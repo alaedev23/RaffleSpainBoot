@@ -1,0 +1,21 @@
+@import 'base/reset.scss';
+@import 'base/base.scss';
+@import 'base/typography.scss';
+
+@import 'abstract/variables';
+
+@import 'components/animation';
+@import 'components/footer';
+@import 'components/navegation';
+@import 'components/header';
+@import 'components/tendencies';
+@import 'components/rifes';
+@import 'components/banner';
+@import 'components/filtres_ordenar';
+@import 'components/butons';
+
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/header';
+@import 'layout/navegation';
+@import 'layout/filtres_ordenar';

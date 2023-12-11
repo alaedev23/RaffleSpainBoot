@@ -1,0 +1,60 @@
+body {
+    font-family: var(--fuente-texto);
+    margin: 0 auto;
+    padding: 0;
+    color: var(--color-negro-fondo);
+    background-color: var(--color-blanco-oscuro);
+}
+
+h1, h2, h3, label {
+    font-family: var(--fuente-titulo);
+}
+
+li:hover {
+    color: var(--color-dorado);
+    transition: 0.4s;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 40px;
+    width: 100%;
+}
+
+h2 {
+    font-size: 33px;
+    margin-top: 20px;
+}
+
+p,li, button, label, option {
+    font-size: 16px;
+}
+
+.icono {
+    width: 40px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.nombre_zapatilla {
+    font-weight: bold;
+}
+
+.zapatilla {
+    background-color: #fff;
+    margin: 20px 1%;
+    width: 31%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.zapatilla p {
+    color: var(--color-negro-fondo);
+    padding: 10px 0px 0px 20px;
+}
+
+.zapatilla img {
+    width: 100%;
+    height: auto;
+}

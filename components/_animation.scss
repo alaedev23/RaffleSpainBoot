@@ -1,0 +1,42 @@
+// Animacion general
+
+.animation {
+    opacity: 0;
+  }
+  
+  .animation.visible {
+    opacity: 1;
+  }
+  
+  // De abajo a arriba
+  
+  .animated-section-down-up {
+    transform: translateY(0);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+    
+  .animated-section-down-up.visible {
+    transform: translateY(-5px);
+  }
+  
+  // Derecha a izquierda
+  
+  .animated-section-right-left {
+    transform: translateX(0px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+    
+  .animated-section-right-left.visible {
+    transform: translateX(-5px);
+  }
+  
+  // Izquierda a derecha
+  
+  .animated-section-left-right {
+    transform: translateX(0px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  .animated-section-left-right.visible {
+    transform: translateX(0px);
+  }

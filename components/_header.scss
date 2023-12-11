@@ -1,0 +1,19 @@
+header {
+    background-color: var(--color-negro-fondo);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#enlaces a {
+    text-decoration: none;
+}
+
+header img {
+    width: 100px;
+}
+
+.menu {
+    width: 50px;
+}

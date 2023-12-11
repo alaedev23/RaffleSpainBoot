@@ -1,0 +1,111 @@
+@media (min-width: 1024px) {
+    
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .menu, #aparecer {
+            display: none;
+        }
+        nav { 
+            flex-grow: 1;
+            ul {
+                display: flex;
+                list-style: none;
+                padding: 0;
+                justify-content: end;
+            }
+        }
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+        }
+        div:first-child {
+            display: flex;
+            flex-grow: 1;
+        }
+        #menu {
+            display: flex !important;
+        }
+    }
+
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    header {
+        display: flex;
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        nav {
+            flex-grow: 1;
+            ul {
+                display: flex;
+                justify-content: end;
+            }
+        }
+
+        #menu {
+            display: none;
+        }
+
+        #aparecer {
+            li {
+                display: flex;
+                flex-direction: row;
+                margin: 20px 10px;
+            }
+        }
+    
+    }
+
+}
+
+@media (max-width: 768px) {
+    header {
+    
+        .icono, .menu {
+            width: 30px;
+        }
+        #logo {
+            display: flex;
+            justify-content: start;
+        }
+        div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 2;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            ul {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        #menu {
+            display: none;
+        }
+        #aparecer {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            li {
+                display: flex;
+                flex-direction: row;
+                margin: 20px 10px;
+            }
+        }
+    }
+}

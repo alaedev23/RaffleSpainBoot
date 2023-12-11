@@ -1,0 +1,30 @@
+@media (min-width: 1024px) {
+        
+    #filtres_ordenar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        grid-template-areas: "a b c d";
+        grid-auto-rows: auto;
+        color: var(--color-negro-fondo);
+        text-align: center;
+
+        div:first-child {
+            grid-area: a;
+        }
+        
+        #buscador {
+            grid-area: b;
+        }
+        
+        #cont_filtres {
+            grid-area: c;
+        }
+        
+        #cont_ordenar {
+            grid-area: d;
+        }
+
+    }
+
+}

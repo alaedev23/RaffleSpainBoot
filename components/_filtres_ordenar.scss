@@ -1,0 +1,29 @@
+#buscador input[type="search"] {
+    background-color: white;
+    color: var(--color-negro-fondo);
+    border: none;
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    margin-top: 35px;
+}
+
+#buscador input[type="search"]:focus {
+    background-color: var(--color-negro-fondo);
+    transition: 0.3s;
+    color: var(--color-dorado);
+}
+
+#cont_filtres, #cont_ordenar {
+    margin-top: 10px;
+}
+
+#cont_filtres select, #cont_ordenar select {
+    width: 100%;
+    background-color: white;
+    color: var(--color-negro-fondo);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}

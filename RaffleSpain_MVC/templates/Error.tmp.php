@@ -1,0 +1,1 @@
+<h1>Ha habido un error al buscar el recurso</h1>
