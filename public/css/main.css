@@ -528,4 +528,32 @@ header img {
   #filtres_ordenar #cont_ordenar {
     grid-area: d;
   }
+}
+#ayuda > h1 {
+  margin: 35px 0 0 0;
+}
+#ayuda > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 90%;
+  margin: 30px auto 100px auto;
+  gap: 4%;
+}
+#ayuda > div > div {
+  width: 48%;
+  margin: 30px 0 50px 0;
+}
+#ayuda > div > div > h3 {
+  font-size: 26px;
+  margin: 18px 0;
+}
+#ayuda > div > div > h5 {
+  margin: 15px 0;
+  font-size: 20px;
+}
+#ayuda > div > div p {
+  font-size: 18px;
 }/*# sourceMappingURL=main.css.map */
