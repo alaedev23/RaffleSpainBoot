@@ -292,7 +292,7 @@ header img {
   margin-top: 5px;
 }
 
-.zapatilla button.participar {
+.btn {
   background-color: var(--color-dorado);
   color: var(--color-negro-fondo);
   border: none;
@@ -301,11 +301,26 @@ header img {
   margin: 10px 0px 30px 20px;
 }
 
-.zapatilla button.participar:hover {
+.btn:hover {
   background-color: var(--color-negro-fondo);
   color: var(--color-dorado);
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+#search {
+  padding: 40px 0px;
+}
+#search form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #tendencies, #trobats {

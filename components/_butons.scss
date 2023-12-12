@@ -1,4 +1,4 @@
-.zapatilla button.participar {
+.btn {
     background-color: var(--color-dorado);
     color: var(--color-negro-fondo);
     border: none;
@@ -7,7 +7,7 @@
     margin: 10px 0px 30px 20px;
 }
 
-.zapatilla button.participar:hover {
+.btn:hover {
     background-color: var(--color-negro-fondo);
     color: var(--color-dorado);
     transition: 0.5s;
