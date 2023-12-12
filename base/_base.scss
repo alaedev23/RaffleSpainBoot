@@ -10,11 +10,6 @@ h1, h2, h3, label {
     font-family: var(--fuente-titulo);
 }
 
-li:hover {
-    color: var(--color-dorado);
-    transition: 0.4s;
-}
-
 h1 {
     text-align: center;
     margin: 20px 0px;
@@ -25,6 +20,16 @@ h1 {
 h2 {
     font-size: 33px;
     margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+li:hover, a:hover {
+    color: var(--color-dorado);
+    transition: 0.4s;
 }
 
 p,li, button, label, option {
