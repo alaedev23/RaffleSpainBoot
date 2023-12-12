@@ -128,6 +128,14 @@ p, li, button, label, option {
   height: auto;
 }
 
+.inpSearch {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  width: 400px;
+}
+
 @font-face {
   font-family: "AlegreyaSans";
   src: url("../fonts/Alegreya_Sans_SC/AlegreyaSansSC-Bold.ttf");
@@ -303,14 +311,17 @@ header img {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  margin: 10px 0px 30px 20px;
 }
 
-.btn:hover {
+.btn:hover, .btnZapatillas:hover {
   background-color: var(--color-negro-fondo);
   color: var(--color-dorado);
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+.btnZapatillas {
+  margin: 10px 0px 30px 20px;
 }
 
 #search {

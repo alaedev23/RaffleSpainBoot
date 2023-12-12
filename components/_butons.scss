@@ -4,11 +4,14 @@
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    margin: 10px 0px 30px 20px;
 }
 
-.btn:hover {
+.btn:hover, .btnZapatillas:hover {
     background-color: var(--color-negro-fondo);
     color: var(--color-dorado);
     transition: 0.5s;
+}
+
+.btnZapatillas {
+    margin: 10px 0px 30px 20px;
 }
