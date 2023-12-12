@@ -339,6 +339,57 @@ header img {
           align-items: center;
 }
 
+#comentarioProducto {
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+  /****** Style Star Rating Widget *****/
+  /***** CSS Magic to Highlight Stars on Hover *****/
+  /* hover previous stars in list */
+}
+#comentarioProducto fieldset, #comentarioProducto label {
+  margin: 0;
+  padding: 0;
+}
+#comentarioProducto body {
+  margin: 20px;
+}
+#comentarioProducto h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+#comentarioProducto .rating {
+  border: none;
+  float: left;
+}
+#comentarioProducto .rating > input {
+  display: none;
+}
+#comentarioProducto .rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+#comentarioProducto .rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+#comentarioProducto .rating > label {
+  color: black;
+  float: right;
+}
+#comentarioProducto .rating > input:checked ~ label,
+#comentarioProducto .rating:not(:checked) > label:hover,
+#comentarioProducto .rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+}
+#comentarioProducto .rating > input:checked + label:hover,
+#comentarioProducto .rating > input:checked ~ label:hover,
+#comentarioProducto .rating > label:hover ~ input:checked ~ label,
+#comentarioProducto .rating > input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
 #tendencies, #trobats {
   padding: 20px 15px 0px 20px;
   display: -webkit-box;
