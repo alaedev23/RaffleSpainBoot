@@ -670,4 +670,175 @@ header img {
   #ayuda > div > div p {
     font-size: 18px;
   }
+}
+
+.favorites h1 {
+  margin: 40px 0;
+}
+.favorites .favorites-list {
+  list-style: none;
+  padding: 0;
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.favorites .favorites-list .product {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  text-align: right;
+}
+.favorites .favorites-list .product img {
+  max-width: 220px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.favorites .favorites-list .product .product-info h3 {
+  color: black;
+  margin: 10px 0;
+  font-size: 24px;
+}
+.favorites .favorites-list .product .product-info p {
+  color: #666;
+  margin: 5px 0;
+}
+.favorites .favorites-list .product .product-info .precio {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .favorites .favorites-list {
+    list-style: none;
+    padding: 0;
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .favorites .favorites-list .product {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    text-align: center;
+  }
+}
+.cistella {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.cistella h1 {
+  text-align: center;
+  color: black;
+}
+.cistella .cistella-list {
+  list-style: none;
+  padding: 0;
+}
+.cistella .cistella-list .product {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.cistella .cistella-list .product img {
+  max-width: 320px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.cistella .cistella-list .product .product-info {
+  text-align: right;
+}
+.cistella .cistella-list .product .product-info h3 {
+  margin: 20px 0;
+  color: black;
+}
+.cistella .cistella-list .product .product-info p {
+  color: #666;
+  margin: 5px 0;
+}
+.cistella .cistella-list .product .product-info .precio {
+  font-weight: bold;
+}
+.cistella .precio-total {
+  text-align: right;
+  margin-top: 20px;
+}
+.cistella .precio-total p {
+  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .cistella .cistella-list {
+    list-style: none;
+    padding: 0;
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .cistella .cistella-list .product {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .cistella .cistella-list .product .product-info {
+    text-align: center;
+  }
 }/*# sourceMappingURL=main.css.map */

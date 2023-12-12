@@ -1,0 +1,97 @@
+$favoritos-color: black;
+$producto-border-radius: 8px;
+ .cistella {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: $producto-border-radius;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    h1 {
+        text-align: center;
+        color: $favoritos-color;
+    }
+
+     .cistella-list {
+        list-style: none;
+        padding: 0;
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: $producto-border-radius;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            img {
+                max-width: 320px;
+                border-radius: $producto-border-radius;
+                margin-right: 10px;
+            }
+
+             .product-info {
+
+                text-align: right;
+
+                h3 {
+                    margin: 20px 0;
+                    color: $favoritos-color;
+                }
+
+                p {
+                    color: #666;
+                    margin: 5px 0;
+                }
+
+                .precio {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .precio-total {
+        text-align: right;
+        margin-top: 20px;
+
+        p {
+            font-size: 1.2em;
+            color: $favoritos-color;
+            font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .cistella {
+
+        .cistella-list {
+            list-style: none;
+            padding: 0;
+            max-width: 90%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: $producto-border-radius;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+            .product {
+                border: 1px solid #ddd;
+                border-radius: $producto-border-radius;
+                padding: 10px;
+                margin: 10px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+
+                .product-info {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
