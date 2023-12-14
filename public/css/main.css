@@ -313,6 +313,15 @@ header img {
   border-radius: 5px;
 }
 
+.btn-talla {
+  background-color: var(--color-blanco-oscur);
+  color: var(--color-negro-fondo);
+  border: 1px grey solid;
+  padding: 10px 25px;
+  margin: 10px 5px;
+  border-radius: 10px;
+}
+
 .btn:hover, .btnZapatillas:hover {
   background-color: var(--color-negro-fondo);
   color: var(--color-dorado);
@@ -325,6 +334,8 @@ header img {
 }
 
 #search {
+  margin: 0 auto;
+  max-width: 1000px;
   padding: 40px 0px;
 }
 #search form {
@@ -338,56 +349,100 @@ header img {
       -ms-flex-align: center;
           align-items: center;
 }
+#search form #search {
+  background-color: #fff;
+  padding: 20px;
+}
+#search form .inpSearch {
+  width: 80%;
+  padding: 10px;
+  margin-right: 10px;
+}
 
 #comentarioProducto {
-  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-  /****** Style Star Rating Widget *****/
-  /***** CSS Magic to Highlight Stars on Hover *****/
-  /* hover previous stars in list */
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
 }
-#comentarioProducto fieldset, #comentarioProducto label {
-  margin: 0;
-  padding: 0;
+
+#producto {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 20px;
 }
-#comentarioProducto body {
-  margin: 20px;
+#producto #fotosProducto {
+  margin-right: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 65%;
 }
-#comentarioProducto h1 {
-  font-size: 1.5em;
-  margin: 10px;
+#producto #fotosProducto #imagenPrincipal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 20px;
 }
-#comentarioProducto .rating {
-  border: none;
-  float: left;
+#producto #fotosProducto #imagenPrincipal img {
+  width: 500px;
+  height: auto;
 }
-#comentarioProducto .rating > input {
-  display: none;
+#producto #fotosProducto #imagenesSecundarias {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: 20px;
 }
-#comentarioProducto .rating > label:before {
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
+#producto #fotosProducto #imagenesSecundarias img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
 }
-#comentarioProducto .rating > .half:before {
-  content: "\f089";
-  position: absolute;
+#producto #infoProducto {
+  width: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-#comentarioProducto .rating > label {
-  color: black;
-  float: right;
+#producto #infoProducto #tallasProducto {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 20px;
 }
-#comentarioProducto .rating > input:checked ~ label,
-#comentarioProducto .rating:not(:checked) > label:hover,
-#comentarioProducto .rating:not(:checked) > label:hover ~ label {
-  color: #FFD700;
-}
-#comentarioProducto .rating > input:checked + label:hover,
-#comentarioProducto .rating > input:checked ~ label:hover,
-#comentarioProducto .rating > label:hover ~ input:checked ~ label,
-#comentarioProducto .rating > input:checked ~ label:hover ~ label {
-  color: #FFED85;
+#producto #infoProducto #tallasProducto .talla {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 #tendencies, #trobats {

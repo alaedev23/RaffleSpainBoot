@@ -1,0 +1,62 @@
+#producto {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 20px;
+
+    #fotosProducto {
+        margin-right: 20px;
+        display: flex;
+        width: 65%;
+
+        #imagenPrincipal {
+            display: flex;
+            margin-right: 20px;
+            img {
+                width: 500px;
+                height: auto;
+            }
+        }
+
+        #imagenesSecundarias {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            margin-right: 20px;
+
+            img {
+                max-width: 150px;
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+
+    #infoProducto {
+        width: 35%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        #tallasProducto {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+    
+            .talla {
+                background-color: #333;
+                color: #fff;
+                padding: 20px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+
+}

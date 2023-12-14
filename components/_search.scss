@@ -1,11 +1,24 @@
 #search {
 
+    margin: 0 auto;
+    max-width: 1000px;
     padding: 40px 0px;
 
     form {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        #search {
+            background-color: #fff;
+            padding: 20px;
+        }
+        
+        .inpSearch {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+        }
     }
 
 }

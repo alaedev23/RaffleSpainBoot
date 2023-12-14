@@ -6,6 +6,15 @@
     border-radius: 5px;
 }
 
+.btn-talla {
+    background-color: var(--color-blanco-oscur);
+    color: var(--color-negro-fondo);
+    border: 1px grey solid;
+    padding: 10px 25px;
+    margin: 10px 5px;
+    border-radius: 10px;
+}
+
 .btn:hover, .btnZapatillas:hover {
     background-color: var(--color-negro-fondo);
     color: var(--color-dorado);
