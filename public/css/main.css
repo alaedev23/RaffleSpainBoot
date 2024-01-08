@@ -435,7 +435,7 @@ header img {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin: 10px 0px 20px 0px;
 }
 #producto #infoProducto #tallasProducto .talla {
   background-color: #333;

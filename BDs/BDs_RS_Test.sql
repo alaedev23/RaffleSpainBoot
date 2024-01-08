@@ -1,3 +1,4 @@
+use rsdb;
 -- Inserting dummy data into Client table
 INSERT INTO `rsdb`.`Client` (`Name`, `Password`, `Surnames`, `Born`, `Email`, `Phone`)
 VALUES 
