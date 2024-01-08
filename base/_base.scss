@@ -32,6 +32,14 @@ li:hover, a:hover {
     transition: 0.4s;
 }
 
+.enlace_invertido {
+    color: var(--color-dorado);
+}
+
+.enlace_invertido:hover {
+    color: var(--color-dorado-fuerte);
+}
+
 p,li, button, label, option {
     font-size: 16px;
 }
