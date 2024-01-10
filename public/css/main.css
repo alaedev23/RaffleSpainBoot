@@ -116,6 +116,7 @@ p, li, button, label, option {
   width: 40px;
   height: auto;
   margin-right: 15px;
+  color: whitesmoke;
 }
 
 .nombre_zapatilla {
@@ -257,17 +258,14 @@ header {
           align-items: center;
   padding: 10px 20px;
 }
-
-#enlaces a {
+header #enlaces a {
   text-decoration: none;
 }
-
+header .menu {
+  width: 50px;
+}
 header img {
   width: 100px;
-}
-
-.menu {
-  width: 50px;
 }
 
 #contenidor_rifes {
