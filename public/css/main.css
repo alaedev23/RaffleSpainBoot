@@ -96,16 +96,20 @@ li:hover, a:hover {
   transition: 0.4s;
 }
 
+p, li, button, label, option {
+  font-size: 16px;
+}
+
+#login p, #registro p {
+  padding: 10px 0px;
+}
+
 .enlace_invertido {
   color: var(--color-dorado);
 }
 
 .enlace_invertido:hover {
   color: var(--color-dorado-fuerte);
-}
-
-p, li, button, label, option {
-  font-size: 16px;
 }
 
 .icono {
@@ -467,7 +471,12 @@ header img {
 #login {
   padding: 50px 0px;
 }
-#login #login-container {
+
+#registro {
+  padding: 50px 0px;
+}
+
+#form-container {
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
@@ -477,14 +486,14 @@ header img {
   text-align: center;
   margin: 0 auto;
 }
-#login #login-container h3 {
+#form-container h3 {
   padding-top: 10px;
 }
-#login #login-container h2 {
+#form-container h2 {
   margin-bottom: 20px;
   color: #333;
 }
-#login #login-container .login-form {
+#form-container .form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -493,16 +502,16 @@ header img {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-#login #login-container .form-group {
+#form-container .form-group {
   margin-bottom: 15px;
 }
-#login #login-container .form-group label {
+#form-container .form-group label {
   font-size: 14px;
   margin-bottom: 5px;
   display: block;
   color: #555;
 }
-#login #login-container .form-group input {
+#form-container .form-group input {
   width: 90%;
   padding: 10px;
   border: 1px solid #ccc;

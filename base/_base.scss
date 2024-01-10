@@ -32,16 +32,20 @@ li:hover, a:hover {
     transition: 0.4s;
 }
 
+p,li, button, label, option {
+    font-size: 16px;
+}
+
+#login p, #registro p {
+    padding: 10px 0px;
+}
+
 .enlace_invertido {
     color: var(--color-dorado);
 }
 
 .enlace_invertido:hover {
     color: var(--color-dorado-fuerte);
-}
-
-p,li, button, label, option {
-    font-size: 16px;
 }
 
 .icono {
