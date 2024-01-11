@@ -1,7 +1,6 @@
 <?php
 class Autoloader{
     private const CARPETAS = ['Model', 'View', 'Controller'];
-    // $Config
     
     public static function load($clase){
         foreach (self::CARPETAS as $carpeta) {
