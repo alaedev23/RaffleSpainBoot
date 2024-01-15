@@ -6,10 +6,8 @@ class DataBase {
     private $conexion;
     
     public function __construct($tipoConsulta) {
-        parent::__construct();
         if ($tipoConsulta === 'select' || $tipoConsulta === 'update' || $tipoConsulta === 'delete' || $tipoConsulta === 'insert') {
             $this->conexion = new Connexio($tipoConsulta);
-            // var_dump($this->conexion);
             switch ($this->conexion->getSgbd()) {
                 case 'mysql' :
                     if ($link = new mysqli($this->conexion->getHost(), $this->conexion->getUsuario(), $this->conexion->getPassword(), $this->conexion->getBase())){

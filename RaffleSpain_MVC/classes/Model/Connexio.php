@@ -7,11 +7,11 @@ class Connexio {
     private $host;
     private $usuario;
     private $password;
-    private const DATOSCONEXION = "classes/config/DatosConexion.php";
+    private const DATOSCONEXION = "classes/Config/DatosConexion.php";
     
     public function __construct($tipoConsulta) {
         if (file_exists(self::DATOSCONEXION)) {
-            include 'classes/config/DatosConexion.php';
+            include 'classes/Config/DatosConexion.php';
             $this->sgbd = $sgbd;
             $this->base = $base;
             $this->host = ini_get('mysqli.default_host');

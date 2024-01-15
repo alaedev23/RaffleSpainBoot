@@ -10,6 +10,7 @@ header("Expires: 0");
 
 require_once 'classes/Config/Autoloader.php';
 spl_autoload_register("Autoloader::load");
+spl_autoload_register("Autoloader::newload");
 
 try {
     $cFront = new FrontController();

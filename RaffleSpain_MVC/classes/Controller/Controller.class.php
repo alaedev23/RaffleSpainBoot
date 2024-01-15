@@ -27,5 +27,27 @@ class Controller {
         return $stringANetejar;
     }
     
+    public function get_browser_name($userAgent) {
+        $browserName = "Unknown";
+        
+        if (preg_match('/MSIE/i', $userAgent) && !preg_match('/Opera/i', $userAgent)) {
+            $browserName = 'Internet Explorer';
+        } elseif (preg_match('/Firefox/i', $userAgent)) {
+            $browserName = 'Mozilla Firefox';
+        } elseif (preg_match('/Chrome/i', $userAgent)) {
+            $browserName = 'Google Chrome';
+        } elseif (preg_match('/Safari/i', $userAgent)) {
+            $browserName = 'Safari';
+        } elseif (preg_match('/Opera/i', $userAgent)) {
+            $browserName = 'Opera';
+        } elseif (preg_match('/Edge/i', $userAgent)) {
+            $browserName = 'Microsoft Edge';
+        } elseif (preg_match('/Trident/i', $userAgent)) {
+            $browserName = 'Internet Explorer';
+        }
+        
+        return $browserName;
+    }
+    
 }
 
