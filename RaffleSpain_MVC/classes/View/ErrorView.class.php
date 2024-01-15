@@ -12,10 +12,11 @@ class ErrorView extends View {
         $missatge = $e->getMessage();
         
         echo "<!DOCTYPE html><html lang=\"en\">";
-        //include "templates/head.php";
+        include "templates/Head.tmp.php";
         echo "<body>";
-	    //include "templates/header.php";
-		include "templates/Error_tmp.php";
+	    include "templates/Header.tmp.php";
+		include "templates/Error.tmp.php";
+		include "templates/Footer.tmp.php";
 		echo "</body></html>";
     }
 }
