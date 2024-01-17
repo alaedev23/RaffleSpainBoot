@@ -11,13 +11,13 @@ class ClientModel implements Crudable {
         
         foreach ($resultado as $fila) {
             $clientObj = new Client(
-                $fila['id'],
-                $fila['name'],
-                $fila['password'],
-                $fila['surnames'],
-                $fila['born'],
-                $fila['email'],
-                $fila['phone']
+                $fila['Id'],
+                $fila['Name'],
+                $fila['Password'],
+                $fila['Surnames'],
+                $fila['Lorn'],
+                $fila['Email'],
+                $fila['Phone']
             );
             $client[] = $clientObj;
         }
@@ -70,16 +70,16 @@ class ClientModel implements Crudable {
         $resultado = $database->executarSQL("SELECT * FROM Client WHERE email = ? and password = ?", [$obj->email, $obj->password]);
         
         if (count($resultado) > 0) {
-    var_dump($resultado[0]);
+            var_dump($resultado[0]);
             $fila = $resultado[0];
             $clientObj = new Client(
-                $fila['id'],
-                $fila['name'],
-                $fila['password'],
-                $fila['surnames'],
-                $fila['born'],
-                $fila['email'],
-                $fila['phone']
+                $fila['Id'],
+                $fila['Name'],
+                $fila['Password'],
+                $fila['Surnames'],
+                $fila['Born'],
+                $fila['Email'],
+                $fila['Phone']
             );
             return $clientObj;
         } else {

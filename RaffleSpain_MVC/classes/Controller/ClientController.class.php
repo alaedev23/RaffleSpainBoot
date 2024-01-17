@@ -30,13 +30,13 @@ class ClientController extends Controller {
             $usuari = $this->sanitize($_POST['username']);
             $contrasenya = $this->sanitize($_POST['password']);
             
-//             if (!filter_var($usuari, FILTER_VALIDATE_EMAIL)) {
-//                 $errors['username'] = "El campo 'usuari' es obligatorio.";
-//             }
+            if (!filter_var($usuari, FILTER_VALIDATE_EMAIL)) {
+                $errors = "El campo 'usuari' es obligatorio.";
+            }
             
-//             if (strlen($contrasenya) == 0) {
-//                 $errors['password'] = "El campo 'contrasenya' es obligatorio.";
-//             }
+            if (strlen($contrasenya) == 0) {
+                $errors = "El campo 'contrasenya' es obligatorio.";
+            }
             
             $this->client = new Client(
                 null,
@@ -54,18 +54,17 @@ class ClientController extends Controller {
                 var_dump($this->client);
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->getById($this->client);
-                if (isset($consulta->password)) {
+                if (isset($consulta->name)) {
                     $_SESSION['usuari'] = $consulta;
                     var_dump($consulta);
                     header("Location: index.php");
                 }
                 else {
-                    $errors['loginIncorrecto'] = "El login es incorrecto";
+                    $errors = "El login es incorrecto";
                     $vLogin->showLogin($this->client, $lang, $errors);
                 }
             }
             else {
-                $errors['hayerrores'] = "Esta mal la modificacion";
                 $vLogin->showLogin($this->client, $lang, $errors);
             }
         }
