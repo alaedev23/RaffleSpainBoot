@@ -120,23 +120,35 @@ class ClientController extends Controller {
             }
             
             if (strlen($contrasenya) == 0) {
-                $errors = "El campo 'contrasenya' es obligatorio.";
+                $errors = "La contrasenya es obligatorio.";
             }
             
-            $objFecha = DateTime::createFromFormat('Y-m-d', $nacimiento);
+            if (strlen($nacimiento) > 0) {
+                $objFecha = DateTime::createFromFormat('Y-m-d', $nacimiento);
+                if (!$objFecha || $objFecha->format('Y-m-d') !== $nacimiento) {
+                    $errors = "El formato de la fecha de nacimiento esta mal.";
+                }
+            }
             
-            if (!$objFecha || $objFecha->format('Y-m-d') !== $nacimiento) {
-                $errors = "El formato de la fecha de nacimiento esta mal.";
+            if (strlen($poblacion) == 0) {
+                $errors = "La poblacion es obligatorio.";
+            }
+            
+            if (strlen($direccion) == 0) {
+                $errors = "La direccion es obligatorio.";
             }
             
             $this->client = new Client(
                 null,
-                null,
+                $name,
                 $contrasenya,
-                null,
-                null,
+                $apellidos,
+                $nacimiento,
                 $usuari,
-                null
+                $telefono,
+                $sexo,
+                $poblacion,
+                $direccion
             );
             
             $vLogin = new ClientView();
