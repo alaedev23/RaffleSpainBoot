@@ -3,7 +3,7 @@
         <h2>Login</h2>
         <form class="form" action="?client/validateLogin" method="post">
             <div class="form-group">
-                <label for="username">Usuario:</label>
+                <label for="username">Email:</label>
                 <input type="text" id="username" name="username">
             </div>
             <div class="form-group">

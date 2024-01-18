@@ -15,7 +15,17 @@ class ClientController extends Controller {
             $lang = "ca";
         }
         
-        LoginView::showLogin($this->client, $lang);
+        ClientView::showLogin($this->client, $lang);
+    }
+    
+    public function formRegister() {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        ClientView::showLogin($this->client, $lang);
     }
     
     public function validateLogin() {
@@ -30,8 +40,11 @@ class ClientController extends Controller {
             $usuari = $this->sanitize($_POST['username']);
             $contrasenya = $this->sanitize($_POST['password']);
             
-            if (!filter_var($usuari, FILTER_VALIDATE_EMAIL)) {
-                $errors = "El campo 'usuari' es obligatorio.";
+            if (strlen($usuari) == 0) {
+                $errors = "El email es obligatorio.";
+            }
+            else if (!filter_var($usuari, FILTER_VALIDATE_EMAIL)) {
+                $errors = "El formato del email es invalido.";
             }
             
             if (strlen($contrasenya) == 0) {
@@ -48,7 +61,7 @@ class ClientController extends Controller {
                 null
             );
             
-            $vLogin = new LoginView();
+            $vLogin = new ClientView();
             
             if (!isset($errors)) {
                 var_dump($this->client);
@@ -68,6 +81,10 @@ class ClientController extends Controller {
                 $vLogin->showLogin($this->client, $lang, $errors);
             }
         }
+    }
+    
+    public function modificarDatos() {
+        header("Location: index.php");
     }
     
 }

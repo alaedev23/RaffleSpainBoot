@@ -1,12 +1,8 @@
 <?php
 
-class HomeController {
-
-    public function __construct() {
-        
-    }
+class HomeController extends Controller {
     
-    public function show() {
+    public static function show() {
         
         HomeView::show();    
         
