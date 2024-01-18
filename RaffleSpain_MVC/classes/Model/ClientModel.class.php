@@ -11,13 +11,16 @@ class ClientModel implements Crudable {
         
         foreach ($resultado as $fila) {
             $clientObj = new Client(
-                $fila['Id'],
-                $fila['Name'],
-                $fila['Password'],
-                $fila['Surnames'],
-                $fila['Lorn'],
-                $fila['Email'],
-                $fila['Phone']
+                $fila['id'],
+                $fila['name'],
+                $fila['password'],
+                $fila['surnames'],
+                $fila['born'],
+                $fila['email'],
+                $fila['phone'],
+                $fila['sex'],
+                $fila['poblation'],
+                $fila['address']
             );
             $client[] = $clientObj;
         }
@@ -73,13 +76,16 @@ class ClientModel implements Crudable {
             var_dump($resultado[0]);
             $fila = $resultado[0];
             $clientObj = new Client(
-                $fila['Id'],
-                $fila['Name'],
-                $fila['Password'],
-                $fila['Surnames'],
-                $fila['Born'],
-                $fila['Email'],
-                $fila['Phone']
+                $fila['id'],
+                $fila['name'],
+                $fila['password'],
+                $fila['surnames'],
+                $fila['born'],
+                $fila['email'],
+                $fila['phone'],
+                $fila['sex'],
+                $fila['poblation'],
+                $fila['address']
             );
             return $clientObj;
         } else {

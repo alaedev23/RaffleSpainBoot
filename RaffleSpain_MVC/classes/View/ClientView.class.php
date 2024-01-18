@@ -28,7 +28,7 @@ class ClientView extends View {
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
-        include "templates/Login.tmp.php";
+        include "templates/Register.tmp.php";
         include "templates/Footer.tmp.php";
         echo "</body></html>";
     }

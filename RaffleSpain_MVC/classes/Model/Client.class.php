@@ -9,8 +9,11 @@ class Client {
     public $born;
     public $email;
     public $phone;
+    public $sex;
+    public $poblation;
+    public $address;
     
-    public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone) {
+    public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone, $sex = null, $poblation, $address) {
         $this->id = $id;
         $this->name = $name;
         $this->password = $password;
@@ -18,6 +21,9 @@ class Client {
         $this->born = $born;
         $this->email = $email;
         $this->phone = $phone;
+        $this->sex = $sex;
+        $this->poblation = $poblation;
+        $this->address = $address;
     }
     
 }
