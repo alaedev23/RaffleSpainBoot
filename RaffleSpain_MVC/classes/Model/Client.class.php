@@ -2,16 +2,16 @@
 
 class Client {
     
-    public $id;
-    public $name;
-    public $password;
-    public $surnames;
-    public $born;
-    public $email;
-    public $phone;
-    public $sex;
-    public $poblation;
-    public $address;
+    private $id;
+    private $name;
+    private $password;
+    private $surnames;
+    private $born;
+    private $email;
+    private $phone;
+    private $sex;
+    private $poblation;
+    private $address;
     
     public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone, $sex = null, $poblation, $address) {
         $this->id = $id;
@@ -24,6 +24,22 @@ class Client {
         $this->sex = $sex;
         $this->poblation = $poblation;
         $this->address = $address;
+    }
+    
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        } else {
+            throw new Exception("No existeix la propietat $property a Entrada");
+        }
+    }
+    
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        } else {
+            throw new Exception("No existeix la propietat $property a Entrada");
+        }
     }
     
 }

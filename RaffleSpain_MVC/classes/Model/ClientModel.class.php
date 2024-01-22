@@ -33,13 +33,7 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('insert');
         
-        $obj->plataforma = PHP_OS;
-        $obj->navegador = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
-        $dateTime = new DateTime();
-        $obj->dataCreacio = $dateTime->format("Y-m-d H:i:s");
-        $obj->dataDarrerAcces = $obj->dataCreacio;
-        
-        $params = [$obj->email, $obj->password, $obj->tipusIdent, $obj->numeroIdent, $obj->nom, $obj->cognoms, $obj->sexe, $obj->naixement, $obj->adreca, $obj->codiPostal, $obj->poblacio, $obj->provincia, $obj->telefon, $obj->imatge, $obj->status, $obj->navegador, $obj->plataforma, $obj->dataCreacio, $obj->dataDarrerAcces];
+        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->phone, $obj->sex, $obj->poblation, $obj->address];
         
         $resultado = $database->executarSQL("INSERT INTO tbl_usuaris (email, password, tipusIdent, numeroIdent, nom, cognoms, sexe, naixement, adreca, codiPostal, poblacio, provincia, telefon, imatge, status, navegador, plataforma, dataCreacio, dataDarrerAcces) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
         

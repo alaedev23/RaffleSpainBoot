@@ -1,10 +1,10 @@
 <?php
 
-class HomeView {
+class HomeView extends View {
     
-    public static function show() {
+    public static function show($products) {
         
-        // include "public/html/home.html";
+        print_r($products);
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
@@ -15,5 +15,6 @@ class HomeView {
         echo "</body></html>";
         
     }
+    
 }
 

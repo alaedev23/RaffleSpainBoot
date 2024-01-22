@@ -134,8 +134,10 @@ class ClientController extends Controller {
                 $errors = "La poblacion es obligatorio.";
             }
             
-            if (strlen($direccion) == 0) {
+            if (strlen($direccion) < 0) {
                 $errors = "La direccion es obligatorio.";
+            } else if (str_contains($direccion, ",")) {
+                $errors = "La direcdcion esta mal.";
             }
             
             $this->client = new Client(
@@ -156,7 +158,7 @@ class ClientController extends Controller {
             if (!isset($errors)) {
                 var_dump($this->client);
                 $cLogin = new ClientModel();
-                $consulta = $cLogin->getById($this->client);
+                $consulta = $cLogin->create($obj);
                 if (isset($consulta->name)) {
                     $_SESSION['usuari'] = $consulta;
                     var_dump($consulta);
