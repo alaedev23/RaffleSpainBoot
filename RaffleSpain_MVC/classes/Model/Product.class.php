@@ -35,4 +35,17 @@ class Product
             throw new Exception("No existeix la propietat $property a Entrada");
         }
     }
+
+    public function __debugInfo()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'brand' => $this->brand,
+            'price' => $this->price,
+            'size' => $this->size,
+            'color' => $this->color,
+            'description' => $this->description,
+        ];
+    }
 }

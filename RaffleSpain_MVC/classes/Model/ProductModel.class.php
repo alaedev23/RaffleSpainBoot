@@ -18,6 +18,7 @@ class ProductModel implements Crudable
         
         foreach ($results as $result) {
             $product = new Product(
+                $result['id'],
                 $result['name'],
                 $result['brand'],
                 $result['price'],
@@ -25,32 +26,30 @@ class ProductModel implements Crudable
                 $result['color'],
                 $result['description']
             );
-            $product->__set('id',$result['id']);
             $products[] = $product;
         }
     
         return $products;
     }
-    
 
     public function create($obj)
     {
         $sql = 'INSERT INTO Product (name, brand, price, size, color, description) VALUES (?, ?, ?, ?, ?, ?)';
-        $params = [$obj->getName(), $obj->getBrand(), $obj->getPrice(), $obj->getSize(), $obj->getColor(), $obj->getDescription()];
+        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description];
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
         $sql = 'UPDATE Product SET name=?, brand=?, price=?, size=?, color=?, description=? WHERE id=?';
-        $params = [$obj->getName(), $obj->getBrand(), $obj->getPrice(), $obj->getSize(), $obj->getColor(), $obj->getDescription(), $obj->getId()];
+        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->id];
         return $this->database->executarSQL($sql, $params);
     }
 
     public function delete($obj)
     {
         $sql = 'DELETE FROM Product WHERE id=?';
-        $params = [$obj->getId()];
+        $params = [$obj->id];
         return $this->database->executarSQL($sql, $params);
     }
 
@@ -61,5 +60,3 @@ class ProductModel implements Crudable
         return $this->database->executarSQL($sql, $params);
     }
 }
-
-?>
