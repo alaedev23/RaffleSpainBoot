@@ -3,6 +3,11 @@
 </section>
 <section id="tendencies">
     <h1 class="animated-section-left-right animation">Tendencias de Zapatillas</h1>
+    <?php
+    
+        
+
+    ?>
     <div class="zapatilla animated-section-left-right animation">
         <a href="producto.html">
             <img src="../public/img/zapatillas1.jpeg" alt="Zapatilla 1">
