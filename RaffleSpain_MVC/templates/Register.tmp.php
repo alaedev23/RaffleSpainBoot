@@ -42,8 +42,6 @@
                     <option value="o">Otr@</option>
                     <option value="">Prefiero no decirlo...</option>
                 </select>
-				<label for="sex">Sexo:</label> <input type="text" id="sex"
-					name="sex">
 			</div>
 			<div class="form-group">
 				<input type="submit" class="btn" id="submit" name="submit"

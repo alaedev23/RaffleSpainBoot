@@ -33,9 +33,9 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('insert');
         
-        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->phone, $obj->sex, $obj->poblation, $obj->address];
+        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address")];
         
-        $resultado = $database->executarSQL("INSERT INTO tbl_usuaris (email, password, tipusIdent, numeroIdent, nom, cognoms, sexe, naixement, adreca, codiPostal, poblacio, provincia, telefon, imatge, status, navegador, plataforma, dataCreacio, dataDarrerAcces) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
+        $resultado = $database->executarSQL("INSERT INTO tbl_usuaris (name, password, surnames, born, email, phone, sex, poblation, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
         
         return $resultado;
         

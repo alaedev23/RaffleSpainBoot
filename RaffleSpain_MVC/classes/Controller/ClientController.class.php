@@ -136,8 +136,8 @@ class ClientController extends Controller {
             
             if (strlen($direccion) < 0) {
                 $errors = "La direccion es obligatorio.";
-            } else if (str_contains($direccion, ",")) {
-                $errors = "La direcdcion esta mal.";
+            } else if (!str_contains($direccion, ",")) {
+                $errors = "La direccion esta mal, debe de contener 'direccion', 'numero'.";
             }
             
             $this->client = new Client(
@@ -158,19 +158,18 @@ class ClientController extends Controller {
             if (!isset($errors)) {
                 var_dump($this->client);
                 $cLogin = new ClientModel();
-                $consulta = $cLogin->create($obj);
+                $consulta = $cLogin->create($this->client);
                 if (isset($consulta->name)) {
-                    $_SESSION['usuari'] = $consulta;
                     var_dump($consulta);
                     header("Location: index.php");
                 }
                 else {
-                    $errors = "El login es incorrecto";
-                    $vLogin->showLogin($this->client, $lang, $errors);
+                    $errors = "El registro es incorrecto";
+                    $vLogin->showRegister($this->client, $lang, $errors);
                 }
             }
             else {
-                $vLogin->showLogin($this->client, $lang, $errors);
+                $vLogin->showRegister($this->client, $lang, $errors);
             }
         }
     }

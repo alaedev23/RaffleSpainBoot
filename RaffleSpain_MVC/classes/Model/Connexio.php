@@ -15,14 +15,10 @@ class Connexio {
             $this->sgbd = $sgbd;
             $this->base = $base;
             $this->host = ini_get('mysqli.default_host');
-            if ($tipoConsulta === 'select') {
+            if ($tipoConsulta === 'select' || $tipoConsulta === 'update' || $tipoConsulta === 'delete' || $tipoConsulta === 'insert') {
                 $this->usuario = $usuarioSelect;
                 $this->password = $passwordSelect;
-            } else if ($tipoConsulta === 'update' || $tipoConsulta === 'delete' || $tipoConsulta === 'insert') {
-                $this->usuario = ini_get('mysqli.default_user');
-                $this->password = ini_get('mysqli.default_pw');
-            }
-            else {
+            } else {
                 throw new Exception("La consulta '$tipoConsulta' no es una consulta buena.");
             }
         } else {
