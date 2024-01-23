@@ -64,10 +64,8 @@ class ClientModel implements Crudable {
     
     public function getById($obj) {
         $database = new DataBase('select');
-        $resultado = $database->executarSQL("SELECT * FROM Client WHERE email = ? and password = ?", [$obj->email, $obj->password]);
-        
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->email, $obj->password]);        
         if (count($resultado) > 0) {
-            var_dump($resultado[0]);
             $fila = $resultado[0];
             $clientObj = new Client(
                 $fila['id'],

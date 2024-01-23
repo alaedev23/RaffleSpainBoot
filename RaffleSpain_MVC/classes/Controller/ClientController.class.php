@@ -65,12 +65,10 @@ class ClientController extends Controller {
             );
             
             $vLogin = new ClientView();
-            
             if (!isset($errors)) {
-                var_dump($this->client);
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->getById($this->client);
-                if (isset($consulta->name)) {
+                if ($consulta->name && $consulta->id) {
                     $_SESSION['usuari'] = $consulta;
                     var_dump($consulta);
                     header("Location: index.php");

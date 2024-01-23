@@ -27,37 +27,35 @@ VALUES
 (4, '2023-11-27', '2023-12-02');
 
 -- Inserts para la tabla `rsdb`.`product`
-INSERT INTO `rsdb`.`product` (`name`, `brand`, `price`, `talla`, `color`, `sex`)
+INSERT INTO `rsdb`.`product` (`name`, `brand`, `price`, `talla`, `color`, `sex`, `img`)
 VALUES 
-('VAMBA1', 'Jordan', 29.99, 1, 'Red', 'H'),
-('VAMBA2', 'Jordan', 39.99, 2, 'Blue', 'D'),
-('Nike Go FlyEase', 'Nike', 129,99, 42, 'Black', 'M'),
-('530', 'New Balance', 120, 44, 'White', 'H'),
-('530', 'New Balance', 120, 42, 'White', 'H');
+('Go-FlyEase', 'Nike', 129.99, 42, 'Black', 'M', 'Nike_Go-FlyEase_Black.png'),
+('530', 'New-Balance', 120, 44, 'White', 'H', 'New-Balance_530_White.png'),
+('530', 'New-Balance', 120, 42, 'White', 'H', 'New-Balance_530_White.png');
 
 select * from product;
-delete from product;
 
 -- Inserts para la tabla `rsdb`.`deliver_has_product`
 INSERT INTO `rsdb`.`deliver_has_product` (`deliver_id`, `product_id`, `quantity`)
 VALUES 
 (1, 1, 2),
 (2, 2, 1),
-(3, 3, 1),
-(4, 4, 2);
+(3, 3, 1);
 
 -- Inserts para la tabla `rsdb`.`raffle`
 INSERT INTO `rsdb`.`raffle` (`product_id`, `date`, `date_end`)
 VALUES 
 (1, '2023-12-01', '2023-12-10'),
 (2, '2023-12-02', '2023-12-12'),
-(3, '2023-12-03', '2023-12-15'),
-(4, '2023-12-05', '2023-12-18');
+(3, '2023-12-03', '2023-12-15');
+
+select * from raffle;
 
 -- Inserts para la tabla `rsdb`.`raffle_has_client`
 INSERT INTO `rsdb`.`raffle_has_client` (`raffle_id`, `client_id`)
 VALUES 
 (1, 1),
 (2, 2),
-(3, 3),
-(4, 4);
+(3, 3);
+
+select * from product;
