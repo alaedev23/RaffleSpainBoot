@@ -159,9 +159,10 @@ class ClientController extends Controller {
                 var_dump($this->client);
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->create($this->client);
+                var_dump($consulta);
                 if (isset($consulta->name)) {
-                    var_dump($consulta);
                     header("Location: index.php");
+                    echo "ha llegadoi bien.";
                 }
                 else {
                     $errors = "El registro es incorrecto";

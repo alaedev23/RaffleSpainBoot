@@ -12,6 +12,24 @@ header {
 
 }
 
+footer {
+
+    nav {
+
+        ul {
+            display: flex;
+            justify-content: center;
+
+            li:last-child {
+                padding-left: 30px;
+            }
+
+        }
+
+    }
+
+}
+
 nav, footer p {
     color: white;
 }

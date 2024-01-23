@@ -2,7 +2,7 @@
     <p>© Copyright - RaffleSpain</p>
     <nav>
         <ul>
-            <li><a href="?ayuda/mostrar">AYUDA</a></li>
+            <li><a href="?ayuda/showView">AYUDA</a></li>
             <li><a href="?map/mostrar">MAPA WEB</a></li>
         </ul>
     </nav>

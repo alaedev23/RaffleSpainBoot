@@ -218,7 +218,7 @@ p, li, button, label, option {
 
 footer {
   background-color: #28282b;
-  padding: 10px 20px;
+  padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -239,6 +239,18 @@ header nav ul {
 }
 header nav li {
   margin: 0 10px;
+}
+
+footer nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+footer nav ul li:last-child {
+  padding-left: 30px;
 }
 
 nav, footer p {

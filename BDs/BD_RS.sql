@@ -28,6 +28,9 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   `born` DATE NULL DEFAULT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` INT NOT NULL,
+  `poblation` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `sex` CHAR(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
@@ -67,6 +70,8 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `price` FLOAT NULL DEFAULT NULL,
   `talla` INT NOT NULL,
   `color` VARCHAR(45) NOT NULL,
+  `sex` CHAR(1) NOT NULL,
+  `img` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
