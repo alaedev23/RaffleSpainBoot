@@ -11,7 +11,7 @@ class ProductModel implements Crudable
 
     public function read($obj = null)
     {
-        $sql = 'SELECT * FROM Product';
+        $sql = 'SELECT * FROM product';
         $results = $this->database->executarSQL($sql);
     
         $products = [];
@@ -24,7 +24,9 @@ class ProductModel implements Crudable
                 $result['price'],
                 $result['size'],
                 $result['color'],
-                $result['description']
+                $result['description'],
+                $result['sex'],
+                $result['img']
             );
             $products[] = $product;
         }
@@ -34,15 +36,15 @@ class ProductModel implements Crudable
 
     public function create($obj)
     {
-        $sql = 'INSERT INTO Product (name, brand, price, size, color, description) VALUES (?, ?, ?, ?, ?, ?)';
-        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description];
+        $sql = 'INSERT INTO Product (name, brand, price, size, color, description, sex, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->sex, $obj->img];
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
-        $sql = 'UPDATE Product SET name=?, brand=?, price=?, size=?, color=?, description=? WHERE id=?';
-        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->id];
+        $sql = 'UPDATE Product SET name=?, sex=?, brand=?, price=?, size=?, color=?, description=? WHERE id=?';
+        $params = [$obj->name, $obj->sex, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->id];
         return $this->database->executarSQL($sql, $params);
     }
 
