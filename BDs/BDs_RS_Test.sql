@@ -27,7 +27,7 @@ VALUES
 (4, '2023-11-27', '2023-12-02');
 
 -- Inserts para la tabla `rsdb`.`product`
-INSERT INTO `rsdb`.`product` (`name`, `brand`, `price`, `talla`, `color`, `sex`, `img`, `description`, `quantity`)
+INSERT INTO `rsdb`.`product` (`name`, `brand`, `price`, `talla`, `color`, `sex`, `img`, `description`,`quantity`, `discount`)
 VALUES 
 ('Go-FlyEase', 'Nike', 129.99, 42, 'Black', 'M', 'Nike_Go-FlyEase_Black.png', 'Esto es un texto de prueba para las Nike Go-FlyEase', 5, 0),
 ('530', 'New-Balance', 120, 44, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 1, 10),
