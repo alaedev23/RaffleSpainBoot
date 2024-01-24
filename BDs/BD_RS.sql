@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `img` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `quantity` INT NOT NULL,
+  `discount` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
