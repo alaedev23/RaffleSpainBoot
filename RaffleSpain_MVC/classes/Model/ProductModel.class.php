@@ -9,7 +9,7 @@ class ProductModel implements Crudable
         $this->database = new DataBase('select');
     }
 
-    public function read($obj = null)
+    public function read()
     {
         $sql = 'SELECT * FROM product';
         $results = $this->database->executarSQL($sql);

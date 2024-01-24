@@ -31,12 +31,35 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   `poblation` VARCHAR(45) NOT NULL,
   `address` VARCHAR(100) NOT NULL,
   `sex` CHAR(1) NULL DEFAULT NULL,
+  `card_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (`card_id`)
+  REFERENCES `rsdb`.`facturacio` (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb3;
+
+-- -----------------------------------------------------
+-- Table `rsdb`.`facturacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rsdb`.`facturacion` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre_titular` VARCHAR(200) NOT NULL,
+  `direccion_facturacion` VARCHAR(100) NOT NULL,
+  `numero_tarjeta` VARCHAR(16) NOT NULL,
+  `cvv` char(3) NOT NULL,
+  `validez` VARCHAR(5) NOT NULL,
+  `cliente_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_facturacion_cliente`
+    FOREIGN KEY (`cliente_id`)
+    REFERENCES `rsdb`.`client` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -72,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `color` VARCHAR(45) NOT NULL,
   `sex` CHAR(1) NOT NULL,
   `img` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  `quantity` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
