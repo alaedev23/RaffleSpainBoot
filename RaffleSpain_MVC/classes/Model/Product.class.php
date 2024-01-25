@@ -10,8 +10,10 @@ class Product
     private $description;
     private $sex;
     private $img;
+    private $quantity;
+    private $discount;
 
-    public function __construct($id, $name, $brand, $price, $size, $color, $description = null, $sex, $img)
+    public function __construct($id, $name, $brand, $price, $size, $color, $description, $sex, $img, $quantity, $discount)
     {
         $this->id = $id;
         $this->name = $name;
@@ -22,6 +24,8 @@ class Product
         $this->description = $description;
         $this->sex = $sex;
         $this->img = $img;
+        $this->quantity = $quantity;
+        $this->discount = $discount;
     }
 
     public function __set($property, $value) {

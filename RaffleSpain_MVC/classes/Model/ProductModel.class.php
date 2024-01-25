@@ -26,7 +26,9 @@ class ProductModel implements Crudable
                 $result['color'],
                 $result['description'],
                 $result['sex'],
-                $result['img']
+                $result['img'],
+                $result['quantity'],
+                $result['discount']
             );
             $products[] = $product;
         }
