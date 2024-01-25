@@ -32,7 +32,7 @@ class Product
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Product");
         }
     }
     
@@ -40,7 +40,7 @@ class Product
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Product");
         }
     }
 
@@ -54,6 +54,9 @@ class Product
             'size' => $this->size,
             'color' => $this->color,
             'description' => $this->description,
+            'img' => $this->img,
+            'quantity' => $this->quantity,
+            'discount' => $this->discount
         ];
     }
 }
