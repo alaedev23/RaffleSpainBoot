@@ -42,4 +42,19 @@ class Client {
         }
     }
     
+    public function __debugInfo() {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'password' => $this->password,
+            'surnames' => $this->surnames,
+            'born' => $this->born,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'sex' => $this->sex,
+            'poblation' => $this->poblation,
+            'address' => $this->address,
+        ];
+    }
+    
 }

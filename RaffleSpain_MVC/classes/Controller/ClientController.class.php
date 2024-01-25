@@ -2,10 +2,12 @@
 
 class ClientController extends Controller {
     
-    private $client;
+    private $login;
+    private $register;
     
     public function __construct() {
-        $this->client = new Client("", "", "", "", "", "", "", "", "", "");
+        $this->login = new Client("", "", "", "", "", "", "", "", "", "");
+        $this->register = new Client("", "", "", "", "", "", "", "", "", "");
     }
     
     public function formLogin() {
@@ -15,7 +17,7 @@ class ClientController extends Controller {
             $lang = "ca";
         }
         
-        ClientView::showLogin($this->client, $lang);
+        ClientView::showLogin($this->login, $lang);
     }
     
     public function formRegister() {
@@ -25,7 +27,7 @@ class ClientController extends Controller {
             $lang = "ca";
         }
         
-        ClientView::showRegister($this->client, $lang);
+        ClientView::showRegister($this->register, $lang);
     }
     
     public function validateLogin() {
@@ -51,7 +53,7 @@ class ClientController extends Controller {
                 $errors = "El campo 'contrasenya' es obligatorio.";
             }
             
-            $this->client = new Client(
+            $this->login = new Client(
                 null,
                 null,
                 $contrasenya,
@@ -67,19 +69,20 @@ class ClientController extends Controller {
             $vLogin = new ClientView();
             if (!isset($errors)) {
                 $cLogin = new ClientModel();
-                $consulta = $cLogin->getById($this->client);
-                if ($consulta->name && $consulta->id) {
+                $consulta = $cLogin->getById($this->login);
+                var_dump($consulta);
+                if ($consulta->__get("id") !== null) {
+                    echo "hola";
                     $_SESSION['usuari'] = $consulta;
-                    var_dump($consulta);
                     header("Location: index.php");
                 }
                 else {
                     $errors = "El login es incorrecto";
-                    $vLogin->showLogin($this->client, $lang, $errors);
+                    $vLogin->showLogin($this->login, $lang, $errors);
                 }
             }
             else {
-                $vLogin->showLogin($this->client, $lang, $errors);
+                $vLogin->showLogin($this->login, $lang, $errors);
             }
         }
     }
@@ -138,7 +141,7 @@ class ClientController extends Controller {
                 $errors = "La direccion esta mal, debe de contener 'direccion', 'numero'.";
             }
             
-            $this->client = new Client(
+            $this->register = new Client(
                 null,
                 $name,
                 $contrasenya,
@@ -154,23 +157,29 @@ class ClientController extends Controller {
             $vLogin = new ClientView();
             
             if (!isset($errors)) {
-                var_dump($this->client);
+                var_dump($this->register);
                 $cLogin = new ClientModel();
-                $consulta = $cLogin->create($this->client);
+                $consulta = $cLogin->create($this->register);
                 var_dump($consulta);
-                if (isset($consulta->name)) {
+                if ($consulta === "La consulta se ha realizado con existo") {
                     header("Location: index.php");
-                    echo "ha llegadoi bien.";
                 }
                 else {
                     $errors = "El registro es incorrecto";
-                    $vLogin->showRegister($this->client, $lang, $errors);
+                    $vLogin->showRegister($this->register, $lang, $errors);
                 }
             }
             else {
-                $vLogin->showRegister($this->client, $lang, $errors);
+                $vLogin->showRegister($this->register, $lang, $errors);
             }
         }
+    }
+    
+    public function logOut()
+    {
+        session_destroy();
+        header("Location: index.php");
+        
     }
     
     public function modificarDatos() {

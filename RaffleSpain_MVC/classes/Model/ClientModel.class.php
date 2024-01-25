@@ -10,18 +10,16 @@ class ClientModel implements Crudable {
         $client = [];
         
         foreach ($resultado as $fila) {
-            $clientObj = new Client(
-                $fila['id'],
-                $fila['name'],
-                $fila['password'],
-                $fila['surnames'],
-                $fila['born'],
-                $fila['email'],
-                $fila['phone'],
-                $fila['sex'],
-                $fila['poblation'],
-                $fila['address']
-            );
+            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null);
+            $clientObj->__set("id", $fila['id']);
+            $clientObj->__set("name", $fila['name']);
+            $clientObj->__set("password", $fila['password']);
+            $clientObj->__set("surnames", $fila['surnames']);
+            $clientObj->__set("born", $fila['born']);
+            $clientObj->__set("email", $fila['email']);
+            $clientObj->__set("phone", $fila['phone']);
+            $clientObj->__set("poblation", $fila['poblation']);
+            $clientObj->__set("address", $fila['address']);
             $client[] = $clientObj;
         }
         
@@ -64,21 +62,19 @@ class ClientModel implements Crudable {
     
     public function getById($obj) {
         $database = new DataBase('select');
-        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->email, $obj->password]);        
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->__get("email"), $obj->__get("password")]);        
         if (count($resultado) > 0) {
             $fila = $resultado[0];
-            $clientObj = new Client(
-                $fila['id'],
-                $fila['name'],
-                $fila['password'],
-                $fila['surnames'],
-                $fila['born'],
-                $fila['email'],
-                $fila['phone'],
-                $fila['sex'],
-                $fila['poblation'],
-                $fila['address']
-            );
+            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null);
+            $clientObj->__set("id", $fila['id']);
+            $clientObj->__set("name", $fila['name']);
+            $clientObj->__set("password", $fila['password']);
+            $clientObj->__set("surnames", $fila['surnames']);
+            $clientObj->__set("born", $fila['born']);
+            $clientObj->__set("email", $fila['email']);
+            $clientObj->__set("phone", $fila['phone']);
+            $clientObj->__set("poblation", $fila['poblation']);
+            $clientObj->__set("address", $fila['address']);
             return $clientObj;
         } else {
             return throw new Exception("Se ha producido un error en el metodo GetById.");

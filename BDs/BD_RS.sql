@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 -- -----------------------------------------------------
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`deliver` (
     FOREIGN KEY (`client_id`)
     REFERENCES `rsdb`.`client` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `name` VARCHAR(45) NOT NULL,
   `brand` VARCHAR(45) NOT NULL,
   `price` FLOAT NULL DEFAULT NULL,
-  `talla` INT NOT NULL,
+  `size` INT NOT NULL,
   `color` VARCHAR(45) NOT NULL,
   `sex` CHAR(1) NOT NULL,
   `img` VARCHAR(100) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`raffle` (
     FOREIGN KEY (`product_id`)
     REFERENCES `rsdb`.`product` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
