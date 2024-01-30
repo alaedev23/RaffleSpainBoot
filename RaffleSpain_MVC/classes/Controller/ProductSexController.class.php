@@ -1,5 +1,9 @@
 <?php
 
+//             echo "<pre>";
+//             var_dump($productos);
+//             echo "</pre>";
+
 class ProductSexController extends Controller {
     
     private $productList;
@@ -15,10 +19,7 @@ class ProductSexController extends Controller {
         $vista = new ProductSexView();
         $model = new ProductModel();
         
-        //             echo "<pre>";
-        //             var_dump($productos);
-        //             echo "</pre>";
-        
+        $sexo = $this->sanitize($sexo[0]);
         $sexo = strtoupper($sexo[0]);
         
         if (!in_array($sexo, self::SEXO)) {
@@ -27,29 +28,15 @@ class ProductSexController extends Controller {
         
         if (!isset($errores)) {
             $productos = $model->readForSex($sexo);
-
+            if (count($productos) > 0) {
+                $vista->showView($lang, $sexo, $productos);
+            } else {
+                $errores = "No hay productos para este sexo.";
+                $vista->showView($lang, $sexo, null, $errores);
+            }
         } else {
-            throw new Exception("No coincide el sexo enviado");
+            $vista->showView($lang, $sexo, null, $errores);
         }
-        
-//         $vLogin = new ClientView();
-//         if (!isset($errors)) {
-//             $cLogin = new ClientModel();
-//             $consulta = $cLogin->getById($this->login);
-//             var_dump($consulta);
-//             if ($consulta->__get("id") !== null) {
-//                 echo "hola";
-//                 $_SESSION['usuari'] = $consulta;
-//                 header("Location: index.php");
-//             }
-//             else {
-//                 $errors = "El login es incorrecto";
-//                 $vLogin->showLogin($this->login, $lang, $errors);
-//             }
-//         }
-//         else {
-//             $vLogin->showLogin($this->login, $lang, $errors);
-//         }
     }
     
 }

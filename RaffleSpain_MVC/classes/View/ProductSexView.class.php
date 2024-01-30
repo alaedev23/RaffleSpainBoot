@@ -6,9 +6,7 @@ class ProductSexView extends View {
         parent::__construct();
     }
     
-    public static function showMap($lang, $sexo, $productos, $errors = null) {
-        $fitxerDeTraduccions = "languages/{$this->lang}_traduccio.php";
-        include $fitxerDeTraduccions;
+    public static function showView($lang, $sexo, $productos, $errors = null) {
         
         $proctos = self::generarProductos($sexo, $productos);
         
@@ -24,7 +22,18 @@ class ProductSexView extends View {
     
     public static function generarProductos($sexo, $productos, $errors = null) {
 
-        
+        foreach ($productos as $product) {
+            
+            echo '
+            <div class="zapatilla animated-section-left-right animation">
+                <a href="?Producte/mostrarProducte/' . $product->id . ' ">
+                    <img src="public/img/vambas/' . $product->img . '" alt="' . $product->name . '">
+                    <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
+                    <p class="sexo_zapatilla">' . generateSex($product->sex) . '</p>
+                    <p class="precio">' . $product->price . ' €</p>
+                </a>
+            </div>';
+        }
         
     }
     

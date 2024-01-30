@@ -27,6 +27,7 @@ function generateSex($sex) {
         return 'Niño';
     }
 }
+
 ?>
 </section>
 <section id="rifes" class="animated-section-right-left animation">
