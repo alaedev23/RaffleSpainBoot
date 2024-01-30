@@ -13,14 +13,15 @@ class Functions {
     }
     
     public static function generatecardProduct($products) {
-        $result = [];
+        // animated-section-left-right animation
+        $result = '';
         foreach ($products as $product) {
             $result .= '
-            <div class="zapatilla animated-section-left-right animation">
+            <div class="zapatilla">
                 <a href="?Producte/mostrarProducte/' . $product->id . ' ">
                     <img src="public/img/vambas/' . $product->img . '" alt="' . $product->name . '">
                     <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
-                    <p class="sexo_zapatilla">' . $this->generateSex($product->sex) . '</p>
+                    <p class="sexo_zapatilla">' . self::generateSex($product->sex) . '</p>
                     <p class="precio">' . $product->price . ' €</p>
                 </a>
             </div>';
