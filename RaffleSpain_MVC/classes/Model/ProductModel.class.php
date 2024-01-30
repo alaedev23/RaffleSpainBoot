@@ -2,7 +2,6 @@
 <?php
 class ProductModel implements Crudable
 {
-
     private $database;
 
     public function __construct()
@@ -95,35 +94,8 @@ class ProductModel implements Crudable
             $tallas[] = $result['size'];
         }
         
+
         return $tallas;
-    }
-
-    public function readForSex($sexo)
-    {
-        $sql = 'SELECT * FROM product where sex = ?';
-        $params = [$sexo];
-        $results = $this->database->executarSQL($sql, $params);
-
-        $products = [];
-
-        foreach ($results as $result) {
-            $product = new Product(
-                $result['id'],
-                $result['name'],
-                $result['brand'],
-                $result['price'],
-                $result['size'],
-                $result['color'],
-                $result['description'],
-                $result['sex'],
-                $result['img'],
-                $result['quantity'],
-                $result['discount']
-                );
-            $products[] = $product;
-        }
-
-        return $products;
     }
 
 }

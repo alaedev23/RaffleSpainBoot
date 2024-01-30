@@ -28,5 +28,10 @@ class Functions {
         }
         return $result;
     }
+
+
+    public static function replaceHyphen($string) {
+        return str_replace($string,' ','-');
+    }
     
 }

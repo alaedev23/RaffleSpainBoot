@@ -13,7 +13,7 @@ class Product
     private $quantity;
     private $discount;
 
-    public function __construct($id, $name, $brand, $price, $size, $color, $description, $sex, $img, $quantity, $discount)
+    public function __construct($id, $name=null, $brand=null, $price=null, $size=null, $color=null, $description=null, $sex=null, $img=null, $quantity=null, $discount=null)
     {
         $this->id = $id;
         $this->name = $name;

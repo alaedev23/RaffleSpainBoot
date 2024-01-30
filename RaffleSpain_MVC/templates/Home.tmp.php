@@ -4,31 +4,7 @@
 <section id="tendencies">
     <h1 class="animated-section-left-right animation">Tendencias de Zapatillas</h1>
 
-<?php
-foreach ($products as $product) {
-
-    echo '
-    <div class="zapatilla animated-section-left-right animation">
-        <a href="?Producte/mostrarProducte/' . $product->id . ' ">
-            <img src="public/img/vambas/' . $product->img . '" alt="' . $product->name . '">
-            <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
-            <p class="sexo_zapatilla">' . generateSex($product->sex) . '</p>
-            <p class="precio">' . $product->price . ' €</p>
-        </a>
-    </div>';
-}
-
-function generateSex($sex) {
-    if ($sex == 'H') {
-        return 'Hombre';
-    } else if ($sex == 'M') {
-        return 'Mujer';
-    } else {
-        return 'Niño';
-    }
-}
-
-?>
+<?= $productsGrid ?>
 </section>
 <section id="rifes" class="animated-section-right-left animation">
     <h1>Rifes</h1>
