@@ -55,6 +55,11 @@ class DataBase {
         return $resultado;
     }
     
+    public function getLastInsertedId()
+    {
+        return $this->link->insert_id;
+    }
+
     public function getLink()
     {
         return $this->link;
