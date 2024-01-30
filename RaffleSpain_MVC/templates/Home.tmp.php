@@ -14,7 +14,6 @@ foreach ($products as $product) {
             <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
             <p class="sexo_zapatilla">' . generateSex($product->sex) . '</p>
             <p class="precio">' . $product->price . ' €</p>
-            <a class="btn btnZapatillas" href="?Cistella/afegirProducte/ ' . $product->id . ' " >Añadir Cesta</a>
         </a>
     </div>';
 }

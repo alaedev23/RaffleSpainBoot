@@ -3,14 +3,14 @@
         <a href="." id="logo"><img src="../public/img/logo.png" alt="Logo"></a>
         <nav>
             <ul id="aparecer">
-                <li>HOME</li>
-                <li>DONE</li>
-                <li>NENS</li>
+                <li><a href="?productsex/show/H">HOMBRE</a></li>
+                <li><a href="?productsex/show/M">MUJER</a></li>
+                <li><a href="?productsex/show/N">NIÑO</a></li>
             </ul>
             <ul id="menu">
-                <li>HOME</li>
-                <li>DONE</li>
-                <li>NENS</li>
+                <li><a href="?productSex/show/H">HOMBRE</a></li>
+                <li><a href="?productSex/show/M">MUJER</a></li>
+                <li><a href="?productSex/show/N">NIÑO</a></li>
             </ul>
         </nav>
     </div>

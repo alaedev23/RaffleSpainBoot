@@ -157,10 +157,8 @@ class ClientController extends Controller {
             $vLogin = new ClientView();
             
             if (!isset($errors)) {
-                var_dump($this->register);
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->create($this->register);
-                var_dump($consulta);
                 if ($consulta === "La consulta se ha realizado con existo") {
                     header("Location: index.php");
                 }

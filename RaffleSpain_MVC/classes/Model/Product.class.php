@@ -54,6 +54,7 @@ class Product
             'size' => $this->size,
             'color' => $this->color,
             'description' => $this->description,
+            'sex' => $this->sex,
             'img' => $this->img,
             'quantity' => $this->quantity,
             'discount' => $this->discount

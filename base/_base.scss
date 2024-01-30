@@ -65,16 +65,21 @@ p,li, button, label, option {
     width: 31%;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 
-.zapatilla p {
-    color: var(--color-negro-fondo);
-    padding: 10px 0px 0px 20px;
-}
+    p {
+        color: var(--color-negro-fondo);
+        padding: 10px 0px 0px 20px;
+    }
 
-.zapatilla img {
-    width: 100%;
-    height: auto;
+    img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .inpSearch {
