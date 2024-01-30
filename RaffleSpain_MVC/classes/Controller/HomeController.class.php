@@ -10,5 +10,6 @@ class HomeController extends Controller {
         HomeView::show($products);    
         
     }
+
 }
 

@@ -9,12 +9,12 @@ foreach ($products as $product) {
 
     echo '
     <div class="zapatilla animated-section-left-right animation">
-        <a href="producto.html">
+        <a href="?Producte/mostrarProducte/' . $product->id . ' ">
             <img src="public/img/vambas/' . $product->img . '" alt="' . $product->name . '">
             <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
             <p class="sexo_zapatilla">' . generateSex($product->sex) . '</p>
             <p class="precio">' . $product->price . ' €</p>
-            <a class="btn btnZapatillas" href="?product/" >Añadir Cesta</a>
+            <a class="btn btnZapatillas" href="?Cistella/afegirProducte/ ' . $product->id . ' " >Añadir Cesta</a>
         </a>
     </div>';
 }
