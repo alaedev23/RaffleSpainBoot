@@ -13,29 +13,24 @@ class ProductModel implements Crudable
     {
         $sql = 'SELECT * FROM product';
         $results = $this->database->executarSQL($sql);
-
-        $products = [];
-
-        foreach ($results as $result) {
-            $product = $this->createProductFromData($result);
-            $products[] = $product;
-        }
-
+        
+        $products = $this->deleteDuplicate($results);
+        
         return $products;
     }
 
     public function create($obj)
     {
-        $sql = 'INSERT INTO product (name, brand, price, size, color, description, sex, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = [$obj->name, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->sex, $obj->img];
+        $sql = 'INSERT INTO product (name, brand, modelCode, price, size, color, description, sex, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = [$obj->name, $obj->brand, $obj->modelCode, $obj->price, $obj->size, $obj->color, $obj->description, $obj->sex, $obj->img];
         
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
-        $sql = 'UPDATE product SET name=?, sex=?, brand=?, price=?, size=?, color=?, description=? WHERE id=?';
-        $params = [$obj->name, $obj->sex, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->id];
+        $sql = 'UPDATE product SET name=?, modelCode=?, sex=?, brand=?, price=?, size=?, color=?, description=?, img=? WHERE id=?';
+        $params = [$obj->name, $obj->modelCode, $obj->sex, $obj->brand, $obj->price, $obj->size, $obj->color, $obj->description, $obj->img, $obj->id];
         
         $this->database->executarSQL($sql, $params);
     }
@@ -61,22 +56,32 @@ class ProductModel implements Crudable
 
         return $this->createProductFromData($result[0]);
     }
-
-    private function createProductFromData($data)
+    
+    public function readForSex($sexo)
     {
-        return new Product(
-            $data['id'],
-            $data['name'],
-            $data['brand'],
-            $data['price'],
-            $data['size'],
-            $data['color'],
-            $data['description'],
-            $data['sex'],
-            $data['img'],
-            $data['quantity'],
-            $data['discount']
-        );
+        $sql = 'SELECT * FROM product WHERE sex = ?';
+        $params = [$sexo];
+        $results = $this->database->executarSQL($sql, $params);
+        
+        $products = $this->deleteDuplicate($results);
+        
+        return $products;
+    }
+    
+    public function deleteDuplicate($results) {
+        $resultado = [];
+        $modelCodes = [];
+        
+        foreach ($results as $result) {
+            $product = $this->createProductFromData($result);
+            $currentModelCode = $product->__get("modelCode");
+            
+            if (!in_array($currentModelCode, $modelCodes)) {
+                $modelCodes[] = $currentModelCode;
+                $resultado[] = $product;
+            }
+        }
+        return $resultado;
     }
 
     public function getTallas($product){
@@ -96,6 +101,24 @@ class ProductModel implements Crudable
         
 
         return $tallas;
+    }
+    
+    private function createProductFromData($data)
+    {
+        return new Product(
+            $data['id'],
+            $data['name'],
+            $data['brand'],
+            $data['modelCode'],
+            $data['price'],
+            $data['size'],
+            $data['color'],
+            $data['description'],
+            $data['sex'],
+            $data['img'],
+            $data['quantity'],
+            $data['discount']
+            );
     }
 
 }

@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `brand` VARCHAR(45) NOT NULL,
+  `modelCode` char(6) NOT NULL,
   `price` FLOAT NULL DEFAULT NULL,
   `size` INT NOT NULL,
   `color` VARCHAR(45) NOT NULL,

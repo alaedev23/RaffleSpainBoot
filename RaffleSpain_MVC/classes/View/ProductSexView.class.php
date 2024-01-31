@@ -14,9 +14,7 @@ class ProductSexView extends View {
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
-        echo "<section class=\"containerProductos\">";
         echo $proctos;
-        echo "</section>";
         include "templates/Footer.tmp.php";
         echo "</body></html>";
         
@@ -24,7 +22,9 @@ class ProductSexView extends View {
     
     public static function generarProductos($sexo, $productos, $errors = null) {
 
-        $templateProduct = Functions::generatecardProduct($productos);
+        $templateProduct = "<section class=\"containerProductos\">";
+        $templateProduct .= Functions::generatecardProduct($productos);
+        $templateProduct .= "</section>";
         return $templateProduct;
         
     }
