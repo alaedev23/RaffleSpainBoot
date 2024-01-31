@@ -18,11 +18,12 @@
             </div>
         </div>
         <div id="infoProducto">
-            <h1><?= $producte->brand . ' ' . $producte->name ?></h1>
+        <h1><?= str_replace('-', ' ', $producte->brand) . ' ' . str_replace('-', ' ', $producte->name) ?></h1>
             <h3><?= generateSex($producte->sex) . ' - ' . $producte->color ?></h3>
             <div id="tallasProducto">
                 <?= generateTallas($tallas) ?>
             </div>
+            <h1><?= $producte->price . ' €' ?></h1>
             <button class="btn">Añadir a la cesta</button>
         </div>
     </section>

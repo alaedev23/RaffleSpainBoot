@@ -19,8 +19,8 @@ class Functions {
             $result .= '
             <div class="zapatilla">
                 <a href="?Producte/mostrarProducte/' . $product->id . ' ">
-                    <img src="public/img/vambas/' . $product->img . '" alt="' . $product->name . '">
-                    <p class="nombre_zapatilla">' . $product->brand . ' ' . $product->name . '</p>
+                    <img src="public/img/vambas/' . $product->img . '" alt="' . str_replace('-', ' ', $product->name) . '">
+                    <p class="nombre_zapatilla">' . str_replace('-', ' ', $product->brand) . ' ' . str_replace('-', ' ', $product->name) . '</p>
                     <p class="sexo_zapatilla">' . self::generateSex($product->sex) . '</p>
                     <p class="precio">' . $product->price . ' €</p>
                 </a>

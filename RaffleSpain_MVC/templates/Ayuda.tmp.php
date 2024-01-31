@@ -2,6 +2,15 @@
     <h1>OBTENER AYUDA</h1>
     <div>
         <div>
+            <h3>PREGUNTAS FRECUENTES</h3>
+            <h5>¿Cómo contacto con servicio al cliente?</h5>
+            <p>Nuestro equipo de servicio al cliente está disponible las 24 horas del día, los 7 días de la semana.
+                Puedes contactarnos por teléfono, correo electrónico o por whatsapp</p>
+            <h5>¿Qué hacer si olvidé mi contraseña?</h5>
+            <p>Si olvidaste tu contraseña, puedes restablecerla fácilmente haciendo clic en el enlace "Olvidé mi
+                contraseña" en la página de inicio de sesión y siguiendo las instrucciones.</p>
+        </div>
+        <div>
             <h3>ENVÍO Y ENTREGA</h3>
             <h5>¿Cuánto suele tardar el envío?</h5>
             <p>En RaffleSpain nos comprometemos a entregar los pedidos en 2-4 días laborales, de no ser así el
@@ -36,20 +45,13 @@
                 comprobar desde la pestaña de pedidos</p>
         </div>
         <div>
-            <h3>PREGUNTAS FRECUENTES</h3>
-            <h5>¿Cómo contacto con servicio al cliente?</h5>
-            <p>Nuestro equipo de servicio al cliente está disponible las 24 horas del día, los 7 días de la semana.
-                Puedes contactarnos por teléfono, correo electrónico o por whatsapp</p>
-            <h5>¿Qué hacer si olvidé mi contraseña?</h5>
-            <p>Si olvidaste tu contraseña, puedes restablecerla fácilmente haciendo clic en el enlace "Olvidé mi
-                contraseña" en la página de inicio de sesión y siguiendo las instrucciones.</p>
-        </div>
-        <div>
             <h3>MÉTODOS DE PAGO</h3>
             <h5>¿Qué opciones de pago aceptan?</h5>
-            <p>Solo aceptamos PayPal, porque ofrece la maxima seguridad tanto para nosotros como para nuestros clientes.</p>
+            <p>Solo aceptamos PayPal, porque ofrece la maxima seguridad tanto para nosotros como para nuestros clientes.
+            </p>
             <h5>¿Es seguro pagar por la web?</h5>
-            <p>Nuestra web cumple con todas las medidas necessarias para asegurar la maxima seguridad a nuestros miembros y clientes.</p>
+            <p>Nuestra web cumple con todas las medidas necessarias para asegurar la maxima seguridad a nuestros
+                miembros y clientes.</p>
         </div>
         <div>
             <h3>DESCUENTOS Y PROMOCIONES</h3>
@@ -64,7 +66,8 @@
             <h3>SEGURIDAD DEL SITIO</h3>
             <h5>¿Cómo protegen la privacidad de mis datos?</h5>
             <p>Valoramos tu privacidad y utilizamos medidas de seguridad robustas para proteger tus datos. Consulta
-                nuestra política de privacidad para obtener detalles sobre cómo manejamos la información del usuario.</p>
+                nuestra política de privacidad para obtener detalles sobre cómo manejamos la información del usuario.
+            </p>
             <h5>¿Qué debo hacer si sospecho actividad fraudulenta en mi cuenta?</h5>
             <p>Si sospechas actividad fraudulenta, comunícate de inmediato con nuestro equipo de soporte para que
                 podamos tomar las medidas necesarias para proteger tu cuenta.</p>

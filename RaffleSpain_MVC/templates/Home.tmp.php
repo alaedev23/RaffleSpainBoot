@@ -1,7 +1,7 @@
 <section id="banner" class="animated-section-left-right animation">
     <img src="../public/img/banner.jpg" alt="Banner">
 </section>
-<section id="tendencies">
+<section class="containerProductos">
     <h1 class="animated-section-left-right animation">Tendencias de Zapatillas</h1>
 
 <?= $productsGrid ?>
