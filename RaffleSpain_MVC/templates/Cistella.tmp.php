@@ -3,7 +3,7 @@
         <h1>Mi Cesta</h1>
         <ul class="cistella-list">
             <li class="product">
-              <img src="../img/zapatillas1.jpeg" alt="Producto 1">
+              <img src="../public/img/vambas/Crocs_Classic-Clog-DreamWorks-Shrek.png" alt="Producto 1">
               <div class="product-info">
                 <h3>Nombre del Producto 1</h3>
                 <p>Descripción del Producto 1.</p>
@@ -13,7 +13,7 @@
             </li>
         
             <li class="product">
-              <img src="../img/zapatillas2.jpg" alt="Producto 2">
+              <img src="../public/img/vambas/Nike_MAG-Back-to-the-Future-2011.png" alt="Producto 2">
               <div class="product-info">
                 <h3>Nombre del Producto 2</h3>
                 <p>Descripción del Producto 2.</p>
@@ -23,7 +23,7 @@
             </li>
         
             <li class="product">
-              <img src="../img/zapatillas3.jpg" alt="Producto 3">
+              <img src="../public/img/vambas/Jordan_Retro-4-Thunder-2023.png" alt="Producto 3">
               <div class="product-info">
                 <h3>Nombre del Producto 3</h3>
                 <p>Descripción del Producto 3.</p>
@@ -33,7 +33,7 @@
             </li>
         
             <li class="product">
-              <img src="../img/zapatillas4.jpeg" alt="Producto 4">
+              <img src="../public/img/vambas/New-Balance_530_White.png" alt="Producto 4">
               <div class="product-info">
                 <h3>Nombre del Producto 4</h3>
                 <p>Descripción del Producto 4.</p>

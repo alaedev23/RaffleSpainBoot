@@ -17,7 +17,7 @@
     <nav>
         <ul>
 
-            <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" id="iconoBasket" fill="currentColor" class="icono" class="bi bi-cart" viewBox="0 0 16 16">
+            <li><a href="?Cistella/show"><svg xmlns="http://www.w3.org/2000/svg" id="iconoBasket" fill="currentColor" class="icono" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
                     </svg></a></li>
             <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" id="iconoSearch" class="icono" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -37,12 +37,10 @@
                               <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
                         </svg></a></li>';
                 }
-            ?>
-            <a href="?Cistella/show">            
+            ?>           
                 <svg xmlns="http://www.w3.org/2000/svg" class="menu icono" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
-            </a>
 
             <!-- <img src="../img/menu.png" alt="Icono menú" class= "menu"> -->
         </ul>
