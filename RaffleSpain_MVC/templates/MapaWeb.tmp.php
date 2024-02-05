@@ -24,7 +24,7 @@
             <h5><a href="">Preguntas Frecuentes</a></h5>
             <h5><a href="">Envío y Entrega</a></h5>
             <h5><a href="">Devoluciones y Reembolsos</a></h5>
-            <h5><a href="">Memrebresía</a></h5>
+            <h5><a href="">Membresía</a></h5>
             <h5><a href="">Pedidos</a></h5>
             <h5><a href="">Métodos de pago</a></h5>
             <h5><a href="">Descuentos y promociones</a></h5>
