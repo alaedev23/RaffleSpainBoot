@@ -2,16 +2,6 @@
 
 class Functions {
     
-    public static function generateSex($sex) {
-        if ($sex == 'H') {
-            return 'Hombre';
-        } else if ($sex == 'M') {
-            return 'Mujer';
-        } else {
-            return 'Niño';
-        }
-    }
-    
     public static function generatecardProduct($products) {
         // animated-section-left-right animation
         $result = '';
@@ -27,6 +17,25 @@ class Functions {
             </div>';
         }
         return $result;
+    }
+    
+    public static function generateSex($sex) {
+        if ($sex == 'H') {
+            return 'Hombre';
+        } else if ($sex == 'M') {
+            return 'Mujer';
+        } else {
+            return 'Niño';
+        }
+    }
+    
+    function generateTallas($tallas) {
+        $tallasHTML = '';
+        foreach ($tallas as $talla) {
+            $tallasHTML .= '<button class="btn-talla">EU ' . $talla . ' </button>';
+        }
+        
+        return $tallasHTML;
     }
 
 

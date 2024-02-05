@@ -21,7 +21,7 @@ class ProductModel implements Crudable
 
     public function create($obj)
     {
-        $sql = 'INSERT INTO product (name, brand, modelCode, price, size, color, description, sex, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO product (name, brand, modelCode, price, size, color, description, sex, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $params = [$obj->name, $obj->brand, $obj->modelCode, $obj->price, $obj->size, $obj->color, $obj->description, $obj->sex, $obj->img];
         
         return $this->database->executarSQL($sql, $params);

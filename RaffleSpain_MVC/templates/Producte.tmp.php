@@ -1,3 +1,8 @@
+<?php 
+
+$funciones = new Functions();
+
+?>
 
     <section id="search">
         <form method="get" role="search">
@@ -19,9 +24,9 @@
         </div>
         <div id="infoProducto">
         <h1><?= str_replace('-', ' ', $producte->brand) . ' ' . str_replace('-', ' ', $producte->name) ?></h1>
-            <h3><?= generateSex($producte->sex) . ' - ' . $producte->color ?></h3>
+            <h3><?= $funciones->generateSex($producte->sex) . ' - ' . $producte->color ?></h3>
             <div id="tallasProducto">
-                <?= generateTallas($tallas) ?>
+                <?= $funciones->generateTallas($tallas) ?>
             </div>
             <h1><?= $producte->price . ' €' ?></h1>
             <button class="btn">Añadir a la cesta</button>
@@ -35,23 +40,3 @@
         <p>Ejemplo de comentario</p>
     </section>
 
-
-<?php
-    function generateSex($sex) {
-        if ($sex == 'H') {
-            return 'Hombre';
-        } else if ($sex == 'M') {
-            return 'Mujer';
-        } else {
-            return 'Niño';
-        }
-    }
-
-    function generateTallas($tallas) {
-        $tallasHTML = '';
-        foreach ($tallas as $talla) {
-            $tallasHTML .= '<button class="btn-talla">EU ' . $talla . ' </button>';
-        }
-
-        return $tallasHTML;
-    }
