@@ -1,9 +1,5 @@
 <?php
 
-//             echo "<pre>";
-//             var_dump($productos);
-//             echo "</pre>";
-
 class ProductSexController extends Controller {
     
     private $productList;

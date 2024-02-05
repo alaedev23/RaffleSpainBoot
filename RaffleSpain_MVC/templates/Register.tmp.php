@@ -1,4 +1,4 @@
-<section id="login">
+<section id="registro">
 	<div id="form-container">
 		<h2>Register</h2>
 		<form class="form" action="?client/validateRegister" method="post">
