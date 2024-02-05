@@ -1,4 +1,8 @@
-#tema {
+#map {
+
+    height: calc(100vh - 218px);
+    font-family: Arial, Helvetica, sans-serif;
+
     @media (min-width: 1024px) {
 
         &>h1 {
@@ -30,6 +34,7 @@
                 &>h5 {
                     margin: 10px 0;
                     font-size: 20px;
+                    font-weight: normal;
                 }
 
                 p {
@@ -67,6 +72,7 @@
                 &>h5 {
                     margin: 15px 0;
                     font-size: 20px;
+                    font-weight: normal;
                 }
 
                 p {
