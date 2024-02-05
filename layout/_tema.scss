@@ -1,7 +1,4 @@
-#ayuda {
-
-
-
+#tema {
     @media (min-width: 1024px) {
 
         &>h1 {
@@ -18,11 +15,11 @@
 
             &>div {
                 width: 48%;
-                margin: 30px 0 50px 0;
+                margin: 5px 0 10px 0;
 
                 &>h3 {
                     font-size: 26px;
-                    margin: 18px 0;
+                    margin: 14px 0;
                 }
 
                 a {
@@ -31,7 +28,7 @@
                 }
 
                 &>h5 {
-                    margin: 15px 0;
+                    margin: 10px 0;
                     font-size: 20px;
                 }
 
