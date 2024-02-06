@@ -129,8 +129,8 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `rsdb`.`raffle` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
-  `date` DATE NOT NULL,
-  `date_end` DATE NULL DEFAULT NULL,
+  `date_start` timestamp NOT NULL,
+  `date_end` timestamp NOT NULL,
   PRIMARY KEY (`id`, `product_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_raffle_product1_idx` (`product_id` ASC) VISIBLE,
