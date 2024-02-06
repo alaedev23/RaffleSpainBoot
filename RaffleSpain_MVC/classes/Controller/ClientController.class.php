@@ -70,18 +70,14 @@ class ClientController extends Controller {
             if (!isset($errors)) {
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->getById($this->login);
-                var_dump($consulta);
-                if ($consulta->__get("id") !== null) {
-                    echo "hola";
+                if ($consulta != "El email o la contrasenya no son correctos.") {
                     $_SESSION['usuari'] = $consulta;
                     header("Location: index.php");
                 }
                 else {
-                    $errors = "El login es incorrecto";
-                    $vLogin->showLogin($this->login, $lang, $errors);
+                    $vLogin->showLogin($this->login, $lang, $consulta);
                 }
-            }
-            else {
+            } else {
                 $vLogin->showLogin($this->login, $lang, $errors);
             }
         }
@@ -160,7 +156,7 @@ class ClientController extends Controller {
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->create($this->register);
                 if ($consulta === "La consulta se ha realizado con existo") {
-                    header("Location: index.php");
+                    header("index.php");
                 }
                 else {
                     $errors = "El registro es incorrecto";

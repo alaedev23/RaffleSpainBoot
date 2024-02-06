@@ -10,7 +10,7 @@ class ClientModel implements Crudable {
         $client = [];
         
         foreach ($resultado as $fila) {
-            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null);
+            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null, null);
             $clientObj->__set("id", $fila['id']);
             $clientObj->__set("name", $fila['name']);
             $clientObj->__set("password", $fila['password']);
@@ -20,6 +20,7 @@ class ClientModel implements Crudable {
             $clientObj->__set("phone", $fila['phone']);
             $clientObj->__set("poblation", $fila['poblation']);
             $clientObj->__set("address", $fila['address']);
+            $clientObj->__set("type", $fila['type']);
             $client[] = $clientObj;
         }
         
@@ -31,9 +32,9 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('insert');
         
-        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address")];
+        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type")];
         
-        $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, born, email, phone, sex, poblation, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
+        $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, born, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
         
         return $resultado;
         
@@ -43,9 +44,31 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('update');
         
-        $params = [$obj->email, $obj->password, $obj->tipusIdent, $obj->numeroIdent, $obj->nom, $obj->cognoms, $obj->sexe, $obj->naixement, $obj->adreca, $obj->codiPostal, $obj->poblacio, $obj->provincia, $obj->telefon, $obj->imatge, $obj->status, $obj->id];
+        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type"), $obj->__get("id")];
         
         $resultado = $database->executarSQL("UPDATE tbl_usuaris SET email = ?, password = ?, tipusIdent = ?, numeroIdent = ?, nom = ?, cognoms = ?, sexe = ?, naixement = ?, adreca = ?, codiPostal = ?, poblacio = ?, provincia = ?, telefon = ?, imatge = ?, status = ? WHERE id = ?", $params);
+        
+        return $resultado;
+    }
+    
+    public function updateToAdmin($obj) {
+        
+        $database = new DataBase('update');
+        
+        $params = [$obj->__get("id")];
+        
+        $resultado = $database->executarSQL("UPDATE tbl_usuaris SET type = 1 WHERE id = ?", $params);
+        
+        return $resultado;
+    }
+    
+    public function updateToClient($obj) {
+        
+        $database = new DataBase('update');
+        
+        $params = [$obj->__get("id")];
+        
+        $resultado = $database->executarSQL("UPDATE tbl_usuaris SET type = 0 WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -54,7 +77,7 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('delete');
         
-        $resultado = $database->executarSQL("DELETE FROM tbl_usuaris WHERE id = ?", [$obj->id]);
+        $resultado = $database->executarSQL("DELETE FROM tbl_usuaris WHERE id = ?", [$obj->__get("id")]);
         
         return $resultado;
         
@@ -65,7 +88,7 @@ class ClientModel implements Crudable {
         $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->__get("email"), $obj->__get("password")]);        
         if (count($resultado) > 0) {
             $fila = $resultado[0];
-            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null);
+            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null, null);
             $clientObj->__set("id", $fila['id']);
             $clientObj->__set("name", $fila['name']);
             $clientObj->__set("password", $fila['password']);
@@ -75,9 +98,10 @@ class ClientModel implements Crudable {
             $clientObj->__set("phone", $fila['phone']);
             $clientObj->__set("poblation", $fila['poblation']);
             $clientObj->__set("address", $fila['address']);
+            $clientObj->__set("type", $fila['type']);
             return $clientObj;
         } else {
-            return throw new Exception("Se ha producido un error en el metodo GetById.");
+            return "El email o la contrasenya no son correctos.";
         }
     }
    

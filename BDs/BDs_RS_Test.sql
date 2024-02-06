@@ -11,12 +11,12 @@ ALTER TABLE `rsdb`.`product` AUTO_INCREMENT = 1;
 ALTER TABLE `rsdb`.`raffle` AUTO_INCREMENT = 1;
 
 -- Inserts para la tabla `rsdb`.`client`
-INSERT INTO `rsdb`.`client` (`name`, `password`, `surnames`, `born`, `email`, `phone`, `poblation`, `address`, `sex`)
+INSERT INTO `rsdb`.`client` (`name`, `password`, `surnames`, `born`, `email`, `phone`, `poblation`, `address`, `sex`, `type`)
 VALUES 
-('John', 'password123', 'Doe', '1990-01-01', 'john.doe@example.com', 123456789, 'City1', 'Address1', 'H'),
-('Alice', 'alicepass', 'Smith', '1985-03-15', 'alice.smith@example.com', 987654321, 'City2', 'Address2', 'O'),
-('Jane', 'janepass', 'Doe', '1992-05-20', 'jane.doe@example.com', 111223344, 'City3', 'Address3', 'D'),
-('Bob', 'bob123', 'Johnson', '1988-09-10', 'bob.johnson@example.com', 554433221, 'City4', 'Address4', 'H');
+('John', 'Marc', 'Doe', '1990-01-01', 'polanmarc19@gmail.com', 123456789, 'City1', 'Address1', 'H', 1),
+('Alice', 'alicepass', 'Smith', '1985-03-15', 'alice.smith@example.com', 987654321, 'City2', 'Address2', 'O', 0),
+('Jane', 'janepass', 'Doe', '1992-05-20', 'jane.doe@example.com', 111223344, 'City3', 'Address3', 'D', 0),
+('Bob', 'bob123', 'Johnson', '1988-09-10', 'bob.johnson@example.com', 554433221, 'City4', 'Address4', 'H', 0);
 
 -- Inserts para la tabla `rsdb`.`deliver`
 INSERT INTO `rsdb`.`deliver` (`client_id`, `date`, `date_deliver`)

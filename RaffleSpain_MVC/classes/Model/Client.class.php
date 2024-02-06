@@ -12,8 +12,9 @@ class Client {
     private $sex;
     private $poblation;
     private $address;
+    private $type;
     
-    public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone, $sex = null, $poblation, $address) {
+    public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone, $sex = null, $poblation, $address, $type = 0) {
         $this->id = $id;
         $this->name = $name;
         $this->password = $password;
@@ -24,6 +25,7 @@ class Client {
         $this->sex = $sex;
         $this->poblation = $poblation;
         $this->address = $address;
+        $this->type = $type;
     }
     
     public function __set($property, $value) {
@@ -54,6 +56,7 @@ class Client {
             'sex' => $this->sex,
             'poblation' => $this->poblation,
             'address' => $this->address,
+            'type' => $this->type,
         ];
     }
     

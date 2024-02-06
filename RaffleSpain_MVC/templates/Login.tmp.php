@@ -4,7 +4,8 @@
         <form class="form" action="?client/validateLogin" method="post">
             <div class="form-group">
                 <label for="username">Email:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required
+                <?= $login->email ? 'value="' . $login->email . '"' : ''; ?>>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
