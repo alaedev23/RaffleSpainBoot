@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   `poblation` VARCHAR(45) NOT NULL,
   `address` VARCHAR(100) NOT NULL,
   `sex` CHAR(1) NULL DEFAULT NULL,
-  `type` CHAR(1) NULL DEFAULT 0,
+  `type` CHAR(1) NOT NULL DEFAULT '0',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE)
