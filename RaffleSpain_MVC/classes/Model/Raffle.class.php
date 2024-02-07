@@ -7,7 +7,15 @@ class Raffle {
     private $date_start;
     private $date_end;
     
+    private $product;
     
+    public function __construct($id, $product_id, $date_start, $date_end, $product = null) {
+        $this->id = $id;
+        $this->product_id = $product_id;
+        $this->date_start = $date_start;
+        $this->date_end = $date_end;
+        $this->product = $product;
+    }
     
     public function __set($property, $value) {
         if (property_exists($this, $property)) {
@@ -28,16 +36,10 @@ class Raffle {
     public function __debugInfo() {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'password' => $this->password,
-            'surnames' => $this->surnames,
-            'born' => $this->born,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'sex' => $this->sex,
-            'poblation' => $this->poblation,
-            'address' => $this->address,
-            'type' => $this->type,
+            'product_id' => $this->product_id,
+            'date_start' => $this->date_start,
+            'date_end' => $this->date_end,
+            'product' => $this->product
         ];
     }
     

@@ -29,16 +29,16 @@ VALUES
 -- Inserts para la tabla `rsdb`.`product`
 INSERT INTO `rsdb`.`product` (`name`, `brand`, `modelCode`,`price`, `size`, `color`, `sex`, `img`, `description`,`quantity`, `discount`)
 VALUES 
--- ('Go-FlyEase', 'Nike', 000001, 129.99, 42, 'Black', 'M', 'Nike_Go-FlyEase_Black.png', 'Esto es un texto de prueba para las Nike Go-FlyEase', 5, 0),
--- ('530', 'New-Balance', 000002, 120, 44, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 1, 10),
--- ('530', 'New-Balance', 000002, 120, 42, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 2, 0),
-('1-High-OG-Satin-Bred', 000003, 'Jordan', 189.99, 39, 'Red-White', 'M', 'Jordan_1-High-OG-Satin-Bred_Red-White.png', 'Esto es un texto de prueba para las Jordan 1-High-OG-"Satin-Bred"', 2, 0);
--- ('Classic-Clog-DreamWorks-Shrek', 000004, 'Crocs', 110, 42, 'Green', 'H', 'Crocs_Classic-Clog-DreamWorks-Shrek.png', 'Esto es un texto de prueba para las Crocs - Classic Clog DreamWorks Shrek', 1, 0),
--- ('MAG-Back-to-the-Future-2011', 000005, 'Nike', 20000, 44, 'Grey', 'H', 'Nike_MAG-Back-to-the-Future-2011.png', 'Esto es un texto de prueba para las Nike - MAG Back to the Future 2011', 1, 0),
--- ('Retro-4-Thunder-2023', 'Jordan', 000006, 330, 43, 'Yellow', 'H', 'Jordan_Retro-4-Thunder-2023.png', 'Esto es un texto de prueba para las Joradn - Retro Thunder 2023', 1, 10);
+('Go-FlyEase', 'Nike', 000001, 129.99, 42, 'Black', 'M', 'Nike_Go-FlyEase_Black.png', 'Esto es un texto de prueba para las Nike Go-FlyEase', 5, 0),
+('530', 'New-Balance', 000002, 120, 44, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 1, 10),
+('530', 'New-Balance', 000002, 120, 42, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 2, 0),
+('1-High-OG-Satin-Bred', 000003, 'Jordan', 189.99, 39, 'Red-White', 'M', 'Jordan_1-High-OG-Satin-Bred_Red-White.png', 'Esto es un texto de prueba para las Jordan 1-High-OG-"Satin-Bred"', 2, 0),
+('Classic-Clog-DreamWorks-Shrek', 000004, 'Crocs', 110, 42, 'Green', 'H', 'Crocs_Classic-Clog-DreamWorks-Shrek.png', 'Esto es un texto de prueba para las Crocs - Classic Clog DreamWorks Shrek', 1, 0),
+('MAG-Back-to-the-Future-2011', 000005, 'Nike', 20000, 44, 'Grey', 'H', 'Nike_MAG-Back-to-the-Future-2011.png', 'Esto es un texto de prueba para las Nike - MAG Back to the Future 2011', 1, 0),
+('Retro-4-Thunder-2023', 'Jordan', 000006, 330, 43, 'Yellow', 'H', 'Jordan_Retro-4-Thunder-2023.png', 'Esto es un texto de prueba para las Joradn - Retro Thunder 2023', 1, 10);
 
 
-select * from product;
+select * from client;
 
 -- Inserts para la tabla `rsdb`.`deliver_has_product`
 INSERT INTO `rsdb`.`deliver_has_product` (`deliver_id`, `product_id`, `quantity`)
@@ -48,11 +48,11 @@ VALUES
 (3, 3, 1);
 
 -- Inserts para la tabla `rsdb`.`raffle`
-INSERT INTO `rsdb`.`raffle` (`product_id`, `date`, `date_end`)
+INSERT INTO `rsdb`.`raffle` (`product_id`, `date_start`, `date_end`)
 VALUES 
-(1, '2023-12-01', '2023-12-10'),
-(2, '2023-12-02', '2023-12-12'),
-(3, '2023-12-03', '2023-12-15');
+(1, '2023-12-01', '2024-12-10'),
+(2, '2023-12-02', '2024-12-12'),
+(3, '2023-12-03', '2024-12-15');
 
 select * from raffle;
 
