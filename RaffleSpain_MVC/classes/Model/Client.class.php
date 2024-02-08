@@ -1,6 +1,6 @@
 <?php
 
-class Client {
+class Client  {
     
     private $id;
     private $name;
@@ -27,6 +27,39 @@ class Client {
         $this->address = $address;
         $this->type = $type;
     }
+    
+    public function serialize() {
+        return serialize([
+            $this->id,
+            $this->name,
+            $this->password,
+            $this->surnames,
+            $this->born,
+            $this->email,
+            $this->phone,
+            $this->sex,
+            $this->poblation,
+            $this->address,
+            $this->type
+        ]);
+    }
+    
+    public function unserialize($data) {
+        list(
+            $this->id,
+            $this->name,
+            $this->password,
+            $this->surnames,
+            $this->born,
+            $this->email,
+            $this->phone,
+            $this->sex,
+            $this->poblation,
+            $this->address,
+            $this->type
+            ) = unserialize($data);
+    }
+    
     
     public function __set($property, $value) {
         if (property_exists($this, $property)) {

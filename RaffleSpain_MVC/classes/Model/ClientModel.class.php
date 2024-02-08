@@ -96,6 +96,7 @@ class ClientModel implements Crudable {
             $clientObj->__set("born", $fila['born']);
             $clientObj->__set("email", $fila['email']);
             $clientObj->__set("phone", $fila['phone']);
+            $clientObj->__set("sex", $fila['sex']);
             $clientObj->__set("poblation", $fila['poblation']);
             $clientObj->__set("address", $fila['address']);
             $clientObj->__set("type", $fila['type']);

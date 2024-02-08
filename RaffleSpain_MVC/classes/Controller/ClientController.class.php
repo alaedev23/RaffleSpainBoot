@@ -72,6 +72,7 @@ class ClientController extends Controller {
                 $consulta = $cLogin->getById($this->login);
                 if ($consulta != "El email o la contrasenya no son correctos.") {
                     $_SESSION['usuari'] = $consulta;
+                    ($consulta->__get("type") == 1) ? $_SESSION['userAdmin'] = true : $_SESSION['userAdmin'] = false;
                     header("Location: index.php");
                 }
                 else {
