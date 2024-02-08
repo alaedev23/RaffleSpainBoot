@@ -1,6 +1,6 @@
 <?php
 
-class Raffleontroller extends Controller {
+class RaffleController extends Controller {
     
     private $raffle;
     

@@ -65,6 +65,7 @@ body {
   font-family: var(--fuente-texto);
   margin: 0 auto;
   padding: 0;
+  height: 100vh;
   color: var(--color-negro-fondo);
   background-color: var(--color-blanco-oscuro);
 }
@@ -830,11 +831,15 @@ header img {
   }
 }
 
+#map {
+  height: calc(100vh - 218px);
+  font-family: Arial, Helvetica, sans-serif;
+}
 @media (min-width: 1024px) {
-  #tema > h1 {
+  #map > h1 {
     margin: 36px 0 0 0;
   }
-  #tema > div {
+  #map > div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -844,31 +849,32 @@ header img {
     margin: 30px auto 100px auto;
     gap: 4%;
   }
-  #tema > div > div {
+  #map > div > div {
     width: 48%;
     margin: 5px 0 10px 0;
   }
-  #tema > div > div > h3 {
+  #map > div > div > h3 {
     font-size: 26px;
     margin: 14px 0;
   }
-  #tema > div > div a {
+  #map > div > div a {
     text-decoration: none;
     color: black;
   }
-  #tema > div > div > h5 {
+  #map > div > div > h5 {
     margin: 10px 0;
     font-size: 20px;
+    font-weight: normal;
   }
-  #tema > div > div p {
+  #map > div > div p {
     font-size: 18px;
   }
 }
 @media (max-width: 1024px) {
-  #tema > h1 {
+  #map > h1 {
     margin: 36px 0 0 0;
   }
-  #tema > div {
+  #map > div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -878,19 +884,20 @@ header img {
     margin: 30px auto 100px auto;
     gap: 0;
   }
-  #tema > div > div {
+  #map > div > div {
     width: 100%;
     margin: 30px 0 50px 0;
   }
-  #tema > div > div > h3 {
+  #map > div > div > h3 {
     font-size: 26px;
     margin: 18px 0;
   }
-  #tema > div > div > h5 {
+  #map > div > div > h5 {
     margin: 15px 0;
     font-size: 20px;
+    font-weight: normal;
   }
-  #tema > div > div p {
+  #map > div > div p {
     font-size: 18px;
   }
 }

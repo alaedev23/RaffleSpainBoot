@@ -2,10 +2,11 @@
 
 class HomeView extends View {
     
-    public static function show($products) {
+    public static function show($products, $rifas) {
 
         $function = new Functions();
         $productsGrid = $function->generatecardProduct($products);
+        $rifasGrid = $function->generatecardRaffle($rifas);
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";

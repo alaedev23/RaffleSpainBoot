@@ -8,20 +8,22 @@ class Raffle {
     private $date_end;
     
     private $product;
+    private $winner;
     
-    public function __construct($id, $product_id, $date_start, $date_end, $product = null) {
+    public function __construct($id, $product_id, $date_start, $date_end, $product = null, $winner = null) {
         $this->id = $id;
         $this->product_id = $product_id;
         $this->date_start = $date_start;
         $this->date_end = $date_end;
         $this->product = $product;
+        $this->winner = $winner;
     }
     
     public function __set($property, $value) {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Rifa");
         }
     }
     
@@ -29,7 +31,7 @@ class Raffle {
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Rifa");
         }
     }
     
@@ -39,7 +41,8 @@ class Raffle {
             'product_id' => $this->product_id,
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
-            'product' => $this->product
+            'product' => $this->product,
+            'winner' => $this->winner
         ];
     }
     

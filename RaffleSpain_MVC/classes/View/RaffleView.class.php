@@ -8,22 +8,22 @@ class RaffleView extends View {
     
     public static function showView($raffle, $lang, $errors = null) {
         
-        $proctos = self::generarProductos($sexo, $productos);
+        $rifas = self::generarRaffle($raffle);
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
-        echo $proctos;
+        echo $rifas;
         include "templates/Footer.tmp.php";
         echo "</body></html>";
         
     }
     
-    public static function generarProductos($raffle, $lang, $errors = null) {
+    public static function generarRaffle($raffle) {
         
         $templateProduct = "<section class=\"containerProductos\">";
-        $templateProduct .= Functions::generatecardProduct($productos);
+        $templateProduct .= Functions::generatecardRaffle($raffle);
         $templateProduct .= "</section>";
         return $templateProduct;
         

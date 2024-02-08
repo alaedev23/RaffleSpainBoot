@@ -7,7 +7,10 @@ class HomeController extends Controller {
         $mProducts = new ProductModel();
         $products = $mProducts->read();
 
-        HomeView::show($products);    
+        $mRifa = new RaffleModel();
+        $rifas = $mRifa->read();
+
+        HomeView::show($products, $rifas);    
         
     }
 

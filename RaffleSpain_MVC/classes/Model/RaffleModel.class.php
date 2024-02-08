@@ -9,25 +9,22 @@ class RaffleModel implements Crudable
         $this->database = new DataBase('select');
     }
 
-    public function read()
-    {
+    public function read() {
         $sql = 'SELECT * FROM raffle';
         $results = $this->database->executarSQL($sql);
         
         $mProduct = new ProductModel();
-        
+
         foreach ($results as $result) {
             
-            $Product = new Product();
-            $Product->product_id = $result['prooduct_id'];
+            $Product = new Product($result['product_id']);
             $consulta = $mProduct->getById($Product);
             
-            $result->product = $consulta;
+            $result['product'] = $consulta;
+            $raffles[] = $this->createRaffleFromData($result);
         }
         
-        $products = $this->deleteDuplicate($results);
-        
-        return $products;
+         return $raffles;
     }
 
     public function create($obj)
@@ -69,24 +66,14 @@ class RaffleModel implements Crudable
         return $this->createRaffleFromData($result[0]);
     }
     
-    public function readForSex($sexo)
-    {
-        $sql = 'SELECT * FROM raffle WHERE sex = ?';
-        $params = [$sexo];
-        $results = $this->database->executarSQL($sql, $params);
-        
-        $products = $this->deleteDuplicate($results);
-        
-        return $products;
-    }
-    
     private function createRaffleFromData($data)
     {
-        return new Product(
+        return new Raffle(
             $data['id'],
             $data['product_id'],
             $data['date_start'],
-            $data['date_end']
+            $data['date_end'],
+            $data['product']
             );
     }
 
