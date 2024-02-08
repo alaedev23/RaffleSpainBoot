@@ -15,5 +15,3 @@ class CistellaView extends View {
     }
 
 }
-
-

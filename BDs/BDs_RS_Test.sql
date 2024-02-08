@@ -50,9 +50,9 @@ VALUES
 -- Inserts para la tabla `rsdb`.`raffle`
 INSERT INTO `rsdb`.`raffle` (`product_id`, `date_start`, `date_end`)
 VALUES 
-(1, '2023-12-01', '2024-12-10'),
-(2, '2023-12-02', '2024-12-12'),
-(3, '2023-12-03', '2024-12-15');
+(1, '2023-12-01 09:00:00', '2024-12-10 09:00:00'),
+(2, '2023-12-02 09:00:00', '2024-12-12 09:00:00'),
+(4, '2023-12-03 09:00:00', '2024-12-15 09:00:00');
 
 select * from raffle;
 
@@ -63,4 +63,4 @@ VALUES
 (2, 2),
 (3, 3);
 
-select * from client;
+select * from raffle_has_client;
