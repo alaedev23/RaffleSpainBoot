@@ -18,6 +18,21 @@ class ProductModel implements Crudable
         
         return $products;
     }
+    
+    public function readAll()
+    {
+        $sql = 'SELECT * FROM product';
+        $results = $this->database->executarSQL($sql);
+        
+        $productos = [];
+        
+        foreach ($results as $fila) {
+            $productObj = $this->createProductFromData($fila);
+            $productos[] = $productObj;
+        }
+        
+        return $productos;
+    }
 
     public function create($obj)
     {

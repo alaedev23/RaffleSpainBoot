@@ -26,7 +26,7 @@ class AdminView extends View {
         if ($products) {
             $html .= "<form action=\"?admin/updateProducts\" method=\"post\">";
         } else {
-            $html .= "<form action=\"?admin/createProducts\" method=\"post\">";
+            $html .= "<form action=\"?admin/createProduct\" method=\"post\">";
         }
         
         $html .= "<table><thead><tr>
@@ -41,13 +41,8 @@ class AdminView extends View {
             <th>Sex</th>
             <th>Img</th>
             <th>Quantity</th>
-            <th>Discount</th>";
-        
-        if ($modificarDatos) {
-            $html .= "<th><input class=\"btn enviar\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></th></tr></thead><tbody>";
-        } else {
-            $html .= "<th><input class=\"btn enviar\" value=\"Crear\" type=\"submit\" name=\"sendDataCrear\"></th></tr></thead><tbody>";
-        }
+            <th>Discount</th>
+        </tr></thead>";
         
         if ($objSelec !== null) {
             
@@ -56,7 +51,7 @@ class AdminView extends View {
             $html .= '<td><input type="text" name="id" readonly></td>';
             $html .= '<td><input type="text" name="name"></td>';
             $html .= '<td><input type="text" name="brand"></td>';
-            $html .= '<td><input type="text" name="modelcode"></td>';
+            $html .= '<td><input type="text" name="modelcode" readonly></td>';
             $html .= '<td><input type="text" name="price"></td>';
             $html .= '<td><input type="text" name="size"></td>';
             $html .= '<td><input type="text" name="color"></td>';
@@ -65,26 +60,31 @@ class AdminView extends View {
             $html .= '<td><input type="file" name="img"></td>';
             $html .= '<td><input type="text" name="quantity"></td>';
             $html .= '<td><input type="text" name="discount"></td>';
-            $html .= "</tr>";
+        }
+        
+        if ($modificarDatos) {
+            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></th></tr></thead><tbody>";
+        } else {
+            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCrear\"></th></tr></thead><tbody>";
         }
         
         foreach ($products as $product) {
-            foreach ($products as $product) {
-                $html .= "<tr>";
-                $html .= "<td>$product->id</td>";
-                $html .= "<td>$product->name</td>"; 
-                $html .= "<td>$product->brand</td>";
-                $html .= "<td>$product->modelCode</td>"; 
-                $html .= "<td>$product->price</td>"; 
-                $html .= "<td>$product->size</td>"; 
-                $html .= "<td>$product->color</td>"; 
-                $html .= "<td>$product->description</td>"; 
-                $html .= "<td>$product->sex</td>"; 
-                $html .= "<td>$product->img</td>"; 
-                $html .= "<td>$product->quantity</td>";
-                $html .= "<td>$product->discount</td>";
-                $html .= "</tr>";
-            }
+            $html .= "<tr>";
+            $html .= "<td>$product->id</td>";
+            $html .= "<td>$product->name</td>";
+            $html .= "<td>$product->brand</td>";
+            $html .= "<td>$product->modelCode</td>";
+            $html .= "<td>$product->price</td>";
+            $html .= "<td>$product->size</td>";
+            $html .= "<td>$product->color</td>";
+            $html .= "<td>$product->description</td>";
+            $html .= "<td>$product->sex</td>";
+            $html .= "<td>$product->img</td>";
+            $html .= "<td>$product->quantity</td>";
+            $html .= "<td>$product->discount</td>";
+            $html .= '<th class="alinear"><a class="btn" href="?admin/modificar/' . $product->id . '">Modificar</a></th>';
+            $html .= '<th class="alinear"><a class="btn" href="?admin/eliminar/' . $product->id . '">Eliminar</a></th></tr>';
+            $html .= "</tr>";
         }
         
 //         foreach ($products as $product) {
@@ -111,4 +111,5 @@ class AdminView extends View {
     }
     
 }
+
 ?>
