@@ -73,6 +73,7 @@ p,li, button, label, option {
     flex-wrap: wrap;
 
     p {
+        font-size: 20px;
         color: var(--color-negro-fondo);
         padding: 10px 0px 0px 20px;
     }
@@ -84,6 +85,10 @@ p,li, button, label, option {
 
     .precio {
         padding-bottom: 20px;
+    }
+
+    .date {
+        margin-bottom: 15px;
     }
 }
 

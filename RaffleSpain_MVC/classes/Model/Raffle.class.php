@@ -10,7 +10,7 @@ class Raffle {
     private $product;
     private $winner;
     
-    public function __construct($id, $product_id, $date_start, $date_end, $product = null, $winner = null) {
+    public function __construct($id, $product_id, $date_start, $date_end, Product $product = null, $winner = null) {
         $this->id = $id;
         $this->product_id = $product_id;
         $this->date_start = $date_start;

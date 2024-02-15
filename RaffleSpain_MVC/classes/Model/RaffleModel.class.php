@@ -66,8 +66,8 @@ class RaffleModel implements Crudable
 
         $mProduct = new ProductModel();
         
-        $Product = new Product($result[0]['product_id']);
-        $consulta = $mProduct->getById($Product);
+        $Product_id = new Product($result[0]['product_id']);
+        $consulta = $mProduct->getById($Product_id);
 
         $result[0]['product'] = $consulta;
 
@@ -79,8 +79,8 @@ class RaffleModel implements Crudable
         return new Raffle(
             $data['id'],
             $data['product_id'],
-            $data['date_start'],
-            $data['date_end'],
+            date("Y-m-d H:i", strtotime($data['date_start'])),
+            date("Y-m-d H:i", strtotime($data['date_end'])),
             $data['product'],
             $data['winner']
             );
