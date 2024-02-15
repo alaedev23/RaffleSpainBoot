@@ -6,27 +6,16 @@ class RaffleView extends View {
         parent::__construct();
     }
     
-    public static function showView($raffle, $lang, $errors = null) {
-        
-        $rifas = self::generarRaffle($raffle);
+    public static function show($rifa, $lang, $errors = null) {
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
-        echo $rifas;
+        include "templates/Rifa.tmp.php";
         include "templates/Footer.tmp.php";
         echo "</body></html>";
         
     }
-    
-    public static function generarRaffle($raffle) {
-        
-        $templateProduct = "<section class=\"containerProductos\">";
-        $templateProduct .= Functions::generatecardRaffle($raffle);
-        $templateProduct .= "</section>";
-        return $templateProduct;
-        
-    }
-    
+
 }

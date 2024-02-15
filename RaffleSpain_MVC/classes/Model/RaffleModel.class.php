@@ -19,9 +19,10 @@ class RaffleModel implements Crudable
             
             $Product = new Product($result['product_id']);
             $consulta = $mProduct->getById($Product);
-            
+
             $result['product'] = $consulta;
             $raffles[] = $this->createRaffleFromData($result);
+
         }
         
          return $raffles;
@@ -55,13 +56,20 @@ class RaffleModel implements Crudable
 
     public function getById($obj)
     {
-        $sql = 'SELECT * FROM raffle WHERE id=?';
+        $sql = 'SELECT * FROM raffle WHERE id=? LIMIT 1';
         $params = [$obj->id];
         $result = $this->database->executarSQL($sql, $params);
 
         if (empty($result)) {
             return null;
         }
+
+        $mProduct = new ProductModel();
+        
+        $Product = new Product($result[0]['product_id']);
+        $consulta = $mProduct->getById($Product);
+
+        $result[0]['product'] = $consulta;
 
         return $this->createRaffleFromData($result[0]);
     }
@@ -73,7 +81,8 @@ class RaffleModel implements Crudable
             $data['product_id'],
             $data['date_start'],
             $data['date_end'],
-            $data['product']
+            $data['product'],
+            $data['winner']
             );
     }
 

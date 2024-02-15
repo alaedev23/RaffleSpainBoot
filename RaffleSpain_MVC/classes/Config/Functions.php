@@ -25,7 +25,7 @@ class Functions {
         foreach ($rifas as $rifa) {
             $result .= '
             <div class="zapatilla">
-                <a href="?Rifa/mostrarRifa/' . $rifa->id . ' ">
+                <a href="?Raffle/showRaffle/' . $rifa->id . ' ">
                     <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . str_replace('-', ' ', $rifa->product_id) . '">
                     <p class="nombre_zapatilla">' . str_replace('-', ' ', $rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
                     <p class="date">' . $rifa->date_start . ' - ' . $rifa->date_end . '</p>

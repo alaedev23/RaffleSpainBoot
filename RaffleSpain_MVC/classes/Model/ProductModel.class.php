@@ -46,7 +46,7 @@ class ProductModel implements Crudable
 
     public function getById($obj)
     {
-        $sql = 'SELECT * FROM product WHERE id=?';
+        $sql = 'SELECT * FROM product WHERE id=? LIMIT 1';
         $params = [$obj->id];
         $result = $this->database->executarSQL($sql, $params);
 
