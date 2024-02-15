@@ -23,7 +23,7 @@ class Raffle {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {
-            throw new Exception("No existeix la propietat $property a Rifa");
+            throw new Exception("No existeix la propietat $property a Raffle");
         }
     }
     
@@ -31,7 +31,7 @@ class Raffle {
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            throw new Exception("No existeix la propietat $property a Rifa");
+            throw new Exception("No existeix la propietat $property a Raffle");
         }
     }
     
