@@ -1,8 +1,3 @@
-<?php 
-
-$funciones = new Functions();
-
-?>
 
     <section id="search">
         <form method="get" role="search">
@@ -13,10 +8,10 @@ $funciones = new Functions();
     <section id="producto">
         <div id="fotosProducto">
             <div id="imagenesSecundarias">
-                <img src="<?= 'public/img/vambas/' . $rifa->producte->img; ?>" alt="Zapatilla 2">
-                <img src="<?= 'public/img/vambas/' . $rifa->producte->img; ?>" alt="Zapatilla 2">
-                <img src="<?= 'public/img/vambas/' . $rifa->producte->img; ?>" alt="Zapatilla 2">
-                <img src="<?= 'public/img/vambas/' . $rifa->producte->img; ?>" alt="Zapatilla 2">
+                <img src="<?= 'public/img/vambas/' . $rifa->product->img; ?>" alt="Zapatilla 2">
+                <img src="<?= 'public/img/vambas/' . $rifa->product->img; ?>" alt="Zapatilla 2">
+                <img src="<?= 'public/img/vambas/' . $rifa->product->img; ?>" alt="Zapatilla 2">
+                <img src="<?= 'public/img/vambas/' . $rifa->product->img; ?>" alt="Zapatilla 2">
             </div>
             <div id="imagenPrincipal">
                 <img src="<?= 'public/img/vambas/' . $rifa->product->img; ?>" alt="Zapatilla 1">
@@ -24,7 +19,8 @@ $funciones = new Functions();
         </div>
         <div id="infoProducto">
         <h1><?= str_replace('-', ' ', $rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) ?></h1>
-            <h1><?= $rifa->$product->price . ' €' ?></h1>
+            <h1><?= $rifa->product->price . ' €' ?></h1>
+            <h3><?="Participa hasta el " . $rifa->date_end?></h3>
             <button class="btn">Participar en la rifa</button>
         </div>
     </section>
