@@ -2,6 +2,12 @@
 
 class AdminController extends Controller {
     
+    private $productsAll;
+    private $rafflesAll;
+    
+    private $products;
+    private $raffles;
+    
     public function showAdminPage() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -9,7 +15,15 @@ class AdminController extends Controller {
             $lang = "ca";
         }
         
-        AdminView::show($lang);
+        $pModel = new ProductModel();
+        $this->productsAll = $pModel->read();
+        
+        $rModel = new RaffleModel();
+        $this->rafflesAll = $rModel->read();
+        
+        AdminView::show($lang, $this->productsAll, $this->rafflesAll);
     }
+    
+    
     
 }
