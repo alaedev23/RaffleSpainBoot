@@ -1,10 +1,10 @@
 <section id="admin">
 
 	<?php 
+    	if ($errors !== "") {
+    	    echo "<h2 class=\"error\">$errors</h2>";
+    	}
 	   echo $result; 
-	   if ($errors !== "") {
-	       echo "<h2 class=\"error\">$errors</h2>";
-	   }
     ?>
 
 </section>

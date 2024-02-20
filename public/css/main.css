@@ -145,6 +145,7 @@ p, li, button, label, option {
       flex-wrap: wrap;
 }
 .zapatilla p {
+  font-size: 20px;
   color: var(--color-negro-fondo);
   padding: 10px 0px 0px 20px;
 }
@@ -154,6 +155,9 @@ p, li, button, label, option {
 }
 .zapatilla .precio {
   padding-bottom: 20px;
+}
+.zapatilla .date {
+  margin-bottom: 15px;
 }
 
 .inpSearch {
@@ -558,6 +562,9 @@ header img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+#admin .adminImages {
+  width: 100px;
 }
 #admin table {
   width: 90%;

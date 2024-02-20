@@ -2,7 +2,7 @@
 
 class AdminView extends View {
     
-    public static function show($lang, $prodcuts, $raffles, $modificarDatos = false, $objSelec = null, $errors = "") {
+    public static function show($lang, $prodcuts, $raffles, $objSelec = null, $modificarDatos = false, $errors = "") {
         
         if ($errors !== "") {
             $result = self::generateSectionAdmin($prodcuts, $raffles, $modificarDatos, $objSelec);
@@ -23,10 +23,10 @@ class AdminView extends View {
     public static function generateSectionAdmin($products, $raffles, $modificarDatos = false, $objSelec= null, $errors = "") {
         $html = "<h1>Productos</h1>";
         
-        if ($products) {
-            $html .= "<form action=\"?admin/updateProducts\" method=\"post\">";
+        if ($modificarDatos) {
+            $html .= "<form action=\"?admin/updateProductSelected\" method=\"post\" enctype=\"multipart/form-data\">";
         } else {
-            $html .= "<form action=\"?admin/createProduct\" method=\"post\">";
+            $html .= "<form action=\"?admin/createProduct\" method=\"post\" enctype=\"multipart/form-data\">";
         }
         
         $html .= "<table><thead><tr>
@@ -45,7 +45,19 @@ class AdminView extends View {
         </tr></thead>";
         
         if ($objSelec !== null) {
-            
+            $html .= "<tr>";
+            $html .= '<td><input type="text" name="id" value="' . $objSelec->id . '" readonly></td>';
+            $html .= '<td><input type="text" name="name" value="' . $objSelec->name . '"></td>';
+            $html .= '<td><input type="text" name="brand" value="' . $objSelec->brand . '"></td>';
+            $html .= '<td><input type="text" name="modelcode" value="' . $objSelec->modelCode . '" readonly></td>';
+            $html .= '<td><input type="text" name="price" value="' . $objSelec->price . '"></td>';
+            $html .= '<td><input type="text" name="size" value="' . $objSelec->size . '"></td>';
+            $html .= '<td><input type="text" name="color" value="' . $objSelec->color . '"></td>';
+            $html .= '<td><input type="text" name="description" value="' . $objSelec->description . '"></td>';
+            $html .= '<td><input type="text" name="sex" value="' . $objSelec->sex . '"></td>';
+            $html .= '<td><input type="file" name="imatge"></td>';
+            $html .= '<td><input type="text" name="quantity" value="' . $objSelec->quantity . '"></td>';
+            $html .= '<td><input type="text" name="discount" value="' . $objSelec->discount . '"></td>';
         } else {
             $html .= "<tr>";
             $html .= '<td><input type="text" name="id" readonly></td>';
@@ -57,7 +69,7 @@ class AdminView extends View {
             $html .= '<td><input type="text" name="color"></td>';
             $html .= '<td><input type="text" name="description"></td>';
             $html .= '<td><input type="text" name="sex"></td>';
-            $html .= '<td><input type="file" name="img"></td>';
+            $html .= '<td><input type="file" name="imatge"></td>';
             $html .= '<td><input type="text" name="quantity"></td>';
             $html .= '<td><input type="text" name="discount"></td>';
         }
@@ -65,7 +77,7 @@ class AdminView extends View {
         if ($modificarDatos) {
             $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></th></tr></thead><tbody>";
         } else {
-            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCrear\"></th></tr></thead><tbody>";
+            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCreate\"></th></tr></thead><tbody>";
         }
         
         foreach ($products as $product) {
@@ -79,11 +91,11 @@ class AdminView extends View {
             $html .= "<td>$product->color</td>";
             $html .= "<td>$product->description</td>";
             $html .= "<td>$product->sex</td>";
-            $html .= "<td>$product->img</td>";
+            $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/$product->img\"></td>";
             $html .= "<td>$product->quantity</td>";
             $html .= "<td>$product->discount</td>";
-            $html .= '<th class="alinear"><a class="btn" href="?admin/modificar/' . $product->id . '">Modificar</a></th>';
-            $html .= '<th class="alinear"><a class="btn" href="?admin/eliminar/' . $product->id . '">Eliminar</a></th></tr>';
+            $html .= '<th class="alinear"><a class="btn" href="?admin/updateProduct/' . $product->id . '">Modificar</a></th>';
+            $html .= '<th class="alinear"><a class="btn" href="?admin/deleteProduct/' . $product->id . '">Eliminar</a></th></tr>';
             $html .= "</tr>";
         }
         
