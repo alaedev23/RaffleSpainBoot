@@ -1,6 +1,6 @@
 <?php
 
-class CarretoList {
+class CistellaList {
     
     private $client_id;
     private Array $carreto;
@@ -31,7 +31,7 @@ class CarretoList {
         }
     }
 
-    public function addProduct($product) {
+    public function addProduct(Product $product) {
         $this->carreto[] = $product;
     }
     

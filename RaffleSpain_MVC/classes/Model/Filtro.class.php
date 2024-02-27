@@ -1,6 +1,6 @@
 <?php
 
-class Client {
+class Filtro {
     
     private $filtros;
     private $search;

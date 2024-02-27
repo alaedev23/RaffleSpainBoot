@@ -21,7 +21,6 @@ class FavoritosController extends Controller {
             $user = $_SESSION['usuari'];
             
             MapView::showMap($lang);
-
         }
 
     }
