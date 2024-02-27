@@ -4,6 +4,7 @@ class AdminController extends Controller {
     
     private $productsAll;
     private $rafflesAll;
+    private $auxID;
     
     private $product;
     private $raffle;
@@ -14,7 +15,6 @@ class AdminController extends Controller {
         $this->productsAll = $pModel->read();
         $this->rafflesAll = $rModel->read();
     }
-    
     
     public function showAdminPage() {
         if (isset($_COOKIE["lang"])) {
@@ -48,7 +48,6 @@ class AdminController extends Controller {
             $id = $this->sanitize($_POST['id']);
             $nameTemp = $this->sanitize($_POST['name']);
             $brandTemp = $this->sanitize($_POST['brand']);
-            $modelcodeTemp = $this->sanitize($_POST['modelcode']);
             $price = $this->sanitize($_POST['price']);
             $size = $this->sanitize($_POST['size']);
             $color = $this->sanitize($_POST['color']);
@@ -60,12 +59,7 @@ class AdminController extends Controller {
             
             $name = Functions::replaceSpaceForHyphen($nameTemp);
             $brand = Functions::replaceSpaceForHyphen($brandTemp);
-            
-            if (strlen($modelcodeTemp) != 0) {
-                $errores = "No tens que posar el modelCode.";
-            } else {
-                $modelcode = Functions::getNewModelCode($name, $brand);
-            }
+            $modelcode = Functions::getNewModelCode($name, $brand);
             
             if (strlen($id) != 0) {
                 $errores = "No tens que posar l'id.";
@@ -128,7 +122,7 @@ class AdminController extends Controller {
                 $errores = "Error en el descompte.";
             }
             
-            $this->product = $this->asignData($id, $name, $brand, $modelcode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);            
+            $this->product = $this->asignDataProduct($id, $name, $brand, $modelcode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);            
             $this->productsAll = $modelo->read();
             
             if (!isset($errores)) {
@@ -154,6 +148,71 @@ class AdminController extends Controller {
         }
     }
     
+    public function createRaffle() {
+        
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["sendDataCreate"]))) {
+            
+            $view = new AdminView();
+            $rModelo = new RaffleModel();
+            $pModelo = new ProductModel();
+            
+            $product_id = $this->sanitize($_POST['product_id']);
+            $data_start = $this->sanitize($_POST['date_start']);
+            $data_end = $this->sanitize($_POST['date_end']);
+            $winner = $this->sanitize($_POST['winner']);
+
+            if (strlen($data_start) === 0) {
+                $errores = "Error en el data_start, has d'introduir un data";
+            } else if (!DateTime::createFromFormat("Y-m-d H:i", $data_start)) {
+                $errores = "Error en el data_start, format incorrecte";
+            }
+            
+            if (strlen($data_end) === 0) {
+                $errores = "Error en el data_end, has d'introduir un data";
+            } else if (!DateTime::createFromFormat("Y-m-d H:i", $data_end)) {
+                $errores = "Error en el data_end, format incorrecte";
+            }
+            
+            if (strlen($product_id) === 0 || !is_numeric($product_id)) {
+                $errores = "Error en el product_id.";
+            } else if (!$pModelo->existProduct(new Product($product_id))) {
+                $errores = "No existeix el id del producte introduit.";
+            } else {
+                $this->product = $pModelo->getById(new Product($product_id));
+            }
+            
+            $this->raffle = $this->asignDataRaffle(null, $product_id, $data_start, $data_end, $this->product, $winner);
+            
+            $this->rafflesAll = $rModelo->read();
+            $this->productsAll = $pModelo->read();
+            
+            if (!isset($errores)) {
+                
+                $create = $rModelo->create($this->raffle);
+                
+                $this->productsAll = $pModelo->read();
+                $this->rafflesAll = $rModelo->read();
+                
+                if ($create === "La consulta se ha realizado con existo") {
+                    $this->productsAll = $rModelo->read();
+                    header("Location: index.php?admin/showAdminPage");
+                    $view->show($lang, $this->productsAll, $this->rafflesAll, null);
+                } else {
+                    $errores = $create;
+                    $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, false, $errores);
+                }
+            } else {
+                $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, false, $errores);
+            }
+        }
+    }
+    
     public function updateProductSelected() {
         
         if (isset($_COOKIE["lang"])) {
@@ -167,10 +226,8 @@ class AdminController extends Controller {
             $view = new AdminView();
             $modelo = new ProductModel();
             
-            $id = $this->sanitize($_POST['id']);
             $nameTemp = $this->sanitize($_POST['name']);
             $brandTemp = $this->sanitize($_POST['brand']);
-            $modelcode = $this->sanitize($_POST['modelcode']);
             $price = $this->sanitize($_POST['price']);
             $size = $this->sanitize($_POST['size']);
             $color = $this->sanitize($_POST['color']);
@@ -183,15 +240,9 @@ class AdminController extends Controller {
             $name = Functions::replaceSpaceForHyphen($nameTemp);
             $brand = Functions::replaceSpaceForHyphen($brandTemp);
             
-            $objAux = $modelo->getById(new Product($id));
-            
-            if ($objAux instanceof Product) {
-                if (!($objAux->modelCode === $modelcode)) {
-                    $errores = "No es pot modificar el modelCode";
-                }
-            } else {
-                $errores = "No es pot modificar l'id";
-            }
+            $auxObject = $modelo->readForNameBrand(new Product(null, $name, $brand));
+            $modelCode = $auxObject[0]->__get("modelCode");
+            $id = $auxObject[0]->__get("id");
             
             if (strlen($name) === 0) {
                 $errores = "Error en el nom.";
@@ -242,7 +293,7 @@ class AdminController extends Controller {
                 $errores = "Error en el descompte.";
             }
             
-            $this->product = $this->asignData($id, $name, $brand, $modelcode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);
+            $this->product = $this->asignDataProduct($id, $name, $brand, $modelCode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);
             $this->productsAll = $modelo->read();
             
             if (!isset($errores)) {
@@ -268,25 +319,72 @@ class AdminController extends Controller {
         }
     }
     
-    public function deleteProduct($id) {
-        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+    public function updateRaffleSelected() {
         
-        $pModelo = new ProductModel();
-        $rModelo = new RaffleModel();
-        $view = new AdminView();
-        
-        $this->product = new Product($id[0]);
-        $consulta = $pModelo->delete($this->product);
-        
-        if ($consulta === "La consulta se ha realizado con existo") {
-            $this->rafflesAll = $rModelo->read();
-            $this->productsAll = $pModelo->read();
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
         } else {
-            $errores = $consulta;
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
+            $lang = "ca";
         }
         
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["sendDataUpdate"]))) {
+            
+            $view = new AdminView();
+            $rModelo = new RaffleModel();
+            $pModelo = new ProductModel();
+            
+            $id = $this->sanitize($_POST['id']);
+            $product_id = $this->sanitize($_POST['product_id']);
+            $data_start = $this->sanitize($_POST['date_start']);
+            $data_end = $this->sanitize($_POST['date_end']);
+            $winner = $this->sanitize($_POST['winner']);
+            
+            if (strlen($data_start) === 0) {
+                $errores = "Error en el data_start, has d'introduir un data";
+            } else if (!DateTime::createFromFormat("Y-m-d H:i", $data_start)) {
+                $errores = "Error en el data_start, format incorrecte";
+            }
+            
+            if (strlen($data_end) === 0) {
+                $errores = "Error en el data_end, has d'introduir un data";
+            } else if (!DateTime::createFromFormat("Y-m-d H:i", $data_end)) {
+                $errores = "Error en el data_end, format incorrecte";
+            }
+            
+            $auxProduct = new Product($product_id);
+            $result = $pModelo->getById($auxProduct);
+            
+            if (strlen($product_id) === 0 || !is_numeric($product_id)) {
+                $errores = "Error en el product_id.";
+            } else if (!($result instanceof Product)) {
+                $errores = "No existeix el id del producte introduit.";
+            } else {
+                $this->product = $result;
+            }
+            
+            $this->raffle = $this->asignDataRaffle($id, $product_id, $data_start, $data_end, $this->product, $winner);
+            
+            $this->rafflesAll = $rModelo->read();
+            $this->productsAll = $pModelo->read();
+            
+            if (!isset($errores)) {
+                
+                $update = $rModelo->update($this->raffle);
+                
+                $this->productsAll = $pModelo->read();
+                $this->rafflesAll = $rModelo->read();
+                
+                if ($update === "La consulta se ha realizado con existo") {
+                    header("Location: index.php?admin/showAdminPage");
+                    $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+                } else {
+                    $errores = $update;
+                    $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, true, $errores);
+                }
+            } else {
+                $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, true, $errores);
+            }
+        }
     }
     
     public function updateProduct($id) {
@@ -310,8 +408,71 @@ class AdminController extends Controller {
         }
     }
     
-    private function asignData($id, $name, $brand, $modelCode, $price, $size, $color, $description, $sex, $img, $quantity, $discount) {
-        return new Product(
+    public function updateRaffle($id) {
+        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+        
+        $pModelo = new ProductModel();
+        $rModelo = new RaffleModel();
+        $view = new AdminView();
+        
+        $this->raffle = new Raffle($id[0], null, null, null);
+        $consulta = $rModelo->getById($this->raffle);
+
+        if ($consulta instanceof Raffle) {
+            $this->raffle = $consulta;
+            $this->rafflesAll = $rModelo->read();
+            $this->productsAll = $pModelo->read();
+            $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, true);
+        } else {
+            $errores = $consulta;
+            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
+        }
+    }
+    
+    public function deleteProduct($id) {
+        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+        
+        $pModelo = new ProductModel();
+        $rModelo = new RaffleModel();
+        $view = new AdminView();
+        
+        $this->product = new Product($id[0]);
+        $consulta = $pModelo->delete($this->product);
+        
+        if ($consulta === "La consulta se ha realizado con existo") {
+            $this->rafflesAll = $rModelo->read();
+            $this->productsAll = $pModelo->read();
+            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+        } else {
+            $errores = $consulta;
+            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
+        }
+        
+    }
+    
+    public function deleteRaffle($id) {
+        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+        
+        $pModelo = new ProductModel();
+        $rModelo = new RaffleModel();
+        $view = new AdminView();
+        
+        $this->raffle = new Raffle($id[0], null, null, null);
+        $consulta = $rModelo->delete($this->raffle);
+        
+        if ($consulta === "La consulta se ha realizado con existo") {
+            $this->rafflesAll = $rModelo->read();
+            $this->productsAll = $pModelo->read();
+            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+        } else {
+            $errores = $consulta;
+            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
+        }
+        
+    }
+    
+    private function asignDataProduct($id, $name, $brand, $modelCode, $price, $size, $color, $description, $sex, $img, $quantity, $discount) {
+        return new Product (
             $id,
             $name,
             $brand,
@@ -324,6 +485,17 @@ class AdminController extends Controller {
             $img,
             $quantity,
             $discount
+        );
+    }
+    
+    private function asignDataRaffle($id, $product_id, $date_start, $date_end, $product, $winner) {
+        return new Raffle (
+            $id,
+            $product_id,
+            $date_start,
+            $date_end,
+            $product,
+            $winner
         );
     }
     

@@ -4,7 +4,8 @@
     	if ($errors !== "") {
     	    echo "<h2 class=\"error\">$errors</h2>";
     	}
-	   echo $result; 
+    	echo $tempProducts; 
+    	echo $tempRraffles; 
     ?>
 
 </section>

@@ -90,6 +90,16 @@ class ProductModel implements Crudable
         return $products;
     }
     
+    public function existProduct($search) {
+        $productsAll = $this->readAll();
+        foreach ($productsAll as $product) {
+            if (intval($search->id) === $product->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public function getTallas($product){
         
         $productName = $product->__get('name');

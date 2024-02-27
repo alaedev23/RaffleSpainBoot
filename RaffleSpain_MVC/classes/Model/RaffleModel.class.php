@@ -30,19 +30,28 @@ class RaffleModel implements Crudable
 
     public function create($obj)
     {
-        
-        $sql = 'INSERT INTO raffle (product_id, date_start, date_end) VALUES (?, ?, ?)';
-        $params = [$obj->product_id, $obj->date_start, $obj->date_end];
+        if ($obj->winner === "") {
+            $sql = 'INSERT INTO raffle (product_id, date_start, date_end) VALUES (?, ?, ?)';
+            $params = [$obj->product_id, $obj->date_start, $obj->date_end];
+        } else {
+            $sql = 'INSERT INTO raffle (product_id, date_start, date_end, winner) VALUES (?, ?, ?, ?)';
+            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->winner];
+        }
         
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
-        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ? WHERE id=?';
-        $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->id];
+        if ($obj->winner === "") {
+            $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ? WHERE id = ?';
+            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->id];
+        } else {
+            $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ?, winner = ? WHERE id = ?';
+            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->winner, $obj->id];
+        }
         
-        $this->database->executarSQL($sql, $params);
+        return $this->database->executarSQL($sql, $params);
     }
 
     public function delete($obj)
@@ -50,8 +59,7 @@ class RaffleModel implements Crudable
         $sql = 'DELETE FROM raffle WHERE id=?';
         $params = [$obj->id];
         
-        $this->database->executarSQL($sql, $params);
-        return $obj;
+        return $this->database->executarSQL($sql, $params);;
     }
 
     public function getById($obj)
