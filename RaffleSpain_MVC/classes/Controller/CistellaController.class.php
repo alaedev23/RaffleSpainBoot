@@ -6,5 +6,9 @@ class CistellaController extends Controller {
         CistellaView::show();    
     }
 
+    public static function addProduct($id) {
+        
+    }
+
 }
 
