@@ -15,7 +15,8 @@
     border-radius: 10px;
 }
 
-.btn:hover, .btnZapatillas:hover {
+.btn:hover,
+.btnZapatillas:hover {
     background-color: var(--color-negro-fondo);
     color: var(--color-dorado);
     transition: 0.5s;
@@ -23,4 +24,87 @@
 
 .btnZapatillas {
     margin: 10px 0px 30px 20px;
+}
+
+
+.botonDesplegable {
+    .boton {
+        width: 50px;
+        margin: 0 auto;
+        margin-top: 10%;
+
+        .lineas {
+            width: 50px;
+            height: 50px;
+            border-radius: 7px;
+            background: #666;
+            margin: 0 auto;
+            padding: 7px;
+            cursor: pointer;
+
+            >div {
+                height: 5px;
+                width: 100%;
+                background: white;
+                margin: 0 auto;
+                margin-top: 9px;
+                transition: all 1s;
+            }
+
+            &:hover {
+                >div:nth-child(2) {
+                    width: 50%;
+                    margin: 0 auto;
+                    margin-top: 9px;
+                }
+
+                >div:last-child {
+                    width: 30%;
+                    margin: 0 auto;
+                    margin-top: 9px;
+                }
+            }
+        }
+
+        ul {
+            height: 0;
+            /* OCULTAMOS MENÚ */
+            overflow: hidden;
+            width: 300px;
+            margin-left: -118px;
+            transition: all 1.5s;
+
+            li:first-child {
+                /* DIBUJAMOS EL TRIÁNGULO */
+                border: 20px solid transparent;
+                border-bottom-color: #666;
+                width: 0;
+                position: relative;
+                left: 50%;
+                margin-left: -20px;
+            }
+
+            li a {
+                display: block;
+                text-align: center;
+                padding: 15px 0;
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;
+                background: #666;
+                border-bottom: 1px solid #dadada;
+
+                &:hover {
+                    box-shadow: 0 -5px 0 white inset;
+                }
+            }
+        }
+
+        &:hover {
+            ul {
+                height: 300px;
+            }
+        }
+    }
 }

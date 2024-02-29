@@ -5,8 +5,8 @@ class HomeView extends View {
     public static function show($products, $rifas) {
 
         $function = new Functions();
-        $productsGrid = $function->generatecardProduct($products);
-        $rifasGrid = $function->generatecardRaffle($rifas);
+        $productsGrid = $function->generatecardProduct(array_slice($products, 0, 6));
+        $rifasGrid = $function->generatecardRaffle(array_slice($rifas, 0, 3));
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
