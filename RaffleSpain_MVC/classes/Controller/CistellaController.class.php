@@ -3,12 +3,15 @@
 class CistellaController extends Controller {
     
     public static function show() {
-        CistellaView::show();    
+
+        $productos = self::cargarProductos();
+
+        CistellaView::show($productos);    
     }
 
     public static function addProduct($id) {
 
-        $prd = new Product($id);
+        $prd = new Product($id[0]);
         $productModel = new ProductModel();
 
         $newProduct = $productModel->getById($prd);
@@ -33,27 +36,16 @@ class CistellaController extends Controller {
     }
 
     public static function cargarProductos() {
-
         if(isset($_SESSION['usuari'])) {
             $carretoModel = new CistellaListModel();
-            $carreto = $carretoModel->read(new Client($_SESSION['usuari']->id));
-            $productModel = new ProductModel();
-            $productes = $productModel->getAll();
-            $productesCarreto = [];
-
-            foreach ($productes as $producte) {
-                if ($carreto->hasProduct($producte)) {
-                    $productesCarreto[] = $producte;
-                }
-            }
-
-            return $productesCarreto;
+            $cistella = $carretoModel->read(new Client($_SESSION['usuari']->id));
+            return is_array($cistella) ? $cistella : $cistella->carreto;
         } else {
-            $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
-            return $carrito;
+            $cistella = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
+            return $cistella;
         }
-
     }
+    
 
 }
 

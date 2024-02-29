@@ -6,7 +6,7 @@ class CistellaListModel implements Crudable {
         $database = new DataBase('select');
         $resultado = $database->executarSQL("SELECT * FROM Carreto where Client_id = ?", [$obj->getClientId()]);
 
-        $carretoObj = new CarretoList();
+        $carretoObj = new CistellaList();
 
         foreach ($resultado as $fila) {
             $product = new Product($fila["product_id"]);

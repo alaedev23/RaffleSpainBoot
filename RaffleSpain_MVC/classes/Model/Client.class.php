@@ -14,7 +14,7 @@ class Client {
     private $address;
     private $type;
     
-    public function __construct($id, $name, $password, $surnames, $born = null, $email, $phone, $sex = null, $poblation, $address, $type = 0) {
+    public function __construct($id, $name = null, $password = null, $surnames = null, $born = null, $email = null, $phone = null, $sex = null, $poblation, $address, $type = 0) {
         $this->id = $id;
         $this->name = $name;
         $this->password = $password;

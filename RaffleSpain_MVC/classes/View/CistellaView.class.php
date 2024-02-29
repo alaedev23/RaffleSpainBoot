@@ -2,7 +2,7 @@
 
 class CistellaView extends View {
     
-    public static function show() {
+    public static function show($carretoProducts = null) {
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
