@@ -30,6 +30,24 @@ class Product
         $this->discount = $discount;
     }
 
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'brand' => $this->brand,
+            'modelCode' => $this->modelCode,
+            'price' => $this->price,
+            'size' => $this->size,
+            'color' => $this->color,
+            'sex' => $this->sex,
+            'img' => $this->img,
+            'description' => $this->description,
+            'quantity' => $this->quantity,
+            'discount' => $this->discount
+        ];
+    }
+
     public function __set($property, $value) {
         if (property_exists($this, $property)) {
             $this->$property = $value;

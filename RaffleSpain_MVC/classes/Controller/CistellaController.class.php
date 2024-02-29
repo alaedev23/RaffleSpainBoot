@@ -1,51 +1,53 @@
-<?php
 
+<?php
 class CistellaController extends Controller {
     
     public static function show() {
-
-        $productos = self::cargarProductos();
-
-        CistellaView::show($productos);    
+        $carretoProductos = self::cargarProductos();
+        CistellaView::show($carretoProductos);    
     }
-
+        
+    
     public static function addProduct($id) {
-
-        $prd = new Product($id[0]);
-        $productModel = new ProductModel();
-
-        $newProduct = $productModel->getById($prd);
-
-        if(!isset($_SESSION['usuari'])) {
+            $prd = new Product($id[0]);
+            $productModel = new ProductModel();
+            $newProduct = $productModel->getById($prd);
 
             $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
-            
+
             if ($newProduct) {
-                $carrito[] = $newProduct;
-                setcookie('cistella', json_encode($carrito), time() + 86400);
+                $carrito[] = $newProduct->toArray();
+                setcookie('cistella', json_encode($carrito), time() + 806400, "/");
             }
 
-        } else {
-            $carretoModel = new CistellaListModel();
-            $carretoModel->create($newProduct);
+            $cistella = new ProducteController();
+            $cistella->mostrarProducte($id);
         }
 
-        $cistella = new ProducteController();
-        $cistella->mostrarProducte($id);
-
-    }
-
-    public static function cargarProductos() {
-        if(isset($_SESSION['usuari'])) {
-            $carretoModel = new CistellaListModel();
-            $cistella = $carretoModel->read(new Client($_SESSION['usuari']->id));
-            return is_array($cistella) ? $cistella : $cistella->carreto;
-        } else {
-            $cistella = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
-            return $cistella;
+        public static function emptyCart() {
+            setcookie('cistella', '', time() - 3600);
+            header('Location: .');
         }
-    }
+
+        public static function removeProductById($productId) {
+            $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
+        
+            $newCarrito = array_filter($carrito, function($product) use ($productId) {
+                return $product['id'] != $productId[0];
+            });
+        
+            setcookie('cistella', "", time() - 3600, '/');
+            setcookie('cistella', json_encode(array_values($newCarrito)), time() + 806400, '/');
+
+            var_dump($newCarrito);
+            
+            header('Location: ?Cistella/show');
+            exit();
+        }
+        
     
-
+    public static function cargarProductos() {
+        $cistella = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
+        return $cistella;
+    }
 }
-
