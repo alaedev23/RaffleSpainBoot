@@ -68,6 +68,7 @@ body {
   height: 100vh;
   color: var(--color-negro-fondo);
   background-color: var(--color-blanco-oscuro);
+  z-index: 1;
 }
 
 h1, h2, h3, label {
@@ -116,8 +117,17 @@ p, li, button, label, option {
 .icono {
   width: 40px;
   height: auto;
-  margin-right: 15px;
+  margin-right: 0px;
   color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.icono:hover, .icono:focus {
+  background-color: rgba(87, 87, 87, 0.2666666667);
+  -webkit-transition: 0.8s;
+  transition: 0.8s;
 }
 
 .nombre_zapatilla {
@@ -298,6 +308,12 @@ header .menu {
 header img {
   width: 100px;
 }
+header nav ul li {
+  margin: 0px 8px 0px 0px;
+}
+header nav ul li:last-child {
+  margin-right: 0px;
+}
 
 #contenidor_rifes {
   display: -webkit-box;
@@ -446,74 +462,40 @@ header img {
   margin: 10px 0px 30px 20px;
 }
 
-.botonDesplegable .boton {
-  width: 50px;
-  margin: 0 auto;
-  margin-top: 10%;
-}
-.botonDesplegable .boton .lineas {
-  width: 50px;
-  height: 50px;
-  border-radius: 7px;
-  background: #666;
-  margin: 0 auto;
-  padding: 7px;
-  cursor: pointer;
-}
-.botonDesplegable .boton .lineas > div {
-  height: 5px;
-  width: 100%;
-  background: white;
-  margin: 0 auto;
-  margin-top: 9px;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.botonDesplegable .boton .lineas:hover > div:nth-child(2) {
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 9px;
-}
-.botonDesplegable .boton .lineas:hover > div:last-child {
-  width: 30%;
-  margin: 0 auto;
-  margin-top: 9px;
-}
-.botonDesplegable .boton ul {
-  height: 0;
-  /* OCULTAMOS MENÚ */
-  overflow: hidden;
-  width: 300px;
-  margin-left: -118px;
-  -webkit-transition: all 1.5s;
-  transition: all 1.5s;
-}
-.botonDesplegable .boton ul li:first-child {
-  /* DIBUJAMOS EL TRIÁNGULO */
-  border: 20px solid transparent;
-  border-bottom-color: #666;
-  width: 0;
+/* Dropdown Button */
+.dropdown {
   position: relative;
-  left: 50%;
-  margin-left: -20px;
+  display: inline-block;
+  z-index: 2;
 }
-.botonDesplegable .boton ul li a {
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  width: 180px;
+  top: 70px;
+  background-color: rgba(46, 46, 46, 0.596);
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
   display: block;
-  text-align: center;
-  padding: 15px 0;
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  background: #666;
-  border-bottom: 1px solid #dadada;
 }
-.botonDesplegable .boton ul li a:hover {
-  -webkit-box-shadow: 0 -5px 0 white inset;
-          box-shadow: 0 -5px 0 white inset;
+
+.dropdown-content a:hover {
+  background-color: var(--color-dorado);
+  color: var(--color-negro-fondo);
 }
-.botonDesplegable .boton:hover ul {
-  height: 300px;
+
+.show {
+  display: block;
+}
+
+.user-dropdown {
+  left: -80px;
 }
 
 #search {

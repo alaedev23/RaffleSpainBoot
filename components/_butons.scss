@@ -26,85 +26,38 @@
     margin: 10px 0px 30px 20px;
 }
 
+/* Dropdown Button */
 
-.botonDesplegable {
-    .boton {
-        width: 50px;
-        margin: 0 auto;
-        margin-top: 10%;
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+}
 
-        .lineas {
-            width: 50px;
-            height: 50px;
-            border-radius: 7px;
-            background: #666;
-            margin: 0 auto;
-            padding: 7px;
-            cursor: pointer;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    transition: 0.6s;
+    width: 180px;
+    top: 70px;
+    background-color: rgba(46, 46, 46, 0.596);
+}
 
-            >div {
-                height: 5px;
-                width: 100%;
-                background: white;
-                margin: 0 auto;
-                margin-top: 9px;
-                transition: all 1s;
-            }
+.dropdown-content a {
+    padding: 12px 16px;
+    display: block;
+}
 
-            &:hover {
-                >div:nth-child(2) {
-                    width: 50%;
-                    margin: 0 auto;
-                    margin-top: 9px;
-                }
+.dropdown-content a:hover {
+    background-color: var(--color-dorado);
+    color: var(--color-negro-fondo)
+}
 
-                >div:last-child {
-                    width: 30%;
-                    margin: 0 auto;
-                    margin-top: 9px;
-                }
-            }
-        }
+.show {
+    display: block;
+}
 
-        ul {
-            height: 0;
-            /* OCULTAMOS MENÚ */
-            overflow: hidden;
-            width: 300px;
-            margin-left: -118px;
-            transition: all 1.5s;
-
-            li:first-child {
-                /* DIBUJAMOS EL TRIÁNGULO */
-                border: 20px solid transparent;
-                border-bottom-color: #666;
-                width: 0;
-                position: relative;
-                left: 50%;
-                margin-left: -20px;
-            }
-
-            li a {
-                display: block;
-                text-align: center;
-                padding: 15px 0;
-                color: white;
-                text-decoration: none;
-                font-size: 18px;
-                font-weight: bold;
-                background: #666;
-                border-bottom: 1px solid #dadada;
-
-                &:hover {
-                    box-shadow: 0 -5px 0 white inset;
-                }
-            }
-        }
-
-        &:hover {
-            ul {
-                height: 300px;
-            }
-        }
-    }
+.user-dropdown {
+    left: -80px;
 }

@@ -5,6 +5,7 @@ body {
     height: 100vh;
     color: var(--color-negro-fondo);
     background-color: var(--color-blanco-oscuro);
+    z-index: 1;
 }
 
 h1, h2, h3, label {
@@ -52,8 +53,18 @@ p,li, button, label, option {
 .icono {
     width: 40px;
     height: auto;
-    margin-right: 15px;
+    margin-right: 0px;
     color: whitesmoke;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: #57575744;
+        transition: 0.8s;
+    }
 }
 
 .nombre_zapatilla {

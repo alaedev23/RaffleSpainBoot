@@ -4,5 +4,5 @@
     <title>RaffleSpain</title>
     <link rel="stylesheet" href="../public/css/main.css">
     <link rel="shortcut icon" href="../public/img/logo.png" type="image/x-icon">
-    <script defer src="../public/js/script.js"></script>
+    <script defer src="public/js/script.js"></script>
 </head>

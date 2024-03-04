@@ -1,4 +1,4 @@
-// // Animacion entrar pagina que salga el elemento y modificaciones grid 
+// Animacion entrar pagina que salga el elemento y modificaciones grid 
 
 document.addEventListener('DOMContentLoaded', function () {
 
