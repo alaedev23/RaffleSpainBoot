@@ -13,11 +13,26 @@ class CistellaController extends Controller {
             $productModel = new ProductModel();
             $newProduct = $productModel->getById($prd);
 
-            $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
+            if (isset($_SESSION['usuari'])) {
+                
+                $cistellaList = new CistellaList();
+                $cistellaModel = new CistellaListModel();
 
-            if ($newProduct) {
-                $carrito[] = $newProduct->toArray();
-                setcookie('cistella', json_encode($carrito), time() + 806400, "/");
+                $cistellaList->client_id = $_SESSION['usuari']->id;
+                $cistellaList->addProduct($newProduct);
+
+                $result  = $cistellaModel->create($cistellaList);
+
+                var_dump($result);
+                die();
+
+            } else {
+                $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
+
+                if ($newProduct) {
+                    $carrito[] = $newProduct->toArray();
+                    setcookie('cistella', json_encode($carrito), time() + 806400, "/");
+                }
             }
 
             $cistella = new ProducteController();

@@ -1,6 +1,6 @@
 <?php
 
-class CistellaListModel implements Crudable {
+class CistellaListModel {
 
     public function read($obj) {
         $database = new DataBase('select');
@@ -21,9 +21,11 @@ class CistellaListModel implements Crudable {
     public function create($obj) {
         $database = new DataBase('insert');
 
-        $params = [$obj->getClientId(), $obj->getProductId()];
+        $params = [$obj->client_id, $obj->carreto[0]->id];
         
-        $resultado = $database->executarSQL("INSERT INTO Carreto (Client_Id, Product_Id) VALUES (?, ?)", $params);
+        var_dump($params);
+
+        $resultado = $database->executarSQL("INSERT INTO carreto (Client_Id, Product_Id) VALUES (?, ?)", $params);
 
         return $resultado;
     }
