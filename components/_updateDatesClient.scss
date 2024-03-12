@@ -1,0 +1,143 @@
+#datesClient {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 150px;
+    
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-body {
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+
+            input {
+                border-radius: 20px;
+                padding: 10px;
+                text-align: center;
+                border: #aaaaaa 0.5px solid;
+            }
+
+            button {
+                margin-top: 15px;
+            }
+        }
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #ffffff;
+        margin: 10% auto;
+        padding: 20px;
+        width: 20%;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+
+    .close:hover, .close:focus {
+        color: #ff5b5b;
+    }
+
+    .iconoDatesClient {
+        width: 30px;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+
+    h3, h4 {
+        margin-bottom: 15px;
+    }
+
+    #asideDatesClient {
+        width: 25%;
+    }
+
+    #contentDatesClient {
+        margin-top: 70px;
+        width: 70%;
+
+        p {
+            padding-bottom: 6px;
+        }
+
+        .itemDetalleCuenta {
+            max-width: 300px;
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+#passwordRequirements {
+    display: block !important;
+    padding-bottom: 10px;
+}
+
+#asideContent {
+    padding: 10px;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            cursor: pointer;
+
+            span {
+                margin-right: 20px;
+            }
+        }
+    }
+}
+
+#contentDetallesCuenta,
+#contentMetodosPago {
+    display: none;
+}
+
+#detallesCuenta.active,
+#metodosPago.active {
+    font-weight: bold;
+}
+
+#contentDetallesCuenta.active,
+#contentMetodosPago.active {
+    display: block;
+}

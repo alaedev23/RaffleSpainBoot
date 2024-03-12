@@ -52,31 +52,31 @@ class AdminView extends View {
         if ($objSelec !== null) {
             $html .= "<tr>";
             $html .= "<td></td>";
-            $html .= '<td><input type="text" name="name" value="' . $objSelec->name . '"></td>';
-            $html .= '<td><input type="text" name="brand" value="' . $objSelec->brand . '"></td>';
-            $html .= '<td><input type="text" name="price" value="' . $objSelec->price . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="name" value="' . $objSelec->name . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="brand" value="' . $objSelec->brand . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="price" value="' . $objSelec->price . '"></td>';
             $html .= "<td></td>";
             $html .= '<td><input type="text" name="size" value="' . $objSelec->size . '"></td>';
             $html .= '<td><input type="text" name="color" value="' . $objSelec->color . '"></td>';
-            $html .= '<td><input type="text" name="description" value="' . $objSelec->description . '"></td>';
-            $html .= '<td><input type="text" name="sex" value="' . $objSelec->sex . '"></td>';
-            $html .= '<td><input type="file" name="imatge"></td>';
-            $html .= '<td><input type="text" name="quantity" value="' . $objSelec->quantity . '"></td>';
-            $html .= '<td><input type="text" name="discount" value="' . $objSelec->discount . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="description" value="' . $objSelec->description . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="sex" value="' . $objSelec->sex . '"></td>';
+            $html .= '<td><input class="inputTable" type="file" name="imatge"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="quantity" value="' . $objSelec->quantity . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="discount" value="' . $objSelec->discount . '"></td>';
         } else {
             $html .= "<tr>";
             $html .= "<td></td>";
-            $html .= '<td><input type="text" name="name"></td>';
-            $html .= '<td><input type="text" name="brand"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="name"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="brand"></td>';
             $html .= "<td></td>";
-            $html .= '<td><input type="text" name="price"></td>';
-            $html .= '<td><input type="text" name="size"></td>';
-            $html .= '<td><input type="text" name="color"></td>';
-            $html .= '<td><input type="text" name="description"></td>';
-            $html .= '<td><input type="text" name="sex"></td>';
-            $html .= '<td><input type="file" name="imatge"></td>';
-            $html .= '<td><input type="text" name="quantity"></td>';
-            $html .= '<td><input type="text" name="discount"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="price"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="size"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="color"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="description"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="sex"></td>';
+            $html .= '<td><input class="inputTable" type="file" name="imatge"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="quantity"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="discount"></td>';
         }
         
         if ($modificarDatos) {
@@ -131,20 +131,20 @@ class AdminView extends View {
         
         if ($objSelec !== null) {
             $html .= "<tr>";
-            $html .= '<td><input type="hidden" name="id" value="' . $objSelec->id . '"></td>';
-            $html .= '<td><input type="text" name="product_id" value="' . $objSelec->product_id . '"></td>';
-            $html .= '<td><input type="text" name="date_start" value="' . $objSelec->date_start . '"></td>';
-            $html .= '<td><input type="text" name="date_end" value="' . $objSelec->date_end . '"></td>';
+            $html .= '<td><input class="inputTable" type="hidden" name="id" value="' . $objSelec->id . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="product_id" value="' . $objSelec->product_id . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="date_start" value="' . $objSelec->date_start . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="date_end" value="' . $objSelec->date_end . '"></td>';
             $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/" . $objSelec->product->img . "\"></td>";
-            $html .= '<td><input type="text" name="winner" value="' . $objSelec->winner . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="winner" value="' . $objSelec->winner . '"></td>';
         } else {
             $html .= "<tr>";
-            $html .= '<td><input type="hidden" name="id" value=""></td>';
-            $html .= '<td><input type="text" name="product_id"></td>';
-            $html .= '<td><input type="text" name="date_start"></td>';
-            $html .= '<td><input type="text" name="date_end"></td>';
+            $html .= '<td><input class="inputTable" type="hidden" name="id" value=""></td>';
+            $html .= '<td><input class="inputTable" type="text" name="product_id"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="date_start"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="date_end"></td>';
             $html .= '<td></td>';
-            $html .= '<td><input type="text" name="winner"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="winner"></td>';
         }
         
         if ($modificarDatos) {

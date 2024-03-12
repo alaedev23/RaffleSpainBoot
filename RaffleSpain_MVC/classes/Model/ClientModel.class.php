@@ -5,22 +5,12 @@ class ClientModel implements Crudable {
     public function read($obj = null) {
         
         $database = new DataBase('select');
-        $resultado = $database->executarSQL("SELECT * FROM Client");
+        $resultado = $database->executarSQL("SELECT * FROM client");
         
         $client = [];
         
         foreach ($resultado as $fila) {
-            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null, null);
-            $clientObj->__set("id", $fila['id']);
-            $clientObj->__set("name", $fila['name']);
-            $clientObj->__set("password", $fila['password']);
-            $clientObj->__set("surnames", $fila['surnames']);
-            $clientObj->__set("born", $fila['born']);
-            $clientObj->__set("email", $fila['email']);
-            $clientObj->__set("phone", $fila['phone']);
-            $clientObj->__set("poblation", $fila['poblation']);
-            $clientObj->__set("address", $fila['address']);
-            $clientObj->__set("type", $fila['type']);
+            $clientObj = $this->createClientFromData($fila);
             $client[] = $clientObj;
         }
         
@@ -41,12 +31,32 @@ class ClientModel implements Crudable {
     }
     
     public function update($obj) {
-        
         $database = new DataBase('update');
         
-        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type"), $obj->__get("id")];
+        $params = [
+            $obj->__get("email"),
+            $obj->__get("password"),
+            $obj->__get("surnames"),
+            $obj->__get("born"),
+            $obj->__get("phone"),
+            $obj->__get("poblation"),
+            $obj->__get("address"),
+            $obj->__get("sex"),
+            $obj->__get("type"),
+            $obj->__get("id")
+        ];
         
-        $resultado = $database->executarSQL("UPDATE tbl_usuaris SET email = ?, password = ?, tipusIdent = ?, numeroIdent = ?, nom = ?, cognoms = ?, sexe = ?, naixement = ?, adreca = ?, codiPostal = ?, poblacio = ?, provincia = ?, telefon = ?, imatge = ?, status = ? WHERE id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE client SET email = ?, password = ?, surnames = ?, born = ?, phone = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
+        
+        return $resultado;
+    }
+    
+    public function updatePassword($obj) {
+        $database = new DataBase('update');
+        
+        $params = [$obj->__get("password"), $obj->__get("id")];
+        
+        $resultado = $database->executarSQL("UPDATE client SET password = ? WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -57,7 +67,7 @@ class ClientModel implements Crudable {
         
         $params = [$obj->__get("id")];
         
-        $resultado = $database->executarSQL("UPDATE tbl_usuaris SET type = 1 WHERE id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE client SET type = 1 WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -68,7 +78,7 @@ class ClientModel implements Crudable {
         
         $params = [$obj->__get("id")];
         
-        $resultado = $database->executarSQL("UPDATE tbl_usuaris SET type = 0 WHERE id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE client SET type = 0 WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -77,33 +87,49 @@ class ClientModel implements Crudable {
         
         $database = new DataBase('delete');
         
-        $resultado = $database->executarSQL("DELETE FROM tbl_usuaris WHERE id = ?", [$obj->__get("id")]);
+        $resultado = $database->executarSQL("DELETE FROM client WHERE id = ?", [$obj->__get("id")]);
         
         return $resultado;
         
     }
     
-    public function getById($obj) {
+    public function getByEmailPassword($obj) {
         $database = new DataBase('select');
-        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->__get("email"), $obj->__get("password")]);        
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ? and password = ?", [$obj->__get("email"), $obj->__get("password")]);
         if (count($resultado) > 0) {
-            $fila = $resultado[0];
-            $clientObj = new Client(null, null, null, null, null, null, null, null, null, null, null);
-            $clientObj->__set("id", $fila['id']);
-            $clientObj->__set("name", $fila['name']);
-            $clientObj->__set("password", $fila['password']);
-            $clientObj->__set("surnames", $fila['surnames']);
-            $clientObj->__set("born", $fila['born']);
-            $clientObj->__set("email", $fila['email']);
-            $clientObj->__set("phone", $fila['phone']);
-            $clientObj->__set("sex", $fila['sex']);
-            $clientObj->__set("poblation", $fila['poblation']);
-            $clientObj->__set("address", $fila['address']);
-            $clientObj->__set("type", $fila['type']);
+            $clientObj = $this->createClientFromData($resultado[0]);
             return $clientObj;
         } else {
             return "El email o la contrasenya no son correctos.";
         }
+    }
+    
+    public function getById($obj) {
+        $database = new DataBase('select');
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE id = ?", [$obj->__get("id")]);  
+        if (count($resultado) > 0) {
+            $clientObj = $this->createClientFromData($resultado[0]);
+            return $clientObj;
+        } else {
+            return "No se ha encontrado usuario en el GetById.";
+        }
+    }
+    
+    private function createClientFromData($data)
+    {
+        return new Client (
+            $data['id'],
+            $data['name'],
+            $data['password'],
+            $data['surnames'],
+            $data['born'],
+            $data['email'],
+            $data['phone'],
+            $data['sex'],
+            $data['poblation'],
+            $data['address'],
+            $data['type']
+        );
     }
    
 }

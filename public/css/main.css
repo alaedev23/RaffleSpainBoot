@@ -433,6 +433,10 @@ header nav ul li:last-child {
   margin-top: 5px;
 }
 
+button, .close {
+  cursor: pointer !important;
+}
+
 .btn {
   background-color: var(--color-dorado);
   color: var(--color-negro-fondo);
@@ -686,7 +690,6 @@ header nav ul li:last-child {
 #admin {
   /* Estilos para la tabla */
   /* Estilos para el botón */
-  /* Estilos para los campos de entrada */
   /* Estilos para el área de descripción */
 }
 #admin .alinear {
@@ -731,8 +734,7 @@ header nav ul li:last-child {
   background-color: black;
   color: var(--color-dorado);
 }
-#admin input[type=text],
-#admin input[type=file] {
+#admin textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -742,8 +744,168 @@ header nav ul li:last-child {
   margin-top: 4px;
   margin-bottom: 8px;
 }
-#admin textarea {
+
+#datesClient {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 40px 150px;
+}
+#datesClient .modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#datesClient .modal-body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 10px;
+}
+#datesClient .modal-body div input {
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+  border: #aaaaaa 0.5px solid;
+}
+#datesClient .modal-body div button {
+  margin-top: 15px;
+}
+#datesClient .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+#datesClient .modal-content {
+  position: relative;
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 20%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+}
+#datesClient .close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+#datesClient .close:hover, #datesClient .close:focus {
+  color: #ff5b5b;
+}
+#datesClient .iconoDatesClient {
+  width: 30px;
+}
+#datesClient h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+#datesClient h3 {
+  font-size: 24px;
+}
+#datesClient h3, #datesClient h4 {
+  margin-bottom: 15px;
+}
+#datesClient #asideDatesClient {
+  width: 25%;
+}
+#datesClient #contentDatesClient {
+  margin-top: 70px;
+  width: 70%;
+}
+#datesClient #contentDatesClient p {
+  padding-bottom: 6px;
+}
+#datesClient #contentDatesClient .itemDetalleCuenta {
+  max-width: 300px;
+}
+#datesClient #contentDatesClient .itemDetalleCuenta div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#passwordRequirements {
+  display: block !important;
+  padding-bottom: 10px;
+}
+
+#asideContent {
+  padding: 10px;
+}
+#asideContent ul {
+  list-style-type: none;
+  padding: 0;
+}
+#asideContent ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 0;
+  cursor: pointer;
+}
+#asideContent ul li span {
+  margin-right: 20px;
+}
+
+#contentDetallesCuenta,
+#contentMetodosPago {
+  display: none;
+}
+
+#detallesCuenta.active,
+#metodosPago.active {
+  font-weight: bold;
+}
+
+#contentDetallesCuenta.active,
+#contentMetodosPago.active {
+  display: block;
+}
+
+.inputTable {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.inputClientDates {
+  width: 300px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

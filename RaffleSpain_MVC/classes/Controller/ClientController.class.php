@@ -5,9 +5,14 @@ class ClientController extends Controller {
     private $login;
     private $register;
     
+    private $vLogin;
+    private $vCLientDates;
+    
     public function __construct() {
         $this->login = new Client("", "", "", "", "", "", "", "", "", "");
         $this->register = new Client("", "", "", "", "", "", "", "", "", "");
+        $this->vCLientDates = new ClientDatesView();
+        $this->vLogin = new ClientView();
     }
     
     public function formLogin() {
@@ -30,14 +35,63 @@ class ClientController extends Controller {
         ClientView::showRegister($this->register, $lang);
     }
     
-    public function showUpdateDatesClient() {
+    public function showDatesClient() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
             $lang = "ca";
         }
         
-        ClientUpdateDates::showRegister($this->register, $lang);
+        $vClientDates = new ClientDatesView();
+        $vClientDates->show($lang);
+    }
+    
+    public function changePassword($idSent) {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["changePassword"]))) {
+            
+            $mClient = new ClientModel();
+            
+            $currentPassword = $this->sanitize($_POST['currentPassword']);
+            $newPassword = $this->sanitize($_POST['newPassword']);
+            $confirmPassword = $this->sanitize($_POST['confirmPassword']);
+            
+            $id = $idSent[0];
+            $auxObj = new Client($id, null, null, null, null, null, null, null, null, null);
+            $result = $mClient->getById($auxObj);
+            
+            if ($result->password !== $currentPassword) {
+                $errors = "La contraseña actual es incorrecta.";
+            }
+            
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $newPassword)) {
+                $errors = "La contraseña no teiene el formato correcto.";
+            }
+            
+            if ($newPassword !== $confirmPassword) {
+                $errors = "La contrasenya nueva no coincide con la contraseña de confirmacion.";
+            }
+            
+            if (!isset($errors)) {
+                
+                $result->__set("password", $confirmPassword);
+                $consulta = $mClient->updatePassword($result);
+                
+                if (count($consulta) === 0) {
+                    session_destroy();
+                    header("Location: index.php?client/formLogin");
+                } else {
+                    $this->vCLientDates->show($lang, $consulta);
+                }
+            } else {
+                $this->vCLientDates->show($lang, $errors);
+            }
+        }
     }
     
     public function validateLogin() {
@@ -76,10 +130,9 @@ class ClientController extends Controller {
                 null
             );
             
-            $vLogin = new ClientView();
             if (!isset($errors)) {
                 $cLogin = new ClientModel();
-                $consulta = $cLogin->getById($this->login);
+                $consulta = $cLogin->getByEmailPassword($this->login);
                 if ($consulta != "El email o la contrasenya no son correctos.") {
                     // session_regenerate_id();
                     $_SESSION['usuari'] = $consulta;
@@ -87,10 +140,10 @@ class ClientController extends Controller {
                     header("Location: index.php");
                 }
                 else {
-                    $vLogin->showLogin($this->login, $lang, $consulta);
+                    $this->vLogin->showLogin($this->login, $lang, $consulta);
                 }
             } else {
-                $vLogin->showLogin($this->login, $lang, $errors);
+                $this->vLogin->showLogin($this->login, $lang, $errors);
             }
         }
     }
@@ -161,9 +214,7 @@ class ClientController extends Controller {
                 $poblacion,
                 $direccion
                 );
-            
-            $vLogin = new ClientView();
-            
+                        
             if (!isset($errors)) {
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->create($this->register);
@@ -172,11 +223,11 @@ class ClientController extends Controller {
                 }
                 else {
                     $errors = "El registro es incorrecto";
-                    $vLogin->showRegister($this->register, $lang, $errors);
+                    $this->vLogin->showRegister($this->register, $lang, $errors);
                 }
             }
             else {
-                $vLogin->showRegister($this->register, $lang, $errors);
+                $this->vLogin->showRegister($this->register, $lang, $errors);
             }
         }
     }
@@ -247,9 +298,7 @@ class ClientController extends Controller {
                 $poblacion,
                 $direccion
             );
-            
-            $vLogin = new ClientView();
-            
+                        
             if (!isset($errors)) {
                 $cLogin = new ClientModel();
                 $consulta = $cLogin->create($this->register);
@@ -258,17 +307,16 @@ class ClientController extends Controller {
                 }
                 else {
                     $errors = "El registro es incorrecto";
-                    $vLogin->showRegister($this->register, $lang, $errors);
+                    $this->vLogin->showRegister($this->register, $lang, $errors);
                 }
             }
             else {
-                $vLogin->showRegister($this->register, $lang, $errors);
+                $this->vLogin->showRegister($this->register, $lang, $errors);
             }
         }
     }
     
-    public function logOut()
-    {
+    public function logOut() {
         session_destroy();
         header("Location: index.php");
         

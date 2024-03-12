@@ -86,10 +86,7 @@ function dropdown(svgElement) {
 }
 
 window.onclick = function (event) {
-  if (
-    !event.target.matches(".drop-button") &&
-    !event.target.matches(".pathDropdown")
-  ) {
+  if (!event.target.matches(".drop-button") && !event.target.matches(".pathDropdown")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     for (var i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
@@ -99,3 +96,44 @@ window.onclick = function (event) {
     }
   }
 };
+
+// Update Dates Client
+
+const asideItems = document.querySelectorAll("#asideContent ul li");
+
+asideItems.forEach(function(item) {
+    item.addEventListener("click", function() {
+        const id = this.id;
+        
+        const contentItems = document.querySelectorAll("#contentDatesClient > div");
+        contentItems.forEach(function(contentItem) {
+            contentItem.classList.remove("active");
+        });
+        
+        const contentToShow = document.getElementById("content" + id.charAt(0).toUpperCase() + id.slice(1));
+        contentToShow.classList.add("active");
+    });
+});
+
+let openModalBtn = document.getElementById("openModalBtn");
+let modal = document.getElementById("myModal");
+let closeModalBtn = document.getElementById("closeModalBtn");
+const modalContent = document.getElementById("editPasswordForm");
+
+openModalBtn.addEventListener("click", function() {
+    modal.style.display = "block";
+});
+
+closeModalBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+
+document.addEventListener("click", function(event) {
+  if (event.target && event.target.id === "openModalBtn") {
+      modal.style.display = "block";
+      modalContent.style.display = "block";
+  }
+});
+
+// Validar contrasenyas iconos
+
