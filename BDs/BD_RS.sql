@@ -135,6 +135,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `rsdb`.`carreto` (
   `client_id` INT NOT NULL,
   `product_id` INT NOT NULL,
+  `quantity` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`client_id`, `product_id`),
   INDEX `fk_client_has_product_product1_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_client_has_product_client1_idx` (`client_id` ASC) VISIBLE,
@@ -157,6 +158,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `rsdb`.`favoritos` (
   `client_id` INT NOT NULL,
   `product_id` INT NOT NULL,
+  `quantity` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`client_id`, `product_id`),
   INDEX `fk_client_has_product_product2_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_client_has_product_client2_idx` (`client_id` ASC) VISIBLE,

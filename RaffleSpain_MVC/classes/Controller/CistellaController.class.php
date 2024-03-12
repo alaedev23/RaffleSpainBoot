@@ -17,25 +17,31 @@ class CistellaController extends Controller
 
         if (isset($_SESSION['usuari'])) {
 
-            $cistellaList = new CistellaList();
-            $cistellaModel = new CistellaListModel();
+            $cistellaList = new CistellaProduct();
+            $cistellaModel = new CistellaProductModel();
 
             $cistellaList->client_id = $_SESSION['usuari']->id;
-            $cistellaList->addProduct($newProduct);
+            $cistellaList->product = $newProduct;
 
-            $result = $cistellaModel->create($cistellaList);
+            $dbProductCarreto = $cistellaModel->readByClientAndProduct($cistellaList);
 
-        } else {
-            $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
-
-            if ($newProduct) {
-                $carrito[] = $newProduct->toArray();
-                setcookie('cistella', json_encode($carrito), time() + 806400, "/");
+            if ($dbProductCarreto === null) {
+                $cistellaListdbProduct = new CistellaProduct();
+                $cistellaListdbProduct->client_id = $_SESSION['usuari']->id;
+                $cistellaListdbProduct->product = $cistellaList->product;
+                $cistellaModel->create($cistellaListdbProduct);
+            } else {
+                $cistellaListdbProduct = new CistellaProduct();
+                $cistellaListdbProduct->client_id = $_SESSION['usuari']->id;
+                $cistellaListdbProduct->product = $newProduct;
+                $cistellaListdbProduct->quantity = $dbProductCarreto->quantity + 1;
+                $cistellaModel->update($cistellaListdbProduct);
             }
+
         }
 
-        $cistella = new ProducteController();
-        $cistella->mostrarProducte($id);
+        header('Location: ?Producte/mostrarProducte/' . $id[0]);
+
     }
 
     public static function emptyCart() {
@@ -44,9 +50,9 @@ class CistellaController extends Controller
             setcookie('cistella', '', time() - 3600);
         }
 
-        if (isset($_SESSION['client']) && $_SESSION['client']->id) {
-            $cistellaModel = new CistellaListModel();
-            $client = new Client($_SESSION['client']->id);
+        if (isset($_SESSION['usuari'])) {
+            $cistellaModel = new CistellaProductModel();
+            $client = new Client($_SESSION['usuari']->id);
             $cistellaModel->deleteByClientId($client);
         }
 
@@ -59,26 +65,37 @@ class CistellaController extends Controller
 
         if (isset($_SESSION['usuari'])) {
 
-            $cistellaListModel = new CistellaListModel();
+            $cistellaListModel = new CistellaProductModel();
             $product = new Product($productId[0]);
 
             $cistellaListModel->deleteById($product);
 
-        } else {
-            $carrito = isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
-
-            $newCarrito = array_filter($carrito, function ($product) use ($productId) {
-                return $product['id'] != $productId[0];
-            });
-
-            setcookie('cistella', "", time() - 3600, '/');
-            setcookie('cistella', json_encode(array_values($newCarrito)), time() + 806400, '/');
         }
-
-
 
         header('Location: ?Cistella/show');
         exit();
+    }
+
+    public static function updateCantidad($params) {
+
+            $productId = $params[0];
+            $newQuantity = $params[1];
+    
+            if (isset($_SESSION['usuari'])) {
+    
+                $cistellaListModel = new CistellaProductModel();
+                $product = new Product($productId);
+                $cistellaList = new CistellaProduct();
+                $cistellaList->client_id = $_SESSION['usuari']->id;
+                $cistellaList->product = $product;
+                $cistellaList->quantity = $newQuantity;
+    
+                $cistellaListModel->update($cistellaList);
+    
+            }
+    
+            header('Location: ?Cistella/show');
+            exit();
     }
 
 
@@ -86,20 +103,14 @@ class CistellaController extends Controller
     {
 
         if (isset($_SESSION['usuari'])) {
-            $cistellaList = new CistellaList();
-            $cistellaModel = new CistellaListModel();
+            $cistellaList = new CistellaProduct();
+            $cistellaModel = new CistellaProductModel();
 
             $cistellaList->client_id = $_SESSION['usuari']->id;
             $cistella = $cistellaModel->read($cistellaList);
 
-            foreach ($cistella->carreto as $cistellaProduct) {
-                $cistellaArray[] = $cistellaProduct->toArray();
-            }
+            return $cistella;
 
-            return $cistellaArray;
-
-        } else {
-            return isset($_COOKIE['cistella']) ? json_decode($_COOKIE['cistella'], true) : [];
         }
     }
 }
