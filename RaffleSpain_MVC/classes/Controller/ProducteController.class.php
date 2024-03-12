@@ -12,8 +12,15 @@ class ProducteController extends Controller {
         $this->product = $mProducts->getById($productId);
         $tallas = $mProducts->getTallas($this->product);
 
+        $enFavoritos = null;
+
+        if (isset($_SESSION['usuari'])) {
+            $favoritosModel = new FavoritosListModel();
+            $enFavoritos = $favoritosModel->getFavoritoByIds($_SESSION['usuari']->id, $id);
+        }
+
         $vProducte = new ProducteView();
-        $vProducte->show($this->product, $tallas);
+        $vProducte->show($this->product, $tallas, $enFavoritos);
 
     }
 

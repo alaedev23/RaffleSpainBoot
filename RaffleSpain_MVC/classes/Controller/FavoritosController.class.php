@@ -18,9 +18,17 @@ class FavoritosController extends Controller {
         if(!isset($_SESSION['usuari'])) {
             header("Location: index.php?client/formLogin");
         } else {
-            $user = $_SESSION['usuari'];
-            
-            MapView::showMap($lang);
+            $favoritosList = new FavoritosList();
+            $favoritosModel = new FavoritosListModel();
+
+            $favoritosList->client_id = $_SESSION['usuari']->id;
+            $cistella = $favoritosModel->read($favoritosList);
+
+            foreach ($cistella->favoritos as $favoritosProduct) {
+                $favoritosArray[] = $favoritosProduct->toArray();
+            }
+
+            FavoritosView::show($favoritosArray);
         }
 
     }
