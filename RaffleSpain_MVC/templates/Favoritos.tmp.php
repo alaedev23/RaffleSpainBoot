@@ -1,29 +1,30 @@
+
 <div class="cistella">
-    <h1>Mis favoritos</h1>
+    <h1>Favoritos</h1>
     <ul class="cistella-list">
         <?php 
         $total = 0;
         if (isset($carretoProducts) && !empty($carretoProducts)) { 
-            foreach ($carretoProducts as $producto) :
-                $total += $producto['price'];
+            foreach ($carretoProducts as $carretoProduct) {
         ?>
                 <li class="product">
-                    <img src="<?= 'public/img/vambas/' . $producto['img']; ?>" alt="<?php echo $producto['name']; ?>">
+                    <img src="<?= 'public/img/vambas/' . $carretoProduct->product->img; ?>" alt="<?= $carretoProduct->product->name; ?>">
                     <div class="product-info">
-                        <h3><?= $producto['name']; ?></h3>
-                        <p><?= $producto['description']; ?></p>
-                        <p class="precio"><?php echo $producto['price']; ?> €</p>
-                        <a href="?Cistella/removeProductById/<?= $producto['id']; ?>" class="btn btnZapatillas">Quitar Cesta</a>
+                        <h3><?= $carretoProduct->product->name; ?></h3>
+                        <p><?= $carretoProduct->product->description; ?></p>
+                        <p class="precio"><?php echo $carretoProduct->product->price; ?> €</p>
+                        <a href="?Favoritos/removeProductById/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Quitar Cesta</a>
                     </div>
                 </li>
-            <?php endforeach; ?>
+        <?php
+            }
+        ?>
             <div class="precio-total">
-                <p>Total: <?= number_format($total, 2); ?> €</p>
-                <a href="?Cistella/emptyCart" class="btn btnZapatillas">Vaciar carrito</a>
-                <button class="btn btnZapatillas">Tramitar Pago</button>
+                <a href="?Favoritos/emptyCart" class="btn btnZapatillas">Vaciar favoritos</a>
             </div>
-        <?php } else {
-            echo "<p class=\"emptycistella\">No hay productos en la lista</p>";
+        <?php 
+        } else {
+            echo "<p class=\"emptycistella\">No hay productos en la cesta</p>";
         } ?>
     </ul>
 </div>

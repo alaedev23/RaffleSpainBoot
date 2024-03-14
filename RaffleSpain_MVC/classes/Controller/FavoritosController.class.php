@@ -2,35 +2,93 @@
 
 class FavoritosController extends Controller {
     
-    public function cookiesControl() {
-        if (isset($_COOKIE["lang"])) {
-            $lang = $_COOKIE["lang"];
+    public static function show()
+    {
+        if (isset($_SESSION['usuari'])) {
+            $carretoProductos = self::cargarProductos();
+            FavoritosView::show($carretoProductos);
         } else {
-            $lang = "ca";
+            $loginController = new ClientController();
+            $loginController->formLogin();
         }
 
-        return $lang;
     }
-    public function show() {
-        
-        $lang = $this->cookiesControl();
 
-        if(!isset($_SESSION['usuari'])) {
-            header("Location: index.php?client/formLogin");
-        } else {
-            $favoritosList = new FavoritosList();
-            $favoritosModel = new FavoritosListModel();
+    public static function cargarProductos() {
 
-            $favoritosList->client_id = $_SESSION['usuari']->id;
-            $cistella = $favoritosModel->read($favoritosList);
+        if (isset($_SESSION['usuari'])) {
+            $cistellaList = new FavoritosProduct();
+            $cistellaModel = new FavoritosProductModel();
 
-            foreach ($cistella->favoritos as $favoritosProduct) {
-                $favoritosArray[] = $favoritosProduct->toArray();
+            $cistellaList->client_id = $_SESSION['usuari']->id;
+            $cistella = $cistellaModel->read($cistellaList);
+
+            return $cistella;
+
+        }
+    }
+
+    public static function addProduct($id)
+    {
+        $prd = new Product($id[0]);
+        $productModel = new ProductModel();
+        $newProduct = $productModel->getById($prd);
+
+        if (isset($_SESSION['usuari'])) {
+
+            $cistellaList = new FavoritosProduct();
+            $cistellaModel = new FavoritosProductModel();
+
+            $cistellaList->client_id = $_SESSION['usuari']->id;
+            $cistellaList->product = $newProduct;
+
+            $dbProductCarreto = $cistellaModel->readByClientAndProduct($cistellaList);
+
+            if ($dbProductCarreto === null) {
+                $cistellaListdbProduct = new FavoritosProduct();
+                $cistellaListdbProduct->client_id = $_SESSION['usuari']->id;
+                $cistellaListdbProduct->product = $cistellaList->product;
+                $cistellaModel->create($cistellaListdbProduct);
+            } else {
+                $cistellaModel->deleteById($cistellaList->product);
             }
 
-            FavoritosView::show($favoritosArray);
+        } else {
+            $loginController = new ClientController();
+            $loginController->formLogin();
         }
 
+        header('Location: ?Producte/mostrarProducte/' . $id[0]);
+        exit();
+
+    }
+
+    public static function emptyCart() {
+
+        if (isset($_SESSION['usuari'])) {
+            $cistellaModel = new FavoritosProductModel();
+            $client = new Client($_SESSION['usuari']->id);
+            $cistellaModel->deleteByClientId($client);
+        }
+
+        header('Location: .');
+        exit();
+    }
+    
+
+    public static function removeProductById($productId) {
+
+        if (isset($_SESSION['usuari'])) {
+
+            $cistellaListModel = new FavoritosProductModel();
+            $product = new Product($productId[0]);
+
+            $cistellaListModel->deleteById($product);
+
+        }
+
+        header('Location: ?Favoritos/show');
+        exit();
     }
     
 }

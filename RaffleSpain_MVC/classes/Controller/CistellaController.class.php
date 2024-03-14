@@ -4,10 +4,29 @@ class CistellaController extends Controller
 
     public static function show()
     {
-        $carretoProductos = self::cargarProductos();
-        CistellaView::show($carretoProductos);
+        if (isset($_SESSION['usuari'])) {
+            $carretoProductos = self::cargarProductos();
+            CistellaView::show($carretoProductos);
+        } else {
+            $loginController = new ClientController();
+            $loginController->formLogin();
+        }
+
     }
 
+    public static function cargarProductos() {
+
+        if (isset($_SESSION['usuari'])) {
+            $cistellaList = new CistellaProduct();
+            $cistellaModel = new CistellaProductModel();
+
+            $cistellaList->client_id = $_SESSION['usuari']->id;
+            $cistella = $cistellaModel->read($cistellaList);
+
+            return $cistella;
+
+        }
+    }
 
     public static function addProduct($id)
     {
@@ -38,17 +57,17 @@ class CistellaController extends Controller
                 $cistellaModel->update($cistellaListdbProduct);
             }
 
+        } else {
+            $loginController = new ClientController();
+            $loginController->formLogin();
         }
 
         header('Location: ?Producte/mostrarProducte/' . $id[0]);
+        exit();
 
     }
 
     public static function emptyCart() {
-
-        if (isset($_COOKIE['cistella'])) {
-            setcookie('cistella', '', time() - 3600);
-        }
 
         if (isset($_SESSION['usuari'])) {
             $cistellaModel = new CistellaProductModel();
@@ -98,19 +117,4 @@ class CistellaController extends Controller
             exit();
     }
 
-
-    public static function cargarProductos()
-    {
-
-        if (isset($_SESSION['usuari'])) {
-            $cistellaList = new CistellaProduct();
-            $cistellaModel = new CistellaProductModel();
-
-            $cistellaList->client_id = $_SESSION['usuari']->id;
-            $cistella = $cistellaModel->read($cistellaList);
-
-            return $cistella;
-
-        }
-    }
 }

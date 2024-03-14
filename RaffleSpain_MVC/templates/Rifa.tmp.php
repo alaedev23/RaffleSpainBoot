@@ -21,7 +21,7 @@
         <h1><?= str_replace('-', ' ', $rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) ?></h1>
             <h1><?= $rifa->product->price . ' €' ?></h1>
             <h3><?="Participa hasta el " . $rifa->date_end?></h3>
-            <button class="btn">Participar en la rifa</button>
+            <a href="?/Rifa/addUser" class="btn">Participar en la rifa</a>
         </div>
     </section>
 

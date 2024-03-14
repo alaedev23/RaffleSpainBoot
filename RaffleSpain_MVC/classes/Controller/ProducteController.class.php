@@ -15,8 +15,11 @@ class ProducteController extends Controller {
         $enFavoritos = null;
 
         if (isset($_SESSION['usuari'])) {
-            $favoritosModel = new FavoritosListModel();
-            $enFavoritos = $favoritosModel->getFavoritoByIds($_SESSION['usuari']->id, $id);
+            $favoritosModel = new FavoritosProductModel();
+            $favoritosProduct = new FavoritosProduct();
+            $favoritosProduct->client_id = $_SESSION['usuari']->id;
+            $favoritosProduct->product = $this->product;
+            $enFavoritos = $favoritosModel->readByClientAndProduct($favoritosProduct);
         }
 
         $vProducte = new ProducteView();
