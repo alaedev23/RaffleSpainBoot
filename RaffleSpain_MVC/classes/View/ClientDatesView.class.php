@@ -18,24 +18,54 @@ class ClientDatesView extends View {
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
+        echo '<main style="height: calc(100vh - 242px);">';
         include "templates/ClientDates.tmp.php";
+        echo "</main>";
         include "templates/Footer.tmp.php";
         echo "</body></html>";
     }
     
     public function generateTemplate() {
-        $html = "<div class=\"itemDetalleCuenta\"><h4>Correo electrónico</h4><input class=\"inputClientDates\" type=\"text\" value=\"" . $this->user->email . "\"></div>";
+        $template = '<div id="containerDetallesCuenta"><div class="mitad">
+        <div class="itemDetalleCuenta">
+            <h4>Nombre</h4>
+            <input class="inputClientDates" type="text" value="' . $this->user->name . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Apellidos</h4>
+            <input class="inputClientDates" type="text" value="' . $this->user->surnames . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Correo electrónico</h4>
+            <input class="inputClientDates" type="text" value="' . $this->user->email . '">
+        </div></div>';
         
-        $passwordEncryp = '';
-        for ($i = 0 ; $i < strlen($this->user->password) + 2 ; $i++) {   // Añado dos elementos mas por seguridad
-            $passwordEncryp .= "*";
-        }
+        $passwordEncryp = str_repeat('*', strlen($this->user->password) + 2); // Añado dos elementos mas por seguridad
         
-        $html .= "<div class=\"itemDetalleCuenta\"><h4>Contraseña</h4><div><p>" . $passwordEncryp . "</p><button id=\"openModalBtn\" class=\"btn\">Editar</button></div></div>";
-        $html .= $this->generateEditPassword();
+        $template .= '<div class="mitad">
+        <div class="itemDetalleCuenta">
+            <h4>Contraseña</h4>
+            <div>
+                <p>' . $passwordEncryp . '</p>
+                <button id="openModalBtn" class="btn">Editar</button>
+            </div>
+        </div>';
         
-        return $html;
+        $template .= $this->generateEditPassword();
+        
+        $template .= '
+        <div class="itemDetalleCuenta">
+            <h4>Número de teléfono</h4>
+            <input class="inputClientDates" type="text" value="' . $this->user->phone . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Fecha de Nacimiento</h4>
+            <input class="inputClientDates" type="text" value="' . $this->user->born . '">
+        </div></div></div>';
+        
+        return $template;
     }
+    
     
     public function generateEditPassword() {
         return '<div id="myModal" class="modal">

@@ -257,6 +257,7 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 
 header nav ul {
@@ -749,9 +750,9 @@ button, .close {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; /* Alinea los elementos a la derecha */
   margin: 40px 150px;
 }
 #datesClient .modal {
@@ -833,14 +834,41 @@ button, .close {
 #datesClient #contentDatesClient {
   margin-top: 70px;
   width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
-#datesClient #contentDatesClient p {
+#datesClient #contentDatesClient #containerDetallesCuenta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+#datesClient #contentDatesClient #containerDetallesCuenta .mitad {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 48%;
+}
+#datesClient #contentDatesClient #containerDetallesCuenta .mitad p {
   padding-bottom: 6px;
 }
-#datesClient #contentDatesClient .itemDetalleCuenta {
+#datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta {
   max-width: 300px;
+  margin-bottom: 10px;
+  margin-right: 20px; /* Añade un margen a la derecha */
 }
-#datesClient #contentDatesClient .itemDetalleCuenta div {
+#datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -912,7 +940,9 @@ button, .close {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin-top: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: var(--fuente-texto);
 }
 
 .containerProductos, #trobats {
