@@ -34,6 +34,7 @@ class Functions {
                 </a>
             </div>';
         }
+        
         return $result;
     }
     
