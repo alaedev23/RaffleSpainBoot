@@ -6,7 +6,7 @@ class RaffleView extends View {
         parent::__construct();
     }
     
-    public static function show($rifa, $lang, $errors = null) {
+    public static function show($rifa, $isInRaffle = false) {
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";

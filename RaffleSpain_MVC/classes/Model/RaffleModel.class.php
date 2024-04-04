@@ -30,28 +30,40 @@ class RaffleModel implements Crudable
 
     public function create($obj)
     {
-        if ($obj->winner === "") {
-            $sql = 'INSERT INTO raffle (product_id, date_start, date_end) VALUES (?, ?, ?)';
-            $params = [$obj->product_id, $obj->date_start, $obj->date_end];
-        } else {
-            $sql = 'INSERT INTO raffle (product_id, date_start, date_end, winner) VALUES (?, ?, ?, ?)';
-            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->winner];
-        }
+        $sql = 'INSERT INTO raffle (product_id, date_start, date_end) VALUES (?, ?, ?)';
+        $params = [$obj->product_id, $obj->date_start, $obj->date_end];
         
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
-        if ($obj->winner === "") {
-            $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ? WHERE id = ?';
-            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->id];
-        } else {
-            $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ?, winner = ? WHERE id = ?';
-            $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->winner, $obj->id];
-        }
+        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ? WHERE id = ?';
+        $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->id];
         
         return $this->database->executarSQL($sql, $params);
+    }
+
+    public function addUser($obj) {
+        $sql = 'INSERT raffle_has_client SET raffle_id = ?, client_id = ?';
+        $params = [$obj->id, $obj->client_id];
+        
+        return $this->database->executarSQL($sql, $params);
+    }
+
+    public function removeUser($obj) {
+        $sql = 'DELETE FROM raffle_has_client WHERE raffle_id = ? AND client_id = ?';
+        $params = [$obj->id, $obj->client_id];
+        
+        return $this->database->executarSQL($sql, $params);
+    }
+
+    public function userIsInRaffle($obj) {
+        $sql = 'SELECT * FROM raffle_has_client WHERE raffle_id = ? AND client_id = ?';
+        $params = [$obj->id, $obj->client_id];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        return !empty($result);
     }
 
     public function delete($obj)
