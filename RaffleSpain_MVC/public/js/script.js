@@ -105,13 +105,17 @@ asideItems.forEach(function(item) {
     item.addEventListener("click", function() {
         const id = this.id;
         
-        const contentItems = document.querySelectorAll("#contentDatesClient > div");
+        console.log(id)
+
+        const contentItems = document.querySelectorAll("#contentDatesClient > div, #contentCambiarContraseña, #contentMetodosPago");
         contentItems.forEach(function(contentItem) {
-            contentItem.classList.remove("active");
+            contentItem.classList.remove("show");
+            contentItem.classList.add("hide");
         });
         
-        const contentToShow = document.getElementById("content" + id.charAt(0).toUpperCase() + id.slice(1));
-        contentToShow.classList.add("active");
+        const contentToShow = document.getElementById("content" + id);
+        contentToShow.classList.add("show");
+        contentToShow.classList.remove("hide");
     });
 });
 
@@ -137,3 +141,10 @@ document.addEventListener("click", function(event) {
 
 // Validar contrasenyas iconos
 
+
+
+// Alto Ajustable de Cesta
+
+if (document.getElementById('cistella')) {
+  console.log('El elemento "cistella" existe.');
+}

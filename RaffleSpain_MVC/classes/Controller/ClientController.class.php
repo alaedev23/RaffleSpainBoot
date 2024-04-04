@@ -5,14 +5,14 @@ class ClientController extends Controller {
     private $login;
     private $register;
     
-    private $vLogin;
-    private $vCLientDates;
+    private $vClient;
+    private $vClientDates;
     
     public function __construct() {
         $this->login = new Client("", "", "", "", "", "", "", "", "", "");
         $this->register = new Client("", "", "", "", "", "", "", "", "", "");
-        $this->vCLientDates = new ClientDatesView();
-        $this->vLogin = new ClientView();
+        $this->vClientDates = new ClientDatesView();
+        $this->vClient = new ClientView();
     }
     
     public function formLogin() {
@@ -86,10 +86,10 @@ class ClientController extends Controller {
                     session_destroy();
                     header("Location: index.php?client/formLogin");
                 } else {
-                    $this->vCLientDates->show($lang, $consulta);
+                    $this->vClientDates->show($lang, $consulta);
                 }
             } else {
-                $this->vCLientDates->show($lang, $errors);
+                $this->vClientDates->show($lang, $errors);
             }
         }
     }
@@ -131,8 +131,8 @@ class ClientController extends Controller {
             );
             
             if (!isset($errors)) {
-                $cLogin = new ClientModel();
-                $consulta = $cLogin->getByEmailPassword($this->login);
+                $mClient = new ClientModel();
+                $consulta = $mClient->getByEmailPassword($this->login);
                 if ($consulta != "El email o la contrasenya no son correctos.") {
                     // session_regenerate_id();
                     $_SESSION['usuari'] = $consulta;
@@ -140,32 +140,35 @@ class ClientController extends Controller {
                     header("Location: index.php");
                 }
                 else {
-                    $this->vLogin->showLogin($this->login, $lang, $consulta);
+                    $this->vClient->showLogin($this->login, $lang, $consulta);
                 }
             } else {
-                $this->vLogin->showLogin($this->login, $lang, $errors);
+                $this->vClient->showLogin($this->login, $lang, $errors);
             }
         }
     }
     
-    public function updateDatesClient() {
+    public function updateDatesClient($id) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
             $lang = "ca";
         }
         
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["submit"]))) {
+        var_dump($_POST);
+        
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["updateDates"]))) {
             
             $name = $this->sanitize($_POST['name']);
             $apellidos = $this->sanitize($_POST['surnames']);
-            $usuari = $this->sanitize($_POST['username']);
-            $contrasenya = $this->sanitize($_POST['password']);
+            $email = $this->sanitize($_POST['email']);
             $nacimiento = $this->sanitize($_POST['born']);
             $telefono = $this->sanitize($_POST['phone']);
-            $poblacion = $this->sanitize($_POST['poblation']);
-            $direccion = $this->sanitize($_POST['address']);
             $sexo = $this->sanitize($_POST['sex']);
+            
+            if (is_numeric($id)) {
+                $errors = "Error al enviar el id.";
+            }
             
             if (strlen($name) == 0) {
                 $errors = "El nombre es obligatorio.";
@@ -175,14 +178,10 @@ class ClientController extends Controller {
                 $errors = "Los apellidos son obligatorio.";
             }
             
-            if (strlen($usuari) == 0) {
+            if (strlen($email) == 0) {
                 $errors = "El email es obligatorio.";
-            } else if (!filter_var($usuari, FILTER_VALIDATE_EMAIL)) {
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors = "El formato del email es invalido.";
-            }
-            
-            if (strlen($contrasenya) == 0) {
-                $errors = "La contrasenya es obligatorio.";
             }
             
             if (strlen($nacimiento) > 0) {
@@ -192,42 +191,44 @@ class ClientController extends Controller {
                 }
             }
             
-            if (strlen($poblacion) == 0) {
-                $errors = "La poblacion es obligatorio.";
+            if ($sexo !== "H" || $sexo !== "M" || $sexo !== "O") {
+                $errors = "El genero debe de ser hombre, mujer o otro.";
             }
-            
-            if (strlen($direccion) < 0) {
-                $errors = "La direccion es obligatorio.";
-            } else if (!str_contains($direccion, ",")) {
-                $errors = "La direccion esta mal, debe de contener 'direccion', 'numero'.";
-            }
-            
-            $this->register = new Client(
-                null,
-                $name,
-                $contrasenya,
-                $apellidos,
-                $nacimiento,
-                $usuari,
-                $telefono,
-                $sexo,
-                $poblacion,
-                $direccion
-                );
                         
             if (!isset($errors)) {
-                $cLogin = new ClientModel();
-                $consulta = $cLogin->create($this->register);
-                if ($consulta === "La consulta se ha realizado con existo") {
-                    header("index.php");
-                }
-                else {
-                    $errors = "El registro es incorrecto";
-                    $this->vLogin->showRegister($this->register, $lang, $errors);
+                $mClient = new ClientModel();
+                $userOld = $mClient->getById(new Client($id));
+                
+                if (count($userOld) > 0) {
+                    
+                    var_dump($userOld);
+                    die;
+                    $updatePassword = new Client(
+                        $id,
+                        $name,
+                        $contrasenya,
+                        $apellidos,
+                        $nacimiento,
+                        $email,
+                        $telefono,
+                        $sexo
+                    );
+                    
+                    $consulta = $mClient->update($updatePassword);
+                    
+                    if ($consulta === "La consulta se ha realizado con existo") {
+                        header("index.php");
+                        
+                    } else {
+                        $errors = "El registro es incorrecto";
+                        $this->vClient->showRegister($updatePassword, $lang, $errors);
+                    }
+                } else {
+                    
                 }
             }
             else {
-                $this->vLogin->showRegister($this->register, $lang, $errors);
+                $this->vClient->showRegister($updatePassword, $lang, $errors);
             }
         }
     }
@@ -300,18 +301,17 @@ class ClientController extends Controller {
             );
                         
             if (!isset($errors)) {
-                $cLogin = new ClientModel();
-                $consulta = $cLogin->create($this->register);
+                $mClient = new ClientModel();
+                $consulta = $mClient->create($this->register);
                 if ($consulta === "La consulta se ha realizado con existo") {
                     header("index.php");
-                }
-                else {
+                } else {
                     $errors = "El registro es incorrecto";
-                    $this->vLogin->showRegister($this->register, $lang, $errors);
+                    $this->vClient->showRegister($this->register, $lang, $errors);
                 }
             }
             else {
-                $this->vLogin->showRegister($this->register, $lang, $errors);
+                $this->vClient->showRegister($this->register, $lang, $errors);
             }
         }
     }

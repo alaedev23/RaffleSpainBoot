@@ -37,11 +37,9 @@
 			<div class="form-group">
 				<label for="sex">Sexo:</label>
 				<select name="sex">
-                    <option value="h" selected>Hombre</option>
-                    <option value="d">Mujer</option>
-                    <option value="n">Niño</option>
-                    <option value="a">Otr@</option>
-                    <option value="">Prefiero no decirlo...</option>
+                    <option value="H" selected>Hombre</option>
+                    <option value="M">Mujer</option>
+                    <option value="O">Otr@</option>
                 </select>
 			</div>
 			<div class="form-group">

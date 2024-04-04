@@ -27,10 +27,10 @@ $funciones = new Functions();
             <?= str_replace('-', ' ', $producte->brand) . ' ' . str_replace('-', ' ', $producte->name) ?>
         </h1>
         <h3>
-            <?= $funciones->generateSex($producte->sex) . ' - ' . $producte->color ?>
+            <?= Functions::generateSex($producte->sex) . ' - ' . $producte->color ?>
         </h3>
         <div id="tallasProducto">
-            <?= $funciones->generateTallas($tallas) ?>
+            <?= Functions::generateTallas($tallas) ?>
         </div>
         <h1>
             <?= $producte->price . ' €' ?>

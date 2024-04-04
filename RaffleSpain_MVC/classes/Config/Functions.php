@@ -47,7 +47,7 @@ class Functions {
         }
     }
     
-    public function generateTallas($tallas) {
+    public static function generateTallas($tallas) {
         $tallasHTML = '';
         foreach ($tallas as $talla) {
             $tallasHTML .= '<button class="btn-talla">EU ' . $talla . ' </button>';

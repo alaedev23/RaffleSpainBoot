@@ -500,7 +500,7 @@ button, .close {
 }
 
 .user-dropdown {
-  left: -80px;
+  left: -92px;
 }
 
 #search {
@@ -752,8 +752,14 @@ button, .close {
   display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: flex-end; /* Alinea los elementos a la derecha */
+          justify-content: flex-end;
   margin: 40px 150px;
+}
+#datesClient .show {
+  display: block;
+}
+#datesClient .hide {
+  display: none;
 }
 #datesClient .modal {
   display: none;
@@ -812,7 +818,8 @@ button, .close {
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
-#datesClient .close:hover, #datesClient .close:focus {
+#datesClient .close:hover,
+#datesClient .close:focus {
   color: #ff5b5b;
 }
 #datesClient .iconoDatesClient {
@@ -825,7 +832,8 @@ button, .close {
 #datesClient h3 {
   font-size: 24px;
 }
-#datesClient h3, #datesClient h4 {
+#datesClient h3,
+#datesClient h4 {
   margin-bottom: 15px;
 }
 #datesClient #asideDatesClient {
@@ -866,7 +874,7 @@ button, .close {
 #datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta {
   max-width: 300px;
   margin-bottom: 10px;
-  margin-right: 20px; /* Añade un margen a la derecha */
+  margin-right: 20px;
 }
 #datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta div {
   display: -webkit-box;
@@ -906,19 +914,9 @@ button, .close {
   margin-right: 20px;
 }
 
-#contentDetallesCuenta,
-#contentMetodosPago {
+#contentMetodosPago,
+#contentCambiarContraseña {
   display: none;
-}
-
-#detallesCuenta.active,
-#metodosPago.active {
-  font-weight: bold;
-}
-
-#contentDetallesCuenta.active,
-#contentMetodosPago.active {
-  display: block;
 }
 
 .inputTable {

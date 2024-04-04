@@ -1,8 +1,16 @@
 #datesClient {
     display: flex;
-    justify-content: flex-end; /* Alinea los elementos a la derecha */
+    justify-content: flex-end;
     margin: 40px 150px;
-    
+
+    .show {
+        display: block;
+    }
+
+    .hide {
+        display: none;
+    }
+
     .modal {
         display: none;
         position: fixed;
@@ -33,7 +41,7 @@
             }
         }
     }
-    
+
     .modal-header {
         display: flex;
         justify-content: space-between;
@@ -57,7 +65,8 @@
         transition: color 0.2s;
     }
 
-    .close:hover, .close:focus {
+    .close:hover,
+    .close:focus {
         color: #ff5b5b;
     }
 
@@ -74,7 +83,8 @@
         font-size: 24px;
     }
 
-    h3, h4 {
+    h3,
+    h4 {
         margin-bottom: 15px;
     }
 
@@ -100,19 +110,19 @@
                 p {
                     padding-bottom: 6px;
                 }
-        
+
                 .itemDetalleCuenta {
                     max-width: 300px;
                     margin-bottom: 10px;
-                    margin-right: 20px; /* Añade un margen a la derecha */
-        
+                    margin-right: 20px;
+
                     div {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                     }
-                }     
-            }       
+                }
+            }
         }
     }
 }
@@ -142,17 +152,7 @@
     }
 }
 
-#contentDetallesCuenta,
-#contentMetodosPago {
+#contentMetodosPago,
+#contentCambiarContraseña {
     display: none;
-}
-
-#detallesCuenta.active,
-#metodosPago.active {
-    font-weight: bold;
-}
-
-#contentDetallesCuenta.active,
-#contentMetodosPago.active {
-    display: block;
 }
