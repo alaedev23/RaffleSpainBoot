@@ -21,18 +21,30 @@ class ClientModel implements Crudable {
     public function create($obj) {
         
         $database = new DataBase('insert');
+                
+        $resultado = [];
         
-        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type")];
-        
-        $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, born, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
-        
-        return $resultado;
+        if (strlen($obj->__get("born")) > 0) {
+            $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type")];
+            $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, born, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
+        } else {
+            $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type")];
+            $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
+        }
+                
+        if (!is_string($resultado)) {
+            if (count($resultado) === 0) {
+                return "La consulta se ha realizado con existo";
+            }
+        } else {
+            return "No se ha podido crear el cliente";
+        }
         
     }
     
     public function update($obj) {
         $database = new DataBase('update');
-        
+              
         $params = [
             $obj->__get("email"),
             $obj->__get("password"),
@@ -47,6 +59,9 @@ class ClientModel implements Crudable {
         ];
         
         $resultado = $database->executarSQL("UPDATE client SET email = ?, password = ?, surnames = ?, born = ?, phone = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
+        
+        var_dump($resultado);
+        die;
         
         return $resultado;
     }

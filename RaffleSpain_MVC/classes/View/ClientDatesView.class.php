@@ -14,6 +14,8 @@ class ClientDatesView extends View
     public function show($lang, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
+        
+        ($errors !== null) ? var_dump($errors) : '';
 
         $htmlDetallesCuentas = $this->generateTemplate();
         $htmlChangePassword = $this->generateEditPassword();
@@ -57,9 +59,12 @@ class ClientDatesView extends View
         $gender = Functions::generateSex($this->user->sex);
 
         $template .= '<div class="itemDetalleCuenta">
-            <h4>Genero</h4>
-            <input class="inputClientDates" name="sex" type="text" value="' . $gender . '">
-            </div>
+            <label for="sex">Sexo:</label>
+            <select name="sex">
+                <option value="H" ' . (($gender === "Hombre") ? "selected" : "") . '>Hombre</option>
+                <option value="M" ' . (($gender === "Mujer") ? "selected" : "") . '>Mujer</option>
+                <option value="O" ' . (($gender === "Otr@") ? "selected" : "") . '>Otr@</option>
+            </select>
         </div>';
         
         $template .= '<button type="submit" name="updateDates" class="btn">Guardar Cambios</button></form></div>';

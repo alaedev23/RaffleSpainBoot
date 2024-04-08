@@ -155,18 +155,16 @@ class ClientController extends Controller {
             $lang = "ca";
         }
         
-        var_dump($_POST);
-        
         if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["updateDates"]))) {
             
             $name = $this->sanitize($_POST['name']);
-            $apellidos = $this->sanitize($_POST['surnames']);
+            $apellidos = $this->sanitize($_POST['surname']);
             $email = $this->sanitize($_POST['email']);
             $nacimiento = $this->sanitize($_POST['born']);
             $telefono = $this->sanitize($_POST['phone']);
             $sexo = $this->sanitize($_POST['sex']);
             
-            if (is_numeric($id)) {
+            if (!is_numeric($id)) {
                 $errors = "Error al enviar el id.";
             }
             
@@ -185,50 +183,49 @@ class ClientController extends Controller {
             }
             
             if (strlen($nacimiento) > 0) {
-                $objFecha = DateTime::createFromFormat('Y-m-d', $nacimiento);
-                if (!$objFecha || $objFecha->format('Y-m-d') !== $nacimiento) {
-                    $errors = "El formato de la fecha de nacimiento esta mal.";
+                $nacimientoAux = DateTime::createFromFormat('Y-m-d', $nacimiento);
+                if (!$nacimientoAux || $nacimientoAux->format('Y-m-d') !== $nacimiento) {
+                    $errors = "El formato de la fecha de nacimiento está mal.";
+                } else {
+                    $nacimiento = $nacimientoAux->format('Y-m-d');
                 }
             }
             
-            if ($sexo !== "H" || $sexo !== "M" || $sexo !== "O") {
-                $errors = "El genero debe de ser hombre, mujer o otro.";
+            if ($sexo !== "H" && $sexo !== "M" && $sexo !== "O") {
+                $errors = "El género debe ser hombre, mujer u otro.";
             }
-                        
+            
             if (!isset($errors)) {
                 $mClient = new ClientModel();
-                $userOld = $mClient->getById(new Client($id));
+                $userOld = $mClient->getById(new Client(intval($id)));
                 
-                if (count($userOld) > 0) {
+                if (!is_string($userOld)) {   // Si fuera un String, sería un mensaje de error
                     
-                    var_dump($userOld);
-                    die;
-                    $updatePassword = new Client(
+                    $updateClient = new Client(
                         $id,
                         $name,
-                        $contrasenya,
+                        $userOld->__get("password"),
                         $apellidos,
                         $nacimiento,
                         $email,
                         $telefono,
                         $sexo
-                    );
+                        );
                     
-                    $consulta = $mClient->update($updatePassword);
+                    $consulta = $mClient->update($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con existo") {
-                        header("index.php");
-                        
+                    if ($consulta === "La consulta se ha realizado con éxito") {
+                        header("Location: index.php");
                     } else {
                         $errors = "El registro es incorrecto";
-                        $this->vClient->showRegister($updatePassword, $lang, $errors);
+                        $this->vClientDates->show($lang, $errors);
                     }
                 } else {
                     
                 }
             }
             else {
-                $this->vClient->showRegister($updatePassword, $lang, $errors);
+                $this->vClientDates->show($lang, $errors);
             }
         }
     }
@@ -303,11 +300,11 @@ class ClientController extends Controller {
             if (!isset($errors)) {
                 $mClient = new ClientModel();
                 $consulta = $mClient->create($this->register);
+                
                 if ($consulta === "La consulta se ha realizado con existo") {
-                    header("index.php");
+                    header("Location: ?client/formLogin");
                 } else {
-                    $errors = "El registro es incorrecto";
-                    $this->vClient->showRegister($this->register, $lang, $errors);
+                    $this->vClient->showRegister($this->register, $lang, $consulta);
                 }
             }
             else {
