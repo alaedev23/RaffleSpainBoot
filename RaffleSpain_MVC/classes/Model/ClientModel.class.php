@@ -74,7 +74,7 @@ class ClientModel implements Crudable {
         
         $params = [$obj->__get("id")];
         
-        $resultado = $database->executarSQL("UPDATE client SET type = 1 WHERE id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE client SET type = 2 WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -86,6 +86,16 @@ class ClientModel implements Crudable {
         $params = [$obj->__get("id")];
         
         $resultado = $database->executarSQL("UPDATE client SET type = 0 WHERE id = ?", $params);
+        
+        return $resultado;
+    }
+
+    public function validateType($obj) {
+        $database = new DataBase('update');
+        
+        $params = [$obj->__get("id")];
+        
+        $resultado = $database->executarSQL("UPDATE client SET type = 1 WHERE id = ?", $params);
         
         return $resultado;
     }
@@ -120,6 +130,27 @@ class ClientModel implements Crudable {
         } else {
             return "No se ha encontrado usuario en el GetById.";
         }
+    }
+
+    public function getByEmail($email) {
+        $database = new DataBase('select');
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE email = ?", [$email]);
+        if (count($resultado) > 0) {
+            $clientObj = $this->createClientFromData($resultado[0]);
+            return $clientObj;
+        } else {
+            return "No se ha encontrado usuario en el GetByEmail.";
+        }
+    }
+
+    public function updateStatus($obj) {
+        $database = new DataBase('update');
+        
+        $params = [1,$obj->id];
+        
+        $resultado = $database->executarSQL("UPDATE client SET status = ? WHERE id = ?", $params);
+        
+        return $resultado;
     }
     
     private function createClientFromData($data)

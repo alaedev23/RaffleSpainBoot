@@ -1,5 +1,8 @@
 <?php
 
+require_once 'vendor/autoload.php';
+require_once 'classes/Config/Crypto.php';
+
 class ClientController extends Controller {
     
     private $login;
@@ -7,6 +10,7 @@ class ClientController extends Controller {
     
     private $vClient;
     private $vClientDates;
+    private static $key = "R@ffl3Sp@1nTM";
     
     public function __construct() {
         $this->login = new Client("", "", "", "", "", "", "", "", "", "");
@@ -135,9 +139,14 @@ class ClientController extends Controller {
                 $consulta = $mClient->getByEmailPassword($this->login);
                 if ($consulta != "El email o la contrasenya no son correctos.") {
                     // session_regenerate_id();
-                    $_SESSION['usuari'] = $consulta;
-                    ($consulta->__get("type") == 1) ? $_SESSION['userAdmin'] = true : $_SESSION['userAdmin'] = false;
-                    header("Location: index.php");
+                    if ($consulta->__get("type") === "0") {
+                        $errors = "Usuario no validado. Por favor, revise su correo electrónico.";
+                    } else {
+                        $_SESSION['usuari'] = $consulta;
+                        ($consulta->__get("type") == 2) ? $_SESSION['userAdmin'] = true : $_SESSION['userAdmin'] = false;
+                        header("Location: index.php");
+                    }
+
                 }
                 else {
                     $this->vClient->showLogin($this->login, $lang, $consulta);
@@ -309,7 +318,8 @@ class ClientController extends Controller {
                 $consulta = $mClient->create($this->register);
                 
                 if ($consulta === "La consulta se ha realizado con existo") {
-                    header("Location: ?client/formLogin");
+                    $this->sendMail($this->register);
+                    ValidateView::show($this->register->email);
                 } else {
                     $this->vClient->showRegister($this->register, $lang, $consulta);
                 }
@@ -318,6 +328,65 @@ class ClientController extends Controller {
                 $this->vClient->showRegister($this->register, $lang, $errors);
             }
         }
+    }
+    
+    function sendMail($client)
+    {
+        $to = $client->email;
+
+        $from = 'rafflespaintm@gmail.com';
+        $fromName = 'rafflespainTM';
+
+        $subject = 'Activa tu cuenta de RaffleSpain';
+        $hash = Crypto::encrypt_hash($client->email);
+        $encodedEmail = urlencode($hash);
+        $domain = "192.168.119.18";
+        $activationLink = "http://{$domain}/M12/RaffleSpainTM/RaffleSpain_MVC/?client/validate/{$encodedEmail}";
+
+        $htmlContent = "
+        <body style='font-family: Verdana, Geneva, sans-serif; background-color: #e8e8e8; margin: 0; padding: 0;'>
+            <div style='background-color: #f8f8f8; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); position: relative;'>
+                <h2 style='color: #444444; margin-bottom: 15px;'>¡Saludos de RaffleSpain!</h2>
+                <p style='color: #666666; line-height: 1.6; margin-bottom: 25px;'>Para activar tu cuenta, por favor sigue el enlace a continuación:</p>
+                <p style='margin: 20px 0;'><a href='{$activationLink}' style='color: #008cff; text-decoration: none; font-weight: bold;'>Activar Cuenta</a></p>
+                <p style='color: #666666; line-height: 1.6;'>Agradecemos tu participación.</p>
+                <p style='color: #444444; line-height: 1.6; margin-top: 25px;'>Cordialmente,<br>El Equipo de Soporte</p>
+            </div>
+        </body>";       
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer;
+
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $from;
+        $mail->Password = 'hpdwbbgulzkimkqh';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->setFrom($from, $fromName);
+        $mail->addAddress($to);
+
+        $mail->isHTML(true);
+
+        $mail->Subject = $subject;
+        $mail->Body = $htmlContent;
+
+        if (!$mail->send()) {
+            throw new Exception("Email sending failed.");
+        }
+    }
+
+    public function validate($hash) {
+        $implodedhash = implode("/", $hash);
+        $email = Crypto::decrypt_hash($implodedhash);
+        if ($email === false ) {
+            throw new Exception("Invalid hash.");
+        }
+        $mClient = new ClientModel();
+        $client = $mClient->getByEmail($email);
+        $mClient->validateType($client);
+        ValidateController::showCorrectValidate($email);
     }
     
     public function logOut() {

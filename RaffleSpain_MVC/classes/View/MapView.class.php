@@ -6,9 +6,7 @@ class MapView extends View {
         parent::__construct();
     }
     
-    public static function showMap($lang, $errors = null) {
-        $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
-        include $fitxerDeTraduccions;
+    public static function showMap() {
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";

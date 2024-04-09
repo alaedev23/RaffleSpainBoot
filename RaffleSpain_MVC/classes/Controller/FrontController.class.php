@@ -22,7 +22,7 @@ class FrontController extends Controller {
                 }
                 if (count($url) > 2) {
                     for ($i=2; $i<count($url); $i++) {
-                        $params[] = strtolower($url[$i]);
+                        $params[] = $url[$i];
                     }
                 }
             }
