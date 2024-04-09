@@ -482,6 +482,7 @@ button, .close {
   transition: 0.6s;
   width: 180px;
   top: 70px;
+  left: -50px;
   background-color: rgba(46, 46, 46, 0.596);
 }
 
@@ -500,7 +501,7 @@ button, .close {
 }
 
 .user-dropdown {
-  left: -92px;
+  left: -100px;
 }
 
 #search {
@@ -754,6 +755,7 @@ button, .close {
       -ms-flex-pack: end;
           justify-content: flex-end;
   margin: 40px 150px;
+  height: calc(100vh - 282px);
 }
 #datesClient .show {
   display: block;

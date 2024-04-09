@@ -54,8 +54,8 @@ class AdminView extends View {
             $html .= "<td></td>";
             $html .= '<td><input class="inputTable" type="text" name="name" value="' . $objSelec->name . '"></td>';
             $html .= '<td><input class="inputTable" type="text" name="brand" value="' . $objSelec->brand . '"></td>';
-            $html .= '<td><input class="inputTable" type="text" name="price" value="' . $objSelec->price . '"></td>';
             $html .= "<td></td>";
+            $html .= '<td><input class="inputTable" type="text" name="price" value="' . $objSelec->price . '"></td>';
             $html .= '<td><input type="text" name="size" value="' . $objSelec->size . '"></td>';
             $html .= '<td><input type="text" name="color" value="' . $objSelec->color . '"></td>';
             $html .= '<td><input class="inputTable" type="text" name="description" value="' . $objSelec->description . '"></td>';

@@ -148,7 +148,7 @@ class ClientController extends Controller {
         }
     }
     
-    public function updateDatesClient($id) {
+    public function updateDatesClient($idPass) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
@@ -164,11 +164,13 @@ class ClientController extends Controller {
             $telefono = $this->sanitize($_POST['phone']);
             $sexo = $this->sanitize($_POST['sex']);
             
+            $id = intval($idPass);
+            
             if (!is_numeric($id)) {
                 $errors = "Error al enviar el id.";
             }
             
-            if (strlen($name) == 0) {
+            if (strlen($name) === 0) {
                 $errors = "El nombre es obligatorio.";
             }
             
@@ -197,6 +199,7 @@ class ClientController extends Controller {
             
             if (!isset($errors)) {
                 $mClient = new ClientModel();
+                
                 $userOld = $mClient->getById(new Client(intval($id)));
                 
                 if (!is_string($userOld)) {   // Si fuera un String, sería un mensaje de error
@@ -209,13 +212,17 @@ class ClientController extends Controller {
                         $nacimiento,
                         $email,
                         $telefono,
-                        $sexo
-                        );
+                        $sexo,
+                        $userOld->__get("poblation"),
+                        $userOld->__get("address"),
+                        $userOld->__get("type"),
+                    );
                     
                     $consulta = $mClient->update($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con éxito") {
-                        header("Location: index.php");
+                    if ($consulta === "La consulta se ha realizado con existo") {
+                        $_SESSION['usuari'] = $updateClient;
+                        $this->vClientDates->show($lang);
                     } else {
                         $errors = "El registro es incorrecto";
                         $this->vClientDates->show($lang, $errors);

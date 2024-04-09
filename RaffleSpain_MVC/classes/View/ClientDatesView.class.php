@@ -8,12 +8,12 @@ class ClientDatesView extends View
     public function __construct()
     {
         parent::__construct();
-        $this->user = isset($_SESSION['usuari']) ? $_SESSION['usuari'] : null;
     }
 
     public function show($lang, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
+        $this->user = isset($_SESSION['usuari']) ? $_SESSION['usuari'] : null;
         
         ($errors !== null) ? var_dump($errors) : '';
 

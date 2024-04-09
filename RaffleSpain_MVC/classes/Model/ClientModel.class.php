@@ -32,13 +32,7 @@ class ClientModel implements Crudable {
             $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
         }
                 
-        if (!is_string($resultado)) {
-            if (count($resultado) === 0) {
-                return "La consulta se ha realizado con existo";
-            }
-        } else {
-            return "No se ha podido crear el cliente";
-        }
+        return $resultado;
         
     }
     
@@ -46,6 +40,7 @@ class ClientModel implements Crudable {
         $database = new DataBase('update');
               
         $params = [
+            $obj->__get("name"),
             $obj->__get("email"),
             $obj->__get("password"),
             $obj->__get("surnames"),
@@ -58,10 +53,7 @@ class ClientModel implements Crudable {
             $obj->__get("id")
         ];
         
-        $resultado = $database->executarSQL("UPDATE client SET email = ?, password = ?, surnames = ?, born = ?, phone = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
-        
-        var_dump($resultado);
-        die;
+        $resultado = $database->executarSQL("UPDATE client SET name = ?, email = ?, password = ?, surnames = ?, born = ?, phone = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
         
         return $resultado;
     }

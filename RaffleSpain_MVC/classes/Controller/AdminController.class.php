@@ -45,7 +45,6 @@ class AdminController extends Controller {
             $view = new AdminView();
             $modelo = new ProductModel();
             
-            $id = $this->sanitize($_POST['id']);
             $nameTemp = $this->sanitize($_POST['name']);
             $brandTemp = $this->sanitize($_POST['brand']);
             $price = $this->sanitize($_POST['price']);
@@ -61,10 +60,6 @@ class AdminController extends Controller {
             $brand = Functions::replaceSpaceForHyphen($brandTemp);
             $modelcode = Functions::getNewModelCode($name, $brand);
             
-            if (strlen($id) != 0) {
-                $errores = "No tens que posar l'id.";
-            }
-            
             if (strlen($name) === 0) {
                 $errores = "Error en el nom.";
             }
@@ -76,10 +71,6 @@ class AdminController extends Controller {
 //             if (ctype_space($name) || ctype_space($brand)) {
 //                 $errores = "No pot haver-hi espais en els camps de Nom o de Brand. Se tiene que separara por guines (-).";
 //             }
-            
-            if (strlen($modelcode) != 0 || !is_numeric($price)) {
-                $errores = "No tens que posar el modelcode.";
-            }
             
             if (strlen($price) === 0 || !is_numeric($price)) {
                 $errores = "Error en el preu.";
@@ -101,7 +92,15 @@ class AdminController extends Controller {
                 $errores = "Error en el sexe, ha de ser els valors: H, D o N.";
             }
             
-            $extensiones_permitidas = ['png'];
+            if (strlen($quantity) === 0 || !is_numeric($quantity)) {
+                $errores = "Error en la quantitat.";
+            }
+            
+            if (strlen($discount) === 0 || !is_numeric($discount)) {
+                $errores = "Error en el descompte.";
+            }
+            
+            $extensiones_permitidas = ['png', 'jpg', 'jpeg'];
             $archivo_info = pathinfo($imatge);
             
             if (isset($archivo_info['extension'])) {
@@ -114,29 +113,21 @@ class AdminController extends Controller {
                 $errores = "No se proporcionó una extensión de archivo.";
             }
             
-            if (strlen($quantity) === 0 || !is_numeric($quantity)) {
-                $errores = "Error en la quantitat.";
-            }
-            
-            if (strlen($discount) === 0 || !is_numeric($discount)) {
-                $errores = "Error en el descompte.";
-            }
-            
-            $this->product = $this->asignDataProduct($id, $name, $brand, $modelcode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);            
+            $this->product = $this->asignDataProduct(null, $name, $brand, $modelcode, $price, $size, $color, $description, $sex, $imatge, $quantity, $discount);            
             $this->productsAll = $modelo->read();
             
             if (!isset($errores)) {
                 
-                $rutaDestino = __DIR__ . "/../../public/img/vambas/$brand-$name.png";
+                $extensionImagen = strtolower($archivo_info['extension']);
+                $rutaDestino = __DIR__ . "/../../public/img/vambas/$brand-$name.$extensionImagen";
                 
                 if (move_uploaded_file($_FILES['imatge']['tmp_name'], $rutaDestino)) {
-                    $this->product->__set("img", "$brand-$name.png");
+                    $this->product->__set("img", "$brand-$name.$extensionImagen");
                     $create = $modelo->create($this->product);
-                    
+                    var_dump($create);                    
                     if ($create === "La consulta se ha realizado con existo") {
                         $this->productsAll = $modelo->read();
                         header("Location: index.php?admin/showAdminPage");
-                        $view->show($lang, $this->productsAll, $this->rafflesAll, null);
                     } else {
                         $errores = $create;
                         $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
