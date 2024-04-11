@@ -44,6 +44,8 @@ class Controller {
             $browserName = 'Microsoft Edge';
         } elseif (preg_match('/Trident/i', $userAgent)) {
             $browserName = 'Internet Explorer';
+        } else {
+            $browserName = 'Unknown';
         }
         
         return $browserName;
