@@ -74,6 +74,54 @@ class Functions {
             return $modelCode + 1;
         }
     }
+    
+    public static function redimensionarImagen($rutaImagen) {
+        // Obtener las dimensiones de la imagen original
+        list($ancho_orig, $alto_orig) = getimagesize($rutaImagen);
+        
+        // Nuevas dimensiones para la imagen redimensionada
+        $nuevo_ancho = 600;
+        $nuevo_alto = 600;
+        
+        // Crear una imagen en blanco con las nuevas dimensiones
+        $imagen_redimensionada = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+        
+        // Dependiendo del tipo de archivo, carga la imagen original
+        $extension = strtolower(pathinfo($rutaImagen, PATHINFO_EXTENSION));
+        switch($extension) {
+            case 'png':
+                $imagen_original = imagecreatefrompng($rutaImagen);
+                break;
+            case 'jpg':
+            case 'jpeg':
+                $imagen_original = imagecreatefromjpeg($rutaImagen);
+                break;
+                // Agrega más casos si necesitas manejar otros tipos de archivos
+            default:
+                return false; // Devuelve falso si el tipo de archivo no es compatible
+        }
+        
+        // Redimensionar la imagen original a la nueva imagen
+        imagecopyresampled($imagen_redimensionada, $imagen_original, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho_orig, $alto_orig);
+        
+        // Guardar la imagen redimensionada en la misma ruta de destino
+        switch($extension) {
+            case 'png':
+                imagepng($imagen_redimensionada, $rutaImagen);
+                break;
+            case 'jpg':
+            case 'jpeg':
+                imagejpeg($imagen_redimensionada, $rutaImagen);
+                break;
+                // Agrega más casos si necesitas manejar otros tipos de archivos
+        }
+        
+        // Liberar la memoria ocupada por las imágenes
+        imagedestroy($imagen_original);
+        imagedestroy($imagen_redimensionada);
+        
+        return true; // Devuelve verdadero si la redimensión fue exitosa
+    }
 
     public static function replaceSpaceForHyphen($string) {
         return str_replace(' ','-', $string);

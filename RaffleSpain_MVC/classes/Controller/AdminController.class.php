@@ -122,21 +122,26 @@ class AdminController extends Controller {
                 $rutaDestino = __DIR__ . "/../../public/img/vambas/$brand-$name.$extensionImagen";
                 
                 if (move_uploaded_file($_FILES['imatge']['tmp_name'], $rutaDestino)) {
-                    $this->product->__set("img", "$brand-$name.$extensionImagen");
-                    $create = $modelo->create($this->product);
-                    var_dump($create);                    
-                    if ($create === "La consulta se ha realizado con existo") {
-                        $this->productsAll = $modelo->read();
-                        header("Location: index.php?admin/showAdminPage");
-                    } else {
-                        $errores = $create;
-                        $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
-                    }
+//                     if (Functions::redimensionarImagen($rutaDestino)) {
+                        $this->product->__set("img", "$brand-$name.$extensionImagen");
+                        $create = $modelo->create($this->product);
+                        var_dump($create);
+                        if ($create === "La consulta se ha realizado con existo") {
+                            $this->productsAll = $modelo->read();;
+                            header("Location: index.php?admin/showAdminPage");
+                        } else {
+                            $errores = $create;
+                            $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
+                        }
+                    } 
+//                     else {
+//                         $errores = "Error al redimensionar la imagen.";
+//                         $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
+//                     }
                 }
             } else {
                 $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
             }
-        }
     }
     
     public function createRaffle() {

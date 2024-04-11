@@ -505,11 +505,13 @@ button, .close {
 }
 
 #search {
-  margin: 0 auto;
-  max-width: 1000px;
   padding: 40px 0px;
+  width: 100%;
+  margin: 0 auto;
 }
 #search form {
+  width: 100%;
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -520,14 +522,26 @@ button, .close {
       -ms-flex-align: center;
           align-items: center;
 }
-#search form #search {
-  background-color: #fff;
-  padding: 20px;
+#search form #searchProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-#search form .inpSearch {
-  width: 80%;
+#search form #searchInput {
+  background-color: #fff;
   padding: 10px;
-  margin-right: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: solid 0.5px grey;
+  margin-right: 50px;
+  font-size: 24px;
+  width: 50%;
 }
 
 #comentarioProducto {

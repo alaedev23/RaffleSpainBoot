@@ -1,24 +1,33 @@
 #search {
 
-    margin: 0 auto;
-    max-width: 1000px;
     padding: 40px 0px;
+    width: 100%;
+    margin: 0 auto;
 
     form {
+        width: 100%;
+        margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        #search {
+        #searchProduct {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        #searchInput {
             background-color: #fff;
-            padding: 20px;
-        }
-        
-        .inpSearch {
-            width: 80%;
             padding: 10px;
-            margin-right: 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: solid 0.5px grey;
+            margin-right: 50px;
+            font-size: 24px;
+            width: 50%;
         }
+
     }
 
 }

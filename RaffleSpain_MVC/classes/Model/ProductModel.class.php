@@ -1,5 +1,5 @@
-
 <?php
+
 class ProductModel implements Crudable
 {
     private $database;
@@ -70,6 +70,48 @@ class ProductModel implements Crudable
         return $this->createProductFromData($result[0]);
     }
     
+    public function getRandomProducts($quantity) {
+        $products = $this->read();
+        $totalProducts = count($products);
+        
+        if ($totalProducts < $quantity) {
+            throw new Exception("No hay suficientes productos disponibles para seleccionar.");
+        }
+        
+        $randomProducts = [];
+        $selectedIndexes = [];
+        while (count($randomProducts) < $quantity) {
+            $randomIndex = mt_rand(0, $totalProducts - 1);
+            
+            if (!in_array($randomIndex, $selectedIndexes)) {
+                $randomProducts[] = $products[$randomIndex];
+                $selectedIndexes[] = $randomIndex;
+            }
+        }
+        
+        return $randomProducts;
+    }
+
+    public function searchProduct($searchString) {
+        $allProducts = $this->readAll();
+        $searchReady = strtolower($searchString);
+        $productsFound = [];
+        
+        if (!empty($allProducts)) {
+            foreach ($allProducts as $product) {
+                $nameBrand = strtolower($product->__get("brand")) . " " . strtolower($product->__get("name"));
+                if (str_contains(strtolower($product->__get("name")), $searchReady) ||
+                    str_contains(strtolower($product->__get("brand")), $searchReady) ||
+                    str_contains(strtolower($product->__get("color")), strtolower($searchString)) ||
+                    str_contains($nameBrand, strtolower($searchString))) {
+                        array_push($productsFound, $product);
+                    }   
+            }
+        }
+        
+        return $productsFound;
+    }
+    
     public function readForSex($sexo) {
         $sql = 'SELECT * FROM product WHERE sex = ?';
         $params = [$sexo];
@@ -114,8 +156,7 @@ class ProductModel implements Crudable
         foreach ($results as $result) {
             $tallas[] = $result['size'];
         }
-        
-        
+
         return $tallas;
     }
     

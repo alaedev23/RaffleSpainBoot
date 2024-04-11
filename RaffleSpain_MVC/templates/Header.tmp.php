@@ -16,13 +16,13 @@
     </div>
     <nav>
         <ul>
-            <li><a href="?Favoritos/show"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icono" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16">
+            <li><a href="?favoritos/show"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icono" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16">
                         <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
                     </svg></a></li>
-            <li><a href="?Cistella/show"><svg xmlns="http://www.w3.org/2000/svg" id="iconoBasket" fill="currentColor" class="icono" class="bi bi-cart" viewBox="0 0 16 16">
+            <li><a href="?cistella/show"><svg xmlns="http://www.w3.org/2000/svg" id="iconoBasket" fill="currentColor" class="icono" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
                     </svg></a></li>
-            <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" id="iconoSearch" class="icono" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <li><a href="?producte/showSearchProducts"><svg xmlns="http://www.w3.org/2000/svg" id="iconoSearch" class="icono" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg></a></li>
             <?php
