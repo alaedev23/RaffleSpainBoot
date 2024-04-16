@@ -16,7 +16,7 @@ class ProducteController extends Controller {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
-            $lang = "ca";
+            $lang = "es";
         }
         
         $products = $this->mProduct->getRandomProducts(6);
