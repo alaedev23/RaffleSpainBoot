@@ -4,12 +4,6 @@ $funciones = new Functions();
 
 ?>
 
-<section id="search">
-    <form method="get" role="search">
-        <input type="search" class="inpSearch" placeholder="Search">
-        <button class="btn" type="submit">Search</button>
-    </form>
-</section>
 <section id="producto">
     <div id="fotosProducto">
         <div id="imagenesSecundarias">

@@ -99,17 +99,22 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `rsdb`.`raffle` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
-  `date` DATE NOT NULL,
+  `date_start` DATE NOT NULL,
   `date_end` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `product_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_raffle_product1_idx` (`product_id` ASC) VISIBLE,
+  `type` INT NOT NULL DEFAULT 0,
+  `winner` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_raffle_product1_idx` (`product_id` ASC),
   CONSTRAINT `fk_raffle_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `rsdb`.`product` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = utf8mb3;
+    REFERENCES `rsdb`.`product` (`id`),
+  CONSTRAINT `fk_raffle_winner`
+    FOREIGN KEY (`winner`)
+    REFERENCES `rsdb`.`client` (`id`)
+) ENGINE=InnoDB
+AUTO_INCREMENT=5
+DEFAULT CHARACTER SET=utf8mb3;
 
 -- -----------------------------------------------------
 -- Table `rsdb`.`raffle_has_client`
@@ -174,6 +179,27 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`favoritos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
+
+-- -----------------------------------------------------
+-- Table `rsdb`.`comment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rsdb`.`comment` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `client_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `title` VARCHAR(50) NOT NULL,
+  `comment` VARCHAR(1000) NOT NULL,
+  `value` INT NOT NULL DEFAULT 5,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_comments_client1_idx` (`client_id` ASC) VISIBLE,
+  INDEX `fk_comments_product1_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_comments_client1`
+    FOREIGN KEY (`client_id`)
+    REFERENCES `rsdb`.`client` (`id`),
+  CONSTRAINT `fk_comments_product1`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `rsdb`.`product` (`id`))
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

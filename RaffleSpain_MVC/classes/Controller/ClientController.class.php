@@ -10,8 +10,6 @@ class ClientController extends Controller {
     
     private $vClient;
     private $vClientDates;
-    private static $key = "R@ffl3Sp@1nTM";
-    
     public function __construct() {
         $this->login = new Client("", "", "", "", "", "", "", "", "", "");
         $this->register = new Client("", "", "", "", "", "", "", "", "", "");
