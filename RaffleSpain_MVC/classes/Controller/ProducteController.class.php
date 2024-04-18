@@ -42,7 +42,6 @@ class ProducteController extends Controller {
 
         $vProducte = new ProducteView();
         $vProducte->show($this->product, $tallas, $enFavoritos);
-
     }
 
     public function searchProducts() {
