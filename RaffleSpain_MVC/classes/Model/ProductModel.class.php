@@ -109,7 +109,13 @@ class ProductModel implements Crudable
             }
         }
         
-        return $productsFound;
+        $deleteDuplicateProducts = [];
+        
+        if (!empty($productsFound)) {
+            $deleteDuplicateProducts = $this->deleteDuplicate($productsFound);
+        }
+        
+        return (empty($deleteDuplicateProducts)) ? $productsFound : $deleteDuplicateProducts;
     }
     
     public function readForSex($sexo) {
@@ -165,7 +171,14 @@ class ProductModel implements Crudable
         $modelCodes = [];
         
         foreach ($results as $result) {
-            $product = $this->createProductFromData($result);
+            $dataArray = [];
+            if ($result instanceof Product) {
+                $dataArray = $this->objectToArray($result);
+            } else {
+                $dataArray = $result;
+            }
+            
+            $product = $this->createProductFromData($dataArray);            
             $currentModelCode = $product->__get("modelCode");
             
             if (!in_array($currentModelCode, $modelCodes)) {
@@ -174,6 +187,24 @@ class ProductModel implements Crudable
             }
         }
         return $resultado;
+    }
+    
+    public function objectToArray($object) {
+        $dataArray = [
+            "id" => $object->id,
+            "name" => $object->name,
+            "brand" => $object->brand,
+            "modelCode" => $object->modelCode,
+            "price" => $object->price,
+            "size" => $object->size,
+            "color" => $object->color,
+            "sex" => $object->sex,
+            "img" => $object->img,
+            "description" => $object->description,
+            "quantity" => $object->quantity,
+            "discount" => $object->discount
+        ];
+        return $dataArray;
     }
     
     private function createProductFromData($data)

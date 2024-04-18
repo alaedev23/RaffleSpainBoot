@@ -3,6 +3,7 @@
 @import 'base/typography.scss';
 
 @import 'abstract/variables';
+
 @import 'components/animation';
 @import 'components/footer';
 @import 'components/navegation';
@@ -13,7 +14,6 @@
 @import 'components/filtres_ordenar';
 @import 'components/butons';
 @import 'components/search';
-@import 'components/comentarioProducto';
 @import 'components/producto';
 @import 'components/login';
 @import 'components/registro';
@@ -21,6 +21,7 @@
 @import 'components/admin';
 @import 'components/updateDatesClient';
 @import 'components/inputs';
+@import 'components/comment';
 
 @import 'layout/footer';
 @import 'layout/grid';

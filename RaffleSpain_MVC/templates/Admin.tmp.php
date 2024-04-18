@@ -2,7 +2,7 @@
 
 	<?php 
     	if ($errors !== "") {
-    	    echo "<h2 class=\"error\">$errors</h2>";
+    	    echo "<div class=\"errorMessage\"><p>$errors</hp></div>";
     	}
     	echo $tempProducts; 
     	echo $tempRraffles; 

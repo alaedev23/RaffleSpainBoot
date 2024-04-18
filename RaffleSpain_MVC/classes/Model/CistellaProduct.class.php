@@ -5,6 +5,7 @@ class CistellaProduct {
     private $client_id;
     private $product;
     private $quantity;
+    private $size;
     
     public function __construct() {}
     
@@ -28,7 +29,8 @@ class CistellaProduct {
         return [
             'client_id' => $this->client_id,
             'product' => $this->product,
-            'quantity' => $this->quantity
+            'quantity' => $this->quantity,
+            'size' => $this->size
         ];
     }
     

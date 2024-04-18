@@ -47,7 +47,7 @@
 					value="Registrarse">
 			</div>
 		</form>
-		<?= isset($errors) ? $errors : ''; ?>
+		<?= isset($errors) ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : ''; ?>
         <p>
 			Estas registrado ? Haz login -> <a
 				class="enlace_invertido" href="?client/formLogin">Aqui</a>

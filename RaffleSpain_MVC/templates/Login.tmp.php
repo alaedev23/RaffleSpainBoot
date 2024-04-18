@@ -15,7 +15,7 @@
             	<input type="submit" class="btn" id="submit" name="submit" value="Iniciar Sesión">
             </div>
         </form>
-        <?= isset($errors) ? $errors : ''; ?>
+        <?= isset($errors) ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : ''; ?>
         <p>Si no estas registrado en la pagina, registrate aqui -> <a class="enlace_invertido" href="?client/formRegister">Aqui</a></p>
     </div>
 </section>

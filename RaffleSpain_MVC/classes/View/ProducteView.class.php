@@ -1,8 +1,17 @@
 <?php
 
 class ProducteView extends View {
-    public function show($producte, $tallas, $enFavoritos) {
 
+    private $mComment;
+    
+    public function __construct() {
+        $this->mComment = new CommentModel();
+    }
+    
+    public function show($producte, $tallas, $enFavoritos, $errors = '') {
+        
+        $getComments = $this->mComment->getById($producte);        
+        
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body id=\"producto_page\">";
