@@ -24,13 +24,13 @@ class ProducteController extends Controller {
     }
 
     public function mostrarProducte($id, $errors = '') {
+        $mProducts = new ProductModel();
+        $productId = new Product($id[0]);
+        
+        $this->product = $mProducts->getById($productId);
+        $tallas = $mProducts->getTallas($this->product);
+        
         if ($errors !== '') {
-            $mProducts = new ProductModel();
-            $productId = new Product($id[0]);
-            
-            $this->product = $mProducts->getById($productId);
-            $tallas = $mProducts->getTallas($this->product);
-            
             $enFavoritos = null;
             
             if (isset($_SESSION['usuari'])) {
