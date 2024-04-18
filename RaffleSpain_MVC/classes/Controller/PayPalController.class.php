@@ -40,8 +40,8 @@ class PayPalController extends Controller
         $accessToken = self::getToken();
     
         $createOrderUrl = 'https://api.sandbox.paypal.com/v2/checkout/orders';
-        $returnUrl = 'http://192.168.119.13/php/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture';
-        $cancelUrl = 'http://192.168.119.13/php/RaffleSpainTM/RaffleSpain_MVC/?cistella/show';
+        $returnUrl = 'http://192.168.119.18/M12/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture';
+        $cancelUrl = 'http://192.168.119.18/M12/RaffleSpainTM/RaffleSpain_MVC/?cistella/show';
     
         $bodyParams = json_encode(
             array(
