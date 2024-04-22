@@ -1521,7 +1521,7 @@ button, .close {
 .cistella .cistella-list .product input, .cistella .cistella-list .product a, .cistella .cistella-list .product p {
   margin-bottom: 10px;
 }
-.cistella .cistella-list .product input {
+.cistella .cistella-list .product input[type=number] {
   border: none;
   border-radius: 10px;
   padding: 8px;
@@ -1577,10 +1577,10 @@ button, .close {
 .cistella .cistella-list .product .product-info .precio {
   font-weight: bold;
 }
-.cistella .cistella-list .product .product-info .btnContainers {
+.cistella .cistella-list .product .product-info .btnContainer {
   margin-top: 30px;
 }
-.cistella .cistella-list .product .product-info .btnContainers .btn {
+.cistella .cistella-list .product .product-info .btnContainer .btn {
   margin-right: 20px;
 }
 .cistella .precio-total {

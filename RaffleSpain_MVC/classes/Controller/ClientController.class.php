@@ -3,6 +3,11 @@
 require_once 'vendor/autoload.php';
 require_once 'classes/Config/Crypto.php';
 
+// Type 0: no validado
+// Type 1: validado
+// Type 2: admin
+// Type 3: miembro
+
 class ClientController extends Controller {
     
     private $login;
