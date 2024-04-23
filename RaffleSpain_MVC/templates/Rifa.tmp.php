@@ -1,9 +1,3 @@
-<section id="search">
-    <form method="get" role="search">
-        <input type="search" class="inpSearch" placeholder="Buscar">
-        <button class="btn" type="submit">Buscar</button>
-    </form>
-</section>
 <section id="producto">
     <div id="fotosProducto">
         <div id="imagenesSecundarias">

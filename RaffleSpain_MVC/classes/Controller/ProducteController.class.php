@@ -20,7 +20,7 @@ class ProducteController extends Controller {
         }
         
         $products = $this->mProduct->getRandomProducts(6);
-        $this->vSearchProduct->show($lang, $products);
+        $this->vSearchProduct->showProducts($lang, $products);
     }
 
     public function mostrarProducte($id, $errors = '') {
@@ -67,12 +67,12 @@ class ProducteController extends Controller {
                 $products = $this->mProduct->searchProduct($search);
                 
                 if (!empty($products)) {
-                    $this->vSearchProduct->show($lang, $products, true, $errors);
+                    $this->vSearchProduct->showProducts($lang, $products, true, $search, $errors);
                 } else {
-                    $this->vSearchProduct->show($lang, null, false, "No se ha encontrado ningun resultado en su busqueda.");
+                    $this->vSearchProduct->showProducts($lang, null, false, $search, "No se ha encontrado ningun resultado en su busqueda.");
                 }
             } else {
-                $this->vSearchProduct->show($lang, null, false, $errors);
+                $this->vSearchProduct->showProducts($lang, null, false, $search, $errors);
             }
             
         }

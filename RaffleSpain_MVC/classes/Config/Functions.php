@@ -28,7 +28,7 @@ class Functions
         foreach ($rifas as $rifa) {
             $result .= '
             <div class="zapatilla">
-                <a href="?Raffle/showRaffle/' . $rifa->id . ' ">
+                <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
                     <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
                     <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
                     <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>

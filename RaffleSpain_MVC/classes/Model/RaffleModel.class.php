@@ -73,6 +73,29 @@ class RaffleModel implements Crudable
         
         return $this->database->executarSQL($sql, $params);;
     }
+    
+    public function searchRaffle($searchString) {
+        $allRaffles = $this->read();
+        $searchReady = strtolower($searchString);
+        $raffleFound = [];
+        
+        if (!empty($allRaffles)) {
+            foreach ($allRaffles as $raffle) {
+                $mProduct = new ProductModel();
+                $product = $mProduct->getById(new Product($raffle->__get("product_id")));
+                $nameBrand = strtolower($product->__get("brand")) . " " . strtolower($product->__get("name"));
+                if (str_contains(strtolower($product->__get("name")), $searchReady) ||
+                    str_contains(strtolower($product->__get("brand")), $searchReady) ||
+                    str_contains(strtolower($product->__get("color")), strtolower($searchString)) ||
+                    str_contains($nameBrand, strtolower($searchString))) {
+                        array_push($raffleFound, $raffle);
+                    }
+            }
+        }
+        
+        
+        return $raffleFound;
+    }
 
     public function getById($obj)
     {
@@ -92,6 +115,44 @@ class RaffleModel implements Crudable
         $result[0]['product'] = $consulta;
 
         return $this->createRaffleFromData($result[0]);
+    }
+    
+    public function deleteDuplicate($results) {
+        $resultado = [];
+        $modelCodes = [];
+        
+        foreach ($results as $result) {
+            $dataArray = [];
+            if ($result instanceof Raffle) {
+                $dataArray = $this->raffleToArray($result);
+            } else {
+                $dataArray = $result;
+            }
+            
+            $raffle = $this->createRaffleFromData($dataArray);
+            $currentId = $raffle->__get("id");
+            
+            if (!in_array($currentId, $modelCodes)) {
+                $modelCodes[] = $currentId;
+                $resultado[] = $raffle;
+            }
+        }
+        return $resultado;
+    }
+    
+    public function raffleToArray($raffle) {
+        $mProduct = new ProductModel();
+        $arrayProduct = $mProduct->productToArray($raffle->product);
+        $objProduct = $mProduct->createProductFromData($arrayProduct);
+        $dataArray = [
+            "id" => $raffle->id,
+            "product_id" => $raffle->product_id,
+            "date_start" => $raffle->date_start,
+            "date_end" => $raffle->date_end,
+            "product" => $objProduct,
+            "winner" => $raffle->winner
+        ];
+        return $dataArray;
     }
     
     private function createRaffleFromData($data)

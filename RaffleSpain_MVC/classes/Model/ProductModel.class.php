@@ -62,11 +62,11 @@ class ProductModel implements Crudable
         $sql = 'SELECT * FROM product WHERE id=? LIMIT 1';
         $params = [$obj->id];
         $result = $this->database->executarSQL($sql, $params);
-
-        if (empty($result)) {
+        
+        if (empty($result[0])) {
             return null;
         }
-
+        
         return $this->createProductFromData($result[0]);
     }
     
@@ -173,7 +173,7 @@ class ProductModel implements Crudable
         foreach ($results as $result) {
             $dataArray = [];
             if ($result instanceof Product) {
-                $dataArray = $this->objectToArray($result);
+                $dataArray = $this->productToArray($result);
             } else {
                 $dataArray = $result;
             }
@@ -189,7 +189,7 @@ class ProductModel implements Crudable
         return $resultado;
     }
     
-    public function objectToArray($object) {
+    public function productToArray($object) {
         $dataArray = [
             "id" => $object->id,
             "name" => $object->name,
@@ -207,7 +207,7 @@ class ProductModel implements Crudable
         return $dataArray;
     }
     
-    private function createProductFromData($data)
+    public function createProductFromData($data)
     {
         return new Product(
             $data['id'],

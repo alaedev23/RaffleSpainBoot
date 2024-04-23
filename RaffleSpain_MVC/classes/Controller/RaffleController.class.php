@@ -4,13 +4,27 @@ class RaffleController extends Controller {
     
     private Raffle $raffle;
     private RaffleModel $mRaffle;
+    private SearchView $vSearchRaffle;
     
     public function __construct() {
         $this->raffle = new Raffle(null, null, null, null);
         $this->mRaffle = new RaffleModel();
+        $this->vSearchRaffle = new SearchView();
     }
     
-    public function showRaffle($id) {
+    public function showAll() {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "es";
+        }
+        
+        $rifas = $this->mRaffle->read();
+        $vSearch = new SearchView();
+        $vSearch->showRaffle($lang, $rifas);
+    }
+    
+    public function showRaffleWithId($id) {
         $this->raffle->id = $id[0];
         
         $isIn = false;
@@ -30,6 +44,35 @@ class RaffleController extends Controller {
         RaffleView::show($this->raffle, $isIn);
     }
     
+    public function searchRaffles() {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["serachRaffle"]))) {
+            $search = $this->sanitize($_POST['searchInput']);
+            
+            if (strlen($search) === 0) {
+                $errors = "Escribe algo para buscar entre nuestros productos.";
+            }
+            
+            if (!isset($errors)) {
+                $products = $this->mRaffle->searchRaffle($search);
+                
+                if (!empty($products)) {
+                    $this->vSearchRaffle->showRaffle($lang, $products, true, $search, $errors);
+                } else {
+                    $this->vSearchRaffle->showRaffle($lang, null, false, $search, "No se ha encontrado ningun resultado en su busqueda.");
+                }
+            } else {
+                $this->vSearchRaffle->showRaffle($lang, null, false, $search, $errors);
+            }
+            
+        }
+    }
+    
     public function toggleUser($ids) {
         $obj = new stdClass();
         $obj->id = $ids[0];
@@ -41,11 +84,11 @@ class RaffleController extends Controller {
             $this->mRaffle->addUser($obj);
         }
     
-        $this->showRaffle($obj->id);
+        $this->showRaffleWithId($obj->id);
     
         $url = $_SERVER['REQUEST_URI'];
         $url = strtok($url, '?');
-        $url .= ('?Raffle/showRaffle/' . $obj->id);
+        $url .= ('?Raffle/showRaffleWithId/' . $obj->id);
         echo "<script>history.pushState(null, null, '$url');</script>";
     }
 }

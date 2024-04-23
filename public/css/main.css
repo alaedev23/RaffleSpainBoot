@@ -534,12 +534,12 @@ button, .close {
   left: -100px;
 }
 
-#search {
+#searchProduct, #searchRaffle {
   padding: 40px 0px;
   width: 100%;
   margin: 0 auto;
 }
-#search form {
+#searchProduct form, #searchRaffle form {
   width: 100%;
   margin: 0 auto;
   display: -webkit-box;
@@ -552,7 +552,7 @@ button, .close {
       -ms-flex-align: center;
           align-items: center;
 }
-#search form #searchProduct {
+#searchProduct form .searchContainer, #searchRaffle form .searchContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -563,7 +563,7 @@ button, .close {
       -ms-flex-align: center;
           align-items: center;
 }
-#search form #searchInput {
+#searchProduct form #searchInput, #searchRaffle form #searchInput {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;

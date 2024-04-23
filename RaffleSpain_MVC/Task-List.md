@@ -10,3 +10,5 @@
 - Dar la opcion de mover los favoritos a la cesta
 - Enviar mail del pedido, si puede ser con el pdf de la factura
 - Implementar idioma
+- Documentacion proyecto (comentarios)
+- Corregir estilos
