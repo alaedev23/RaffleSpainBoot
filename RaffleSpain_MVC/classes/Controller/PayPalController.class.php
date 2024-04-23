@@ -35,14 +35,31 @@ class PayPalController extends Controller
         }
     }
 
-    public static function createOrder($params)
+    public static function createOrder()
     {
+
+        $totalPrice = null;
+
+        if (isset($_SESSION['usuari'])) {
+            $cistellaList = new CistellaProduct();
+            $cistellaModel = new CistellaProductModel();
+
+            $cistellaList->client_id = $_SESSION['usuari']->id;
+            $cistella = $cistellaModel->read($cistellaList);
+
+            foreach($cistella as $producteCistella) {
+                $totalPrice += $producteCistella->product->price * $producteCistella->quantity;
+            }
+
+        }
+
         $accessToken = self::getToken();
-    
+
+
         $createOrderUrl = 'https://api.sandbox.paypal.com/v2/checkout/orders';
-        $returnUrl = 'http://192.168.119.18/M12/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture';
-        $cancelUrl = 'http://192.168.119.18/M12/RaffleSpainTM/RaffleSpain_MVC/?cistella/show';
-    
+        $returnUrl = 'http://localhost/M12/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture';
+        $cancelUrl = 'http://localhost/M12/RaffleSpainTM/RaffleSpain_MVC/?cistella/show';
+
         $bodyParams = json_encode(
             array(
                 'intent' => 'CAPTURE',
@@ -50,7 +67,7 @@ class PayPalController extends Controller
                     array(
                         'amount' => array(
                             'currency_code' => 'EUR',
-                            'value' => $params[0]
+                            'value' => $totalPrice
                         )
                     )
                 ),
@@ -59,7 +76,7 @@ class PayPalController extends Controller
                         'experience_context' => array(
                             'payment_method_preference' => 'IMMEDIATE_PAYMENT_REQUIRED',
                             'brand_name' => 'RAFFLESPAIN TM',
-                            'locale' => 'en-US',
+                            'locale' => 'es-ES',
                             'user_action' => 'PAY_NOW',
                             'return_url' => $returnUrl,
                             'cancel_url' => $cancelUrl
@@ -68,28 +85,29 @@ class PayPalController extends Controller
                 )
             )
         );
-    
+
         $curl = curl_init();
-    
+
         curl_setopt($curl, CURLOPT_URL, $createOrderUrl);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             'Authorization: Bearer ' . $accessToken,
             'Content-Type: application/json'
-        ));
+        )
+        );
         curl_setopt($curl, CURLOPT_POSTFIELDS, $bodyParams);
-    
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
-    
+
         curl_close($curl);
-    
+
         if ($err) {
             echo "Error en la solicitud cURL: " . $err;
         } else {
             $orderData = json_decode($response);
-    
+
             if (isset($orderData->links[1])) {
                 header('Location: ' . $orderData->links[1]->href);
                 exit();
@@ -99,51 +117,52 @@ class PayPalController extends Controller
         }
     }
 
-    
-    
-public static function confirmPaymentCapture()
-{
-    // Obtener el token y PayerID del query string ($_GET)
-    $token = $_GET['token'] ?? '';
-    $payerID = $_GET['PayerID'] ?? '';
 
-    if (empty($token) || empty($payerID)) {
-        echo "Error: Falta token o PayerID en la solicitud.";
-        return;
+
+    public static function confirmPaymentCapture()
+    {
+
+        $token = $_GET['token'] ?? '';
+        $payerID = $_GET['PayerID'] ?? '';
+
+        if (empty($token) || empty($payerID)) {
+            echo "Error: Falta token o PayerID en la solicitud.";
+            return;
+        }
+
+        $accessToken = self::getToken();
+
+        $captureUrl = 'https://api.sandbox.paypal.com/v2/checkout/orders/' . $token . '/capture';
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, $captureUrl);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $accessToken,
+            'Content-Type: application/json'
+        )
+        );
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $pView = new PayPalView();
+
+        if ($err) {
+            $pView->showError();
+        } else {
+
+            $cistellaModel = new CistellaProductModel();
+            $client = new Client($_SESSION['usuari']->id);
+            $cistellaModel->deleteByClientId($client);
+
+            $pView->showCorrect();
+        }
     }
-
-    $accessToken = self::getToken();
-    
-    // Crear la URL de confirmación de captura con el token y el PayerID
-    $captureUrl = 'https://api.sandbox.paypal.com/v2/checkout/orders/' . $token . '/capture';
-    
-    $curl = curl_init();
-    
-    curl_setopt($curl, CURLOPT_URL, $captureUrl);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        'Authorization: Bearer ' . $accessToken,
-        'Content-Type: application/json'
-    ));
-    
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    
-    curl_close($curl);
-    
-    if ($err) {
-        echo "Error en la solicitud cURL: " . $err;
-    } else {
-        // Analizar y manejar la respuesta de confirmación aquí si es necesario
-        return $response;
-    }
-}
-
-
-
-    
-
 
 }
 

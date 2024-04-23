@@ -13,7 +13,7 @@
         <div>
             <h3>ENVÍO Y ENTREGA</h3>
             <h5>¿Cuánto suele tardar el envío?</h5>
-            <p>En RaffleSpain nos comprometemos a entregar los pedidos en 2-4 días laborales, de no ser así el
+            <p>En RaffleSpain nos comprometemos a entregar los pedidos en 5-8 días laborales, de no ser así el
                 precio del envío sería reembolsado.</p>
             <h5>¿Donde haceis los envios?</h5>
             <p>En RaffleSpain realizamos envios en todo el territorio español, tanto a peninsula como

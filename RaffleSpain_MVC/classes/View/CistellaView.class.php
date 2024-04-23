@@ -49,7 +49,7 @@ class CistellaView extends View {
         $html = '<div class="precio-total">';
         $html .= '<p>Total: ' . number_format($total, 2) . ' €</p>';
         $html .= '<a href="?Cistella/emptyCart" class="btn btnZapatillas">Vaciar carrito</a>';
-        $html .= '<button class="btn btnZapatillas">Tramitar Pago</button>';
+        $html .= '<a href="?PayPal/createOrder" class="btn btnZapatillas">Tramitar Pago</a>';
         $html .= '</div>';
         
         return $html;
