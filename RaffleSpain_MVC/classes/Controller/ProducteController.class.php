@@ -30,7 +30,7 @@ class ProducteController extends Controller {
         $this->product = $mProducts->getById($productId);
         $tallas = $mProducts->getTallas($this->product);
         
-        if ($errors !== '') {
+        if ($errors == '') {
             $enFavoritos = null;
             
             if (isset($_SESSION['usuari'])) {
@@ -40,13 +40,14 @@ class ProducteController extends Controller {
                 $favoritosProduct->product = $this->product;
                 $enFavoritos = $favoritosModel->readByClientAndProduct($favoritosProduct);
             }
-            
+
             $vProducte = new ProducteView();
             $vProducte->show($this->product, $tallas, $enFavoritos);
         } else {
             $vProducte = new ProducteView();
             $vProducte->show($this->product, $tallas, false);
         }
+
     }
 
     public function searchProducts() {

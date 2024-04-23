@@ -143,6 +143,17 @@ class ClientModel implements Crudable {
         }
     }
 
+    public function getByPhone($phone) {
+        $database = new DataBase('select');
+        $resultado = $database->executarSQL("SELECT * FROM client WHERE phone = ?", [$phone]);
+        if (count($resultado) > 0) {
+            $clientObj = $this->createClientFromData($resultado[0]);
+            return $clientObj;
+        } else {
+            return false;
+        }
+    }
+
     public function updateStatus($obj) {
         $database = new DataBase('update');
         
