@@ -13,6 +13,7 @@ class SearchView extends View
         // $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
         // include $fitxerDeTraduccions;
         $templateRaffle = $this->showFilterRaffles($rifas); // si esta activo printea los que se hayan encontrado, sino printea aleatorios
+        $templateRaffleMember = $this->showFilterRafflesMemeber($rifas);
         
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
@@ -47,4 +48,21 @@ class SearchView extends View
     {
         return Functions::generatecardRaffle($rifas);
     }
+    
+    public function showFilterRafflesMemeber($rifas)
+    {
+        $html = '';
+        foreach ($rifas as $rifa) {
+            if ($rifa->type == 1) {
+                if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
+                    $html .= Functions::generatecardRaffleMemberOpen($rifa);
+                } else {
+                    $html .= Functions::generatecardRaffleMemberClose($rifa);
+                }
+            }
+        }
+        
+        return $html;
+    }
+    
 }

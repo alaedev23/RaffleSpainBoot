@@ -30,16 +30,16 @@ class RaffleModel implements Crudable
 
     public function create($obj)
     {
-        $sql = 'INSERT INTO raffle (product_id, date_start, date_end) VALUES (?, ?, ?)';
-        $params = [$obj->product_id, $obj->date_start, $obj->date_end];
+        $sql = 'INSERT INTO raffle (product_id, date_start, date_end, type) VALUES (?, ?, ?, ?)';
+        $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->type];
         
         return $this->database->executarSQL($sql, $params);
     }
 
     public function update($obj)
     {
-        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ? WHERE id = ?';
-        $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->id];
+        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ?, type = ? WHERE id = ?';
+        $params = [$obj->product_id, $obj->date_start, $obj->date_end, $obj->type, $obj->id];
         
         return $this->database->executarSQL($sql, $params);
     }
@@ -117,6 +117,19 @@ class RaffleModel implements Crudable
         return $this->createRaffleFromData($result[0]);
     }
     
+    public function getByType($obj)
+    {
+        $sql = 'SELECT * FROM raffle WHERE type=? LIMIT 1';
+        $params = [$obj->type];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        if (empty($result)) {
+            return null;
+        }
+        
+        return $this->createRaffleFromData($result[0]);
+    }
+    
     public function deleteDuplicate($results) {
         $resultado = [];
         $modelCodes = [];
@@ -150,7 +163,8 @@ class RaffleModel implements Crudable
             "date_start" => $raffle->date_start,
             "date_end" => $raffle->date_end,
             "product" => $objProduct,
-            "winner" => $raffle->winner
+            "winner" => $raffle->winner,
+            "type" => $raffle->type
         ];
         return $dataArray;
     }
@@ -163,7 +177,8 @@ class RaffleModel implements Crudable
             date("Y-m-d H:i", strtotime($data['date_start'])),
             date("Y-m-d H:i", strtotime($data['date_end'])),
             $data['product'],
-            $data['winner']
+            $data['winner'],
+            $data['type']
             );
     }
 

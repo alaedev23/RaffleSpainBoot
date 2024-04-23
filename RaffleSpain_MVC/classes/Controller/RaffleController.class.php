@@ -19,16 +19,26 @@ class RaffleController extends Controller {
             $lang = "es";
         }
         
-        $rifas = $this->mRaffle->read();
-        $vSearch = new SearchView();
-        $vSearch->showRaffle($lang, $rifas);
+        if (isset($_SESSION['usuari'])) {
+            $rifas = $this->mRaffle->read();
+            $vSearch = new SearchView();
+            $vSearch->showRaffle($lang, $rifas);
+        } else {
+            header("Location: ?client/formLogin");
+        }
     }
     
     public function showRaffleWithId($id) {
-        $this->raffle->id = $id[0];
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
         
+        $this->raffle->id = $id[0];
         $isIn = false;
-        if(isset($_SESSION['usuari'])){
+        
+        if (isset($_SESSION['usuari'])){
             $obj = new stdClass();
             $obj->id = $this->raffle->id;
             $obj->client_id = $_SESSION['usuari']->id;
@@ -37,11 +47,26 @@ class RaffleController extends Controller {
             if ($this->mRaffle->userIsInRaffle($obj)) {
                 $isIn = true;
             }
-        }
-
-        $this->raffle = $this->mRaffle->getById($this->raffle);
-        
-        RaffleView::show($this->raffle, $isIn);
+            
+//             if ($isIn) {
+                $this->raffle = $this->mRaffle->getById($this->raffle);
+                
+                if ($this->raffle->__get("type") == 1) {
+                    if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
+                        RaffleView::show($this->raffle, $isIn);
+                    } else {
+//                         header("Location: index.php");
+                        $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
+                    }
+                } else {
+                    RaffleView::show($this->raffle, $isIn);
+                }
+            } else {
+                header("Location: ?client/formLogin");
+            }
+//         } else {
+//             header("Location: index.html");
+//         }
     }
     
     public function searchRaffles() {

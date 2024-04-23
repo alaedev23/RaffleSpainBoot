@@ -6,17 +6,18 @@ class Raffle {
     private $product_id;
     private $date_start;
     private $date_end;
-    
     private $product;
     private $winner;
+    private $type;
     
-    public function __construct($id, $product_id, $date_start, $date_end, Product $product = null, $winner = null) {
+    public function __construct($id, $product_id, $date_start, $date_end, Product $product = null, $winner = null, $type = 0) {
         $this->id = $id;
         $this->product_id = $product_id;
         $this->date_start = $date_start;
         $this->date_end = $date_end;
         $this->product = $product;
         $this->winner = $winner;
+        $this->type = $type;
     }
     
     public function __set($property, $value) {
@@ -42,7 +43,8 @@ class Raffle {
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'product' => $this->product,
-            'winner' => $this->winner
+            'winner' => $this->winner,
+            'type' => $this->type
         ];
     }
     
