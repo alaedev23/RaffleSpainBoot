@@ -69,6 +69,18 @@ class RaffleController extends Controller {
 //         }
     }
     
+    public function getRaffleClient() {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        $raffles = $this->mRaffle->getRaffleForClient($_SESSION['usuari']->id);
+        $vSearch = new ClientDatesView();
+        $vSearch->showMyRaffle($lang, $raffles);
+    }
+    
     public function searchRaffles() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];

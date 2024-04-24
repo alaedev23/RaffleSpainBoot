@@ -25,22 +25,26 @@ class Functions
     public static function generatecardRaffle($rifas)
     {
         $result = '';
-        foreach ($rifas as $rifa) {
-            if ($rifa->type == 0) {
-                $result .= '
-                <div class="zapatilla">
-                    <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
-                        <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
-                        <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
-                        <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
-                    </a>
-                </div>';
+        if ($rifas !== null) {
+            if (count($rifas) > 0) {
+                foreach ($rifas as $rifa) {
+                    if ($rifa->type == 0) {
+                        $result .= '
+                        <div class="zapatilla">
+                            <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
+                                <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
+                                <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
+                                <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
+                            </a>
+                        </div>';
+                    }
+                }
             }
         }
 
         return $result;
     }
-    
+
     public static function generatecardRaffleMemberOpen($rifa)
     {
         $result = '';
@@ -56,10 +60,10 @@ class Functions
                 <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
             </a>
         </div>';
-        
+
         return $result;
     }
-    
+
     public static function generatecardRaffleMemberClose($rifa)
     {
         $result = '';
@@ -75,7 +79,7 @@ class Functions
                 <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
             </a>
         </div>';
-        
+
         return $result;
     }
 
@@ -138,10 +142,10 @@ class Functions
             <label for="talla_' . $talla . '">EU ' . $talla . '</label><br>
         ';
         }
-        
+
         return $tallasHTML;
     }
-    
+
     public static function generateFullTallas($tallas)
     {
         $tallasHTML = '<section>';
@@ -151,10 +155,9 @@ class Functions
         }
         $tallasHTML .= '</select>';
         $tallasHTML .= '</section>';
-        
+
         return $tallasHTML;
     }
-    
 
     public static function getNewModelCode($name, $brand)
     {

@@ -58,6 +58,7 @@
                             </svg>
                             <div id="dropdownUser" class="user-dropdown dropdown-content">
                                 <a href="?client/showDatesClient">Configuración</a>
+                                <a href="?raffle/getRaffleClient">Mis rifas</a>
                                 <a href="?client/logOut">Log Out</a>
                             </div>
                         </div>

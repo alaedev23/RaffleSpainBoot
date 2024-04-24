@@ -30,6 +30,23 @@ class ClientDatesView extends View
         include "templates/Footer.tmp.php";
         echo "</body></html>";
     }
+    
+    public function showMyRaffle($lang, $raffles, $errors = null)
+    {
+        $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
+        
+        $templateMyRaffle = Functions::generatecardRaffle($raffles); 
+        
+        echo "<!DOCTYPE html><html lang=\"en\">";
+        include "templates/Head.tmp.php";
+        echo "<body>";
+        include "templates/Header.tmp.php";
+        echo '<main>';
+        include "templates/MyRaffles.tmp.php";
+        echo "</main>";
+        include "templates/Footer.tmp.php";
+        echo "</body></html>";
+    }
 
     public function generateTemplate() {
         $template = '<div id="containerDetallesCuenta">
