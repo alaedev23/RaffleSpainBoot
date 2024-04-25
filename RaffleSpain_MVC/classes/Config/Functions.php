@@ -23,10 +23,10 @@ class Functions
     }
 
     public static function generatecardRaffle($rifas)
-    {
+    {        
         $result = '';
         if ($rifas !== null) {
-            if (count($rifas) > 0) {
+            if (count((array)$rifas) > 0) {
                 foreach ($rifas as $rifa) {
                     if ($rifa->type == 0) {
                         $result .= '

@@ -126,34 +126,38 @@ class RaffleModel implements Crudable
     {
         $sql = 'SELECT * FROM raffle_has_client WHERE client_id = ?';
         $params = [$idClient];
-        $result = $this->database->executarSQL($sql, $params);
+        $query = $this->database->executarSQL($sql, $params);
         
-        if (empty($result)) {
+        if (empty($query)) {
             return null;
         }
+
+        $objRaffle = new Raffle();
+        $objRaffle->__set("id", $query[0]['raffle_id']);
+        $result = $this->getById($objRaffle);
         
-        return $this->createRaffleFromData($result[0]);
+        return $result;
     }
 
     public function getById($obj)
-    {
+    {        
         $sql = 'SELECT * FROM raffle WHERE id=? LIMIT 1';
         $params = [
             $obj->id
         ];
         $result = $this->database->executarSQL($sql, $params);
-
+        
         if (empty($result)) {
             return null;
         }
 
         $mProduct = new ProductModel();
 
-        $Product_id = new Product($result[0]['product_id']);
-        $consulta = $mProduct->getById($Product_id);
-
+        $product_id = new Product($result[0]['product_id']);
+        $consulta = $mProduct->getById($product_id);
+        
         $result[0]['product'] = $consulta;
-
+        
         return $this->createRaffleFromData($result[0]);
     }
 
@@ -164,12 +168,13 @@ class RaffleModel implements Crudable
             $obj->type
         ];
         $result = $this->database->executarSQL($sql, $params);
-
+        
         if (empty($result)) {
             return null;
         }
-
-        return $this->createRaffleFromData($result[0]);
+        
+        
+        return $this->createRaffleFromData($result[0]); 
     }
 
     public function deleteDuplicate($results)
@@ -215,6 +220,13 @@ class RaffleModel implements Crudable
 
     private function createRaffleFromData($data)
     {
-        return new Raffle($data['id'], $data['product_id'], date("Y-m-d H:i", strtotime($data['date_start'])), date("Y-m-d H:i", strtotime($data['date_end'])), $data['product'], $data['winner'], $data['type']);
+        return new Raffle(
+            $data['id'], 
+            $data['product_id'], 
+            date("Y-m-d H:i", strtotime($data['date_start'])), 
+            date("Y-m-d H:i", strtotime($data['date_end'])), 
+            $data['product'], 
+            $data['winner'], 
+            $data['type']);
     }
 }
