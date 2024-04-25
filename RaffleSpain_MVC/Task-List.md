@@ -1,8 +1,6 @@
 
 # Task List
 
-- Solucionar problema de tallas en el carrito
-- Miembros
 - PayPal
 - Admin Page (campos)
 - Configuracion de usuario, tema direccion y añadir cosas
@@ -11,7 +9,8 @@
 - Implementar idioma
 - Documentacion proyecto (comentarios)
 - Corregir estilos
-
+- Comentar codigo
 
 Extras:
  - Añadir talla preferida al perfil
+ - Pagos los miembros por cada mes

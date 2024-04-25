@@ -25,18 +25,30 @@ class Functions
     public static function generatecardRaffle($rifas)
     {        
         $result = '';
+        
         if ($rifas !== null) {
             if (count((array)$rifas) > 0) {
                 foreach ($rifas as $rifa) {
-                    if ($rifa->type == 0) {
+                    if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
                         $result .= '
-                        <div class="zapatilla">
-                            <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
-                                <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
-                                <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
-                                <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
-                            </a>
-                        </div>';
+                            <div class="zapatilla">
+                                <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
+                                    <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
+                                    <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
+                                    <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
+                                </a>
+                            </div>';
+                    } else {
+                        if ($rifa->type == 0) {
+                            $result .= '
+                                <div class="zapatilla">
+                                    <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">
+                                        <img src="public/img/vambas/' . $rifa->product->img . '" alt="' . self::replaceHyphenForSpace($rifa->product_id) . '">
+                                        <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</p>
+                                        <p class="date">' . "Participa hasta el " . $rifa->date_end . '</p>
+                                    </a>
+                                </div>';
+                        }
                     }
                 }
             }

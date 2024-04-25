@@ -47,7 +47,7 @@ class RaffleController extends Controller {
             if ($this->mRaffle->userIsInRaffle($obj)) {
                 $isIn = true;
             }
-
+            
             if ($this->raffle->__get("type") == 1) {
                 if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
                     RaffleView::show($this->raffle, $isIn);

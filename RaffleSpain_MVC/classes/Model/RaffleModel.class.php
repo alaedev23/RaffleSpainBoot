@@ -131,13 +131,17 @@ class RaffleModel implements Crudable
         if (empty($query)) {
             return null;
         }
-
-        $objRaffle = new Raffle();
-        $objRaffle->__set("id", $query[0]['raffle_id']);
-        $result = $this->getById($objRaffle);
+        
+        $result = [];
+        foreach ($query as $element) {
+            $objRaffle = new Raffle();
+            $objRaffle->__set("id", $element['raffle_id']);
+            $result[] = $this->getById($objRaffle);
+        }
         
         return $result;
     }
+    
 
     public function getById($obj)
     {        
