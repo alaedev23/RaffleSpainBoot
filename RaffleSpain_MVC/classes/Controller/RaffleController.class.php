@@ -28,7 +28,7 @@ class RaffleController extends Controller {
         }
     }
     
-    public function showRaffleWithId($id) {
+    public function OLD($id) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
@@ -67,6 +67,41 @@ class RaffleController extends Controller {
 //         } else {
 //             header("Location: index.html");
 //         }
+    }
+
+    public function showRaffleWithId($id) {
+
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+
+        $this->raffle->id = $id[0];
+        
+        $isIn = false;
+        if(isset($_SESSION['usuari'])){
+            $obj = new stdClass();
+            $obj->id = $this->raffle->id;
+            $obj->client_id = $_SESSION['usuari']->id;
+
+            if ($this->mRaffle->userIsInRaffle($obj)) {
+                $isIn = true;
+            }
+
+            if ($this->raffle->__get("type") == 1) {
+                if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
+                    RaffleView::show($this->raffle, $isIn);
+                } else {
+                    $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
+                }
+            }
+
+        }
+
+        $this->raffle = $this->mRaffle->getById($this->raffle);
+        
+        RaffleView::show($this->raffle, $isIn);
     }
     
     public function getRaffleClient() {

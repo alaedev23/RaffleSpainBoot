@@ -15,7 +15,7 @@
         <h1><?= $rifa->product->price . ' €' ?></h1>
         <h3><?="Participa hasta el " . $rifa->date_end?></h3>
         <?php
-        if (isset($_SESSION['usuari'])) { //  && $isInRaffle
+        if (isset($_SESSION['usuari']) && $isInRaffle) {
                 echo "<a href='?Raffle/toggleUser/{$rifa->id}/{$_SESSION['usuari']->id}/' class='btn'>Dejar de participar</a>";
             } else if (isset($_SESSION['usuari'])) {
                 echo "<a href='?Raffle/toggleUser/{$rifa->id}/{$_SESSION['usuari']->id}/' class='btn'>Participar en la rifa</a>";
