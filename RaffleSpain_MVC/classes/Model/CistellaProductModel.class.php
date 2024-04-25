@@ -16,6 +16,7 @@ class CistellaProductModel {
             $carretoObj->product = $product;
             $carretoObj->client_id = $obj->client_id;
             $carretoObj->quantity = $fila["quantity"];
+            $carretoObj->size = $fila["talla"];
             $carretoArray[] = $carretoObj;
         }
 
@@ -43,18 +44,18 @@ class CistellaProductModel {
     public function create($obj) {
         $database = new DataBase('insert');
 
-        $params = [$obj->client_id, $obj->product->id];
+        $params = [$obj->client_id, $obj->product->id, $obj->size];
 
-        $resultado = $database->executarSQL("INSERT INTO carreto (client_id, product_id) VALUES (?, ?)", $params);
+        $resultado = $database->executarSQL("INSERT INTO carreto (client_id, product_id, talla) VALUES (?, ?, ?)", $params);
         return $resultado;
     }
 
     public function update($obj) {
         $database = new DataBase('update');
 
-        $params = [$obj->quantity, $obj->client_id, $obj->product->id];
+        $params = [$obj->quantity, $obj->client_id, $obj->product->id, $obj->size];
 
-        $resultado = $database->executarSQL("UPDATE carreto SET quantity = ? WHERE client_id = ? AND product_id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE carreto SET quantity = ? WHERE client_id = ? AND product_id = ? AND talla = ?", $params);
 
         return $resultado;
     }

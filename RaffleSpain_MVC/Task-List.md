@@ -11,3 +11,7 @@
 - Implementar idioma
 - Documentacion proyecto (comentarios)
 - Corregir estilos
+
+
+Extras:
+ - Añadir talla preferida al perfil

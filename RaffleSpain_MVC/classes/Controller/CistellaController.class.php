@@ -37,7 +37,7 @@ class CistellaController extends Controller
                 if (!is_numeric($sizeSelect) || $sizeSelect <= 0) {
                     $error = "Debes de seleccionar una talla.";
                 }
-                
+
                 $vProduct = new ProducteView();
                 $prd = new Product($id[0]);
                 $productModel = new ProductModel();
@@ -59,12 +59,14 @@ class CistellaController extends Controller
                         $cistellaListdbProduct = new CistellaProduct();
                         $cistellaListdbProduct->client_id = $_SESSION['usuari']->id;
                         $cistellaListdbProduct->product = $cistellaList->product;
+                        $cistellaListdbProduct->size = $cistellaList->size;
                         $cistellaModel->create($cistellaListdbProduct);
                     } else {
                         $cistellaListdbProduct = new CistellaProduct();
                         $cistellaListdbProduct->client_id = $_SESSION['usuari']->id;
                         $cistellaListdbProduct->product = $newProduct;
                         $cistellaListdbProduct->quantity = $dbProductCarreto->quantity + 1;
+                        $cistellaListdbProduct->size = $cistellaList->size;
                         $cistellaModel->update($cistellaListdbProduct);
                     }
                 } else {
