@@ -38,14 +38,23 @@ class ClientModel implements Crudable {
     
     public function update($obj) {
         $database = new DataBase('update');
+        
+//         var_dump($_SESSION['usuari']);
+//         die;
+        
+        if ($obj->__get("email") !== $_SESSION['usuari']->email) {
+            $database->executarSQL("UPDATE client SET email = ? WHERE id = ?", [$obj->__get("email"), $obj->__get("id")]);
+        }
+        
+        if ($obj->__get("phone") !== $_SESSION['usuari']->phone) {
+            $database->executarSQL("UPDATE client SET phone = ? WHERE id = ?", [$obj->__get("phone"), $obj->__get("id")]);
+        }
               
         $params = [
             $obj->__get("name"),
-            $obj->__get("email"),
             $obj->__get("password"),
             $obj->__get("surnames"),
             $obj->__get("born"),
-            $obj->__get("phone"),
             $obj->__get("poblation"),
             $obj->__get("address"),
             $obj->__get("sex"),
@@ -53,7 +62,7 @@ class ClientModel implements Crudable {
             $obj->__get("id")
         ];
         
-        $resultado = $database->executarSQL("UPDATE client SET name = ?, email = ?, password = ?, surnames = ?, born = ?, phone = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
+        $resultado = $database->executarSQL("UPDATE client SET name = ?, password = ?, surnames = ?, born = ?, poblation = ?, address = ?, sex = ?, type = ? WHERE id = ?", $params);
         
         return $resultado;
     }

@@ -216,19 +216,11 @@ class ClientController extends Controller {
                 
                 if (!is_string($userOld)) {  
                     
-                    $updateClient = new Client(
-                        $id,
-                        $name,
-                        $userOld->__get("password"),
-                        $apellidos,
-                        $nacimiento,
-                        $email,
-                        $telefono,
-                        $sexo,
-                        $userOld->__get("poblation"),
-                        $userOld->__get("address"),
-                        $userOld->__get("type"),
-                    );
+                    if ($email !== $_SESSION['usuari']->email) {
+                        $updateClient = new Client($id, $name, $userOld->__get("password"), $apellidos, $nacimiento, $email, $telefono, $sexo, $userOld->__get("poblation"), $userOld->__get("address"), $userOld->__get("type"));
+                    } else {
+                        $updateClient = new Client($id, $name, $userOld->__get("password"), $apellidos, $nacimiento, $email, $telefono, $sexo, $userOld->__get("poblation"), $userOld->__get("address"), $userOld->__get("type"));
+                    }
                     
                     $consulta = $mClient->update($updateClient);
                     
