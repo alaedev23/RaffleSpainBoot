@@ -158,12 +158,16 @@ class Functions
         return $tallasHTML;
     }
 
-    public static function generateFullTallas($tallas)
+    public static function generateFullTallas($tallas, $actualTalla = null)
     {
         $tallasHTML = '<section>';
         $tallasHTML .= '<select name="talla" id="talla">';
         foreach ($tallas as $talla) {
-            $tallasHTML .= '<option value="' . $talla . '">EU ' . $talla . '</option>';
+            if ($actualTalla == $talla) {
+                $tallasHTML .= '<option value="' . $talla . '" selected>EU ' . $talla . '</option>';
+            } else {
+                $tallasHTML .= '<option value="' . $talla . '">EU ' . $talla . '</option>';
+            }
         }
         $tallasHTML .= '</select>';
         $tallasHTML .= '</section>';

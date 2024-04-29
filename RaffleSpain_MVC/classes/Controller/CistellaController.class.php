@@ -130,4 +130,28 @@ class CistellaController extends Controller
         header('Location: ?Cistella/show');
         exit();
     }
+
+    public static function updateCantidadTalla($params)
+    {
+        $productId = $params[0];
+        $newQuantity = $params[1];
+        $newSize = $params[2];
+
+        if (isset($_SESSION['usuari'])) {
+
+            $cistellaListModel = new CistellaProductModel();
+            $product = new Product($productId);
+            $cistellaList = new CistellaProduct();
+            $cistellaList->client_id = $_SESSION['usuari']->id;
+            $cistellaList->product = $product;
+            $cistellaList->quantity = $newQuantity;
+            $cistellaList->size = $newSize;
+
+            $cistellaListModel->update($cistellaList);
+        }
+
+        header('Location: ?Cistella/show');
+        exit();
+    }
+
 }

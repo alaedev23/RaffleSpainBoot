@@ -28,17 +28,17 @@ class CistellaView extends View {
         $mProduct = new ProductModel();
         $sizes = $mProduct->getTallas($carretoProduct->product);
         
-        $htmlSizes = Functions::generateFullTallas($sizes);
+        $htmlSizes = Functions::generateFullTallas($sizes, $carretoProduct->size);
         
         $html = '<li class="product">';
         $html .= '<img src="public/img/vambas/' . $carretoProduct->product->img . '" alt="' . $carretoProduct->product->name . '">';
         $html .= '<div class="product-info">';
         $html .= '<h3>' . Functions::replaceHyphenForSpace($carretoProduct->product->brand) . " " . Functions::replaceHyphenForSpace($carretoProduct->product->name) . '</h3>';
         // $html .= '<p>' . $carretoProduct->product->description . '</p>';
-        $html .= '<div class="tallas"><p>' . $carretoProduct->product->size . '</p>' . $htmlSizes . ' </div>';
+        $html .= '<div class="tallas"><p>' . $carretoProduct->size . '</p>' . $htmlSizes . ' </div>';
         $html .= '<p class="precio">' . $carretoProduct->product->price . ' €</p>';
-        $html .= '<input type="number" id="cantidad-' . $carretoProduct->product->id . '" value="' . $carretoProduct->quantity . '">';
-        $html .= '<div class="btnContainer"><a href="#" onclick="guardarCantidad(' . $carretoProduct->product->id . ')" class="btn">Guardar Cantidad</a>';
+        $html .= '<input type="number" min="0" id="cantidad-' . $carretoProduct->product->id . '" value="' . $carretoProduct->quantity . '">';
+        $html .= '<div class="btnContainer"><a href="#" onclick="guardarCantidadYtalla(' . $carretoProduct->product->id . ')" class="btn">Guardar</a>';
         $html .= '<a href="?Cistella/removeProductById/' . $carretoProduct->product->id . '" class="btn">Quitar Cesta</a></div>';
         $html .= '</div></li>';
         
