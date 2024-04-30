@@ -10,9 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema rsdb
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema rsdb
@@ -31,13 +28,18 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   `born` DATE NULL DEFAULT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` INT NOT NULL,
+  `floor` VARCHAR(45) NULL,
+  `door` VARCHAR(45) NULL,
+  `postal_code` VARCHAR(5) NULL,
+  `poblation` varchar(45) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `type` INT NOT NULL DEFAULT 0,
+  `sex` CHAR(1) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 10
-DEFAULT CHARACTER SET = utf8mb3;
+  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb3;
 
 -- -----------------------------------------------------
 -- Table `rsdb`.`deliver`
@@ -65,7 +67,12 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `brand` VARCHAR(45) NOT NULL,
+  `modelCode` INT NOT NULL,
   `price` FLOAT NULL DEFAULT NULL,
+  `size` INT NOT NULL,
+  `color` VARCHAR(45) NOT NULL,
+  `sex` CHAR(1) NOT NULL,
+  `img` VARCHAR(255) NULL DEFAULT NULL,
   `talla` INT NOT NULL,
   `color` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -80,7 +87,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `rsdb`.`deliver_has_product` (
   `deliver_id` INT NOT NULL,
   `product_id` INT NOT NULL,
-  `quantitat` INT NOT NULL,
+  `quantity` INT NOT NULL,
   PRIMARY KEY (`deliver_id`, `product_id`),
   INDEX `fk_pedido_has_product_product1_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_pedido_has_product_pedido1_idx` (`deliver_id` ASC) VISIBLE,
@@ -141,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`carreto` (
   `client_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `quantity` INT NOT NULL DEFAULT 1,
+  `talla` INT NOT NULL,
   PRIMARY KEY (`client_id`, `product_id`),
   INDEX `fk_client_has_product_product1_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_client_has_product_client1_idx` (`client_id` ASC) VISIBLE,
@@ -199,7 +207,11 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`comment` (
     REFERENCES `rsdb`.`client` (`id`),
   CONSTRAINT `fk_comments_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `rsdb`.`product` (`id`))
+    REFERENCES `rsdb`.`product` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

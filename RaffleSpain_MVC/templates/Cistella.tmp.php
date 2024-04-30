@@ -2,18 +2,21 @@
 <?= (isset($template)) ? $template : '' ?>
 
 <script>
+
 function guardarCantidadYtalla(productId) {
-    var cantidadInput = document.getElementById('cantidad-' + productId);
-    var tallaInput = document.getElementById('talla');
-    var nuevaCantidad = cantidadInput.value;
-    var nuevaTalla = tallaInput.value;
-    
-    if (nuevaCantidad > 0) {
-        window.location.href = "?Cistella/updateCantidadTalla/" + productId + "/" + nuevaCantidad + "/" + nuevaTalla;
-    } else {
+    const cantidadInput = document.getElementById('cantidad-' + productId);
+    const tallaInput = document.getElementById('talla');
+    const nuevaCantidad = cantidadInput.value;
+    const nuevaTalla = tallaInput.value;
+
+    console.log(nuevaCantidad);
+    console.log(nuevaTalla);
+
+    if (nuevaCantidad >= 0) {
         window.location.href = "?Cistella/removeProductById/" + productId;
+    } else {
+        window.location.href = "?Cistella/updateCantidadTalla/" + productId + "/" + nuevaCantidad + "/" + nuevaTalla;
     }
 }
-
 
 </script>

@@ -11,12 +11,11 @@ ALTER TABLE `rsdb`.`product` AUTO_INCREMENT = 1;
 ALTER TABLE `rsdb`.`raffle` AUTO_INCREMENT = 1;
 
 -- Inserts para la tabla `rsdb`.`client`
-INSERT INTO `rsdb`.`client` (`name`, `password`, `surnames`, `born`, `email`, `phone`, `poblation`, `address`, `sex`, `type`)
-VALUES 
-('John', 'Marc', 'Doe', '1990-01-01', 'polanmarc19@gmail.com', 123456789, 'City1', 'Address1', 'H', 1),
-('Alice', 'alicepass', 'Smith', '1985-03-15', 'alice.smith@example.com', 987654321, 'City2', 'Address2', 'O', 0),
-('Jane', 'janepass', 'Doe', '1992-05-20', 'jane.doe@example.com', 111223344, 'City3', 'Address3', 'D', 0),
-('Bob', 'bob123', 'Johnson', '1988-09-10', 'bob.johnson@example.com', 554433221, 'City4', 'Address4', 'H', 0);
+INSERT INTO `rsdb`.`client` (`id`, `name`, `password`, `surnames`, `born`, `email`, `phone`, `floor`, `door`, `postal_code`, `poblation`, `address`, `sex`, `type`)
+VALUES
+('1', 'Marc', 'Marc1234_', 'Polan', '2024-04-04', 'polanmarc19@gmail.com', '932132140', '1', '2', '08304', 'Mataro', 'Calle de los Rinocerontes', 'H', '2'),
+('5', 'Alae', 'alae1234', 'Polan', '2003-07-22', 'alae@gmail.com', '612532121', NULL, NULL, '08304', 'Mataro', 'Calle d elos fLAMENCOS, 21', 'H', '1'),
+('75', 'Alae', 'Alae_1234', 'Harrak', '2024-04-04', 'thos.harrak.alae@gmail.com', '932132132', NULL, NULL, '08304', 'Mataro', 'Calle d elos fLAMENCOS, 21', 'H', '1');
 
 -- Inserts para la tabla `rsdb`.`deliver`
 INSERT INTO `rsdb`.`deliver` (`client_id`, `date`, `date_deliver`)

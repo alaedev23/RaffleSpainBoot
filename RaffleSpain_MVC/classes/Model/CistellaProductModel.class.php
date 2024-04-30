@@ -60,6 +60,16 @@ class CistellaProductModel {
         return $resultado;
     }
 
+    public function updateQuantityAndSize($obj) {
+        $database = new DataBase('update');
+
+        $params = [$obj->quantity, $obj->size, $obj->client_id, $obj->product->id, $obj->size];
+
+        $resultado = $database->executarSQL("UPDATE carreto SET quantity = ?, size = ? WHERE client_id = ? AND product_id = ? AND talla = ?", $params);
+
+        return $resultado;
+    }
+    
     public function deleteByClientId($obj) {
         $database = new DataBase('delete');
 

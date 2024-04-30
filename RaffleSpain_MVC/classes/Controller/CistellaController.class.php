@@ -98,6 +98,7 @@ class CistellaController extends Controller
 
     public static function removeProductById($productId)
     {
+        
         if (isset($_SESSION['usuari'])) {
 
             $cistellaListModel = new CistellaProductModel();
@@ -136,6 +137,9 @@ class CistellaController extends Controller
         $productId = $params[0];
         $newQuantity = $params[1];
         $newSize = $params[2];
+
+        var_dump($params);
+        die;
 
         if (isset($_SESSION['usuari'])) {
 
