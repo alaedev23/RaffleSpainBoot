@@ -101,23 +101,35 @@ window.onclick = function (event) {
 
 const asideItems = document.querySelectorAll("#asideContent ul li");
 
+// Función para mostrar el contenido correspondiente
+function showContent(id) {
+    const contentItems = document.querySelectorAll("#contentDatesClient > div, #contentCambiarContraseña, #contentMetodosPago");
+    contentItems.forEach(function(contentItem) {
+        contentItem.classList.remove("show");
+        contentItem.classList.add("hide");
+    });
+    
+    const contentToShow = document.getElementById("content" + id);
+    contentToShow.classList.add("show");
+    contentToShow.classList.remove("hide");
+}
+
 asideItems.forEach(function(item) {
     item.addEventListener("click", function() {
         const id = this.id;
-        
-        console.log(id)
-
-        const contentItems = document.querySelectorAll("#contentDatesClient > div, #contentCambiarContraseña, #contentMetodosPago");
-        contentItems.forEach(function(contentItem) {
-            contentItem.classList.remove("show");
-            contentItem.classList.add("hide");
-        });
-        
-        const contentToShow = document.getElementById("content" + id);
-        contentToShow.classList.add("show");
-        contentToShow.classList.remove("hide");
+        localStorage.setItem("currentPage", id); // Guardar la página actual en localStorage
+        showContent(id);
     });
 });
+
+// Verificar si hay una página almacenada en el localStorage y mostrarla
+document.addEventListener("DOMContentLoaded", function() {
+    const currentPage = localStorage.getItem("currentPage");
+    if (currentPage) {
+        showContent(currentPage);
+    }
+});
+
 
 let openModalBtn = document.getElementById("openModalBtn");
 let modal = document.getElementById("myModal");

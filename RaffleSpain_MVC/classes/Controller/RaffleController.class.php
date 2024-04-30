@@ -48,8 +48,16 @@ class RaffleController extends Controller {
                 $isIn = true;
             }
             
+            $this->raffle = $this->mRaffle->getById($this->raffle);
+            
             if ($this->raffle->__get("type") == 1) {
                 if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
+                    RaffleView::show($this->raffle, $isIn);
+                } else {
+                    $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
+                }
+            } else {
+                if ($_SESSION['usuari']->type == 1 || $_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
                     RaffleView::show($this->raffle, $isIn);
                 } else {
                     $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
@@ -58,9 +66,8 @@ class RaffleController extends Controller {
 
         }
 
-        $this->raffle = $this->mRaffle->getById($this->raffle);
-        
-        RaffleView::show($this->raffle, $isIn);
+//         $this->raffle = $this->mRaffle->getById($this->raffle);
+//         RaffleView::show($this->raffle, $isIn);
     }
     
     public function getRaffleClient() {

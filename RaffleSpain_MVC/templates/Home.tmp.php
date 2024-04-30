@@ -25,12 +25,12 @@
     </div>
 </section>
 <section class="containerProductos" style="padding-top: 500px;">
-    <h1 class="animated-section-left-right animation">Tendencias de Zapatillas</h1>
+    <h1 class="animated-section-left-right animation">Zapatillas</h1>
 
 <?= $productsGrid ?>
 </section>
 <section id="rifes" class=" containerProductos animated-section-right-left animation">
-    <h1>Rifes</h1>
+    <h1>Rifas</h1>
     <?= $rifasGrid ?>
     </div>
 </section>

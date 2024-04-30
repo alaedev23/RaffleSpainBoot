@@ -13,8 +13,11 @@ class Client {
     private $poblation;
     private $address;
     private $type;
+    private $floor;
+    private $door;
+    private $postal_code;
     
-    public function __construct($id, $name = null, $password = null, $surnames = null, $born = null, $email = null, $phone = null, $sex = null, $poblation = null, $address = null, $type = 0) {
+    public function __construct($id, $name = null, $password = null, $surnames = null, $born = null, $email = null, $phone = null, $sex = null, $poblation = null, $address = null, $type = 0, $floor = 1, $door = 1, $postal_code = 00000) {
         $this->id = $id;
         $this->name = $name;
         $this->password = $password;
@@ -26,6 +29,9 @@ class Client {
         $this->poblation = $poblation;
         $this->address = $address;
         $this->type = $type;
+        $this->floor = $floor;
+        $this->door = $door;
+        $this->postal_code = $postal_code;
     }
     
     public function __set($property, $value) {
@@ -57,6 +63,9 @@ class Client {
             'poblation' => $this->poblation,
             'address' => $this->address,
             'type' => $this->type,
+            'floor' => $this->floor,
+            'door' => $this->door,
+            'postal_code' => $this->postal_code
         ];
     }
     

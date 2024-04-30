@@ -14,11 +14,10 @@ class ClientDatesView extends View
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
         $this->user = isset($_SESSION['usuari']) ? $_SESSION['usuari'] : null;
-        
-        ($errors !== null) ? var_dump($errors) : '';
 
-        $htmlDetallesCuentas = $this->generateTemplate();
-        $htmlChangePassword = $this->generateEditPassword();
+        $htmlDetalleCuenta = $this->generateTemplate($errors);
+        $htmlChangePassword = $this->generateEditPassword($errors);
+        $htmlChangeDirection = $this->generateDirection($errors);
 
         echo "<!DOCTYPE html><html lang=\"en\">";
         include "templates/Head.tmp.php";
@@ -30,13 +29,13 @@ class ClientDatesView extends View
         include "templates/Footer.tmp.php";
         echo "</body></html>";
     }
-    
+
     public function showMyRaffle($lang, $raffles, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
-        
-        $templateMyRaffle = Functions::generatecardRaffle($raffles); 
-        
+
+        $templateMyRaffle = Functions::generatecardRaffle($raffles);
+
         echo "<!DOCTYPE html><html lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
@@ -48,7 +47,12 @@ class ClientDatesView extends View
         echo "</body></html>";
     }
 
-    public function generateTemplate() {
+    public function generateTemplate($errors = null)
+    {
+        if ($errors['message'] !== null && $errors['type'] === 1) {
+            $errorSection = $errors;
+        }
+
         $template = '<div id="containerDetallesCuenta">
         <form id="clientDetailsForm" action="?client/updateDatesClient/' . $this->user->id . '" method="post">';
         $template .= '<div class="mitad">
@@ -83,7 +87,11 @@ class ClientDatesView extends View
                 <option value="O" ' . (($gender === "Otr@") ? "selected" : "") . '>Otr@</option>
             </select>
         </div>';
-        
+
+        if (isset($errorSection)) {
+            $template .= "<div class=\"errorMessage\"><p>" . $errorSection['message'] . "</hp></div>";
+        }
+
         $template .= '<button type="submit" name="updateDates" class="btn">Guardar Cambios</button></form></div>';
 
         $template .= '</div>';
@@ -91,10 +99,54 @@ class ClientDatesView extends View
         return $template;
     }
 
-    public function generateEditPassword() {
-        $passwordEncryp = str_repeat('*', strlen($this->user->password) + 2); // Añado dos elementos mas por seguridad
+    public function generateDirection($errors = null)
+    {
+        if ($errors['message'] !== null && $errors['type'] === 2) {
+            $errorSection = $errors;
+        }
         
-        return '<div><div class="itemDetalleCuenta">
+        $template = '<div id="containerDetallesCuenta">
+        <form id="clientDetailsForm" action="?client/updateDirection/' . $this->user->id . '" method="post">';
+        $template .= '<div class="mitad">
+        <div class="itemDetalleCuenta">
+            <h4>Poblacion</h4>
+            <input class="inputClientDates" name="poblation" type="text" value="' . $this->user->poblation . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Direccion</h4>
+            <input class="inputClientDates" name="address" type="text" value="' . $this->user->address . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Planta</h4>
+            <input class="inputClientDates" name="floor" type="text" value="' . $this->user->floor . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Puerta</h4>
+            <input class="inputClientDates" name="door" type="text" value="' . $this->user->door . '">
+        </div>
+        <div class="itemDetalleCuenta">
+            <h4>Codigo Postal</h4>
+            <input class="inputClientDates" name="postal_code" type="text" value="' . $this->user->postal_code . '">
+        </div>';
+
+        if (isset($errorSection)) {
+            $template .= "<div class=\"errorMessage\"><p>" . $errorSection['message'] . "</hp></div>";
+        }
+
+        $template .= '<button type="submit" name="updateDirection" class="btn">Guardar Cambios</button></form></div></div>';
+
+        return $template;
+    }
+
+    public function generateEditPassword($errors = null)
+    {
+        if ($errors['message'] !== null && $errors['type'] === 3) {
+            $errorSection = $errors;
+        }
+        
+        $passwordEncryp = str_repeat('*', strlen($this->user->password) + 2); // Añado dos elementos mas por seguridad
+
+        $html = '<div><div class="itemDetalleCuenta">
             <h4>Contraseña</h4>
             <div>
                 <p>' . $passwordEncryp . '</p>
@@ -119,13 +171,20 @@ class ClientDatesView extends View
                         </div>
                         <div>
                             <input type="password" placeholder="Confirmar Contraseña" id="confirmPassword" name="confirmPassword" required>
-                        </div>
-                        <div>
+                        </div>';
+        
+        if (isset($errorSection)) {
+            $html .= "<div class=\"errorMessage\"><p>" . $errorSection['message'] . "</hp></div>";
+        }
+        
+        $html .= '<div>
                             <button class="btn" name="changePassword" type="submit">Cambiar Contraseña</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div></div>';
+
+        return $html;
     }
 }

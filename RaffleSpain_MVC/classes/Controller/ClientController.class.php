@@ -15,6 +15,7 @@ class ClientController extends Controller {
     
     private $vClient;
     private $vClientDates;
+    
     public function __construct() {
         $this->login = new Client("", "", "", "", "", "", "", "", "", "");
         $this->register = new Client("", "", "", "", "", "", "", "", "", "");
@@ -69,19 +70,21 @@ class ClientController extends Controller {
             $confirmPassword = $this->sanitize($_POST['confirmPassword']);
             
             $id = $idSent[0];
-            $auxObj = new Client($id, null, null, null, null, null, null, null, null, null);
+            $auxObj = new Client($id);
             $result = $mClient->getById($auxObj);
             
             if ($result->password !== $currentPassword) {
-                $errors = "La contraseña actual es incorrecta.";
+                $errors = ["message" => "La contraseña actual es incorrecta."];
             }
             
-            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $newPassword)) {
-                $errors = "La contraseña no teiene el formato correcto.";
+            if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$/", $newPassword)) {
+                $errors = ["message" => "La contraseña no teiene el formato correcto."];
+            } else if ($result->password === $newPassword) {
+                $errors = ["message" => "No puedes cambiar la contraseña a la que tenias."];
             }
             
             if ($newPassword !== $confirmPassword) {
-                $errors = "La contrasenya nueva no coincide con la contraseña de confirmacion.";
+                $errors = ["message" => "La contrasenya nueva no coincide con la contraseña de confirmacion."];
             }
             
             if (!isset($errors)) {
@@ -89,13 +92,14 @@ class ClientController extends Controller {
                 $result->__set("password", $confirmPassword);
                 $consulta = $mClient->updatePassword($result);
                 
-                if (count($consulta) === 0) {
+                if ($consulta === "La consulta se ha realizado con existo") {
                     session_destroy();
                     header("Location: index.php?client/formLogin");
                 } else {
                     $this->vClientDates->show($lang, $consulta);
                 }
             } else {
+                $errors["type"] = 3;
                 $this->vClientDates->show($lang, $errors);
             }
         }
@@ -179,34 +183,34 @@ class ClientController extends Controller {
             $id = intval($idPass);
             
             if (!is_numeric($id)) {
-                $errors = "Error al enviar el id.";
+                $errors = ["message" => "Error al enviar el id.", "type" => 1];
             }
             
             if (strlen($name) === 0) {
-                $errors = "El nombre es obligatorio.";
+                $errors = ["message" => "El nombre es obligatorio.", "type" => 1];
             }
             
             if (strlen($apellidos) == 0) {
-                $errors = "Los apellidos son obligatorio.";
+                $errors = ["message" => "Los apellidos son obligatorios.", "type" => 1];
             }
             
             if (strlen($email) == 0) {
-                $errors = "El email es obligatorio.";
+                $errors = ["message" => "El email es obligatorio.", "type" => 1];
             } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors = "El formato del email es invalido.";
+                $errors = ["message" => "El formato del email es inválido.", "type" => 1];
             }
             
             if (strlen($nacimiento) > 0) {
                 $nacimientoAux = DateTime::createFromFormat('Y-m-d', $nacimiento);
                 if (!$nacimientoAux || $nacimientoAux->format('Y-m-d') !== $nacimiento) {
-                    $errors = "El formato de la fecha de nacimiento está mal.";
+                    $errors = ["message" => "El formato de la fecha de nacimiento está mal.", "type" => 1];
                 } else {
                     $nacimiento = $nacimientoAux->format('Y-m-d');
                 }
             }
             
             if ($sexo !== "H" && $sexo !== "M" && $sexo !== "O") {
-                $errors = "El género debe ser hombre, mujer u otro.";
+                $errors = ["message" => "El género debe ser hombre, mujer u otro.", "type" => 1];
             }
             
             if (!isset($errors)) {
@@ -214,21 +218,17 @@ class ClientController extends Controller {
                 
                 $userOld = $mClient->getById(new Client(intval($id)));
                 
-                if (!is_string($userOld)) {  
+                if (!is_string($userOld)) {
                     
-                    if ($email !== $_SESSION['usuari']->email) {
-                        $updateClient = new Client($id, $name, $userOld->__get("password"), $apellidos, $nacimiento, $email, $telefono, $sexo, $userOld->__get("poblation"), $userOld->__get("address"), $userOld->__get("type"));
-                    } else {
-                        $updateClient = new Client($id, $name, $userOld->__get("password"), $apellidos, $nacimiento, $email, $telefono, $sexo, $userOld->__get("poblation"), $userOld->__get("address"), $userOld->__get("type"));
-                    }
+                    $updateClient = new Client($id, $name, $userOld->__get("password"), $apellidos, $nacimiento, $email, $telefono, $sexo, $userOld->__get("poblation"), $userOld->__get("address"), $userOld->__get("type"));
                     
                     $consulta = $mClient->update($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con existo") {
+                    if ($consulta === "La consulta se ha realizado con éxito") {
                         $_SESSION['usuari'] = $updateClient;
                         $this->vClientDates->show($lang);
                     } else {
-                        $errors = "El registro es incorrecto";
+                        $errors = ["message" => "El registro es incorrecto", "type" => 1];
                         $this->vClientDates->show($lang, $errors);
                     }
                 } else {
@@ -240,6 +240,95 @@ class ClientController extends Controller {
             }
         }
     }
+    
+    public function updateDirection($idPass) {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "ca";
+        }
+        
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["updateDirection"]))) {
+            
+            $poblation = $this->sanitize($_POST['poblation']);
+            $address = $this->sanitize($_POST['address']);
+            $floor = $this->sanitize($_POST['floor']);
+            $door = $this->sanitize($_POST['door']);
+            $postal_code = $this->sanitize($_POST['postal_code']);
+            
+            $id = intval($idPass);
+            
+            if (!is_numeric($id)) {
+                $errors = ["message" => "Error al enviar el id.", "type" => 2];
+            }
+            
+            if (strlen($poblation) > 0) {
+                if (!is_string($poblation)) {
+                    $errors = ["message" => "La población no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($address) > 0) {
+                if (!is_string($address)) {
+                    $errors = ["message" => "La dirección no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($floor) > 0) {
+                if (!is_numeric($floor)) {
+                    $errors = ["message" => "La planta no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($door) > 0) {
+                if (!is_numeric($door)) {
+                    $errors = ["message" => "La puerta no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($postal_code) > 0) {
+                if (!is_numeric($postal_code) || !preg_match('/^[0-9]{5}$/', $postal_code)) {
+                    $errors = ["message" => "El código postal no es correcto.", "type" => 2];
+                }
+            }
+            
+            if (!isset($errors)) {
+                $mClient = new ClientModel();
+                
+                $userOld = $mClient->getById(new Client($id));
+                
+                if (!is_string($userOld)) {
+                    
+                    $updateClient = new Client($id);
+                    $updateClient->__set("address", $address);
+                    $updateClient->__set("poblation", $poblation);
+                    $updateClient->__set("floor", $floor);
+                    $updateClient->__set("door", $door);
+                    $updateClient->__set("postal_code", $postal_code);
+                    
+                    $consulta = $mClient->updateDirection($updateClient);
+                    
+                    if ($consulta === "La consulta se ha realizado con éxito") {
+                        $_SESSION['usuari']->address = $address;
+                        $_SESSION['usuari']->poblation = $poblation;
+                        $_SESSION['usuari']->floor = $floor;
+                        $_SESSION['usuari']->door = $door;
+                        $_SESSION['usuari']->postal_code = $postal_code;
+                        $this->vClientDates->show($lang);
+                    } else {
+                        $errors = ["message" => "El registro es incorrecto", "type" => 2];
+                        $this->vClientDates->show($lang, $errors);
+                    }
+                } else {
+                    
+                }
+            }
+            else {
+                $this->vClientDates->show($lang, $errors);
+            }
+        }
+    }
+    
     
     public function validateRegister() {
         if (isset($_COOKIE["lang"])) {
@@ -294,10 +383,9 @@ class ClientController extends Controller {
                 $errors = "La poblacion es obligatorio.";
             }
             
-            if (strlen($direccion) < 0) {
+            if (strlen($direccion) == 0) {
                 $errors = "La direccion es obligatorio.";
             } 
-
 
             $consultaPhone = $mClient->getByPhone($telefono);
 
