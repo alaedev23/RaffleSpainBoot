@@ -4,6 +4,9 @@ ALTER TABLE `rsdb`.`client` AUTO_INCREMENT = 1;
 -- Establecer autoincremental a 1 para la tabla `rsdb`.`deliver`
 ALTER TABLE `rsdb`.`deliver` AUTO_INCREMENT = 1;
 
+-- Establecer autoincremental a 1 para la tabla `rsdb`.`deliver`
+ALTER TABLE `rsdb`.`deliver_has_product` AUTO_INCREMENT = 1;
+
 -- Establecer autoincremental a 1 para la tabla `rsdb`.`product`
 ALTER TABLE `rsdb`.`product` AUTO_INCREMENT = 1;
 
@@ -21,9 +24,9 @@ VALUES
 INSERT INTO `rsdb`.`deliver` (`client_id`, `date`, `date_deliver`)
 VALUES 
 (1, '2023-11-30', '2023-12-05'),
-(2, '2023-11-29', '2023-12-03'),
-(3, '2023-11-28', '2023-12-04'),
-(4, '2023-11-27', '2023-12-02');
+(5, '2023-11-29', '2023-12-03'),
+(5, '2023-11-28', '2023-12-04'),
+(1, '2023-11-27', '2023-12-02');
 
 -- Inserts para la tabla `rsdb`.`product`
 INSERT INTO `rsdb`.`product` (`name`, `brand`, `modelCode`,`price`, `size`, `color`, `sex`, `img`, `description`,`quantity`, `discount`)
@@ -31,9 +34,9 @@ VALUES
 ('Go-FlyEase', 'Nike', 000001, 129.99, 42, 'Black', 'M', 'Nike_Go-FlyEase_Black.png', 'Esto es un texto de prueba para las Nike Go-FlyEase', 5, 0),
 ('530', 'New-Balance', 000002, 120, 44, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 1, 10),
 ('530', 'New-Balance', 000002, 120, 42, 'White', 'H', 'New-Balance_530_White.png', 'Esto es un texto de prueba para las New-Balance - 530', 2, 0),
-('1-High-OG-Satin-Bred', 000003, 'Jordan', 189.99, 39, 'Red-White', 'M', 'Jordan_1-High-OG-Satin-Bred_Red-White.png', 'Esto es un texto de prueba para las Jordan 1-High-OG-"Satin-Bred"', 2, 0),
-('Classic-Clog-DreamWorks-Shrek', 000004, 'Crocs', 110, 42, 'Green', 'N', 'Crocs_Classic-Clog-DreamWorks-Shrek.png', 'Esto es un texto de prueba para las Crocs - Classic Clog DreamWorks Shrek', 1, 0),
-('MAG-Back-to-the-Future-2011', 000005, 'Nike', 20000, 44, 'Grey', 'H', 'Nike_MAG-Back-to-the-Future-2011.png', 'Esto es un texto de prueba para las Nike - MAG Back to the Future 2011', 1, 0),
+('1-High-OG-Satin-Bred', 'Jordan', 000003, 189.99, 39, 'Red-White', 'M', 'Jordan_1-High-OG-Satin-Bred_Red-White.png', 'Esto es un texto de prueba para las Jordan 1-High-OG-"Satin-Bred"', 2, 0),
+('Classic-Clog-DreamWorks-Shrek', 'Crocs', 000004, 110, 42, 'Green', 'N', 'Crocs_Classic-Clog-DreamWorks-Shrek.png', 'Esto es un texto de prueba para las Crocs - Classic Clog DreamWorks Shrek', 1, 0),
+('MAG-Back-to-the-Future-2011', 'Nike', 000005, 20000, 44, 'Grey', 'H', 'Nike_MAG-Back-to-the-Future-2011.png', 'Esto es un texto de prueba para las Nike - MAG Back to the Future 2011', 1, 0),
 ('Retro-4-Thunder-2023', 'Jordan', 000006, 330, 43, 'Yellow', 'H', 'Jordan_Retro-4-Thunder-2023.png', 'Esto es un texto de prueba para las Joradn - Retro Thunder 2023', 1, 10);
 
 
@@ -59,7 +62,7 @@ select * from raffle;
 INSERT INTO `rsdb`.`raffle_has_client` (`raffle_id`, `client_id`)
 VALUES 
 (1, 1),
-(2, 2),
-(3, 3);
+(2, 5),
+(3, 75);
 
 select * from raffle_has_client;

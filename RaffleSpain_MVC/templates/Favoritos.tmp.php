@@ -13,6 +13,7 @@
                         <h3><?= $carretoProduct->product->name; ?></h3>
                         <p><?= $carretoProduct->product->description; ?></p>
                         <p class="precio"><?php echo $carretoProduct->product->price; ?> €</p>
+                        <a href="?Producte/mostrarProducte/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Ver</a>
                         <a href="?Favoritos/removeProductById/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Quitar Favorito</a>
                     </div>
                 </li>

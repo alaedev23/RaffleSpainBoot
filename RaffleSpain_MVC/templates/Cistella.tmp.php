@@ -9,10 +9,7 @@ function guardarCantidadYtalla(productId) {
     const nuevaCantidad = cantidadInput.value;
     const nuevaTalla = tallaInput.value;
 
-    console.log(nuevaCantidad);
-    console.log(nuevaTalla);
-
-    if (nuevaCantidad >= 0) {
+    if (nuevaCantidad <= 0) {
         window.location.href = "?Cistella/removeProductById/" + productId;
     } else {
         window.location.href = "?Cistella/updateCantidadTalla/" + productId + "/" + nuevaCantidad + "/" + nuevaTalla;

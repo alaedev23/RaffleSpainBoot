@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
   `postal_code` VARCHAR(5) NULL,
   `poblation` varchar(45) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `type` INT NOT NULL DEFAULT 0,
   `sex` CHAR(1) NULL,
+  `type` CHAR(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
@@ -49,9 +49,8 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`deliver` (
   `client_id` INT NOT NULL,
   `date` DATE NOT NULL,
   `date_deliver` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `client_id`),
+  PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `cliente_id_UNIQUE` (`client_id` ASC) VISIBLE,
   INDEX `fk_pedido_cliente_idx` (`client_id` ASC) VISIBLE,
   CONSTRAINT `fk_pedido_cliente`
     FOREIGN KEY (`client_id`)
@@ -73,8 +72,9 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`product` (
   `color` VARCHAR(45) NOT NULL,
   `sex` CHAR(1) NOT NULL,
   `img` VARCHAR(255) NULL DEFAULT NULL,
-  `talla` INT NOT NULL,
-  `color` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(500) NULL DEFAULT NULL,
+  `quantity` INT NOT NULL DEFAULT 1,
+  `discount` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB

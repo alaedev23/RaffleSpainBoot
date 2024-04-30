@@ -138,9 +138,6 @@ class CistellaController extends Controller
         $newQuantity = $params[1];
         $newSize = $params[2];
 
-        var_dump($params);
-        die;
-
         if (isset($_SESSION['usuari'])) {
 
             $cistellaListModel = new CistellaProductModel();
@@ -151,7 +148,7 @@ class CistellaController extends Controller
             $cistellaList->quantity = $newQuantity;
             $cistellaList->size = $newSize;
 
-            $cistellaListModel->update($cistellaList);
+            $cistellaListModel->updateQuantityAndSize($cistellaList);
         }
 
         header('Location: ?Cistella/show');

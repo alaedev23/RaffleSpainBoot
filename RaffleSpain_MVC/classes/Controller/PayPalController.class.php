@@ -160,6 +160,8 @@ class PayPalController extends Controller
             $client = new Client($_SESSION['usuari']->id);
             $cistellaModel->deleteByClientId($client);
 
+            
+
             $pView->showCorrect();
         }
     }
