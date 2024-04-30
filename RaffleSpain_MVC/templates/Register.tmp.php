@@ -20,7 +20,7 @@
 			</div>
 			<div class="form-group">
 				<label for="born">Fecha:</label> <input type="date"
-					name="born" id="born"/> <!-- Hacer max y min en php -->
+					name="born" id="born" /> <!-- Hacer max y min en php -->
 			</div>
 			<div class="form-group">
 				<label for="phone">Telefono:</label> <input type="tel"
@@ -33,6 +33,18 @@
 			<div class="form-group">
 				<label for="address">Direccion:</label> <input type="text" id="address"
 					name="address" required>
+			</div>
+			<div class="form-group">
+				<label for="address">Planta:</label> <input type="text" id="floor"
+					name="floor">
+			</div>
+			<div class="form-group">
+				<label for="address">Puerta:</label> <input type="text" id="door"
+					name="door">
+			</div>
+			<div class="form-group">
+				<label for="address">Codigo Postal:</label> <input type="text" id="postal_code"
+					name="postal_code">
 			</div>
 			<div class="form-group">
 				<label for="sex">Sexo:</label>

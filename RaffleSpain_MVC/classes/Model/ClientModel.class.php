@@ -20,20 +20,26 @@ class ClientModel implements Crudable {
     
     public function create($obj) {
         
-        $database = new DataBase('insert');
-                
+        $database = new DataBase('insert');        
         $resultado = [];
         
-        if (strlen($obj->__get("born")) > 0) {
-            $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("born"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type"), $obj->__get("floor"), $obj->__get("door"), $obj->__get("postal_code")];
-            $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, born, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
-        } else {
-            $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type"), $obj->__get("floor"), $obj->__get("door"), $obj->__get("postal_code")];
-            $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
-        }
+        $params = [$obj->__get("name"), $obj->__get("password"), $obj->__get("surnames"), $obj->__get("email"), $obj->__get("phone"), $obj->__get("sex"), $obj->__get("poblation"), $obj->__get("address"), $obj->__get("type")];
+        $resultado = $database->executarSQL("INSERT INTO client (name, password, surnames, email, phone, sex, poblation, address, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", $params);
+        
+        $arrayUpdate = ["born" => $obj->__get("born"), "floor" => $obj->__get("floor"), "door" => $obj->__get("door"), "postal_code" => $obj->__get("postal_code")];
+        $databaseUpdate = new DataBase('update'); 
+        
+        $newId = $this->getByEmail($obj->__get("email"));
+        $obj->__set("id", $newId->__get("id"));
+        
+        foreach ($arrayUpdate as $selected => $value) {
+            if ($obj->__get($selected) !== null) {
+                $params = [$obj->__get($selected), $obj->__get("id")];
+                $resultado = $databaseUpdate->executarSQL("UPDATE client SET " . $selected . " = ? WHERE id = ?", $params);
+            }
+        }       
                 
         return $resultado;
-        
     }
     
     public function update($obj) {

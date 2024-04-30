@@ -17,8 +17,8 @@ class ClientController extends Controller {
     private $vClientDates;
     
     public function __construct() {
-        $this->login = new Client("", "", "", "", "", "", "", "", "", "");
-        $this->register = new Client("", "", "", "", "", "", "", "", "", "");
+        $this->login = new Client(null);
+        $this->register = new Client(null);
         $this->vClientDates = new ClientDatesView();
         $this->vClient = new ClientView();
     }
@@ -348,6 +348,9 @@ class ClientController extends Controller {
             $poblacion = $this->sanitize($_POST['poblation']);
             $direccion = $this->sanitize($_POST['address']);
             $sexo = $this->sanitize($_POST['sex']);
+            $floor = $this->sanitize($_POST['floor']);
+            $door = $this->sanitize($_POST['door']);
+            $postal_code = $this->sanitize($_POST['postal_code']);
             
             if (strlen($name) == 0) {
                 $errors = "El nombre es obligatorio.";
@@ -368,7 +371,7 @@ class ClientController extends Controller {
                 $errors = "El email ya existe.";
             }
             
-            if (strlen($contrasenya) == 0) {
+            if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$/", $contrasenya)) {
                 $errors = "La contrasenya es obligatorio.";
             }
             
@@ -397,6 +400,24 @@ class ClientController extends Controller {
                 $errors = "El telefono ya existe.";
             }
             
+            if (strlen($floor) > 0) {
+                if (!is_numeric($floor)) {
+                    $errors = ["message" => "La planta no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($door) > 0) {
+                if (!is_numeric($door)) {
+                    $errors = ["message" => "La puerta no es correcta.", "type" => 2];
+                }
+            }
+            
+            if (strlen($postal_code) > 0) {
+                if (!is_numeric($postal_code) || !preg_match('/^[0-9]{5}$/', $postal_code)) {
+                    $errors = ["message" => "El código postal no es correcto.", "type" => 2];
+                }
+            }
+            
             $this->register = new Client(
                 null,
                 $name,
@@ -407,9 +428,13 @@ class ClientController extends Controller {
                 $telefono,
                 $sexo,
                 $poblacion,
-                $direccion
+                $direccion,
+                0,
+                $floor,
+                $door,
+                $postal_code
             );
-                        
+            
             if (!isset($errors)) {
                 $mClient = new ClientModel();
                 $consulta = $mClient->create($this->register);
