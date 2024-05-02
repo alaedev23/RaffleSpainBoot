@@ -126,3 +126,26 @@
 </body>
 
 </html>
+
+
+
+<div id="contactUs">
+	<h1>Contact Us</h1>
+    <div class="form-container">
+        <form action="?contact/verifyForm" method="post">
+            <div class="question-container">
+                <label for="tituloContactUs">Titulo</label>
+                <input type="text" name="tituloContactUs" id="tituloContactUs">
+            </div>
+            <div class="question-container">
+                <label for="mensajeContactUs">Mensaje</label>
+                <textarea name="mensajeContactUs" id="mensajeContactUs" cols="30" rows="10"></textarea>
+            </div>
+            <div class="question-container">
+                <label for="emailContactUs">Email</label>
+                <textarea name="emailContactUs" id="emailContactUs" cols="30" rows="10"></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>

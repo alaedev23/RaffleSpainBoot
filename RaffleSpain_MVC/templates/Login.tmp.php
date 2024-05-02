@@ -1,5 +1,5 @@
 <section id="login">
-    <div id="form-container">
+    <div class="form-container">
         <h2>Login</h2>
         <form class="form" action="?client/validateLogin" method="post">
             <div class="form-group">

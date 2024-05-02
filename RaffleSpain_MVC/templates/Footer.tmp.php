@@ -4,6 +4,7 @@
         <ul>
             <li><a href="?ayuda/showView">AYUDA</a></li>
             <li><a href="?map/mostrar">MAPA WEB</a></li>
+            <li><a href="?contact/showContactUs">CONTACT US</a></li>
         </ul>
     </nav>
     <div>

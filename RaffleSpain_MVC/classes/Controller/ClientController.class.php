@@ -308,7 +308,7 @@ class ClientController extends Controller {
                     
                     $consulta = $mClient->updateDirection($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con éxito") {
+                    if ($consulta === "La consulta se ha realizado con existo") {
                         $_SESSION['usuari']->address = $address;
                         $_SESSION['usuari']->poblation = $poblation;
                         $_SESSION['usuari']->floor = $floor;

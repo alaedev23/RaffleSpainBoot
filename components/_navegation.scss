@@ -20,8 +20,12 @@ footer {
             display: flex;
             justify-content: center;
 
-            li:last-child {
+            li {
                 padding-left: 30px;
+            }
+
+            li:first-child {
+                padding-left: 0px;
             }
 
         }
