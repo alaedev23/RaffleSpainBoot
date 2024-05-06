@@ -6,9 +6,7 @@ class Deliver {
     private $client_id;
     private $date;
     private $date_deliver;
-
     private $product;
-
     private $quantity;
 
     public function __construct($id = null, $client_id = null, $date = null, $date_deliver = null, $product = null, $quantity = null) {

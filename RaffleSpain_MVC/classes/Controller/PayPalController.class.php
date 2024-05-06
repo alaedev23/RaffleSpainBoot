@@ -67,7 +67,8 @@ class PayPalController extends Controller
                     array(
                         'amount' => array(
                             'currency_code' => 'EUR',
-                            'value' => $totalPrice
+                            'value' => $totalPrice,
+                            'description' => $cistella[0]->product->id
                         )
                     )
                 ),
@@ -160,7 +161,7 @@ class PayPalController extends Controller
             $client = new Client($_SESSION['usuari']->id);
             $cistellaModel->deleteByClientId($client);
 
-            
+            $cistellaModel = new DeliverModel();
 
             $pView->showCorrect();
         }
