@@ -4,22 +4,36 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d
+class ComposerStaticInit300223a49e52f33f6d94b89f04165442
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'db356362850385d08a5381de2638b5fd' => __DIR__ . '/..' . '/mpdf/mpdf/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        's' => 
+        array (
+            'setasign\\Fpdi\\' => 14,
+        ),
         'S' => 
         array (
             'Symfony\\Component\\OptionsResolver\\' => 34,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'Picqer\\Barcode\\' => 15,
             'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'M' => 
+        array (
+            'Mpdf\\PsrLogAwareTrait\\' => 22,
+            'Mpdf\\PsrHttpMessageShim\\' => 24,
+            'Mpdf\\' => 5,
         ),
         'H' => 
         array (
@@ -27,16 +41,30 @@ class ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d
             'Http\\Discovery\\' => 15,
             'Http\\Client\\' => 12,
         ),
+        'D' => 
+        array (
+            'DeepCopy\\' => 9,
+            'DASPRiD\\Enum\\' => 13,
+        ),
         'B' => 
         array (
             'Buzz\\' => 5,
+            'BaconQrCode\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'setasign\\Fpdi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
         'Symfony\\Component\\OptionsResolver\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -47,9 +75,25 @@ class ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
+        'Picqer\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Mpdf\\PsrLogAwareTrait\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/psr-log-aware-trait/src',
+        ),
+        'Mpdf\\PsrHttpMessageShim\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/psr-http-message-shim/src',
+        ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
         ),
         'Http\\Promise\\' => 
         array (
@@ -63,9 +107,21 @@ class ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d
         array (
             0 => __DIR__ . '/..' . '/php-http/httplug/src',
         ),
+        'DeepCopy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
         'Buzz\\' => 
         array (
             0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 
@@ -76,9 +132,9 @@ class ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitff1d1b8530dc5f79ceca9f7b000c036d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit300223a49e52f33f6d94b89f04165442::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit300223a49e52f33f6d94b89f04165442::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit300223a49e52f33f6d94b89f04165442::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -10,6 +10,7 @@ Extras:
  - Pagos los miembros por cada mes
  - Implementar idioma
  - Cambiar "existo" a "exito"
+ - Pagina de administracion de pedidos
 
 Alae : 
 
