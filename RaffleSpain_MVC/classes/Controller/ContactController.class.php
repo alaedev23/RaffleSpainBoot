@@ -9,7 +9,7 @@ class ContactController extends Controller {
             $lang = "ca";
         }
         
-        ContactView::show($lang);
+        ContactView::show($lang, false);
     }
     
     public function verifyForm() {
@@ -48,10 +48,12 @@ class ContactController extends Controller {
                 (isset($email)) ? $infoClient["email"] = $email : $infoClient["email"] = $_SESSION['usuari']->email;                
                 
                 $cEmail = new EmailController();
-                $cEmail->sendMailContactUs($infoClient);
+//                 $cEmail->sendMailContactUs($infoClient);
+                
+                ContactView::show($lang, true);
                 
             } else {
-                ContactView::show($lang, $errors);
+                ContactView::show($lang, false, $errors);
             }
         }
     }

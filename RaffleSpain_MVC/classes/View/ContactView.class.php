@@ -6,7 +6,7 @@ class ContactView extends View {
         parent::__construct();
     }
     
-    public static function show($lang, $errors = '') {
+    public static function show($lang, $send, $errors = '') {
         echo "<!DOCTYPE html><html lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";

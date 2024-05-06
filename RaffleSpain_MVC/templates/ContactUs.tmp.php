@@ -21,6 +21,7 @@
             }?>
             <button class="btn" name="sendContactUs" type="submit">Enviar</button>
         </form>
-        <?= isset($errors) ? "<div style='margin-top: 20px;' class=\"errorMessage\"><p>$errors</hp></div>" : ''; ?>
+       	<?= ($send) ? "<div style='margin-top: 20px;' class=\"correctMessage\"><p>Mail enviado correctamnete. Pronto nos pondremos en contacto contigo!</hp></div>" : ''; ?>
+        <?= ($errors !== '') ? "<div style='margin-top: 20px;' class=\"errorMessage\"><p>$errors</hp></div>" : ''; ?>
     </div>
 </div>

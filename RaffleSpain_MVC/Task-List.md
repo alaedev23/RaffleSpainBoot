@@ -1,9 +1,8 @@
 
 # Task List
 
-- Documentacion proyecto (comentarios)
+- Documentacion proyecto, comentarios y "javadoc"
 - Corregir estilos
-- Pagina Contact Us
 - Pagina cuando se acaba la rifa
 
 Extras:
@@ -16,4 +15,3 @@ Alae :
 
 - PayPal
 - Enviar mail del pedido, si puede ser con el pdf de la factura
-- Pagina Mis Pedidos

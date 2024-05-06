@@ -15,7 +15,7 @@ class Connexio {
             $this->sgbd = $sgbd;
             $this->base = $base;
             $this->host = ini_get('mysqli.default_host');
-            $this->host = "192.168.119.13";
+            $this->host = "192.168.119.18";
             if ($tipoConsulta === 'select' || $tipoConsulta === 'update' || $tipoConsulta === 'delete' || $tipoConsulta === 'insert') {
                 $this->usuario = $usuarioSelect;
                 $this->password = $passwordSelect;

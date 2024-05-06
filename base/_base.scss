@@ -136,6 +136,16 @@ p,li, button, label, option {
     text-align: center;
 }
 
+.correctMessage {
+    background-color: #d7f8dd;
+    border: 1px solid #cbfdad; 
+    color: #30721c; 
+    padding: 10px; 
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
 .stars {
     // display: flex;
     // justify-content: center;
