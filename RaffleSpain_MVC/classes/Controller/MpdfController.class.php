@@ -54,7 +54,7 @@ class MpdfController extends Controller {
                 <table class='pdf-table'>
                     <thead>
                         <tr>
-                            <th colspan='3' class='pdf-title'>Detalle de entrega</th>
+                            <th colspan='3' class='pdf-title'>Factura</th>
                             <th colspan='1'><img class='pdf-logo' src='" . __DIR__ . "/../../public/img/logo.png' alt='Logo Empresa'/></th>
                         </tr>
                     </thead>

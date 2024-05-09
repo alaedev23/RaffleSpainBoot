@@ -60,6 +60,10 @@ class DeliverModel {
         return $deliver_id;
     }
     
+    public function getLastInsertedId() {
+        
+    }
+    
     public function getIdByClientAndDate($client_id, $date_deliver) {
         $query = "SELECT * FROM deliver WHERE client_id = ? AND DATE(date_deliver) = ?";
         $params = array(
