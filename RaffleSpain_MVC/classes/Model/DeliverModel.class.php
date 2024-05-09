@@ -37,6 +37,40 @@ class DeliverModel {
         return $delivers;
     }
 
+    public function createDeliver($deliver) {
+        $query = "INSERT INTO deliver (client_id, date, date_deliver) VALUES (?, ?, ?)";
+        $params = array(
+            $deliver->client_id,
+            $deliver->date,
+            $deliver->date_deliver
+        );
+        $this->database->executarSQL($query, $params);
+    
+        $result = $this->getIdByClientAndDate($deliver->client_id, $deliver->date_deliver);
+        $deliver_id = $result[0]['id'];
+    
+        $query2 = "INSERT INTO deliver_has_product (deliver_id, product_id, quantity) VALUES (?, ?, ?)";
+        $params2 = array(
+            $deliver_id,
+            $deliver->product->id,
+            $deliver->quantity
+        );
+        $this->database->executarSQL($query2, $params2);
+    
+        return $deliver_id;
+    }
+    
+    public function getIdByClientAndDate($client_id, $date_deliver) {
+        $query = "SELECT * FROM deliver WHERE client_id = ? AND DATE(date_deliver) = ?";
+        $params = array(
+            $client_id,
+            $date_deliver
+        );
+        $result = $this->database->executarSQL($query, $params);
+    
+        return $result;
+    }
+
     public function getDeliversByClient($client_id) {
         $query = "SELECT * FROM deliver WHERE client_id = ?";
         $params = [$client_id];

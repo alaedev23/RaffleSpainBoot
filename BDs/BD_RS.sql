@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `rsdb`.`client` (
 CREATE TABLE IF NOT EXISTS `rsdb`.`deliver` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `client_id` INT NOT NULL,
-  `date` DATE NOT NULL,
-  `date_deliver` DATE NULL DEFAULT NULL,
+  `date` DATETIME NOT NULL,
+  `date_deliver` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `fk_pedido_cliente_idx` (`client_id` ASC) VISIBLE,

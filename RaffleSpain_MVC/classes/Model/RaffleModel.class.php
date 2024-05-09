@@ -63,6 +63,20 @@ class RaffleModel implements Crudable
         return $finalResult;
     }
 
+    public function getRaffleByProductId($obj) {
+        $sql = 'SELECT * FROM raffle WHERE product_id = ? AND winner IS NOT NULL';
+        $params = [
+            $obj->product_id
+        ];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        if (empty($result)) {
+            return null;
+        }
+        
+        return $this->createRaffleFromData($result[0]);
+    }
+
     public function create($obj)
     {
         $sql = 'INSERT INTO raffle (product_id, date_start, date_end, type) VALUES (?, ?, ?, ?)';

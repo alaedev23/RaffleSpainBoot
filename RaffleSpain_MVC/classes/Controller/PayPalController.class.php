@@ -39,25 +39,52 @@ class PayPalController extends Controller
     {
 
         $totalPrice = null;
+        $productsIds = null;
+        $quantities = null;
 
         if (isset($_SESSION['usuari'])) {
             $cistellaList = new CistellaProduct();
             $cistellaModel = new CistellaProductModel();
+            $cistellShow = new CistellaView();
+            $raffleModel = new RaffleModel();
 
             $cistellaList->client_id = $_SESSION['usuari']->id;
             $cistella = $cistellaModel->read($cistellaList);
 
-            foreach($cistella as $producteCistella) {
+            foreach ($cistella as $producteCistella) {
                 $totalPrice += $producteCistella->product->price * $producteCistella->quantity;
+                $productsIds[] = $producteCistella->product->id;
+                $quantities[] = $producteCistella->quantity;
+
+                $raffle = $raffleModel->getRaffleByProductId($producteCistella);
+
+                if ($raffle != null) {
+                    if ($_SESSION['usuari'] !=  $raffle->client_id) {
+                        $cistellShow->show('No puedes comprar un producto que has sorteado.');
+                    }
+                    if ($producteCistella->quantity = 1 || $producteCistella->quantity > 0) {
+                        $cistellShow->show('No hay stock del producto' . Functions::replaceHyphenForSpace($producteCistella->brand) . ' ' . str_replace('-', ' ', $producteCistella->name) . ' en la cantidad solicitada. Por favor, revise su cesta de la compra.');
+                    }
+                }
+
             }
 
         }
 
+        $tokenArray = array(
+            'userId' => $_SESSION['usuari']->id,
+            'productIds' => $productsIds,
+            'quantities' => $quantities,
+            'date' => date('Y-m-d H:i:s')
+        );
+
+        $paymentToken = Crypto::encrypt_hash(json_encode($tokenArray));
+        $sendToken = urlencode($paymentToken);
+
         $accessToken = self::getToken();
 
-
         $createOrderUrl = 'https://api.sandbox.paypal.com/v2/checkout/orders';
-        $returnUrl = 'http://localhost/M12/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture';
+        $returnUrl = 'http://localhost/M12/RaffleSpainTM/RaffleSpain_MVC/?PayPal/confirmPaymentCapture/' . $sendToken;
         $cancelUrl = 'http://localhost/M12/RaffleSpainTM/RaffleSpain_MVC/?cistella/show';
 
         $bodyParams = json_encode(
@@ -92,10 +119,13 @@ class PayPalController extends Controller
         curl_setopt($curl, CURLOPT_URL, $createOrderUrl);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer ' . $accessToken,
-            'Content-Type: application/json'
-        )
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Authorization: Bearer ' . $accessToken,
+                'Content-Type: application/json'
+            )
         );
         curl_setopt($curl, CURLOPT_POSTFIELDS, $bodyParams);
 
@@ -120,14 +150,14 @@ class PayPalController extends Controller
 
 
 
-    public static function confirmPaymentCapture()
+    public static function confirmPaymentCapture($paymentToken)
     {
 
         $token = $_GET['token'] ?? '';
         $payerID = $_GET['PayerID'] ?? '';
 
-        if (empty($token) || empty($payerID)) {
-            echo "Error: Falta token o PayerID en la solicitud.";
+        if (empty($token) || empty($payerID) || empty($paymentToken)) {
+            echo "Error: Falta token, PayerID o paymentToken en la solicitud.";
             return;
         }
 
@@ -140,10 +170,13 @@ class PayPalController extends Controller
         curl_setopt($curl, CURLOPT_URL, $captureUrl);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer ' . $accessToken,
-            'Content-Type: application/json'
-        )
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Authorization: Bearer ' . $accessToken,
+                'Content-Type: application/json'
+            )
         );
 
         $response = curl_exec($curl);
@@ -157,11 +190,46 @@ class PayPalController extends Controller
             $pView->showError();
         } else {
 
-            $cistellaModel = new CistellaProductModel();
-            $client = new Client($_SESSION['usuari']->id);
-            $cistellaModel->deleteByClientId($client);
+            // $captureData = json_decode($response);
+            $implodedhash = implode("/", $paymentToken);
+            $data = Crypto::decrypt_hash($implodedhash);
+            $array = json_decode($data, true);
 
-            $cistellaModel = new DeliverModel();
+            $deliverModel = new DeliverModel();
+            $productModel = new ProductModel();
+            $cistellaModel = new CistellaProductModel();
+
+            $client_id = null;
+
+            if (isset($_SESSION['usuari'])) {
+
+                if ($_SESSION['usuari']->id == $array['userId']) {
+
+                    $client = new Client($_SESSION['usuari']->id);
+                    $cistellaModel->deleteByClientId($client);
+
+                    foreach ($array['productIds'] as $index => $productId) {
+
+                        $deliver = new Deliver();
+                        $deliver->client_id = $array['userId'];
+                        $deliver->product = $productId;
+                        $deliver->quantity = $array['quantities'][$index];
+                        $deliver->date = $array['date'];
+
+                        $deliver->product = new Product($deliver->product);
+                        $stockProduct = $productModel->getQuantity($deliver->product);
+
+                        $deliver->date_deliver = date('Y-m-d H:i:s', strtotime('+5 days', strtotime($deliver->date)));
+
+                        $productModel->updateQuantity($deliver->product, $stockProduct - $deliver->quantity);
+
+                        $deliverModel->createDeliver($deliver);
+
+                    }
+                }
+            }
+
+            $cistellaModel->deleteByClientId($client_id);
 
             $pView->showCorrect();
         }

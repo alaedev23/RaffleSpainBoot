@@ -165,6 +165,23 @@ class ProductModel implements Crudable
 
         return $tallas;
     }
+
+    public function updateQuantity($product, $quantity)
+    {
+        $sql = 'UPDATE product SET quantity=? WHERE id=?';
+        $params = [$quantity, $product->id];
+        
+        return $this->database->executarSQL($sql, $params);
+    }
+
+    public function getQuantity($product)
+    {
+        $sql = 'SELECT quantity FROM product WHERE id=?';
+        $params = [$product->id];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        return $result[0]['quantity'];
+    }
     
     public function deleteDuplicate($results) {
         $resultado = [];
