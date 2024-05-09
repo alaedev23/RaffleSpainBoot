@@ -22,7 +22,7 @@
     			<img src="public/img/slider/img4.jpg" />
     		</div>
     	</div>
-    </div>
+	</div>
 </section>
 <section class="containerProductos" style="padding-top: 500px;">
     <h1 class="animated-section-left-right animation">Zapatillas</h1>

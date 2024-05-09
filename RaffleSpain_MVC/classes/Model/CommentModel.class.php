@@ -20,8 +20,8 @@ class CommentModel implements Crudable {
         $database = new DataBase('insert');
         
         $params = [
-            $obj->client_id,
-            $obj->product_id,
+            $obj->clientId,
+            $obj->productId,
             $obj->title,
             $obj->comment,
             $obj->value,
@@ -37,8 +37,8 @@ class CommentModel implements Crudable {
         $database = new DataBase('update');
         
         $params = [
-            $obj->client_id,
-            $obj->product_id,
+            $obj->clientId,
+            $obj->productId,
             $obj->title,
             $obj->comment,
             $obj->value,

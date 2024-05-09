@@ -7,20 +7,10 @@ class MpdfController extends Controller {
     
     public function show() {
         
-        $html = '
-            
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-4" />
-            <title>Document in Lithuanian</title>
-        </head>
-        <body>
-                    
-        ... the body of the document encoded in ISO-8859-4 ...
-                    
-        </body>
-        </html>';
+        $mDeliver = new DeliverModel();
+        $deliver = $mDeliver->getDeliver(1);
+        
+        $html = $this->generateTemplateDeliver($deliver[0]);
         
         $mpdf = new Mpdf([
             'mode' => 'c',
@@ -38,9 +28,106 @@ class MpdfController extends Controller {
             'charset_in' => 'utf-8'
         ]);
         
-        $mpdf->WriteHTML($html);
-        $mpdf->Output();
+        $mpdf->SetProtection([
+            'copy',
+            'print'
+        ], '', 'RafFleSpa1n2@24');
+        $mpdf->showWatermarkText = true;
+        $mpdf->watermark_font = 'Verdana';
+        $mpdf->SetWatermarkText('RaffleSpain');
         
+        $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . __DIR__ . '/../../public/img/favicon.ico">';
+        $mpdf->SetHTMLHeader($favicon);
+        
+        $stylesheet = file_get_contents(__DIR__ . '/pdfStyles.css');
+        $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+
+        $mpdf->Output();
+    }
+    
+    public function generateTemplateDeliver($deliver) {
+        $mClient = new ClientModel();
+        $client = $mClient->getById(new Client($deliver->id));
+        
+        return "<div class='pdf-wrap'>
+                <table class='pdf-table'>
+                    <thead>
+                        <tr>
+                            <th colspan='3' class='pdf-title'>Detalle de entrega</th>
+                            <th colspan='1'><img class='pdf-logo' src='" . __DIR__ . "/../../public/img/logo.png' alt='Logo Empresa'/></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <th colspan='2' class='pdf-category'>ID de entrega</th>
+                        <th class='pdf-category'>Fecha de entrega</th>
+                        <th class='pdf-category'>Fecha de hora estimada</th>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class='pdf-data centrar-texto'>
+                            <p>" . $deliver->id . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $deliver->date_deliver . "</p>
+                        </td>
+                        <td class='pdf-data'>
+                            <p>" . date('Y-m-d', strtotime($deliver->date_deliver . ' +5 days')) . "</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class='pdf-category'>Nombre Cliente</th>
+                        <th class='pdf-category'>Apellido/s Cliente</th>
+                        <th class='pdf-category'>Email</th>
+                        <th class='pdf-category'>Telefono</th>
+                    </tr>
+                    <tr>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->name . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->surnames . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->email . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->phone . "</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan='2' class='pdf-category'>Direccion</th>
+                        <th class='pdf-category'>Planta</th>
+                        <th class='pdf-category'>Puerta</th>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class='pdf-data centrar-texto'>
+                            <p>" . $client->address . ', ' . $client->postal_code . ', ' . $client->poblation . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->floor . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $client->door . "</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan='2' class='pdf-category'>Nombre Producto</th>
+                        <th class='pdf-category'>Codigo Producto</th>
+                        <th class='pdf-category'>Precio</th>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class='pdf-data centrar-texto'>
+                            <p>" . $deliver->product->name . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $deliver->product->modelCode . "</p>
+                        </td>
+                        <td class='pdf-data centrar-texto'>
+                            <p>" . $deliver->product->price . "</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>";
     }
     
 }

@@ -178,6 +178,11 @@ p, li, button, label, option {
   margin-bottom: 15px;
 }
 
+.beforeDiscount {
+  -webkit-text-decoration: line-through solid red;
+          text-decoration: line-through solid red;
+}
+
 .inpSearch {
   padding: 10px;
   border: none;
@@ -858,6 +863,9 @@ button, .close {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 #datesClient .modal-content {
   position: relative;
@@ -1008,6 +1016,33 @@ button, .close {
   margin: 0 auto;
   max-width: 1000px;
 }
+#comentarioProducto .headerComentario {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 0px 10px;
+}
+#comentarioProducto .headerComentario .addComment {
+  width: 40px;
+}
+#comentarioProducto .headerComentario .addComment:hover {
+  background-color: #c9c9c9;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  border-radius: 5px;
+}
+#comentarioProducto .headerComentario h1 {
+  text-align: start !important;
+}
 #comentarioProducto .comment {
   background-color: #fff;
   padding: 20px;
@@ -1073,6 +1108,210 @@ button, .close {
 #comentarioProducto .comment .comment-card .comment-info .comment-rating .star {
   color: #ffc107;
   margin-right: 4px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.modal h2 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.modal .modal-body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 10px;
+}
+.modal .modal-body div .section-modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.modal .modal-body div .section-modal label {
+  margin-bottom: 5px;
+}
+.modal .modal-body div input {
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+  border: #aaaaaa 0.5px solid;
+}
+.modal .modal-body div button {
+  margin-top: 15px;
+}
+.modal .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.modal .modal-content {
+  position: relative;
+  background-color: #ffffff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 25%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+}
+.modal .close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.modal .close:hover,
+.modal .close:focus {
+  color: #ff5b5b;
+}
+
+.pdf-wrap {
+  font-family: "Arial", sans-serif;
+  border: 2px solid #4CAF50;
+  width: 700px;
+  background-color: #f0f0f0;
+  margin: 21px auto;
+  color: #555;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.pdf-wrap .pdf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pdf-wrap .pdf-table thead tr {
+  background-color: #4CAF50;
+  padding: 5px;
+  border-bottom: 2px solid #4CAF50;
+}
+.pdf-wrap .pdf-table thead tr th {
+  padding: 15px;
+}
+.pdf-wrap .pdf-table.pdf-title {
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+}
+.pdf-wrap .pdf-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+}
+.pdf-wrap .pdf-table td.pdf-category {
+  background-color: #e0e0e0;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 8px;
+}
+.pdf-wrap .pdf-table td .barcode-container {
+  padding: 15px;
+  padding-right: 40px;
+  text-align: center;
+}
+.pdf-wrap .pdf-table td .pdf-data {
+  vertical-align: top;
+  padding-left: 15px;
+}
+.pdf-wrap .pdf-table td .pdf-data p {
+  margin: 8px 0;
+}
+.pdf-wrap .pdf-table td .qr-container {
+  padding: 12px;
+  top: 15px;
+  text-align: center;
+  position: absolute;
+  right: 15px;
+}
+.pdf-wrap .pdf-table td .qr-container .pdf-qr-img {
+  position: absolute;
+  right: 15px;
+  top: 90px;
+  border: 2px solid #4CAF50;
+  max-width: 100px;
+  max-height: 70px;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.pdf-wrap .pdf-table td .qr-container .pdf-qr-img img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.pdf-wrap .pdf-table td .pdf-footer {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 8px;
+  text-align: right;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-size: 16px;
+}
+.pdf-wrap .pdf-table td .pdf-logo {
+  width: 150px;
+}
+.pdf-wrap .pdf-table td .content-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.pdf-wrap .pdf-table td .centrar-texto {
+  text-align: center;
+}
+.pdf-wrap .pdf-table td .pdf-qr-container {
+  width: 700px;
+}
+.pdf-wrap .pdf-table td .pdf-qr-container .pdf-qr-code {
+  width: 300px;
+  margin-top: 15px;
+}
+.pdf-wrap .pdf-table td .pdf-qr-container .pdf-event-img {
+  width: 300px;
 }
 
 .containerProductos, #trobats {
@@ -1543,7 +1782,7 @@ button, .close {
       justify-content: space-around;
 }
 .cistella .cistella-list .product img {
-  max-width: 320px;
+  max-width: 50%;
   border-radius: 8px;
   margin-right: 10px;
 }

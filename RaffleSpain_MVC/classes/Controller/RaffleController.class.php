@@ -52,13 +52,15 @@ class RaffleController extends Controller {
             
             if ($this->raffle->__get("type") == 1) {
                 if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
-                    RaffleView::show($this->raffle, $isIn);
+                    $validate = $this->validateDateRaffle();
+                    RaffleView::show($this->raffle, $isIn, $validate);
                 } else {
                     $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
                 }
             } else {
                 if ($_SESSION['usuari']->type == 1 || $_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
-                    RaffleView::show($this->raffle, $isIn);
+                    $validate = $this->validateDateRaffle();
+                    RaffleView::show($this->raffle, $isIn, $validate);
                 } else {
                     $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
                 }
@@ -66,9 +68,19 @@ class RaffleController extends Controller {
 
         }
 
-//         $this->raffle = $this->mRaffle->getById($this->raffle);
-//         RaffleView::show($this->raffle, $isIn);
     }
+    
+    public function validateDateRaffle() {        
+        $actualDate = new DateTime();
+        $raffleDate = new DateTime($this->raffle->__get("date_end"));
+                
+        if ($actualDate > $raffleDate) {
+            $this->mRaffle->searchWinner($this->raffle);
+            return true;
+        } else {
+            return false;
+        }
+    }    
     
     public function getRaffleClient() {
         if (isset($_COOKIE["lang"])) {

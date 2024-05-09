@@ -4,6 +4,28 @@
     margin: 0 auto;
     max-width: 1000px;
 
+    .headerComentario {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        padding: 0px 10px;
+
+        .addComment {
+            width: 40px;
+        }
+
+        .addComment:hover {
+            background-color: #c9c9c9;
+            transition: 0.6s;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: start !important;
+        }
+    }
+
     .comment {
         background-color: #fff;
         padding: 20px;

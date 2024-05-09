@@ -2,9 +2,10 @@
 
 class CistellaView extends View {
     
-    public static function mostrarCesta($carretoProducts = null) {
+    public static function mostrarCesta($carretoProducts = null, $errors = '') {
         $html = '<div class="cistella">';
         $html .= '<h1>Mi Cesta</h1>';
+        ($errors !== '') ? $html .= "<div class=\"errorMessage\"><p>$errors</hp></div>" : '';
         $html .= '<ul class="cistella-list">';
         
         $total = 0;

@@ -189,6 +189,17 @@ class ProductModel implements Crudable
         return $resultado;
     }
     
+    public function convertRaffleToProduct($rifas) 
+    {
+        $allProducts = [];
+        foreach ($rifas as $rifa) {
+            $product = $this->getById(new Product($rifa->product_id));
+            $allProducts[] = $product;
+        }
+        
+        return $allProducts;
+    }
+    
     public function productToArray($object) {
         $dataArray = [
             "id" => $object->id,

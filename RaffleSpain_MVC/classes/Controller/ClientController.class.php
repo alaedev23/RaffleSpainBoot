@@ -54,6 +54,23 @@ class ClientController extends Controller {
         $vClientDates->show($lang);
     }
     
+    public function showMyPrizes() {
+        if (isset($_COOKIE["lang"])) {
+            $lang = $_COOKIE["lang"];
+        } else {
+            $lang = "es";
+        }
+        
+        $mRaffle = new RaffleModel();
+        $rifasWinner = $mRaffle->getWinnerByClientId($_SESSION['usuari']->id);
+        
+        $mProduct = new ProductModel();
+        $products = $mProduct->convertRaffleToProduct($rifasWinner);
+        
+        $vClientDates = new ClientDatesView();
+        $vClientDates->showMyPrizes($lang, $products);
+    }
+    
     public function changePassword($idSent) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];

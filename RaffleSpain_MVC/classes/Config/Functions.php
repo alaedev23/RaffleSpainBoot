@@ -3,7 +3,12 @@ use RdKafka\Producer;
 
 class Functions
 {
-
+    public static function discountPrice($price, $discount)
+    {
+        $discountedPrice = $price - ($price * ($discount / 100));
+        return $discountedPrice;
+    }
+    
     public static function generatecardProduct($products)
     {
         // animated-section-left-right animation
@@ -14,10 +19,13 @@ class Functions
                 <a href="?Producte/mostrarProducte/' . $product->id . ' ">
                     <img src="public/img/vambas/' . $product->img . '" alt="' . self::replaceHyphenForSpace($product->name) . '">
                     <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($product->brand) . ' ' . str_replace('-', ' ', $product->name) . '</p>
-                    <p class="sexo_zapatilla">' . self::generateSex($product->sex) . '</p>
-                    <p class="precio">' . $product->price . ' €</p>
-                </a>
-            </div>';
+                    <p class="sexo_zapatilla">' . self::generateSex($product->sex) . '</p>';
+                    if ($product->price != Functions::discountPrice($product->price, $product->discount)) {
+                        $result .= '<p class="precio"><span class="beforeDiscount">' . $product->price . '</span> ' . Functions::discountPrice($product->price, $product->discount) . ' €</p>';
+                    } else {
+                        $result .= '<p class="precio">' . $product->price . ' €</p>';
+                    }
+                    $result .= '</a></div>';
         }
         return $result;
     }
@@ -29,7 +37,7 @@ class Functions
         if ($rifas !== null) {
             if (count((array)$rifas) > 0) {
                 foreach ($rifas as $rifa) {
-                    if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3) {
+                    if ($_SESSION['usuari']->type == 2 || $_SESSION['usuari']->type == 3 || $_SESSION['usuari']->type == 1) {
                         $result .= '
                             <div class="zapatilla">
                                 <a href="?Raffle/showRaffleWithId/' . $rifa->id . ' ">

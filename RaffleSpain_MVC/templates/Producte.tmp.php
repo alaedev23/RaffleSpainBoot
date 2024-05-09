@@ -69,14 +69,14 @@
 </div>
 <section id="comentarioProducto">
     <?php
-    if ($getComments !== null) {
-        if (count($getComments) > 0) {
-            echo '<h1>Comentarios</h1>' . Functions::generatecardComment($getComments);
-        } else {
-            echo '<h1>No hay comentarios de este producto.</h1>';
-        }
+    echo '<div class="headerComentario"><h1>Comentarios</h1><svg id="openModalBtn" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus addComment" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+        </svg></div>';
+    if ($getComments !== null && count($getComments) > 0) {
+        echo Functions::generatecardComment($getComments);
     } else {
-        echo '<h1>No hay comentarios de este producto.</h1>';
+        echo '<h1>Aun no hay comentarios para esta zapatilla.</h1>';
     }
+    echo $generateAddComment;
     ?>
 </section>

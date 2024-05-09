@@ -101,7 +101,6 @@ window.onclick = function (event) {
 
 const asideItems = document.querySelectorAll("#asideContent ul li");
 
-// Función para mostrar el contenido correspondiente
 function showContent(id) {
     const contentItems = document.querySelectorAll("#contentDatesClient > div, #contentCambiarContraseña, #contentMetodosPago");
     contentItems.forEach(function(contentItem) {
@@ -117,12 +116,11 @@ function showContent(id) {
 asideItems.forEach(function(item) {
     item.addEventListener("click", function() {
         const id = this.id;
-        localStorage.setItem("currentPage", id); // Guardar la página actual en localStorage
+        localStorage.setItem("currentPage", id);
         showContent(id);
     });
 });
 
-// Verificar si hay una página almacenada en el localStorage y mostrarla
 document.addEventListener("DOMContentLoaded", function() {
     const currentPage = localStorage.getItem("currentPage");
     if (currentPage) {
@@ -130,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Change Password
 
 let openModalBtn = document.getElementById("openModalBtn");
 let modal = document.getElementById("myModal");
@@ -151,9 +150,27 @@ document.addEventListener("click", function(event) {
   }
 });
 
-// Validar contrasenyas iconos
+// Add comment
 
+let openModalBtnComment = document.getElementById("openModalBtnComment");
+let modalComment = document.getElementById("myModalComment");
+let closeModalBtnComment = document.getElementById("closeModalBtnComment");
+const modalContentComment = document.querySelector(".modal-content-comment");
 
+openModalBtnComment.addEventListener("click", function() { 
+  modalComment.style.display = "block";
+});
+
+closeModalBtnComment.addEventListener("click", function() { 
+  modalComment.style.display = "none";
+});
+
+document.addEventListener("click", function(event) {
+  if (event.target && event.target.id === "openModalBtnComment") {
+      modalComment.style.display = "block";
+      modalContentComment.style.display = "block";
+  }
+});
 
 // Alto Ajustable de Cesta
 

@@ -8,7 +8,7 @@ class HomeController extends Controller {
         $products = $mProducts->getRandomProducts(6);
 
         $mRifa = new RaffleModel();
-        $rifas = $mRifa->read();
+        $rifas = $mRifa->readRandomRaffle(3);
 
         HomeView::show($products, $rifas);    
         

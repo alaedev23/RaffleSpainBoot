@@ -1,4 +1,3 @@
-
 <?php
 
 class RaffleModel implements Crudable
@@ -29,6 +28,40 @@ class RaffleModel implements Crudable
 
         return $raffles;
     }
+    
+    public function readRandomRaffle($quantity)
+    {
+        $sql = 'SELECT * FROM raffle';
+        $results = $this->database->executarSQL($sql);
+        
+        $totalRaffles = count($results);
+        if ($totalRaffles < $quantity) {
+            throw new Exception("No hay suficientes elementos disponibles para seleccionar.");
+        }
+        
+        $randomRaffles = [];
+        $selectedIndexes = [];
+        
+        while (count($randomRaffles) < $quantity) {
+            $randomIndex = mt_rand(0, $totalRaffles - 1);
+            
+            if (!in_array($randomIndex, $selectedIndexes)) {
+                $randomRaffles[] = $results[$randomIndex];
+                $selectedIndexes[] = $randomIndex;
+            }
+        }
+        
+        $mProduct = new ProductModel();
+        $finalResult = [];
+        
+        foreach ($randomRaffles as $rifa) {
+            $objRaffle = $this->createRaffleFromData($rifa);
+            $objRaffle->product = $mProduct->getById(new Product($objRaffle->product_id));
+            $finalResult[] = $objRaffle;
+        }
+        
+        return $finalResult;
+    }
 
     public function create($obj)
     {
@@ -54,6 +87,17 @@ class RaffleModel implements Crudable
             $obj->id
         ];
 
+        return $this->database->executarSQL($sql, $params);
+    }
+    
+    public function updateWinner($obj)
+    {
+        $sql = 'UPDATE raffle SET winner = ? WHERE id = ?';
+        $params = [
+            $obj->winner,
+            $obj->id
+        ];
+        
         return $this->database->executarSQL($sql, $params);
     }
 
@@ -164,10 +208,108 @@ class RaffleModel implements Crudable
         
         return $this->createRaffleFromData($result[0]);
     }
+    
+    public function getWinnerByClientId($idClient)
+    {
+        $sql = 'SELECT * FROM raffle WHERE winner = ?';
+        $params = [$idClient];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        if (empty($result)) {
+            return null;
+        }
+        
+        $resultsReturn = [];
+        
+        foreach ($result as $index => $value) {
+            $mProduct = new ProductModel();
+            
+            $product_id = new Product($result[$index]['product_id']);
+            $consulta = $mProduct->getById($product_id);
+            
+            $result[$index]['product'] = $consulta;
+            $resultsReturn[] = $this->createRaffleFromData($result[$index]);
+        }
+        
+        return $resultsReturn; 
+    }
+    
+//     public function getWinnerByClientId($obj)
+//     {
+//         $sql = 'SELECT * FROM raffle_has_client WHERE client_id = ?';
+//         $params = [
+//             $obj->id
+//         ];
+//         $result = $this->database->executarSQL($sql, $params);
+        
+//         if (empty($result)) {
+//             return null;
+//         }
+        
+//         $clients = [];
+//         $mClient = new ClientModel();
+//         foreach ($result as $element) {
+//             $newClient = $mClient->getById(new Client($element['client_id']));
+//             $clients[] = $newClient;
+//         }
+        
+//         return $clients;
+//     }
+    
+    public function searchWinner($obj)
+    {
+        $raffle = $this->getById($obj);
+        if ($raffle->winner !== null) {
+            return $raffle;
+        } else {
+            $this->generateWinner($obj);
+        }
+    }
+    
+    public function generateWinner($obj) {
+        $clientes = $this->getAllClientInRaffle($obj);
+        
+        $ids = [];
+        foreach ($clientes as $client) {
+            $ids[] = $client->id;
+        }
+        
+        $randomId = $ids[array_rand($ids)];
+        
+        $mClient = new ClientModel();
+        $clientSelected = $mClient->getById(new Client($randomId));
+        
+        $obj->winner = $clientSelected->id;       
+        $update = $this->updateWinner($obj);
+        
+        return $update;
+    }
+    
+    public function getAllClientInRaffle($obj)
+    {
+        $sql = 'SELECT * FROM raffle_has_client WHERE raffle_id = ?';
+        $params = [
+            $obj->id
+        ];
+        $result = $this->database->executarSQL($sql, $params);
+        
+        if (empty($result)) {
+            return null;
+        }
+        
+        $clients = [];
+        $mClient = new ClientModel();
+        foreach ($result as $element) {
+            $newClient = $mClient->getById(new Client($element['client_id']));
+            $clients[] = $newClient;
+        }
+        
+        return $clients;
+    }
 
     public function getByType($obj)
     {
-        $sql = 'SELECT * FROM raffle WHERE type=? LIMIT 1';
+        $sql = 'SELECT * FROM raffle WHERE type=?';
         $params = [
             $obj->type
         ];
