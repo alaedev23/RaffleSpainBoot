@@ -48,6 +48,8 @@ class DeliverModel {
     
         $result = $this->getIdByClientAndDate($deliver->client_id, $deliver->date_deliver);
         $deliver_id = $result[0]['id'];
+        
+        
     
         $query2 = "INSERT INTO deliver_has_product (deliver_id, product_id, quantity) VALUES (?, ?, ?)";
         $params2 = array(
@@ -60,8 +62,13 @@ class DeliverModel {
         return $deliver_id;
     }
     
-    public function getLastInsertedId() {
+    public function getLastInsertedIdByClient($clientId) {
+        $query = "SELECT * FROM deliver WHERE client_id = ? ORDER BY client_id DESC LIMIT 1";
+        $params = [$clientId];
         
+        $result = $this->database->executarSQL($query, $params);
+        
+        return $this->createDeliverFromData($result);
     }
     
     public function getIdByClientAndDate($client_id, $date_deliver) {
