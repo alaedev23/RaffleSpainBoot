@@ -66,7 +66,7 @@ class RaffleModel implements Crudable
     public function getRaffleByProductId($obj) {
         $sql = 'SELECT * FROM raffle WHERE product_id = ? AND winner IS NOT NULL';
         $params = [
-            $obj->product_id
+            $obj->product->id
         ];
         $result = $this->database->executarSQL($sql, $params);
         

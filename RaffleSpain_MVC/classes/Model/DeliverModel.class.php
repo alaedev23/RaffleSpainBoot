@@ -46,29 +46,26 @@ class DeliverModel {
         );
         $this->database->executarSQL($query, $params);
     
-        $result = $this->getIdByClientAndDate($deliver->client_id, $deliver->date_deliver);
-        $deliver_id = $result[0]['id'];
-        
-        
+        $lastDeliver = $this->getLastInsertedIdByClient($deliver->client_id);
     
         $query2 = "INSERT INTO deliver_has_product (deliver_id, product_id, quantity) VALUES (?, ?, ?)";
         $params2 = array(
-            $deliver_id,
+            $lastDeliver->id,
             $deliver->product->id,
             $deliver->quantity
         );
         $this->database->executarSQL($query2, $params2);
     
-        return $deliver_id;
+        return $lastDeliver->id;
     }
     
     public function getLastInsertedIdByClient($clientId) {
-        $query = "SELECT * FROM deliver WHERE client_id = ? ORDER BY client_id DESC LIMIT 1";
+        $query = "SELECT * FROM deliver WHERE client_id = ? ORDER BY id DESC LIMIT 1";
         $params = [$clientId];
         
         $result = $this->database->executarSQL($query, $params);
         
-        return $this->createDeliverFromData($result);
+        return $this->createDeliverFromData($result[0]);
     }
     
     public function getIdByClientAndDate($client_id, $date_deliver) {

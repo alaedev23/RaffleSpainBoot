@@ -205,18 +205,16 @@ class PayPalController extends Controller
 
                 if ($_SESSION['usuari']->id == $array['userId']) {
 
-                    $client = new Client($_SESSION['usuari']->id);
-                    $cistellaModel->deleteByClientId($client);
-
                     foreach ($array['productIds'] as $index => $productId) {
 
                         $deliver = new Deliver();
+                        $product = new Product($productId);
+
                         $deliver->client_id = $array['userId'];
-                        $deliver->product = $productId;
+                        $deliver->product = $product;
                         $deliver->quantity = $array['quantities'][$index];
                         $deliver->date = $array['date'];
 
-                        $deliver->product = new Product($deliver->product);
                         $stockProduct = $productModel->getQuantity($deliver->product);
 
                         $deliver->date_deliver = date('Y-m-d H:i:s', strtotime('+5 days', strtotime($deliver->date)));
@@ -229,7 +227,8 @@ class PayPalController extends Controller
                 }
             }
 
-            $cistellaModel->deleteByClientId($client_id);
+            $client = new Client($_SESSION['usuari']->id);
+            $cistellaModel->deleteByClientId($client);
 
             $pView->showCorrect();
         }
