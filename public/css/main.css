@@ -300,7 +300,7 @@ p, li, button, label, option {
 }
 
 .site-footer {
-  background-color: #26272b;
+  background-color: var(--color-negro-fondo);
   padding: 30px 20px;
   font-size: 15px;
   line-height: 24px;
@@ -341,7 +341,7 @@ p, li, button, label, option {
 }
 .site-footer .footer-container .footer-row .footer-col h6 {
   color: #fff;
-  font-size: 16px;
+  font-size: 20px;
   text-transform: uppercase;
   margin-top: 5px;
   letter-spacing: 2px;
