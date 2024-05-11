@@ -1697,16 +1697,20 @@ button, .close {
   }
 }
 @media (max-width: 768px) {
-  header .icono, header .menu {
-    width: 30px;
-  }
-  header #logo {
+  header .header-content {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  header .icono, header .menu {
+    width: 30px;
+    padding: 3px;
   }
   header div {
     display: -webkit-box;

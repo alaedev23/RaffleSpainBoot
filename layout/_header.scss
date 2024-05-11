@@ -77,13 +77,14 @@
 
 @media (max-width: 768px) {
     header {
-    
-        .icono, .menu {
-            width: 30px;
-        }
-        #logo {
+        .header-content {
             display: flex;
             justify-content: start;
+            align-items: flex-start;
+        }
+        .icono, .menu {
+            width: 30px;
+            padding: 3px;
         }
         div {
             display: flex;

@@ -70,7 +70,6 @@ img.addEventListener("click", () => {
     manuAparecer.style.display = "flex";
     manuAparecer.style.flexDirection = "row";
     manuAparecer.style.justifyContent = "center";
-    genderHeader.style.display = "flex";
     menu.style.display = "none";
   } else if (styleMenu.getPropertyValue("display") === "flex") {
     manuAparecer.style.display = "none";
