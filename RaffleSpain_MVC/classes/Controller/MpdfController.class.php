@@ -59,7 +59,9 @@ class MpdfController extends Controller {
     
     public function generateTemplateDeliver($deliver) {
         $mClient = new ClientModel();
-        $client = $mClient->getById(new Client($deliver->id));
+        var_dump($deliver);
+        die;
+        $client = $mClient->getById(new Client($deliver->client_id));
         
         return "<div class='pdf-wrap'>
                 <table class='pdf-table'>
