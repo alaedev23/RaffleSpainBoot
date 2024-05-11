@@ -1,87 +1,264 @@
 #banner {
 
-    height: 100px;
-    position: relative;
-    z-index: 1;
+    // height: 100px;
+    // position: relative;
+    // z-index: 1;
 
-    .slideshow {
-        max-width: 100%;
-        max-height: 700px;
+    // .slideshow {
+    //     max-width: 100%;
+    //     max-height: 700px;
 
-        &:after {
-            content: '';
-            display: block;
-        }
+    //     &:after {
+    //         content: '';
+    //         display: block;
+    //     }
 
-        &:hover a {
-            opacity: 1;
-        }
+    //     &:hover a {
+    //         opacity: 1;
+    //     }
 
-        a {
-            opacity: 0;
-            position: relative;
-            text-decoration: none;
-            transition: opacity 0.5s;
+    //     a {
+    //         opacity: 0;
+    //         position: relative;
+    //         text-decoration: none;
+    //         transition: opacity 0.5s;
 
-            &:after {
-                border-color: #FFF #FFF transparent transparent;
-                border-style: solid;
-                border-width: 2px;
-                color: #FFF;
-                display: block;
-                height: 10px;
-                position: absolute;
-                top: calc(50% - 5px);
-                width: 10px;
-            }
+    //         &:after {
+    //             border-color: #FFF #FFF transparent transparent;
+    //             border-style: solid;
+    //             border-width: 2px;
+    //             color: #FFF;
+    //             display: block;
+    //             height: 10px;
+    //             position: absolute;
+    //             top: calc(50% - 5px);
+    //             width: 10px;
+    //         }
 
-            &:first-child:after {
-                content: '';
-                left: 10px;
-                transform: rotate(-135deg);
-            }
+    //         &:first-child:after {
+    //             content: '';
+    //             left: 10px;
+    //             transform: rotate(-135deg);
+    //         }
 
-            &:nth-child(2):after {
-                content: '';
-                right: 10px;
-                transform: rotate(45deg);
-            }
-        }
-    }
+    //         &:nth-child(2):after {
+    //             content: '';
+    //             right: 10px;
+    //             transform: rotate(45deg);
+    //         }
+    //     }
+    // }
 
-    .slide {
-        background-color: #FFF;
-        box-sizing: border-box;
-        display: none;
-        height: 600px;
-        position: absolute;
+    // .slide {
+    //     background-color: #FFF;
+    //     box-sizing: border-box;
+    //     display: none;
+    //     height: 600px;
+    //     position: absolute;
+    //     width: 100%;
+
+    //     &:first-child,
+    //     &:target {
+    //         display: block;
+    //     }
+
+    //     a {
+    //         display: block;
+    //         height: 100%;
+    //         position: absolute;
+    //         width: 50%;
+
+    //         &:nth-child(2) {
+    //             left: 50%;
+    //         }
+    //     }
+
+    //     img {
+    //         width: 100%;
+    //         height: 600px;
+    //     }
+    // }
+
+    // a:target {
+    //     color: red;
+    // }
+
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+
+    // /!\ IMPORTANT: this variable precises the number of slides contained in the slider.
+    // if you add/remove images, make sure that this variable is up to date so the buttons,
+    // the disposition of elements and the animations work correctly.
+    $nb-slides: 5;
+
+    .line {
         width: 100%;
+    }
 
-        &:first-child,
-        &:target {
-            display: block;
+    .flex {
+        display: flex;
+    }
+
+    .center {
+        @extend .flex;
+        margin-top: 50px;
+        align-items: center; // horizontal
+        justify-content: center; // vertical
+    }
+
+
+    .carousel-wrapper {
+        @extend .flex;
+        position: relative;
+        max-width: 1100px;
+        margin-bottom: 20px;
+
+        input {
+            display: none;
+        }
+    }
+
+
+    // CAROUSEL / SLIDER
+    .carousel {
+        @extend .line;
+        overflow: hidden;
+
+        ul {
+            @extend .center;
+            position: relative;
+            list-style: none;
+            overflow: hidden;
+
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100% * $nb-slides;
+
+            transition: left .8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        a {
-            display: block;
-            height: 100%;
-            position: absolute;
-            width: 50%;
+        li {
+            @extend .line;
 
-            &:nth-child(2) {
-                left: 50%;
+            img {
+                @extend .line;
+                border-radius: 15px;
+                max-width: 1100px;
+                max-height: 670px;
             }
         }
+    }
 
-        img {
-            width: 100%;
-            height: 600px;
+    // NAVIGATION DOTS
+    .nav-dot {
+        $dot-size: 15px;
+        position: absolute;
+        cursor: pointer;
+
+        margin-left: -$dot-size / 2;
+        bottom: -$dot-size * 1.5;
+        width: $dot-size;
+        height: $dot-size;
+
+        opacity: .5;
+        background-color: black;
+        border-radius: 50%;
+        transition: .4s;
+
+        &:hover {
+            opacity: .8;
+            transform: scale(1.2);
+        }
+
+        &:active {
+            transform: scale(0.9);
         }
     }
 
-    a:target {
-        color: red;
+    // goes from 1 to 5.
+    @for $n from 1 through $nb-slides {
+
+        // arranges the navigation dots horizontally
+        .nav-dot[for=slide#{$n}] {
+            left: 50% + ((($n - 1) - (($nb-slides - 1)/ 2)) * 5%);
+        }
+
+        #slide#{$n}:checked {
+
+            // moves the carousel to the right slide
+            &~.carousel ul {
+                left: -100% * ($n - 1)
+            }
+
+            // highlights the selected navigation dot
+            &~.nav-dot[for=slide#{$n}] {
+                opacity: 1;
+            }
+        }
     }
 
+
+    // ARROWS
+    %arrow {
+        $arrow-size: 50px;
+        display: none; // hidden by default
+        position: absolute;
+        color: white;
+
+        cursor: pointer;
+        font-weight: bolder;
+        text-shadow: 0 0 7.5px rgba($color: white, $alpha: .7);
+
+        top: 50%;
+        z-index: 1;
+        opacity: .7;
+        margin-top: -$arrow-size / 2;
+        height: $arrow-size;
+        font-size: $arrow-size;
+        transition: .2s;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+
+    .left-arrow {
+        @extend %arrow;
+        left: 15px;
+    }
+
+    .right-arrow {
+        @extend %arrow;
+        right: 15px;
+    }
+
+    @function custom-modulo($n) {
+        // this function returns '$n % $nb-slides', except that if the result is 0,
+        // '$nb-slides' is returned.
+        // for exemple, for $nb-slides = 4, possible values are {1, 2, 3, 4}
+        // (and not {0, 1, 2, 3}).
+        @return 1+($nb-slides + (($n - 1) % $nb-slides)) % $nb-slides;
+    }
+
+    @for $n from 1 through $nb-slides {
+        // when the nth slide is selected,
+        // displays the left-arrow that goes to the (n-1)th slide
+        // and the right arrow that goes to the (n+1)th slide.
+        // don't worry, it loops thanks to the 'custom-modulo' function !
+
+        #slide#{$n}:checked {
+
+            &~.left-arrow[for=slide#{custom-modulo($n - 1)}],
+            &~.right-arrow[for=slide#{custom-modulo($n + 1)}] {
+                display: block;
+            }
+        }
+    }
 
 }

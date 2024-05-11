@@ -3,6 +3,7 @@
 
 - Documentacion proyecto, comentarios y "javadoc"
 - Corregir estilos
+- Repasar Admin Page
 
 Extras:
  - Añadir talla preferida al perfil

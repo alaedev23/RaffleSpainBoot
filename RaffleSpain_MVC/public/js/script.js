@@ -46,13 +46,16 @@ const img = document.querySelector(".menu");
 const menu = document.getElementById("menu");
 const manuAparecer = document.getElementById("aparecer");
 const media = window.matchMedia("(min-width: 1024px)");
+const genderHeader = document.getElementById("gender-header");
 
 function mirarTamaño(media) {
   if (media.matches) {
     manuAparecer.style.display = "none";
+    genderHeader.style.display = "flex";
     menu.style.display = "flex";
   } else {
     menu.style.display = "none";
+    genderHeader.style.display = "none";
     manuAparecer.style.display = "none";
   }
 }
@@ -65,9 +68,13 @@ img.addEventListener("click", () => {
   let styleMenu = window.getComputedStyle(manuAparecer);
   if (styleMenu.getPropertyValue("display") === "none") {
     manuAparecer.style.display = "flex";
+    manuAparecer.style.flexDirection = "row";
+    manuAparecer.style.justifyContent = "center";
+    genderHeader.style.display = "flex";
     menu.style.display = "none";
   } else if (styleMenu.getPropertyValue("display") === "flex") {
     manuAparecer.style.display = "none";
+    genderHeader.style.display = "none";
   }
 });
 

@@ -12,6 +12,8 @@
             display: none;
         }
         nav { 
+            justify-content: flex-end;
+            display: flex;
             flex-grow: 1;
             ul {
                 display: flex;
@@ -48,6 +50,8 @@
         }
 
         nav {
+            justify-content: flex-end;
+            display: flex;
             flex-grow: 1;
             ul {
                 display: flex;

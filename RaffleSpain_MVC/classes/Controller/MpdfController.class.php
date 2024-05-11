@@ -5,45 +5,56 @@ use Mpdf\Mpdf;
 
 class MpdfController extends Controller {
     
-    public function show() {
+    public function show($id) {
         
-        $mDeliver = new DeliverModel();
-        $deliver = $mDeliver->getDeliver(1);
+        $idValid = $this->sanitize($id[0]);
         
-        $html = $this->generateTemplateDeliver($deliver[0]);
+        if (!is_numeric($idValid)) {
+            $errors = "El id pasado no es un id valido.";
+        }
         
-        $mpdf = new Mpdf([
-            'mode' => 'c',
-            'format' => 'A4',
-            'margin_right' => 10,
-            'margin_top' => 10,
-            'default_font_size' => '14',
-            'default_font' => 'arial',
-            'margin_footer' => 9,
-            'orientation' => 'P',
-            'margin_left' => 10,
-            'margin_bottom' => 10,
-            'margin_header' => 9,
-            'allow_charset_conversion' => true,
-            'charset_in' => 'utf-8'
-        ]);
-        
-        $mpdf->SetProtection([
-            'copy',
-            'print'
-        ], '', 'RafFleSpa1n2@24');
-        $mpdf->showWatermarkText = true;
-        $mpdf->watermark_font = 'Verdana';
-        $mpdf->SetWatermarkText('RaffleSpain');
-        
-        $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . __DIR__ . '/../../public/img/favicon.ico">';
-        $mpdf->SetHTMLHeader($favicon);
-        
-        $stylesheet = file_get_contents(__DIR__ . '/pdfStyles.css');
-        $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
-
-        $mpdf->Output();
+        if (!isset($errors)) {
+            $mDeliver = new DeliverModel();
+            $deliver = $mDeliver->getDeliver($idValid);
+            
+            $html = $this->generateTemplateDeliver($deliver[0]);
+            
+            $mpdf = new Mpdf([
+                'mode' => 'c',
+                'format' => 'A4',
+                'margin_right' => 10,
+                'margin_top' => 10,
+                'default_font_size' => '14',
+                'default_font' => 'arial',
+                'margin_footer' => 9,
+                'orientation' => 'P',
+                'margin_left' => 10,
+                'margin_bottom' => 10,
+                'margin_header' => 9,
+                'allow_charset_conversion' => true,
+                'charset_in' => 'utf-8'
+            ]);
+            
+            $mpdf->SetProtection([
+                'copy',
+                'print'
+            ], '', 'RafFleSpa1n2@24');
+            $mpdf->showWatermarkText = true;
+            $mpdf->watermark_font = 'Verdana';
+            $mpdf->SetWatermarkText('RaffleSpain');
+            
+            $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . __DIR__ . '/../../public/img/favicon.ico">';
+            $mpdf->SetHTMLHeader($favicon);
+            
+            $stylesheet = file_get_contents(__DIR__ . '/pdfStyles.css');
+            $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+            $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+            
+            $mpdf->Output();
+        } else {
+            $cDeliver = new DeliverController();
+            $cDeliver->showDelivers();
+        }
     }
     
     public function generateTemplateDeliver($deliver) {

@@ -94,9 +94,9 @@ class ProductModel implements Crudable
 
     public function searchProduct($searchString) {
         $allProducts = $this->readAll();
-        $searchReady = strtolower($searchString);
-        $productsFound = [];
+        $searchReady = strtolower(trim($searchString));
         
+        $productsFound = [];
         if (!empty($allProducts)) {
             foreach ($allProducts as $product) {
                 $nameBrand = strtolower($product->__get("brand")) . " " . strtolower($product->__get("name"));
@@ -108,6 +108,35 @@ class ProductModel implements Crudable
                     }   
             }
         }
+        
+//         if (empty($productsFound)) {
+//             foreach ($allProducts as $product) {
+//                 // Normaliza el nombre del producto y la marca, y los une en una sola cadena
+//                 $nameBrand = strtolower($product->__get("brand")) . " " . strtolower($product->__get("name"));
+                
+//                 // Divide la cadena de búsqueda en tokens individuales
+//                 $searchTokens = explode(" ", $searchReady);
+                
+//                 // Divide el nombre del producto en tokens individuales
+//                 $productTokens = explode(" ", strtolower($nameBrand));
+                
+//                 // Verifica si hay coincidencias entre los tokens
+//                 $match = false;
+//                 foreach ($searchTokens as $searchToken) {
+//                     foreach ($productTokens as $productToken) {
+//                         // Comprueba si el token de búsqueda está contenido en el token del producto
+//                         if (str_contains($productToken, $searchToken) || str_contains($searchToken, $productToken)) {
+//                             $match = true;
+//                             break 2; // Sale de ambos bucles foreach
+//                         }
+//                     }
+//                 }
+                
+//                 if ($match) {
+//                     array_push($productsFound, $product);
+//                 }   
+//             }
+//         }
         
         $deleteDuplicateProducts = [];
         

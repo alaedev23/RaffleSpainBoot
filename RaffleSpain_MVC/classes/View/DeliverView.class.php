@@ -34,6 +34,7 @@ class DeliverView extends View {
         $html .= '<p class="precio">' . $deliver->product->price . ' €</p>';
         $html .= '<p> Quantitat: ' . $deliver->quantity . '</p>';   
         $html .= '<p> Fecha de compra: ' . $deliver->date . '</p>';
+        $html .= '<a style="margin-top: 10px;" class="btn" href="?mpdf/show/' . $deliver->id . '">Ver Factura</a>';
         $html .= '</div></li>';
         
         return $html;
