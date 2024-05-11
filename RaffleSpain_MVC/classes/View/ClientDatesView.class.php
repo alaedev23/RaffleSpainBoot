@@ -56,7 +56,7 @@ class ClientDatesView extends View
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
-        echo '<main>';
+        echo '<main styles="">';
         include "templates/MyPrizes.tmp.php";
         echo "</main>";
         include "templates/Footer.tmp.php";
