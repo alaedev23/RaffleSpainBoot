@@ -137,40 +137,7 @@
         .copyright-text {
             margin: 0;
             font-size: 18px;
-        }
+        }       
 
-        @media (max-width: 991px) {
-            [class^='footer-col'] {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .footer-row {
-                flex-direction: column;
-            }
-
-            .footer-row:last-child {
-                text-align: left;
-
-                .footer-col {
-                    justify-content: start;
-                }
-            }
-
-            .social-icons {
-                text-align: left !important;
-            }
-        }        
-
-        @media (max-width: 767px) {
-            padding-bottom: 0;
-
-            .social-icons li.title {
-                display: block;
-                margin-right: 0;
-                font-weight: 600;
-            }
-        }
     }
 }

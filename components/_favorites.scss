@@ -1,0 +1,53 @@
+$favoritos-color: black;
+$producto-border-radius: 8px;
+
+.favorites {
+
+    h1 {
+        margin: 40px 0;
+    }
+
+    .favorites-list {
+            list-style: none;
+            padding: 0;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: $producto-border-radius;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: $producto-border-radius;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            text-align: right;
+
+            img {
+                max-width: 220px;
+                border-radius: $producto-border-radius;
+                margin-right: 10px;
+            }
+
+            .product-info {
+                h3 {
+                    color: $favoritos-color;
+                    margin: 10px 0;
+                    font-size: 24px;
+                }
+
+                p {
+                    color: #666;
+                    margin: 5px 0;
+                }
+
+                .precio {
+                    font-weight: bold;
+                }
+            }
+        }
+    }    
+}

@@ -16,23 +16,23 @@ class MpdfController extends Controller {
         $client = $_SESSION['usuari'];
         
         if ($client->address === null || $client->address === "") {
-            $errors = 'El usuario tiene que tener el campo "direccion" asignado.';
+            $errors = 'El usuario tiene que tener el campo "direccion" asignado para generar la factura en PDF.';
         }
         
         if ($client->poblation === null || $client->poblation === "") {
-            $errors = 'El usuario tiene que tener el campo "poblacion" asignado.';
+            $errors = 'El usuario tiene que tener el campo "poblacion" asignado para generar la factura en PDF.';
         }
         
         if ($client->postal_code === null || $client->postal_code === "") {
-            $errors = 'El usuario tiene que tener el campo "codigo postal" asignado.';
+            $errors = 'El usuario tiene que tener el campo "codigo postal" asignado para generar la factura en PDF.';
         }
         
         if ($client->floor === null || $client->floor === "") {
-            $errors = 'El usuario tiene que tener el campo "planta" asignado.';
+            $errors = 'El usuario tiene que tener el campo "planta" asignado para generar la factura en PDF.';
         }
         
         if ($client->door === null || $client->door === "") {
-            $errors = 'El usuario tiene que tener el campo "puerta" asignado.';
+            $errors = 'El usuario tiene que tener el campo "puerta" asignado para generar la factura en PDF.';
         }
         
         if (!isset($errors)) {

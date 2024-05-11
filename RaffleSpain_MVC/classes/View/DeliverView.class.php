@@ -9,7 +9,7 @@ class DeliverView extends View {
     public static function mostrarPedidos($delivers = null, $errors = '') {
         $html = '<div class="cistella">';
         $html .= '<h1>Mis Vambas Pedidas</h1>';
-        $html .= ($errors !== '') ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : '';
+        $html .= ($errors !== null) ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : '';
         $html .= '<ul class="cistella-list">';
         
         if (isset($delivers) && !empty($delivers)) {
@@ -43,7 +43,7 @@ class DeliverView extends View {
     
     public static function show($delivers = null, $errors = '') {
         
-        $template = self::mostrarPedidos($delivers);
+        $template = self::mostrarPedidos($delivers, $errors);
         
         $html = '<!DOCTYPE html><html lang="es">';
         $html .= include "templates/Head.tmp.php";
