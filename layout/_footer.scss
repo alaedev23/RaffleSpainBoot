@@ -3,6 +3,14 @@
         [class^='footer-col'] {
             margin-bottom: 30px;
         }
+
+        .social-icons {
+            margin-top: 15px;
+
+            li a {
+                margin-right: 10px !important;
+            }
+        }
     }
     
     @media (max-width: 800px) {

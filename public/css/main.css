@@ -1562,6 +1562,12 @@ button, .close {
   .footer-container [class^=footer-col] {
     margin-bottom: 30px;
   }
+  .footer-container .social-icons {
+    margin-top: 15px;
+  }
+  .footer-container .social-icons li a {
+    margin-right: 10px !important;
+  }
 }
 @media (max-width: 800px) {
   .footer-container .footer-row {
