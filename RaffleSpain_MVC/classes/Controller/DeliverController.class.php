@@ -8,7 +8,7 @@ class DeliverController extends Controller {
         $this->view = new DeliverView();
     }
 
-    public function showDelivers() {
+    public function showDelivers($errors = '') {
 
         if (!isset($_SESSION['usuari'])) {
             throw new Exception("No hi ha cap client loguejat");
@@ -19,7 +19,7 @@ class DeliverController extends Controller {
         $deliverModel = new DeliverModel();
         $delivers = $deliverModel->getDeliversByClient($client_id);
 
-        $this->view->show($delivers);
+        $this->view->show($delivers, $errors);
     }
 
 }

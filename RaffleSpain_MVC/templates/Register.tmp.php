@@ -35,23 +35,23 @@
 					name="address" <?= $register->address ? 'value="' . $register->address . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
-				<label for="floor">Planta:</label> <input type="text" id="floor"
+				<label for="floor">Planta:</label> <input type="text" id="floor" require
 					name="floor" <?= $register->floor ? 'value="' . $register->floor . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
-				<label for="door">Puerta:</label> <input type="text" id="door"
+				<label for="door">Puerta:</label> <input type="text" id="door" require
 					name="door" <?= $register->door ? 'value="' . $register->door . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
-				<label for="postal_code">Codigo Postal:</label> <input type="text" id="postal_code"
+				<label for="postal_code">Codigo Postal:</label> <input type="text" id="postal_code" require
 					name="postal_code" <?= $register->postal_code ? 'value="' . $register->postal_code . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
 				<label for="sex">Sexo:</label>
-				<select name="sex">
+				<select name="sex" require>
                     <option value="H" <?= ($register->sex === "H") ? "selected" : '' ?>>Hombre</option>
                     <option value="M" <?= ($register->sex === "M") ? "selected" : '' ?>>Mujer</option>
-                    <option value="O" <?= ($register->sex === "O") ? "selected" : '' ?>>Otr@</option>
+                    <option value="O" <?= ($register->sex === "O") ? "selected" : '' ?>>Otr@</option>	
                 </select>
 			</div>
 			<div class="form-group">

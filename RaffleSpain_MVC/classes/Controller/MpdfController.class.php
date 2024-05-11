@@ -13,6 +13,28 @@ class MpdfController extends Controller {
             $errors = "El id pasado no es un id valido.";
         }
         
+        $client = $_SESSION['usuari'];
+        
+        if ($client->address === null || $client->address === "") {
+            $errors = 'El usuario tiene que tener el campo "direccion" asignado.';
+        }
+        
+        if ($client->poblation === null || $client->poblation === "") {
+            $errors = 'El usuario tiene que tener el campo "poblacion" asignado.';
+        }
+        
+        if ($client->postal_code === null || $client->postal_code === "") {
+            $errors = 'El usuario tiene que tener el campo "codigo postal" asignado.';
+        }
+        
+        if ($client->floor === null || $client->floor === "") {
+            $errors = 'El usuario tiene que tener el campo "planta" asignado.';
+        }
+        
+        if ($client->door === null || $client->door === "") {
+            $errors = 'El usuario tiene que tener el campo "puerta" asignado.';
+        }
+        
         if (!isset($errors)) {
             $mDeliver = new DeliverModel();
             $deliver = $mDeliver->getDeliver($idValid);
@@ -53,7 +75,7 @@ class MpdfController extends Controller {
             $mpdf->Output();
         } else {
             $cDeliver = new DeliverController();
-            $cDeliver->showDelivers();
+            $cDeliver->showDelivers($errors);
         }
     }
     

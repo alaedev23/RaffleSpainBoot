@@ -6,9 +6,10 @@ class DeliverView extends View {
         parent::__construct();
     }
 
-    public static function mostrarPedidos($delivers = null) {
+    public static function mostrarPedidos($delivers = null, $errors = '') {
         $html = '<div class="cistella">';
         $html .= '<h1>Mis Vambas Pedidas</h1>';
+        $html .= ($errors !== '') ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : '';
         $html .= '<ul class="cistella-list">';
         
         if (isset($delivers) && !empty($delivers)) {
@@ -40,7 +41,7 @@ class DeliverView extends View {
         return $html;
     }
     
-    public static function show($delivers = null) {
+    public static function show($delivers = null, $errors = '') {
         
         $template = self::mostrarPedidos($delivers);
         
@@ -49,7 +50,7 @@ class DeliverView extends View {
         $html .= '<body id="producto_page">';
         $html .= include "templates/Header.tmp.php";
         $html .= '<main>';
-        $html .= include "templates/Cistella.tmp.php";
+        $html .= include "templates/Deliver.tmp.php";
         $html .= '</main>';
         $html .= include "templates/Footer.tmp.php";
         $html .= "</body></html>";
