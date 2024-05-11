@@ -18,7 +18,7 @@ class ClientView extends View {
         echo "</body></html>";
     }
     
-    public static function showRegister($login, $lang, $errors=null) {
+    public static function showRegister($register, $lang, $errors=null) {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
         
         echo "<!DOCTYPE html><html lang=\"en\">";

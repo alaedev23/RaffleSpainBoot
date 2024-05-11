@@ -4,54 +4,54 @@
 		<form class="form" action="?client/validateRegister" method="post">
 			<div class="form-group">
 				<label for="name">Nombre:</label> <input type="text" id="name"
-					name="name" required>
+					name="name" required <?= $register->name ? 'value="' . $register->name . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
 				<label for="surnames">Apellidos:</label> <input type="text"
-					id="surnames" name="surnames" required>
+					id="surnames" name="surnames" <?= $register->surnames ? 'value="' . $register->surnames . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="username">Email:</label> <input type="text"
-					id="username" name="username" required>
+					id="username" name="username" <?= $register->email ? 'value="' . $register->email . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="password">Contraseña:</label> <input type="password"
-					id="password" name="password" required>
+					id="password" name="password" <?= $register->password ? 'value="' . $register->password . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="born">Fecha:</label> <input type="date"
-					name="born" id="born" /> <!-- Hacer max y min en php -->
+					name="born" id="born" <?= $register->born ? 'value="' . $register->born . '"' : ''; ?> /> <!-- Hacer max y min en php -->
 			</div>
 			<div class="form-group">
 				<label for="phone">Telefono:</label> <input type="tel"
-					id="phone" name="phone" required>
+					id="phone" name="phone" <?= $register->phone ? 'value="' . $register->phone . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="poblation">Poblacion:</label> <input type="text" id="poblation"
-					name="poblation" required>
+					name="poblation" <?= $register->poblation ? 'value="' . $register->poblation . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="address">Direccion:</label> <input type="text" id="address"
-					name="address" required>
+					name="address" <?= $register->address ? 'value="' . $register->address . '"' : ''; ?> required>
 			</div>
 			<div class="form-group">
-				<label for="address">Planta:</label> <input type="text" id="floor"
-					name="floor">
+				<label for="floor">Planta:</label> <input type="text" id="floor"
+					name="floor" <?= $register->floor ? 'value="' . $register->floor . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
-				<label for="address">Puerta:</label> <input type="text" id="door"
-					name="door">
+				<label for="door">Puerta:</label> <input type="text" id="door"
+					name="door" <?= $register->door ? 'value="' . $register->door . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
-				<label for="address">Codigo Postal:</label> <input type="text" id="postal_code"
-					name="postal_code">
+				<label for="postal_code">Codigo Postal:</label> <input type="text" id="postal_code"
+					name="postal_code" <?= $register->postal_code ? 'value="' . $register->postal_code . '"' : ''; ?>>
 			</div>
 			<div class="form-group">
 				<label for="sex">Sexo:</label>
 				<select name="sex">
-                    <option value="H" selected>Hombre</option>
-                    <option value="M">Mujer</option>
-                    <option value="O">Otr@</option>
+                    <option value="H" <?= ($register->sex === "H") ? "selected" : '' ?>>Hombre</option>
+                    <option value="M" <?= ($register->sex === "M") ? "selected" : '' ?>>Mujer</option>
+                    <option value="O" <?= ($register->sex === "O") ? "selected" : '' ?>>Otr@</option>
                 </select>
 			</div>
 			<div class="form-group">
