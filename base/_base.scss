@@ -81,35 +81,85 @@ p,li, button, label, option {
     font-weight: bold;
 }
 
-.zapatilla {
-    background-color: #fff;
-    margin: 20px 1%;
-    width: 31%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
+@media (min-width: 768px) {
+    .zapatilla {
+        background-color: #fff;
+        margin: 20px 1%;
+        width: 31%;
+        border: 1px solid #b8b8b8;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        transition: transform 0.3s ease-in-out;
+    
+        p {
+            font-size: 20px;
+            color: var(--color-negro-fondo);
+            padding: 10px 0px 0px 20px;
+        }
+    
+        img {
+            width: 100%;
+            height: auto;
+        }
+    
+        .precio {
+            padding-bottom: 20px;
+        }
+    
+        .date {
+            margin-bottom: 15px;
+        }
 
-    p {
-        font-size: 20px;
-        color: var(--color-negro-fondo);
-        padding: 10px 0px 0px 20px;
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
     }
+    
+}
 
-    img {
+@media (max-width: 768px) {
+    .zapatilla {
+        background-color: #fff;
+        margin: 20px 3%;
         width: 100%;
-        height: auto;
-    }
+        border: 1px solid #b8b8b8;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        transition: transform 0.3s ease-in-out;
+    
+        p {
+            font-size: 20px;
+            color: var(--color-negro-fondo) !important;
+            padding: 10px 0px 0px 20px;
+        }
+    
+        img {
+            width: 100%;
+            height: auto;
+        }
+    
+        .precio {
+            padding-bottom: 20px;
+        }
+    
+        .date {
+            margin-bottom: 15px;
+        }
 
-    .precio {
-        padding-bottom: 20px;
-    }
-
-    .date {
-        margin-bottom: 15px;
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
     }
 }
 
