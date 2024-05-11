@@ -22,5 +22,4 @@ class DeliverController extends Controller {
         $this->view->show($delivers);
     }
 
-
 }

@@ -46,7 +46,7 @@ class MpdfController extends Controller {
             $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . __DIR__ . '/../../public/img/favicon.ico">';
             $mpdf->SetHTMLHeader($favicon);
             
-            $stylesheet = file_get_contents(__DIR__ . '/pdfStyles.css');
+            $stylesheet = file_get_contents(__DIR__ . '/../../../public/css/pdfStyles.css');
             $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
             $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
             
@@ -59,8 +59,7 @@ class MpdfController extends Controller {
     
     public function generateTemplateDeliver($deliver) {
         $mClient = new ClientModel();
-        var_dump($deliver);
-        die;
+
         $client = $mClient->getById(new Client($deliver->client_id));
         
         return "<div class='pdf-wrap'>
