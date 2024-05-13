@@ -1,5 +1,5 @@
 
-<div class="cistella">
+<?= (count($carretoProducts) === 0) ? '<div style="height: calc(100vh - 482px)" class="cistella">' : '<div class="cistella">' ?>
     <h1>Favoritos</h1>
     <ul class="cistella-list">
         <?php 

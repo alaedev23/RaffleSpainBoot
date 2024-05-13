@@ -3,7 +3,7 @@
 class CistellaView extends View {
     
     public static function mostrarCesta($carretoProducts = null, $errors = '') {
-        $html = '<div class="cistella">';
+        $html = (count($carretoProducts) === 0) ? '<div style="height: calc(100vh - 480px)" class="cistella">' : '<div class="cistella">';
         $html .= '<h1>Mi Cesta</h1>';
         ($errors !== '') ? $html .= "<div class=\"errorMessage\"><p>$errors</hp></div>" : '';
         $html .= '<ul class="cistella-list">';

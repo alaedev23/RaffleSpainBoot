@@ -759,7 +759,7 @@ header nav ul li:last-child {
   margin-top: 5px;
 }
 
-button, .close {
+button, select, option, .close {
   cursor: pointer !important;
 }
 
@@ -790,6 +790,17 @@ button, .close {
 
 .btnZapatillas {
   margin: 10px 0px 30px 20px;
+}
+
+.select {
+  border-radius: 5px;
+  background-color: var(--color-blanco-oscur);
+  color: var(--color-negro-fondo);
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 40%;
+  text-align: center;
+  padding: 10px;
 }
 
 /* Dropdown Button */

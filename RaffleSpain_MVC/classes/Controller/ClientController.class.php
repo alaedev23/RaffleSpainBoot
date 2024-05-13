@@ -162,7 +162,6 @@ class ClientController extends Controller {
                 $mClient = new ClientModel();
                 $consulta = $mClient->getByEmailPassword($this->login);
                 if ($consulta != "El email o la contrasenya no son correctos.") {
-                    // session_regenerate_id();
                     if ($consulta->__get("type") === "0") {
                         $errors = "Usuario no validado. Por favor, revise su correo electrónico.";
                     } else {
