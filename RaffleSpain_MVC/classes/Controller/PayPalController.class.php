@@ -47,11 +47,15 @@ class PayPalController extends Controller
             $cistellaModel = new CistellaProductModel();
             $cistellShow = new CistellaView();
             $raffleModel = new RaffleModel();
+            $productModel = new ProductModel();
 
             $cistellaList->client_id = $_SESSION['usuari']->id;
             $cistella = $cistellaModel->read($cistellaList);
 
             foreach ($cistella as $producteCistella) {
+
+                $stock = $productModel->getQuantity($producteCistella->product);
+
                 $totalPrice += $producteCistella->product->price * $producteCistella->quantity;
                 $productsIds[] = $producteCistella->product->id;
                 $quantities[] = $producteCistella->quantity;
@@ -59,11 +63,8 @@ class PayPalController extends Controller
                 $raffle = $raffleModel->getRaffleByProductId($producteCistella);
 
                 if ($raffle != null) {
-                    if ($_SESSION['usuari'] !=  $raffle->client_id) {
-                        $cistellShow->show('No puedes comprar un producto que has sorteado.');
-                    }
-                    if ($producteCistella->quantity = 1 || $producteCistella->quantity > 0) {
-                        $cistellShow->show('No hay stock del producto' . Functions::replaceHyphenForSpace($producteCistella->brand) . ' ' . str_replace('-', ' ', $producteCistella->name) . ' en la cantidad solicitada. Por favor, revise su cesta de la compra.');
+                    if ($_SESSION['usuari']->id != $raffle->winner && $stock <= 1) {
+                        $cistellShow->show($cistella, 'No hay stock del producto ' . Functions::replaceHyphenForSpace($producteCistella->product->brand) . ' ' . str_replace('-', ' ', $producteCistella->product->name) . ' en la cantidad solicitada. Por favor, revise su cesta de la compra.');
                     }
                 }
 
@@ -199,8 +200,6 @@ class PayPalController extends Controller
             $productModel = new ProductModel();
             $cistellaModel = new CistellaProductModel();
 
-            $client_id = null;
-
             if (isset($_SESSION['usuari'])) {
 
                 if ($_SESSION['usuari']->id == $array['userId']) {
@@ -214,14 +213,26 @@ class PayPalController extends Controller
                         $deliver->product = $product;
                         $deliver->quantity = $array['quantities'][$index];
                         $deliver->date = $array['date'];
+                        $deliver->token = $token;
 
                         $stockProduct = $productModel->getQuantity($deliver->product);
 
                         $deliver->date_deliver = date('Y-m-d H:i:s', strtotime('+5 days', strtotime($deliver->date)));
 
+                        $existantDeliver = $deliverModel->getDeliver($deliver->id);
+
+                        if ($existantDeliver != null) {
+                            $pView->showError();
+                            die;
+                        }
+
                         $productModel->updateQuantity($deliver->product, $stockProduct - $deliver->quantity);
 
-                        $deliverModel->createDeliver($deliver);
+                        $createdDeliverId = $deliverModel->createDeliver($deliver);
+                        $deliver->id = $createdDeliverId;
+
+                        $emailController = new EmailController();
+                        $emailController->sendMail($_SESSION['usuari'], $deliver);
 
                     }
                 }

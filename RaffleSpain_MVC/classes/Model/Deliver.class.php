@@ -9,13 +9,16 @@ class Deliver {
     private $product;
     private $quantity;
 
-    public function __construct($id = null, $client_id = null, $date = null, $date_deliver = null, $product = null, $quantity = null) {
+    private $token;
+
+    public function __construct($id = null, $client_id = null, $date = null, $date_deliver = null, $product = null, $quantity = null, $token = null) {
         $this->id = $id;
         $this->client_id = $client_id;
         $this->date = $date;
         $this->date_deliver = $date_deliver;
         $this->product = $product;
         $this->quantity = $quantity;
+        $this->token = $token;
     }
 
     public function __set($property, $value) {
@@ -41,7 +44,8 @@ class Deliver {
             'date' => $this->date,
             'date_deliver' => $this->date_deliver,
             'product' => $this->product,
-            'quantity' => $this->quantity
+            'quantity' => $this->quantity,
+            'token' => $this->token
         ];
     }
 

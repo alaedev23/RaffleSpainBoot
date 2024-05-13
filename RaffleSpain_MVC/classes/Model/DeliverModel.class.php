@@ -58,6 +58,33 @@ class DeliverModel {
     
         return $lastDeliver->id;
     }
+
+    public function getDeliverByClientAndToken($obj) {
+        $query = "SELECT * FROM deliver WHERE client_id = ? AND token = ?";
+        $params = [$obj->client_id, $obj->token];
+        $result = $this->database->executarSQL($query, $params);
+        
+        $delivers = [];
+        
+        $mProduct = new ProductModel();
+        
+        foreach ($result as $row) {
+            
+            $query2 = "SELECT * FROM deliver_has_product WHERE deliver_id = ?";
+            $params2 = [$row['id']];
+            $result2 = $this->database->executarSQL($query2, $params2);
+            
+            $productId = new Product($result2[0]['product_id']);
+            $product = $mProduct->getById($productId);
+            $row['product'] = $product;
+            $row['quantity'] = $result2[0]['quantity'];
+            
+            $deliverObj = $this->createDeliverFromData($row);
+            $delivers[] = $deliverObj;
+        }
+        
+        return $delivers;
+    } 
     
     public function getLastInsertedIdByClient($clientId) {
         $query = "SELECT * FROM deliver WHERE client_id = ? ORDER BY id DESC LIMIT 1";
@@ -66,17 +93,6 @@ class DeliverModel {
         $result = $this->database->executarSQL($query, $params);
         
         return $this->createDeliverFromData($result[0]);
-    }
-    
-    public function getIdByClientAndDate($client_id, $date_deliver) {
-        $query = "SELECT * FROM deliver WHERE client_id = ? AND DATE(date_deliver) = ?";
-        $params = array(
-            $client_id,
-            $date_deliver
-        );
-        $result = $this->database->executarSQL($query, $params);
-    
-        return $result;
     }
 
     public function getDeliversByClient($client_id) {
@@ -113,7 +129,8 @@ class DeliverModel {
             $data['date'],
             $data['date_deliver'],
             $data['product'],
-            $data['quantity']
+            $data['quantity'],
+            $data['token']
         );
     }
 

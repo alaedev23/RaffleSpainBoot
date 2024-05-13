@@ -102,10 +102,10 @@ class MpdfController extends Controller {
                             <p>" . $deliver->id . "</p>
                         </td>
                         <td class='pdf-data centrar-texto'>
-                            <p>" . $deliver->date_deliver . "</p>
+                            <p>" . $deliver->date . "</p>
                         </td>
                         <td class='pdf-data'>
-                            <p>" . date('Y-m-d', strtotime($deliver->date_deliver . ' +5 days')) . "</p>
+                            <p>" . $deliver->date_deliver . "</p>
                         </td>
                     </tr>
                     <tr>
@@ -163,5 +163,58 @@ class MpdfController extends Controller {
                 </table>
             </div>";
     }
+
+    public function generateAndSavePDF($del) {
+
+        $mDeliver = new DeliverModel();
+        $deliver = $mDeliver->getDeliver($del->id);
+
+        // Generar el contenido HTML para el PDF
+        $html = $this->generateTemplateDeliver($deliver[0]);
+    
+        // Crear una instancia de Mpdf con las configuraciones necesarias
+        $mpdf = new Mpdf([
+            'mode' => 'c',
+            'format' => 'A4',
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'default_font_size' => '14',
+            'default_font' => 'arial',
+            'margin_footer' => 9,
+            'orientation' => 'P',
+            'margin_left' => 10,
+            'margin_bottom' => 10,
+            'margin_header' => 9,
+            'allow_charset_conversion' => true,
+            'charset_in' => 'utf-8'
+        ]);
+    
+        // Obtener el contenido del CSS
+        $stylesheet = file_get_contents(__DIR__ . '/../../../public/css/pdfStyles.css');
+    
+        // Agregar el CSS al PDF
+        $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+    
+        // Obtener el contenido del PDF
+        $pdfContent = $mpdf->Output('', \Mpdf\Output\Destination::STRING_RETURN);
+    
+        $uniqueId = uniqid();
+        // Guardar el PDF en el directorio temporal
+        $pdfFilePath = __DIR__ . '/../../temporal/' . $uniqueId . '.pdf';
+        file_put_contents($pdfFilePath, $pdfContent);
+    
+        return array($pdfFilePath, $uniqueId);
+    }
+    
+    public function deletePDF($pdfFilePath) {
+        if (file_exists($pdfFilePath)) {
+            unlink($pdfFilePath);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     
 }

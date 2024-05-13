@@ -56,9 +56,9 @@ class CistellaView extends View {
         return $html;
     }
     
-    public static function show($carretoProducts = null) {
+    public static function show($carretoProducts = null, $errors = '') {
         
-        $template = self::mostrarCesta($carretoProducts);
+        $template = self::mostrarCesta($carretoProducts, $errors);
         
         $html = '<!DOCTYPE html><html lang="es">';
         $html .= include "templates/Head.tmp.php";
