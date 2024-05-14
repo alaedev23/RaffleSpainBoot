@@ -1,5 +1,5 @@
 <div id="searchRaffle">
-    <div class="searcherContainer">
+    <div id="searcherRaffle">
         <form action="?raffle/searchRaffles/" method="POST">
             <input class="searchInput" type="search" name="searchInput" value="<?= ($searchText !== null) ? $searchText : '' ?>">
             <div>
