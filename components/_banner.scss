@@ -102,8 +102,8 @@
     .center {
         @extend .flex;
         margin-top: 50px;
-        align-items: center; // horizontal
-        justify-content: center; // vertical
+        align-items: center;
+        justify-content: center;
     }
 
 
