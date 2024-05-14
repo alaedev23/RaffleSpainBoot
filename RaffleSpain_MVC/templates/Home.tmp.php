@@ -55,19 +55,19 @@
     <div class="carousel">
       <ul>
         <li>
-          <img src="https://raw.githubusercontent.com/osef-art/osef-art.github.io/master/src/assets/wallpapers/canyon.jpg" />
+          <img src="public/img/slider/fondo1.jpeg"" alt="" />
         </li>
         <li>
-          <img src="https://m.media-amazon.com/images/I/31Y+R3Y3nvL._SL1000_.jpg" alt="">
+          <img src="public/img/slider/fondo2.jpg" alt="">
         </li>
         <li>
-          <img src="https://raw.githubusercontent.com/osef-art/ministick/main/data/img/main/ministick-clip-3.gif" />
+          <img src="public/img/slider/fondo3.avif"" />
         </li>
         <li>
-          <img src="https://raw.githubusercontent.com/osef-art/osef-art.github.io/master/src/assets/wallpapers/smoke.jpg">
+          <img src="public/img/slider/fondo4.jpg">
         </li>
         <li>
-          <img src="https://images.ctfassets.net/9l3tjzgyn9gr/photo-157575/d224d518da6c26515a470a9b7e490df8/157575-honey-bun-baby.jpg?fm=jpg&fl=progressive&q=50&w=1200" alt="">
+          <img src="public/img/slider/fondo5.jpeg" alt="">
         </li>
       </ul>
     </div>

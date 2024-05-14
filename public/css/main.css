@@ -2256,7 +2256,7 @@ button, select, option, .close {
   }
   #searcherProduct form .searchInput, #searcherRaffle form .searchInput {
     margin: 0;
-    width: 70%;
+    width: 80%;
   }
   #searcherProduct form div, #searcherRaffle form div {
     display: -webkit-box;
