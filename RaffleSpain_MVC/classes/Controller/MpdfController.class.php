@@ -94,18 +94,18 @@ class MpdfController extends Controller {
                     </thead>
                     <tr>
                         <th colspan='2' class='pdf-category'>ID de entrega</th>
-                        <th class='pdf-category'>Fecha de entrega</th>
-                        <th class='pdf-category'>Fecha de hora estimada</th>
+                        <th class='pdf-category'>Fecha de pedido</th>
+                        <th class='pdf-category'>Fecha de entrega aproximada</th>
                     </tr>
                     <tr>
                         <td colspan='2' class='pdf-data centrar-texto'>
                             <p>" . $deliver->id . "</p>
                         </td>
                         <td class='pdf-data centrar-texto'>
-                            <p>" . $deliver->date . "</p>
+                            <p>" . date('Y-m-d', strtotime($deliver->date)) . "</p>
                         </td>
                         <td class='pdf-data'>
-                            <p>" . $deliver->date_deliver . "</p>
+                            <p>" . date('Y-m-d', strtotime($deliver->date_deliver)) . "</p>
                         </td>
                     </tr>
                     <tr>

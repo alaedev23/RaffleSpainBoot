@@ -12,7 +12,3 @@ Extras:
  - Cambiar "existo" a "exito"
  - Pagina de administracion de pedidos
  - Pagina para ver todos los comentarios de un producto
-
-Alae : 
-
-- Enviar mail del pedido, si puede ser con el pdf de la factura

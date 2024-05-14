@@ -148,9 +148,6 @@ class PayPalController extends Controller
             }
         }
     }
-
-
-
     public static function confirmPaymentCapture($paymentToken)
     {
 

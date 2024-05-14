@@ -127,6 +127,7 @@ class AdminView extends View {
             <th>Fecha Fin</th>
             <th>Imatge Producte</th>
             <th>Ganador</th>
+            <th>Type</th>
         </tr></thead>";
         
         if ($objSelec !== null) {
@@ -137,6 +138,7 @@ class AdminView extends View {
             $html .= '<td><input class="inputTable" type="text" name="date_end" value="' . $objSelec->date_end . '"></td>';
             $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/" . $objSelec->product->img . "\"></td>";
             $html .= '<td><input class="inputTable" type="text" name="winner" value="' . $objSelec->winner . '"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="type" value="' . $objSelec->type . '"></td>';
         } else {
             $html .= "<tr>";
             $html .= '<td><input class="inputTable" type="hidden" name="id" value=""></td>';
@@ -145,6 +147,7 @@ class AdminView extends View {
             $html .= '<td><input class="inputTable" type="text" name="date_end"></td>';
             $html .= '<td></td>';
             $html .= '<td><input class="inputTable" type="text" name="winner"></td>';
+            $html .= '<td><input class="inputTable" type="text" name="type"></td>';
         }
         
         if ($modificarDatos) {
@@ -161,6 +164,7 @@ class AdminView extends View {
             $html .= "<td>$raffle->date_end</td>";
             $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/" . $raffle->product->img . "\"></td>";
             $html .= "<td>$raffle->winner</td>";
+            $html .= "<td>$raffle->type</td>";
             $html .= '<th class="alinear"><a class="btn" href="?admin/updateRaffle/' . $raffle->id . '">Modificar</a></th>';
             $html .= '<th class="alinear"><a class="btn" href="?admin/deleteRaffle/' . $raffle->id . '">Eliminar</a></th></tr>';
             $html .= "</tr>";

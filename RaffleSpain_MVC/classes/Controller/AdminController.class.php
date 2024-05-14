@@ -5,7 +5,6 @@ class AdminController extends Controller {
     private $productsAll;
     private $rafflesAll;
     private $auxID;
-    
     private $product;
     private $raffle;
 
@@ -162,6 +161,7 @@ class AdminController extends Controller {
             $data_start = $this->sanitize($_POST['date_start']);
             $data_end = $this->sanitize($_POST['date_end']);
             $winner = $this->sanitize($_POST['winner']);
+            $type = $this->sanitize($_POST['type']);
 
             if (strlen($data_start) === 0) {
                 $errores = "Error en el data_start, has d'introduir un data";
@@ -183,7 +183,7 @@ class AdminController extends Controller {
                 $this->product = $pModelo->getById(new Product($product_id));
             }
             
-            $this->raffle = $this->asignDataRaffle(null, $product_id, $data_start, $data_end, $this->product, $winner);
+            $this->raffle = $this->asignDataRaffle(null, $product_id, $data_start, $data_end, $this->product, $winner, $type);
             
             $this->rafflesAll = $rModelo->read();
             $this->productsAll = $pModelo->read();
@@ -334,6 +334,7 @@ class AdminController extends Controller {
             $data_start = $this->sanitize($_POST['date_start']);
             $data_end = $this->sanitize($_POST['date_end']);
             $winner = $this->sanitize($_POST['winner']);
+            $type = $this->sanitize($_POST['type']);
             
             if (strlen($data_start) === 0) {
                 $errores = "Error en el data_start, has d'introduir un data";
@@ -358,7 +359,7 @@ class AdminController extends Controller {
                 $this->product = $result;
             }
             
-            $this->raffle = $this->asignDataRaffle($id, $product_id, $data_start, $data_end, $this->product, $winner);
+            $this->raffle = $this->asignDataRaffle($id, $product_id, $data_start, $data_end, $this->product, $winner, $type);
             
             $this->rafflesAll = $rModelo->read();
             $this->productsAll = $pModelo->read();
@@ -411,7 +412,7 @@ class AdminController extends Controller {
         $rModelo = new RaffleModel();
         $view = new AdminView();
         
-        $this->raffle = new Raffle($id[0], null, null, null);
+        $this->raffle = new Raffle($id[0]);
         $consulta = $rModelo->getById($this->raffle);
 
         if ($consulta instanceof Raffle) {
@@ -484,14 +485,15 @@ class AdminController extends Controller {
         );
     }
     
-    private function asignDataRaffle($id, $product_id, $date_start, $date_end, $product, $winner) {
+    private function asignDataRaffle($id, $product_id, $date_start, $date_end, $product, $winner, $type) {
         return new Raffle (
             $id,
             $product_id,
             $date_start,
             $date_end,
             $product,
-            $winner
+            $winner,
+            $type
         );
     }
     
