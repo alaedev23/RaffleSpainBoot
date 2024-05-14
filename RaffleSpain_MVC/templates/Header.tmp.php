@@ -20,6 +20,10 @@
             <li><a href="?producte/showSearchProducts"><svg xmlns="http://www.w3.org/2000/svg" id="iconoSearch" class="icono" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg></a></li>
+            <li><a href="?raffle/showAll"><svg xmlns="http://www.w3.org/2000/svg" class="icono" fill="currentColor" class="bi bi-box2-heart" viewBox="0 0 16 16">
+                    <path d="M8 7.982C9.664 6.309 13.825 9.236 8 13 2.175 9.236 6.336 6.31 8 7.982"/>
+                    <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4zm0 1H7.5v3h-6zM8.5 4V1h3.75l2.25 3zM15 5v10H1V5z"/>
+                </svg></a></li>
             <?php
             if (!isset($_SESSION['usuari'])) {
                 echo '<li>
@@ -34,12 +38,6 @@
                             </div>
                         </li>';
             } else {
-                echo '<li>
-                        <a href="?raffle/showAll"><svg xmlns="http://www.w3.org/2000/svg" class="icono" fill="currentColor" class="bi bi-box2-heart" viewBox="0 0 16 16">
-                          <path d="M8 7.982C9.664 6.309 13.825 9.236 8 13 2.175 9.236 6.336 6.31 8 7.982"/>
-                          <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4zm0 1H7.5v3h-6zM8.5 4V1h3.75l2.25 3zM15 5v10H1V5z"/>
-                        </svg></a>
-                    </li>';
                 if ($_SESSION['userAdmin'] === true) {
                     echo '<li>
                             <div class="dropdown">

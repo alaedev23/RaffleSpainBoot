@@ -1,0 +1,22 @@
+#searcherProduct, #searcherRaffle {
+    @media (max-width: 600px) {
+        form {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .searchInput {
+                margin: 0;
+                width: 70%;
+            }
+
+            div {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+        }
+    }
+}

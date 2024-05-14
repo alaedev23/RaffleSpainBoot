@@ -840,12 +840,12 @@ button, select, option, .close {
   left: -100px;
 }
 
-#searchProduct, #searchRaffle {
+#searcherProduct, #searcherRaffle {
   padding: 40px 0px;
   width: 100%;
   margin: 0 auto;
 }
-#searchProduct form, #searchRaffle form {
+#searcherProduct form, #searcherRaffle form {
   width: 100%;
   margin: 0 auto;
   display: -webkit-box;
@@ -858,7 +858,7 @@ button, select, option, .close {
       -ms-flex-align: center;
           align-items: center;
 }
-#searchProduct form .searchContainer, #searchRaffle form .searchContainer {
+#searcherProduct form .searchContainer, #searcherRaffle form .searchContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -869,7 +869,7 @@ button, select, option, .close {
       -ms-flex-align: center;
           align-items: center;
 }
-#searchProduct form #searchInput, #searchRaffle form #searchInput {
+#searcherProduct form .searchInput, #searcherRaffle form .searchInput {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
@@ -2238,5 +2238,39 @@ button, select, option, .close {
   }
   .cistella .cistella-list .product .product-info {
     text-align: center;
+  }
+}
+@media (max-width: 600px) {
+  #searcherProduct form, #searcherRaffle form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #searcherProduct form .searchInput, #searcherRaffle form .searchInput {
+    margin: 0;
+    width: 70%;
+  }
+  #searcherProduct form div, #searcherRaffle form div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 20px;
   }
 }/*# sourceMappingURL=main.css.map */
