@@ -97,7 +97,7 @@ class ClientDatesView extends View
 
         $template .= '<div class="itemDetalleCuenta">
             <label for="sex">Sexo:</label>
-            <select name="sex">
+            <select class="select" name="sex">
                 <option value="H" ' . (($gender === "Hombre") ? "selected" : "") . '>Hombre</option>
                 <option value="M" ' . (($gender === "Mujer") ? "selected" : "") . '>Mujer</option>
                 <option value="O" ' . (($gender === "Otr@") ? "selected" : "") . '>Otr@</option>

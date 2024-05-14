@@ -1,7 +1,7 @@
 #datesClient {
     display: flex;
     justify-content: flex-end;
-    margin: 40px 150px;
+    margin: 40px 100px 100px 100px;
     height: calc(100vh - 282px);
 
     .show {
@@ -116,6 +116,7 @@
                 .itemDetalleCuenta {
                     max-width: 300px;
                     margin-bottom: 10px;
+                    width: 100%;
                     margin-right: 20px;
 
                     div {

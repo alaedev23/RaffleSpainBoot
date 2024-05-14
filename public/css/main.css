@@ -1095,7 +1095,7 @@ button, select, option, .close {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  margin: 40px 150px;
+  margin: 40px 100px 100px 100px;
   height: calc(100vh - 282px);
 }
 #datesClient .show {
@@ -1220,6 +1220,7 @@ button, select, option, .close {
 #datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta {
   max-width: 300px;
   margin-bottom: 10px;
+  width: 100%;
   margin-right: 20px;
 }
 #datesClient #contentDatesClient #containerDetallesCuenta .mitad .itemDetalleCuenta div {
@@ -2272,5 +2273,85 @@ button, select, option, .close {
         -ms-flex-align: center;
             align-items: center;
     margin-top: 20px;
+  }
+}
+
+@media (max-width: 1300px) {
+  #datesClient #asideDatesClient {
+    width: 30%;
+  }
+  #datesClient #contentDetallesCuenta h3 {
+    text-align: center;
+  }
+  #datesClient #contentDetallesCuenta #containerDetallesCuenta {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+@media (max-width: 750px) {
+  #datesClient {
+    margin: 30px 30px 80px 30px;
+  }
+  #datesClient #contentDatesClient {
+    margin-top: 40px;
+  }
+}
+@media (max-width: 600px) {
+  #datesClient {
+    height: auto;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 30px;
+  }
+  #datesClient #asideDatesClient, #datesClient #contentDatesClient {
+    width: 100%;
+  }
+  #datesClient #asideDatesClient .mitad, #datesClient #contentDatesClient .mitad {
+    width: 100% !important;
+  }
+  #datesClient #asideDatesClient .mitad .itemDetalleCuenta, #datesClient #contentDatesClient .mitad .itemDetalleCuenta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #datesClient #asideDatesClient .mitad .itemDetalleCuenta input, #datesClient #contentDatesClient .mitad .itemDetalleCuenta input {
+    width: 80%;
+  }
+}
+@media (max-width: 240px) {
+  #datesClient {
+    margin: 15px;
+  }
+  #datesClient #asideContent ul li span {
+    display: none;
+  }
+  #datesClient .mitad .itemDetalleCuenta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-right: 0 !important;
   }
 }/*# sourceMappingURL=main.css.map */

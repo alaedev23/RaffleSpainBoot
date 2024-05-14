@@ -1,0 +1,71 @@
+#datesClient {
+    @media (max-width: 1300px) {
+        #asideDatesClient {
+            width: 30%;
+        }
+
+        #contentDetallesCuenta {
+            h3 {
+                text-align: center;
+            }
+
+            #containerDetallesCuenta {
+                justify-content: center;
+            }
+        }
+    }
+
+    @media (max-width: 750px) {
+        margin: 30px 30px 80px 30px;
+
+        #contentDatesClient {
+            margin-top: 40px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 30px;
+
+        #asideDatesClient, #contentDatesClient {
+            width: 100%;
+
+            .mitad {
+                width: 100% !important;
+
+                .itemDetalleCuenta {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    input {
+                        width: 80%;
+                    }
+                }
+            }
+        }   
+    }
+
+    @media (max-width: 240px) {
+        margin: 15px;
+
+        #asideContent {
+            ul li span {
+                display: none;
+            }
+        }
+
+        .mitad {
+            .itemDetalleCuenta {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                justify-content: center;
+                margin-right: 0 !important;
+            }
+        }
+    }
+}
