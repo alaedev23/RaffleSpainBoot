@@ -13,7 +13,7 @@ class ProducteView extends View {
         $getComments = $this->mComment->getById($producte);   
         $generateAddComment = $this->generateAddComment($producte, $errorsComment);
         
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body id=\"producto_page\">";
         include "templates/Header.tmp.php";

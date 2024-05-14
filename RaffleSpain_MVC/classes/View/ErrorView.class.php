@@ -11,7 +11,7 @@ class ErrorView extends View {
         $titol = "hi ha hagut un error";
         $missatge = $e->getMessage();
         
-        echo "<!DOCTYPE html><html lang=\"en\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
 	    include "templates/Header.tmp.php";

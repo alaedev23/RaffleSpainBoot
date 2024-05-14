@@ -5,7 +5,7 @@ class PayPalView extends View {
     public static function showCorrect() {
         $mensaje = "Pago realizado correctamente";
 
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
@@ -17,7 +17,7 @@ class PayPalView extends View {
     public static function showError() {
         $mensaje = "Error en el pago";
 
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

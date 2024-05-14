@@ -45,7 +45,7 @@ class DeliverView extends View {
         
         $template = self::mostrarPedidos($delivers, $errors);
         
-        $html = '<!DOCTYPE html><html lang="es">';
+        $html = '<!DOCTYPE html><html class=\"light\" lang="es">';
         $html .= include "templates/Head.tmp.php";
         $html .= '<body id="producto_page">';
         $html .= include "templates/Header.tmp.php";

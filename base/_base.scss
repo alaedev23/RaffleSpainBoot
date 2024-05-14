@@ -83,7 +83,7 @@ p,li, button, label, option {
 
 @media (min-width: 768px) {
     .zapatilla {
-        background-color: #fff;
+        background-color: var(--color-zapatilla-fondo);
         margin: 20px 1%;
         width: 31%;
         border: 1px solid #b8b8b8;
@@ -125,7 +125,7 @@ p,li, button, label, option {
 
 @media (max-width: 768px) {
     .zapatilla {
-        background-color: #fff;
+        background-color: var(--color-zapatilla-fondo);
         margin: 20px 3%;
         width: 100%;
         border: 1px solid #b8b8b8;

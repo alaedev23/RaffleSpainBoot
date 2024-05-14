@@ -19,7 +19,7 @@ class ClientDatesView extends View
         $htmlChangePassword = $this->generateEditPassword($errors);
         $htmlChangeDirection = $this->generateDirection($errors);
 
-        echo "<!DOCTYPE html><html lang=\"en\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
@@ -36,7 +36,7 @@ class ClientDatesView extends View
 
         $templateMyRaffle = Functions::generatecardRaffle($raffles);
 
-        echo "<!DOCTYPE html><html lang=\"en\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
@@ -52,7 +52,7 @@ class ClientDatesView extends View
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
         $templateMyPrizes = Functions::generatecardProduct($raffles);
         
-        echo "<!DOCTYPE html><html lang=\"en\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

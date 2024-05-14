@@ -7,7 +7,7 @@ class ContactView extends View {
     }
     
     public static function show($lang, $send, $errors = '') {
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

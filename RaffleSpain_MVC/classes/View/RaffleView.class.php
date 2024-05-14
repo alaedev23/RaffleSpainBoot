@@ -10,7 +10,7 @@ class RaffleView extends View {
         
         $infoRaffle = self::generateInfoRaffle($rifa, $isInRaffle, $dateVerify);
         
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

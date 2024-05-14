@@ -1,5 +1,5 @@
 header {
-    background-color: var(--color-negro-fondo);
+    background-color: var(--color-oscuro);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,6 +7,11 @@ header {
 
     #enlaces a {
         text-decoration: none;
+    }
+
+    #cambiar-tema {
+        width: 15px;
+        height: 15px;
     }
     
     .menu {

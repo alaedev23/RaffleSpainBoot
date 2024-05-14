@@ -15,7 +15,7 @@ class AdminView extends View {
             $tempRraffles = self::generateSectionRaffles($raffles, $modificarDatos, $objSelec, $errors);
         }
         
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body id=\"adminPage\">";
         include "templates/Header.tmp.php";

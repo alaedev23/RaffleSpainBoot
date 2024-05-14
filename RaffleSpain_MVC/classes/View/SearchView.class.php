@@ -15,7 +15,7 @@ class SearchView extends View
         $templateRaffle = $this->showFilterRaffles($rifas); // si esta activo printea los que se hayan encontrado, sino printea aleatorios
         $templateRaffleMember = $this->showFilterRafflesMemeber($rifas);
         
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";
@@ -30,7 +30,7 @@ class SearchView extends View
         // include $fitxerDeTraduccions;
         $templateProduct = $this->showFilterProducts($productos); // si esta activo printea los que se hayan encontrado, sino printea aleatorios
 
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

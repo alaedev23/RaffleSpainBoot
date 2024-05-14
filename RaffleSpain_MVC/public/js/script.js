@@ -1,3 +1,27 @@
+// Tema claro o oscuro
+
+const tema = document.getElementById("cambiar-tema");
+let temaOscuro = localStorage.getItem("tema");
+
+if (temaOscuro === "true") {
+    document.documentElement.classList.add("dark");
+} else {
+    document.documentElement.classList.remove("dark");
+}
+
+tema.addEventListener("click", () => cambiarTema());
+
+function cambiarTema() {
+    if (temaOscuro === "true") {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("tema", "false");
+    } else {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("tema", "true");
+    }
+    location.reload()
+}
+
 // // Animacion entrar pagina que salga el elemento y modificaciones grid
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -74,7 +74,7 @@
   </div>
 </div>
 </section>
-<section class="containerProductos"> <!-- style="padding-top: 500px;" -->
+<section class="containerProductos">
     <h1 class="animated-section-left-right animation">Zapatillas</h1>
 
 <?= $productsGrid ?>

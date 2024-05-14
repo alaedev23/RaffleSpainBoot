@@ -144,7 +144,7 @@ p, li, button, label, option {
 
 @media (min-width: 768px) {
   .zapatilla {
-    background-color: #fff;
+    background-color: var(--color-zapatilla-fondo);
     margin: 20px 1%;
     width: 31%;
     border: 1px solid #b8b8b8;
@@ -191,7 +191,7 @@ p, li, button, label, option {
 }
 @media (max-width: 768px) {
   .zapatilla {
-    background-color: #fff;
+    background-color: var(--color-zapatilla-fondo);
     margin: 20px 3%;
     width: 100%;
     border: 1px solid #b8b8b8;
@@ -299,12 +299,24 @@ p, li, button, label, option {
   src: url("../fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
 }
 :root {
-  --color-dorado: #ffc600;
-  --color-dorado-fuerte: #c29800;
-  --color-negro-fondo: #333;
-  --color-blanco-oscuro: #f5f5f5;
   --fuente-titulo: "AlegreyaSans";
   --fuente-texto: "Open Sans";
+}
+:root.light {
+  --color-dorado: #ffc600;
+  --color-dorado-fuerte: #c29800;
+  --color-oscuro: #333;
+  --color-zapatilla-fondo: #fff;
+  --color-negro-fondo: #333;
+  --color-blanco-oscuro: #f5f5f5;
+}
+:root.dark {
+  --color-dorado: #ffc600;
+  --color-dorado-fuerte: #c29800;
+  --color-oscuro: #1d1d1d;
+  --color-zapatilla-fondo: #1d1d1d;
+  --color-negro-fondo: #f5f5f5;
+  --color-blanco-oscuro: #333;
 }
 
 .animation {
@@ -358,7 +370,7 @@ p, li, button, label, option {
 }
 
 .site-footer {
-  background-color: var(--color-negro-fondo);
+  background-color: var(--color-oscuro);
   padding: 30px 20px;
   font-size: 15px;
   line-height: 24px;
@@ -520,7 +532,7 @@ nav, footer p {
 }
 
 header {
-  background-color: var(--color-negro-fondo);
+  background-color: var(--color-oscuro);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -534,6 +546,10 @@ header {
 }
 header #enlaces a {
   text-decoration: none;
+}
+header #cambiar-tema {
+  width: 15px;
+  height: 15px;
 }
 header .menu {
   width: 50px;

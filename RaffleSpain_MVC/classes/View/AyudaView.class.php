@@ -9,7 +9,7 @@ class AyudaView extends View {
     public static function showLogin($lang, $errors=null) {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
         
-        echo "<!DOCTYPE html><html lang=\"en\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"en\">";
         include "templates/Head.tmp.php";
         echo "<body>";
         include "templates/Header.tmp.php";

@@ -4,7 +4,7 @@ class FavoritosView extends View {
     
     public static function show($carretoProducts = null) {
         
-        echo "<!DOCTYPE html><html lang=\"es\">";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
         include "templates/Head.tmp.php";
         echo "<body id=\"producto_page\">";
         include "templates/Header.tmp.php";
