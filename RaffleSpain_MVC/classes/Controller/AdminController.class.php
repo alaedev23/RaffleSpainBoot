@@ -67,10 +67,6 @@ class AdminController extends Controller {
                 $errores = "Error en el brand.";
             }
             
-//             if (ctype_space($name) || ctype_space($brand)) {
-//                 $errores = "No pot haver-hi espais en els camps de Nom o de Brand. Se tiene que separara por guines (-).";
-//             }
-            
             if (strlen($price) === 0 || !is_numeric($price)) {
                 $errores = "Error en el preu.";
             }
