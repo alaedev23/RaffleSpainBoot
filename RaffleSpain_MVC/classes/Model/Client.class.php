@@ -38,7 +38,7 @@ class Client {
         if (property_exists($this, $property)) {
             $this->$property = $value;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Client");
         }
     }
     
@@ -46,7 +46,7 @@ class Client {
         if (property_exists($this, $property)) {
             return $this->$property;
         } else {
-            throw new Exception("No existeix la propietat $property a Entrada");
+            throw new Exception("No existeix la propietat $property a Client");
         }
     }
     

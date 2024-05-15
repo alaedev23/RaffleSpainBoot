@@ -138,7 +138,7 @@ class AdminController extends Controller {
 //                         $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
 //                     }
                 }
-            } else {
+            // } else {
                 $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, false, $errores);
             }
     }

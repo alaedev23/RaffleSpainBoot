@@ -92,11 +92,12 @@ class RaffleModel implements Crudable
 
     public function update($obj)
     {
-        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ?, type = ? WHERE id = ?';
+        $sql = 'UPDATE raffle SET product_id = ?, date_start = ?, date_end = ?, winner = ?, type = ? WHERE id = ?';
         $params = [
             $obj->product_id,
             $obj->date_start,
             $obj->date_end,
+            $obj->winner,
             $obj->type,
             $obj->id
         ];
