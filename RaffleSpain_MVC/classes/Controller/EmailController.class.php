@@ -18,10 +18,9 @@ class EmailController extends Controller
         $from = 'rafflespaintm@gmail.com';
         $fromName = 'rafflespainTM';
 
-        $subject = 'Activa tu cuenta de RaffleSpain';
         $hash = Crypto::encrypt_hash($client->email);
         $encodedEmail = urlencode($hash);
-        $domain = "192.168.119.18";
+        $domain = "localhost";
         $activationLink = "http://{$domain}/M12/RaffleSpainTM/RaffleSpain_MVC/?Email/validate/{$encodedEmail}";
 
         $mail = new PHPMailer\PHPMailer\PHPMailer;
@@ -38,6 +37,7 @@ class EmailController extends Controller
 
 
         if (isset($deliver)) {
+            $subject = 'Pedido realizado con éxito';
             $htmlContent = "
             <body style='font-family: Verdana, Geneva, sans-serif; background-color: #e8e8e8; margin: 0; padding: 0;'>
                 <div style='background-color: #f8f8f8; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); position: relative;'>
@@ -51,6 +51,7 @@ class EmailController extends Controller
             $mail->addAttachment($params[0], $params[1] . '.pdf');
 
         } else {
+            $subject = 'Activa tu cuenta de RaffleSpain';
             $htmlContent = "
         <body style='font-family: Verdana, Geneva, sans-serif; background-color: #e8e8e8; margin: 0; padding: 0;'>
             <div style='background-color: #f8f8f8; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); position: relative;'>
