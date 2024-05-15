@@ -46,8 +46,7 @@
                                 </svg>    
                                 <div id="dropdownAdmin" class="dropdown-content">
                                     <a href="?admin/showAdminPage">Productos y Rifas</a>
-                                    <a href="#">Link 2</a>
-                                    <a href="#">Link 3</a>
+                                    <a href="?ClientAdmin/show">Clientes</a>
                                 </div>
                             </div>
                         </li>';
