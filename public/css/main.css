@@ -968,6 +968,11 @@ button, select, option, .close {
       -ms-flex-align: center;
           align-items: center;
 }
+#producto #infoProducto .descrpcion-producto {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
 #producto #infoProducto #tallasProducto {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1404,6 +1409,7 @@ button, select, option, .close {
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
+  word-wrap: break-word;
 }
 #comentarioProducto .comment .comment-card h2 {
   color: #555;
@@ -2493,5 +2499,69 @@ button, select, option, .close {
         -ms-flex-pack: center;
             justify-content: center;
     margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 875px) {
+  #producto {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  #producto #fotosProducto {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  #producto #fotosProducto #imagenPrincipal img {
+    width: 100%;
+    height: auto;
+  }
+  #producto #infoProducto {
+    width: 100%;
+  }
+  #producto #infoProducto .actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+}
+@media (max-width: 650px) {
+  #comentarioProducto h1 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 700px) {
+  #myModal .modal-content {
+    width: 40%;
+  }
+}
+@media (max-width: 500px) {
+  #myModal .modal-content {
+    width: 60%;
+  }
+}
+@media (max-width: 350px) {
+  #myModal .modal-content {
+    width: 75%;
   }
 }/*# sourceMappingURL=main.css.map */

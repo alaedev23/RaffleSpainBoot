@@ -1,69 +1,3 @@
-// Tema claro o oscuro
-
-const tema = document.getElementById("cambiar-tema-container");
-let temaOscuro = localStorage.getItem("tema");
-
-if (temaOscuro === "true") {
-    document.documentElement.classList.add("dark");
-} else {
-    document.documentElement.classList.remove("dark");
-}
-
-tema.addEventListener("click", () => cambiarTema());
-
-function cambiarTema() {
-    if (temaOscuro === "true") {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("tema", "false");
-    } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("tema", "true");
-    }
-    location.reload()
-}
-
-// // Animacion entrar pagina que salga el elemento y modificaciones grid
-
-document.addEventListener("DOMContentLoaded", function () {
-  if (document.querySelector("header")) {
-    setTimeout(function () {
-      document.querySelector("#banner").classList.add("visible");
-      document.querySelector("header").classList.add("visible");
-    }, 100);
-  }
-});
-
-// Animacion mientras haces scroll que vayan apareciendo
-
-document.addEventListener("DOMContentLoaded", function () {
-  const animatedElements = document.querySelectorAll(".animation");
-
-  window.addEventListener("scroll", () => {
-    handleScroll(animatedElements);
-  });
-
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
-  }
-
-  function handleScroll(elements) {
-    elements.forEach((element) => {
-      const animationDirection = element.classList.contains(
-        "animated-section-left-right"
-      )
-        ? "left_right"
-        : element.classList.contains("animated-section-right-left")
-        ? "right_left"
-        : "down_up";
-
-      if (isInViewport(element)) {
-        element.classList.add("visible");
-      }
-    });
-  }
-});
-
 // Menu aparecer desaparecer
 
 const img = document.querySelector(".menu");
@@ -100,6 +34,30 @@ img.addEventListener("click", () => {
     genderHeader.style.display = "none";
   }
 });
+
+// Tema claro o oscuro
+
+const tema = document.getElementById("cambiar-tema-container");
+let temaOscuro = localStorage.getItem("tema");
+
+if (temaOscuro === "true") {
+    document.documentElement.classList.add("dark");
+} else {
+    document.documentElement.classList.remove("dark");
+}
+
+tema.addEventListener("click", () => cambiarTema());
+
+function cambiarTema() {
+    if (temaOscuro === "true") {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("tema", "false");
+    } else {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("tema", "true");
+    }
+    location.reload()
+}
 
 // Dropdown button
 
@@ -207,3 +165,45 @@ document.addEventListener("click", function(event) {
 if (document.getElementById('cistella')) {
   console.log('El elemento "cistella" existe.');
 }
+
+// // Animacion entrar pagina que salga el elemento y modificaciones grid
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.querySelector("header")) {
+    setTimeout(function () {
+      document.querySelector("#banner").classList.add("visible");
+      document.querySelector("header").classList.add("visible");
+    }, 100);
+  }
+});
+
+// Animacion mientras haces scroll que vayan apareciendo
+
+document.addEventListener("DOMContentLoaded", function () {
+  const animatedElements = document.querySelectorAll(".animation");
+
+  window.addEventListener("scroll", () => {
+    handleScroll(animatedElements);
+  });
+
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
+  }
+
+  function handleScroll(elements) {
+    elements.forEach((element) => {
+      const animationDirection = element.classList.contains(
+        "animated-section-left-right"
+      )
+        ? "left_right"
+        : element.classList.contains("animated-section-right-left")
+        ? "right_left"
+        : "down_up";
+
+      if (isInViewport(element)) {
+        element.classList.add("visible");
+      }
+    });
+  }
+});
