@@ -45,17 +45,15 @@ class DeliverView extends View {
         
         $template = self::mostrarPedidos($delivers, $errors);
         
-        $html = '<!DOCTYPE html><html class=\"light\" lang="es">';
-        $html .= include "templates/Head.tmp.php";
-        $html .= '<body id="producto_page">';
-        $html .= include "templates/Header.tmp.php";
-        $html .= '<main>';
-        $html .= include "templates/Deliver.tmp.php";
-        $html .= '</main>';
-        $html .= include "templates/Footer.tmp.php";
-        $html .= "</body></html>";
-        
-        return $html;
+        echo '<!DOCTYPE html><html class="light" lang="es">';
+        include "templates/Head.tmp.php";
+        echo '<body id="producto_page">';
+        include "templates/Header.tmp.php";
+        echo '<main>';
+        include "templates/Deliver.tmp.php";
+        echo '</main>';
+        include "templates/Footer.tmp.php";
+        echo "</body></html>";
     }
 
 }

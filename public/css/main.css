@@ -2075,6 +2075,30 @@ button, select, option, .close {
     margin: 10px 5px;
   }
 }
+@media (max-width: 450px) {
+  header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+  header .icono, header .menu {
+    width: 25px;
+    padding: 3px;
+  }
+  header #aparecer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+  }
+}
 @media (min-width: 1024px) {
   #filtres_ordenar {
     display: grid;

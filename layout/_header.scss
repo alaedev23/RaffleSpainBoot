@@ -117,3 +117,20 @@
         }
     }
 }
+
+@media (max-width: 450px) {
+    header {
+        display: flex;
+        flex-direction: column !important;
+
+        .icono, .menu {
+            width: 25px;
+            padding: 3px;
+        }
+
+        #aparecer {
+            display: flex;
+            flex-direction: row !important;
+        }
+    }
+}
