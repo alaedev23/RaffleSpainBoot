@@ -4,7 +4,7 @@ button, select, option, .close {
 
 .btn {
     background-color: var(--color-dorado);
-    color: var(--color-negro-fondo);
+    color: var(--color-siempre-negro);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -12,7 +12,7 @@ button, select, option, .close {
 
 .btn-talla {
     background-color: var(--color-blanco-oscur);
-    color: var(--color-negro-fondo);
+    color: var(--color-siempre-negro);
     border: 1px grey solid;
     padding: 10px 25px;
     margin: 10px 5px;
@@ -22,7 +22,7 @@ button, select, option, .close {
 .btn:hover,
 .btnZapatillas:hover {
     background-color: var(--color-negro-fondo);
-    color: var(--color-dorado);
+    color: var(--color-siempre-negro);
     transition: 0.5s;
 }
 

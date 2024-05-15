@@ -13,7 +13,7 @@ $producto-border-radius: 8px;
             .product {
                 border: 1px solid #ddd;
                 border-radius: $producto-border-radius;
-                padding: 10px;
+                padding: 10px 10px 30px 10px;
                 margin: 10px 0;
                 display: flex;
                 flex-direction: column;
@@ -22,6 +22,56 @@ $producto-border-radius: 8px;
 
                 .product-info {
                     text-align: center;
+                }
+            }
+        }
+
+        .precio-total {
+            margin: 20px 20px 20px 0px;
+    
+            .botones-compra {
+                height: 50px;
+            }
+        }
+    }
+}
+
+@media (max-width: 440px) {
+    .cistella {
+        .cistella-list {
+            .product {
+                .product-info {
+                    .btnContainer {
+                        margin-top: 15px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+
+        .precio-total {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;  
+            height: 170px;
+            margin: 0;
+            padding: 0px 15px 15px 0px;
+            .botones-compra {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+
+                a:first-child {
+                    margin-bottom: 0;
+                }
+
+                a {
+                    margin: 15px 0px;
+                    width: 120px;
                 }
             }
         }

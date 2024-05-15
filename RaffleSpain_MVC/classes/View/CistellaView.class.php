@@ -35,7 +35,6 @@ class CistellaView extends View {
         $html .= '<img src="public/img/vambas/' . $carretoProduct->product->img . '" alt="' . $carretoProduct->product->name . '">';
         $html .= '<div class="product-info">';
         $html .= '<h3>' . Functions::replaceHyphenForSpace($carretoProduct->product->brand) . " " . Functions::replaceHyphenForSpace($carretoProduct->product->name) . '</h3>';
-        // $html .= '<p>' . $carretoProduct->product->description . '</p>';
         $html .= '<div class="tallas"><p>' . $carretoProduct->size . '</p>' . $htmlSizes . ' </div>';
         $html .= '<p class="precio">' . $carretoProduct->product->price . ' €</p>';
         $html .= '<input type="number" min="0" id="cantidad-' . $carretoProduct->product->id . '" value="' . $carretoProduct->quantity . '">';
@@ -49,9 +48,10 @@ class CistellaView extends View {
     private static function renderizarPrecioTotal($total) {
         $html = '<div class="precio-total">';
         $html .= '<p>Total: ' . number_format($total, 2) . ' €</p>';
+        $html .= '<div class="botones-compra">';
         $html .= '<a href="?Cistella/emptyCart" class="btn btnZapatillas">Vaciar carrito</a>';
         $html .= '<a href="?PayPal/createOrder" class="btn btnZapatillas">Tramitar Pago</a>';
-        $html .= '</div>';
+        $html .= '</div></div>';
         
         return $html;
     }
@@ -60,15 +60,15 @@ class CistellaView extends View {
         
         $template = self::mostrarCesta($carretoProducts, $errors);
         
-        $html = '<!DOCTYPE html><html class=\"light\" lang="es">';
-        $html .= include "templates/Head.tmp.php";
-        $html .= '<body id="producto_page">';
-        $html .= include "templates/Header.tmp.php";
-        $html .= '<main>';
-        $html .= include "templates/Cistella.tmp.php";
-        $html .= '</main>';
-        $html .= include "templates/Footer.tmp.php";
-        $html .= "</body></html>";
+        echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";
+        include "templates/Head.tmp.php";
+        echo '<body id="producto_page">';
+        include "templates/Header.tmp.php";
+        echo '<main>';
+        include "templates/Cistella.tmp.php";
+        echo '</main>';
+        include "templates/Footer.tmp.php";
+        echo "</body></html>";
         
         return $html;
     }

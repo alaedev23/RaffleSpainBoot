@@ -306,6 +306,8 @@ p, li, button, label, option {
   --color-dorado: #ffc600;
   --color-dorado-fuerte: #c29800;
   --color-oscuro: #333;
+  --color-siempre-negro: #333;
+  --color-negrita-gris: #666;
   --color-zapatilla-fondo: #fff;
   --color-negro-fondo: #333;
   --color-blanco-oscuro: #f5f5f5;
@@ -314,6 +316,8 @@ p, li, button, label, option {
   --color-dorado: #ffc600;
   --color-dorado-fuerte: #c29800;
   --color-oscuro: #1d1d1d;
+  --color-siempre-negro: #333;
+  --color-negrita-gris: #fff;
   --color-zapatilla-fondo: #1d1d1d;
   --color-negro-fondo: #f5f5f5;
   --color-blanco-oscuro: #333;
@@ -781,7 +785,7 @@ button, select, option, .close {
 
 .btn {
   background-color: var(--color-dorado);
-  color: var(--color-negro-fondo);
+  color: var(--color-siempre-negro);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -789,7 +793,7 @@ button, select, option, .close {
 
 .btn-talla {
   background-color: var(--color-blanco-oscur);
-  color: var(--color-negro-fondo);
+  color: var(--color-siempre-negro);
   border: 1px grey solid;
   padding: 10px 25px;
   margin: 10px 5px;
@@ -799,7 +803,7 @@ button, select, option, .close {
 .btn:hover,
 .btnZapatillas:hover {
   background-color: var(--color-negro-fondo);
-  color: var(--color-dorado);
+  color: var(--color-siempre-negro);
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -1622,7 +1626,7 @@ button, select, option, .close {
 }
 .cistella h1 {
   text-align: center;
-  color: black;
+  color: var(--color-negro-fondo);
 }
 .cistella .cistella-list {
   list-style: none;
@@ -1694,10 +1698,10 @@ button, select, option, .close {
 }
 .cistella .cistella-list .product .product-info h3 {
   margin: 20px 0;
-  color: black;
+  color: var(--color-negro-fondo);
 }
 .cistella .cistella-list .product .product-info p {
-  color: #666;
+  color: var(--color-negrita-gris);
   margin: 5px 0;
 }
 .cistella .cistella-list .product .product-info a {
@@ -1716,9 +1720,12 @@ button, select, option, .close {
   text-align: right;
   margin-top: 20px;
 }
-.cistella .precio-total p {
+.cistella .precio-total .botones-compra {
+  margin-top: 30px;
+}
+.cistella .precio-total .botones-compra p {
   font-size: 1.2em;
-  color: black;
+  color: var(--color-negro-fondo);
   font-weight: bold;
 }
 
@@ -1756,7 +1763,7 @@ button, select, option, .close {
   margin-right: 10px;
 }
 .favorites .favorites-list .product .product-info h3 {
-  color: black;
+  color: var(--color-negro-fondo);
   margin: 10px 0;
   font-size: 24px;
 }
@@ -2238,7 +2245,7 @@ button, select, option, .close {
   .cistella .cistella-list .product {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 10px 30px 10px;
     margin: 10px 0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2255,6 +2262,67 @@ button, select, option, .close {
   }
   .cistella .cistella-list .product .product-info {
     text-align: center;
+  }
+  .cistella .precio-total {
+    margin: 20px 20px 20px 0px;
+  }
+  .cistella .precio-total .botones-compra {
+    height: 50px;
+  }
+}
+@media (max-width: 440px) {
+  .cistella .cistella-list .product .product-info .btnContainer {
+    margin-top: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .cistella .precio-total {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 170px;
+    margin: 0;
+    padding: 0px 15px 15px 0px;
+  }
+  .cistella .precio-total .botones-compra {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .cistella .precio-total .botones-compra a:first-child {
+    margin-bottom: 0;
+  }
+  .cistella .precio-total .botones-compra a {
+    margin: 15px 0px;
+    width: 120px;
   }
 }
 @media (max-width: 600px) {

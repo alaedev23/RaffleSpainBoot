@@ -34,7 +34,7 @@ $producto-border-radius: 8px;
 
             .product-info {
                 h3 {
-                    color: $favoritos-color;
+                    color: var(--color-negro-fondo);
                     margin: 10px 0;
                     font-size: 24px;
                 }
