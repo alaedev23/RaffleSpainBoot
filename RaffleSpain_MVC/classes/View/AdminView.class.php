@@ -80,9 +80,9 @@ class AdminView extends View {
         }
         
         if ($modificarDatos) {
-            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></th></tr></thead><tbody>";
+            $html .= "<td class=\"input-admin\" colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></td></tr></thead><tbody>";
         } else {
-            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCreate\"></th></tr></thead><tbody>";
+            $html .= "<td class=\"input-admin\" colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCreate\"></td></tr></thead><tbody>";
         }
         
         foreach ($products as $product) {
@@ -99,8 +99,8 @@ class AdminView extends View {
             $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/$product->img\"></td>";
             $html .= "<td>$product->quantity</td>";
             $html .= "<td>$product->discount</td>";
-            $html .= '<th class="alinear"><a class="btn" href="?admin/updateProduct/' . $product->id . '">Modificar</a></th>';
-            $html .= '<th class="alinear"><a class="btn" href="?admin/deleteProduct/' . $product->id . '">Eliminar</a></th></tr>';
+            $html .= '<td class="alinear"><a class="btn" href="?admin/updateProduct/' . $product->id . '">Modificar</a></td>';
+            $html .= '<td class="alinear"><a class="btn" href="?admin/deleteProduct/' . $product->id . '">Eliminar</a></td></tr>';
             $html .= "</tr>";
         }
         
@@ -120,7 +120,7 @@ class AdminView extends View {
             $html .= "<form action=\"?admin/createRaffle\" method=\"post\" enctype=\"multipart/form-data\">";
         }
         
-        $html .= "<table><thead><tr>
+        $html .= "<table id=\"raffle-table-admin\"><thead><tr>
             <th>Id</th>
             <th>Producto Id</th>
             <th>Fecha Inicio </th>
@@ -151,9 +151,9 @@ class AdminView extends View {
         }
         
         if ($modificarDatos) {
-            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></th></tr></thead><tbody>";
+            $html .= "<td class=\"input-admin\" colspan=\"2\"><input class=\"btn\" value=\"Update\" type=\"submit\" name=\"sendDataUpdate\"></td></tr></thead><tbody>";
         } else {
-            $html .= "<th colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCreate\"></th></tr></thead><tbody>";
+            $html .= "<td class=\"input-admin\" colspan=\"2\"><input class=\"btn\" value=\"Crear\" type=\"submit\" name=\"sendDataCreate\"></td></tr></thead><tbody>";
         }
         
         foreach ($raffles as $raffle) {
@@ -165,8 +165,8 @@ class AdminView extends View {
             $html .= "<td><img class=\"adminImages\" src=\"public/img/vambas/" . $raffle->product->img . "\"></td>";
             $html .= "<td>$raffle->winner</td>";
             $html .= "<td>$raffle->type</td>";
-            $html .= '<th class="alinear"><a class="btn" href="?admin/updateRaffle/' . $raffle->id . '">Modificar</a></th>';
-            $html .= '<th class="alinear"><a class="btn" href="?admin/deleteRaffle/' . $raffle->id . '">Eliminar</a></th></tr>';
+            $html .= '<td class="alinear"><a class="btn" href="?admin/updateRaffle/' . $raffle->id . '">Modificar</a></td>';
+            $html .= '<td class="alinear"><a class="btn" href="?admin/deleteRaffle/' . $raffle->id . '">Eliminar</a></td></tr>';
             $html .= "</tr>";
         }
         

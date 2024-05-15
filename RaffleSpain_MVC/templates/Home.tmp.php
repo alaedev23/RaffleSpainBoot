@@ -1,4 +1,4 @@
-<section id="banner" class="animated-section-left-right animation">
+<section id="banner">
     <!-- <div class="container">
     	<div class="slideshow">
     		<div id="slide-1" class="slide">
@@ -75,11 +75,11 @@
 </div>
 </section>
 <section class="containerProductos">
-    <h1 class="animated-section-left-right animation">Zapatillas</h1>
+    <h1>Zapatillas</h1> <!-- class="animated-section-left-right animation" -->
 
 <?= $productsGrid ?>
 </section>
-<section id="rifes" class=" containerProductos animated-section-right-left animation">
+<section id="rifes" class="containerProductos">
     <h1>Rifas</h1>
     <?= $rifasGrid ?>
     </div>

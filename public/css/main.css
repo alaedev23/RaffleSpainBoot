@@ -311,6 +311,8 @@ p, li, button, label, option {
   --color-zapatilla-fondo: #fff;
   --color-negro-fondo: #333;
   --color-blanco-oscuro: #f5f5f5;
+  --color-tabla-par-admin: #fff;
+  --color-tabla-inpar-admin: #b8b8b8;
 }
 :root.dark {
   --color-dorado: #ffc600;
@@ -321,6 +323,8 @@ p, li, button, label, option {
   --color-zapatilla-fondo: #1d1d1d;
   --color-negro-fondo: #f5f5f5;
   --color-blanco-oscuro: #333;
+  --color-tabla-par-admin: #d0d0d0;
+  --color-tabla-inpar-admin: #333;
 }
 
 .animation {
@@ -1055,6 +1059,10 @@ button, select, option, .close {
   /* Estilos para el botón */
   /* Estilos para el área de descripción */
 }
+#admin p {
+  text-align: center;
+  margin-bottom: 10px;
+}
 #admin .alinear {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1074,22 +1082,31 @@ button, select, option, .close {
   /* Estilos para la cabecera de la tabla */
   /* Estilos para las filas impares */
 }
+#admin table .input-admin {
+  border-bottom: 1px solid var(--color-negrita-gris) !important;
+}
 #admin table th, #admin table td {
   padding: 8px;
   border: 1px solid var(--color-negrita-gris);
   text-align: center;
 }
 #admin table th {
-  background-color: var(--color-zapatilla-fondo);
+  background-color: var(--color-tabla-inpar-admin);
+}
+#admin table td:nth-child(13) {
+  border-bottom: none;
+}
+#admin table td:nth-child(13), #admin table td:nth-child(14) {
+  border-left: none;
 }
 #admin table tbody tr:nth-child(odd) {
-  background-color: var(--color-negro-fondo);
+  background-color: var(--color-tabla-par-admin);
 }
 #admin table tbody tr:nth-child(odd) td, #admin table tbody tr:nth-child(odd) th {
-  color: var(--color-zapatilla-fondo);
+  color: var(--color-siempre-negro);
 }
 #admin table tbody tr:nth-child(even) {
-  background-color: var(--color-zapatilla-fondo);
+  background-color: var(--color-tabla-inpar-admin);
 }
 #admin table tbody tr:nth-child(even) td, #admin table tbody tr:nth-child(even) th {
   color: var(--color-negro-fondo);
@@ -1105,6 +1122,12 @@ button, select, option, .close {
 #admin .btn:hover {
   background-color: black;
   color: var(--color-dorado);
+}
+#admin #raffle-table-admin td:nth-child(8) {
+  border-bottom: none;
+}
+#admin #raffle-table-admin td:nth-child(8), #admin #raffle-table-admin td:nth-child(9) {
+  border-left: none;
 }
 #admin textarea {
   width: 100%;
