@@ -438,7 +438,7 @@ p, li, button, label, option {
   display: block;
 }
 .site-footer .footer-container .footer-row .footer-col .footer-links li a:active, .site-footer .footer-container .footer-row .footer-col .footer-links li a:focus, .site-footer .footer-container .footer-row .footer-col .footer-links li a:hover {
-  color: #3366cc;
+  color: var(--color-dorado);
   text-decoration: none;
 }
 .site-footer .footer-container .footer-row .footer-col .footer-links li.inline {

@@ -55,7 +55,7 @@
 
                         a {
                             &:active, &:focus, &:hover {
-                                color: #3366cc;
+                                color: var(--color-dorado);
                                 text-decoration: none;
                             }
                         }

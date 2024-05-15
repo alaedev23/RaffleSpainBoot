@@ -1,6 +1,6 @@
 // Tema claro o oscuro
 
-const tema = document.getElementById("cambiar-tema");
+const tema = document.getElementById("cambiar-tema-container");
 let temaOscuro = localStorage.getItem("tema");
 
 if (temaOscuro === "true") {
