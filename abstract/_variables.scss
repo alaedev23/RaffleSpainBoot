@@ -13,6 +13,7 @@
         --color-blanco-oscuro: #f5f5f5;
         --color-tabla-par-admin: #fff;
         --color-tabla-inpar-admin: #b8b8b8;
+        --color-form: #000000;
     } 
 
     &.dark {
@@ -26,5 +27,6 @@
         --color-blanco-oscuro: #333;
         --color-tabla-par-admin: #d0d0d0;
         --color-tabla-inpar-admin: #333;
+        --color-form: #000000;
     }
 }

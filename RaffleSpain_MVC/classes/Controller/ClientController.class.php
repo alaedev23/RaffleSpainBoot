@@ -29,6 +29,9 @@ class ClientController extends Controller {
         } else {
             $lang = "ca";
         }
+
+        $_SESSION['usuari'] = null;
+        $_SESSION['userAdmin'] = null;
         
         ClientView::showLogin($this->login, $lang);
     }
@@ -39,6 +42,9 @@ class ClientController extends Controller {
         } else {
             $lang = "ca";
         }
+
+        $_SESSION['usuari'] = null;
+        $_SESSION['userAdmin'] = null;
         
         ClientView::showRegister($this->register, $lang);
     }
