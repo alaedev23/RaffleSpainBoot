@@ -26,10 +26,10 @@ class RaffleView extends View {
         <h1>' . $rifa->product->price . ' €</h1>
         <h3>Participa hasta el ' . $rifa->date_end . '</h3>';
 
-        $rModel = new RaffleModel();
-        $rifaHaveClients = $rModel->getAllClientInRaffle($rifa->id);
+        // $rModel = new RaffleModel();
+        // $rifaHaveClients = $rModel->getAllClientInRaffle($rifa->id);
         
-        if ($dateVerify && isset($rifaHaveClients)) {
+        if ($dateVerify) {
             $html .= '<p>Se ha acabado la rifa. Consulte su apartado de "Mis Premios" para ver si ha ganado la rifa. Mucha suerte!</p>';
         }  else if (isset($_SESSION['usuari']) && $isInRaffle) {
             $html .= "<a href='?Raffle/toggleUser/{$rifa->id}/{$_SESSION['usuari']->id}/' class='btn'>Dejar de participar</a>";
