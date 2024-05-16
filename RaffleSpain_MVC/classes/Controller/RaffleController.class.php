@@ -67,7 +67,7 @@ class RaffleController extends Controller {
             }
 
         } else {
-            $this->vSearchRaffle->showRaffle($lang, $this->mRaffle->read(), false, null, "No tienes permisos para entrar a esta pagina.");
+            header("Location: ?client/formLogin");
         }
 
     }
