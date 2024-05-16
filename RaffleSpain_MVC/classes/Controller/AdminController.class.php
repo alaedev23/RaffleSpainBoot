@@ -330,6 +330,9 @@ class AdminController extends Controller {
             $data_start = $this->sanitize($_POST['date_start']);
             $data_end = $this->sanitize($_POST['date_end']);
             $winner = $this->sanitize($_POST['winner']);
+            if ($winner === "null") {
+                $winner = '';
+            }
             $type = $this->sanitize($_POST['type']);
             
             if (strlen($data_start) === 0) {

@@ -37,7 +37,7 @@ class EmailController extends Controller
 
 
         if (isset($deliver)) {
-            $subject = 'Pedido realizado con éxito';
+            $subject = 'Pedido realizado con Exito';
             $htmlContent = "
             <body style='font-family: Verdana, Geneva, sans-serif; background-color: #e8e8e8; margin: 0; padding: 0;'>
                 <div style='background-color: #f8f8f8; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); position: relative;'>

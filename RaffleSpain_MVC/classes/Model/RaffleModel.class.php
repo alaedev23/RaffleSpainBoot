@@ -284,6 +284,10 @@ class RaffleModel implements Crudable
     public function generateWinner($obj) {
         $clientes = $this->getAllClientInRaffle($obj);
         
+        if (empty($clientes)) {
+            return null;
+        }
+
         $ids = [];
         foreach ($clientes as $client) {
             $ids[] = $client->id;
