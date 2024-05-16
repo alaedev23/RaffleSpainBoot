@@ -48,7 +48,7 @@
 			</div>
 			<div class="form-group">
 				<label for="sex">Sexo:</label>
-				<select name="sex" require>
+				<select name="sex" class="select" require>
                     <option value="H" <?= ($register->sex === "H") ? "selected" : '' ?>>Hombre</option>
                     <option value="M" <?= ($register->sex === "M") ? "selected" : '' ?>>Mujer</option>
                     <option value="O" <?= ($register->sex === "O") ? "selected" : '' ?>>Otr@</option>	

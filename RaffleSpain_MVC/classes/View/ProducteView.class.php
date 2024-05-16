@@ -41,7 +41,7 @@ class ProducteView extends View {
                             <input type="text" placeholder="Mensaje" id="mensajeComment" name="mensajeComment" required>
                         </div>
                         <div class="section-modal">
-                            <select name="estrellas">
+                            <select name="estrellas" class="select" style="min-width: 200px;">
                                 <option value="">Selecciona las estrellas</option>
                                 <option value="0">Ninguna estrella</option>
                                 <option value="1">1 estrella</option>

@@ -39,6 +39,11 @@ button, select, option, .close {
     width: 40%;
     text-align: center;
     padding: 10px;
+    color: var(--color-siempre-negro) !important;
+
+    option {
+        color: var(--color-siempre-negro) !important;
+    }
 }
 
 /* Dropdown Button */

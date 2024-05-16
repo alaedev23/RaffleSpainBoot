@@ -4,6 +4,11 @@
     margin: 40px 100px 100px 100px;
     height: calc(100vh - 282px);
 
+    .select {
+        min-width: 100px;
+        color: var(--color-negro-fondo) !important;
+    }
+
     .show {
         display: block;
     }
