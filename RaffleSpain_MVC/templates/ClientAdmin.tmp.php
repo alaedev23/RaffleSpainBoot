@@ -1,4 +1,4 @@
-<section id="admin">
+<section id="admin" style="min-height: calc(100vh - 425px)">
 
 	<?php 
     	if ($errors !== "") {

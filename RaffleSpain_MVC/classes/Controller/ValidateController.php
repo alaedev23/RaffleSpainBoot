@@ -10,7 +10,8 @@ class ValidateController extends Controller {
     }
 
     public static function showCorrectValidate($email) {
-        ValidateView::showCorrectValidate($email);
+        header("Location: index.php");
+        // ValidateView::showCorrectValidate($email);
     }
     
   

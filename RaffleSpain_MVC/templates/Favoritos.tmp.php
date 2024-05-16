@@ -14,7 +14,7 @@
                         <p><?= $carretoProduct->product->description; ?></p>
                         <p class="precio"><?php echo $carretoProduct->product->price; ?> €</p>
                         <a href="?Producte/mostrarProducte/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Ver</a>
-                        <a href="?Favoritos/removeProductById/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Quitar Favorito</a>
+                        <a href="?Favoritos/removeProductById/<?= $carretoProduct->product->id; ?>" class="btn btnZapatillas">Quitar</a>
                     </div>
                 </li>
         <?php
