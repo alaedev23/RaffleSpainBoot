@@ -1,7 +1,20 @@
 <?php
 
+/**
+ * Clase que representa la vista de administrador.
+ */
 class AdminView extends View {
     
+    /**
+     * Muestra la vista de administrador.
+     *
+     * @param string $lang      Idioma de la página.
+     * @param array  $products  Lista de productos.
+     * @param array  $raffles   Lista de rifas.
+     * @param mixed  $objSelec  Objeto seleccionado.
+     * @param bool   $modificarDatos  Indica si se están modificando los datos.
+     * @param string $errors    Errores a mostrar.
+     */
     public static function show($lang, $products, $raffles, $objSelec = null, $modificarDatos = false, $errors = "") {
         
         if ($objSelec instanceof Product) {
@@ -25,6 +38,16 @@ class AdminView extends View {
         
     }
     
+    /**
+     * Genera la sección de productos en la vista de administrador.
+     *
+     * @param array  $products       Lista de productos.
+     * @param bool   $modificarDatos Indica si se están modificando los datos.
+     * @param mixed  $objSelec       Objeto seleccionado.
+     * @param string $errors         Errores a mostrar.
+     *
+     * @return string HTML generado para la sección de productos.
+     */
     public static function generateSectionProducts($products, $modificarDatos = false, $objSelec= null, $errors = "") {
         $html = "<h1>Productos</h1>";
         
@@ -110,6 +133,16 @@ class AdminView extends View {
         return $html;
     }
     
+    /**
+     * Genera la sección de rifas en la vista de administrador.
+     *
+     * @param array  $raffles        Lista de rifas.
+     * @param bool   $modificarDatos Indica si se están modificando los datos.
+     * @param mixed  $objSelec       Objeto seleccionado.
+     * @param string $errors         Errores a mostrar.
+     *
+     * @return string HTML generado para la sección de rifas.
+     */
     public static function generateSectionRaffles($raffles, $modificarDatos = false, $objSelec= null, $errors = "") {
         $html = "<h1>Raffles</h1>";
         $html .= "<p>El format de les dates son el seguent: 2023-12-01 09:00.</p>";

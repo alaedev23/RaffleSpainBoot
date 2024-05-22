@@ -1,9 +1,22 @@
 <?php
+
+/**
+ * Clase que representa la vista de errores.
+ */
 class ErrorView extends View {
 
+    /**
+     * Constructor de la clase.
+     */
     public function __construct() {
         parent::__construct();
     }
+    
+    /**
+     * Muestra la interfaz de error.
+     *
+     * @param Exception $e Excepción que ha ocurrido.
+     */
     public function show(Exception $e) {
         $fitxerDeTraduccions = "lang/{$this->lang}.php";
         include $fitxerDeTraduccions;

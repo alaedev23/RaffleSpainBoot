@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Clase PayPalView
+ *
+ * Esta clase se utiliza para mostrar las vistas relacionadas con los pagos de PayPal.
+ */
 class PayPalView extends View {
 
+    /**
+     * Muestra la vista de pago realizado correctamente.
+     */
     public static function showCorrect() {
         $mensaje = "Pago realizado correctamente";
 
@@ -14,6 +22,9 @@ class PayPalView extends View {
         echo "</body></html>";
     }
 
+    /**
+     * Muestra la vista de error en el pago.
+     */
     public static function showError() {
         $mensaje = "Error en el pago";
 

@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Clase HomeView
+ *
+ * Esta clase se utiliza para mostrar la vista de la página de inicio.
+ */
 class HomeView extends View {
     
+    /**
+     * Muestra la vista de la página de inicio.
+     *
+     * @param array $products Los productos a mostrar en la página de inicio.
+     * @param array $rifas Las rifas a mostrar en la página de inicio.
+     */
     public static function show($products, $rifas) {
 
         $function = new Functions();

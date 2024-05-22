@@ -1,13 +1,33 @@
 <?php
 
+/**
+ * Clase ProducteView
+ *
+ * Esta clase se utiliza para mostrar las vistas relacionadas con los productos.
+ */
 class ProducteView extends View {
 
+    /**
+     * @var CommentModel Objeto de modelo de comentarios.
+     */
     private $mComment;
     
+    /**
+     * Constructor de la clase.
+     */
     public function __construct() {
         $this->mComment = new CommentModel();
     }
     
+    /**
+     * Muestra la vista del producto.
+     *
+     * @param mixed $producte Información del producto.
+     * @param mixed $tallas Información de las tallas disponibles para el producto.
+     * @param mixed $enFavoritos Indica si el producto está en la lista de favoritos.
+     * @param string $errors Mensajes de error.
+     * @param string $errorsComment Mensajes de error para los comentarios.
+     */
     public function show($producte, $tallas, $enFavoritos, $errors = '', $errorsComment = '') {
         
         $getComments = $this->mComment->getById($producte);   
@@ -23,6 +43,13 @@ class ProducteView extends View {
 
     }
     
+    /**
+     * Genera el formulario para añadir un comentario.
+     *
+     * @param mixed $producte Información del producto.
+     * @param string $errorsComment Mensajes de error para los comentarios.
+     * @return string HTML del formulario para añadir un comentario.
+     */
     public function generateAddComment($producte, $errorsComment = '')
     {        
         $html = '<div>

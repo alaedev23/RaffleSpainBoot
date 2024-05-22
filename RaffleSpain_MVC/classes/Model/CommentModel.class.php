@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Clase CommentModel
+ *
+ * Esta clase maneja las operaciones CRUD para la entidad Comment.
+ */
 class CommentModel implements Crudable {
     
+    /**
+     * Lee todos los comentarios de la base de datos.
+     *
+     * @param mixed $obj No se utiliza en este método.
+     * @return array Un array de objetos Comment.
+     */
     public function read($obj = null) {
         $database = new DataBase('select');
         $result = $database->executarSQL("SELECT * FROM comment");
@@ -16,6 +27,12 @@ class CommentModel implements Crudable {
         return $comments;
     }
     
+    /**
+     * Crea un nuevo comentario en la base de datos.
+     *
+     * @param Comment $obj El objeto Comment a crear.
+     * @return mixed El resultado de la operación de creación.
+     */
     public function create($obj) {
         $database = new DataBase('insert');
         
@@ -33,6 +50,12 @@ class CommentModel implements Crudable {
         return $result;
     }
     
+    /**
+     * Actualiza un comentario en la base de datos.
+     *
+     * @param Comment $obj El objeto Comment a actualizar.
+     * @return mixed El resultado de la operación de actualización.
+     */
     public function update($obj) {
         $database = new DataBase('update');
         
@@ -51,6 +74,12 @@ class CommentModel implements Crudable {
         return $result;
     }
     
+    /**
+     * Obtiene todos los comentarios asociados a un producto.
+     *
+     * @param Comment $obj El objeto Comment que contiene el ID del producto.
+     * @return array|null Un array de objetos Comment o null si no se encuentran comentarios para el producto.
+     */
     public function getById($obj) {
         $database = new DataBase('select');
         
@@ -73,6 +102,12 @@ class CommentModel implements Crudable {
         return $comments;
     }
     
+    /**
+     * Elimina un comentario de la base de datos.
+     *
+     * @param Comment $obj El objeto Comment a eliminar.
+     * @return mixed El resultado de la operación de eliminación.
+     */
     public function delete($obj) {
         $database = new DataBase('delete');
         
@@ -81,6 +116,12 @@ class CommentModel implements Crudable {
         return $result;
     }
     
+    /**
+     * Crea un objeto Comment a partir de los datos obtenidos de la base de datos.
+     *
+     * @param array $data Los datos del comentario obtenidos de la base de datos.
+     * @return Comment El objeto Comment creado.
+     */
     private function createCommentFromData($data) {
         return new Comment (
             $data['id'],

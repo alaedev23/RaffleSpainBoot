@@ -1,15 +1,31 @@
 <?php
 
+/**
+ * Clase que representa la vista de datos del cliente.
+ */
 class ClientDatesView extends View
 {
 
+    /**
+     * Usuario actual.
+     * @var object
+     */
     private $user;
 
+    /**
+     * Constructor de la clase.
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
+    /**
+     * Muestra la interfaz para la visualización de datos del cliente.
+     *
+     * @param string $lang   Idioma de la interfaz.
+     * @param array  $errors Posibles errores a mostrar.
+     */
     public function show($lang, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
@@ -30,6 +46,13 @@ class ClientDatesView extends View
         echo "</body></html>";
     }
 
+    /**
+     * Muestra la interfaz para la visualización de rifas del cliente.
+     *
+     * @param string $lang    Idioma de la interfaz.
+     * @param array  $raffles Lista de rifas del cliente.
+     * @param array  $errors  Posibles errores a mostrar.
+     */
     public function showMyRaffle($lang, $raffles, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
@@ -47,6 +70,13 @@ class ClientDatesView extends View
         echo "</body></html>";
     }
     
+    /**
+     * Muestra la interfaz para la visualización de premios del cliente.
+     *
+     * @param string $lang    Idioma de la interfaz.
+     * @param array  $raffles Lista de premios del cliente.
+     * @param array  $errors  Posibles errores a mostrar.
+     */
     public function showMyPrizes($lang, $raffles, $errors = null)
     {
         $fitxerDeTraduccions = "languages/{$lang}_traduccio.php";
@@ -63,6 +93,12 @@ class ClientDatesView extends View
         echo "</body></html>";
     }
 
+    /**
+     * Genera el formulario de edición de datos del cliente.
+     *
+     * @param array $errors Posibles errores a mostrar.
+     * @return string HTML que representa el formulario de edición de datos del cliente.
+     */
     public function generateTemplate($errors = null)
     {
         if ($errors['message'] !== null && $errors['type'] === 1) {
@@ -115,6 +151,12 @@ class ClientDatesView extends View
         return $template;
     }
 
+    /**
+     * Genera el formulario de edición de dirección del cliente.
+     *
+     * @param array $errors Posibles errores a mostrar.
+     * @return string HTML que representa el formulario de edición de dirección del cliente.
+     */
     public function generateDirection($errors = null)
     {
         if ($errors['message'] !== null && $errors['type'] === 2) {
@@ -154,6 +196,12 @@ class ClientDatesView extends View
         return $template;
     }
 
+    /**
+     * Genera el formulario de edición de contraseña del cliente.
+     *
+     * @param array $errors Posibles errores a mostrar.
+     * @return string HTML que representa el formulario de edición de contraseña del cliente.
+     */
     public function generateEditPassword($errors = null)
     {
         if ($errors['message'] !== null && $errors['type'] === 3) {

@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * Clase que representa la vista de administración de clientes.
+ */
 class ClientAdminView {
     
+    /**
+     * Muestra la interfaz de administración de clientes.
+     *
+     * @param string $lang          Idioma de la interfaz.
+     * @param array  $clients       Lista de clientes.
+     * @param object $objSelec      Cliente seleccionado para modificar (opcional).
+     * @param bool   $modificarDatos Indica si se está modificando datos de un cliente (opcional).
+     * @param string $errors        Mensaje de error (opcional).
+     */
     public static function showClients($lang, $clients, $objSelec = null, $modificarDatos = false, $errors = "") {
         
         $clientTemplate = self::generateClientSection($clients, $modificarDatos, $objSelec, $errors);
@@ -15,6 +27,15 @@ class ClientAdminView {
         echo "</body></html>";
     }
     
+    /**
+     * Genera la sección de clientes para mostrar en la interfaz de administración.
+     *
+     * @param array  $clients       Lista de clientes.
+     * @param bool   $modificarDatos Indica si se está modificando datos de un cliente (opcional).
+     * @param object $objSelec      Cliente seleccionado para modificar (opcional).
+     * @param string $errors        Mensaje de error (opcional).
+     * @return string HTML que representa la sección de clientes.
+     */
     public static function generateClientSection($clients, $modificarDatos = false, $objSelec= null, $errors = "") {
         $html = "<div class=\"client-section\">";
         $html .= "<h1>Clients</h1>";

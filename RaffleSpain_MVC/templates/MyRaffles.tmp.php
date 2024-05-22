@@ -1,4 +1,4 @@
-<?= (count($raffles) === 0) ? '<section style="height: calc(100vh - 462px)" id="myRaffles ">' : '<section id="myRaffles ">' ?>
+<?= ($raffles === null) ? '<section style="height: calc(100vh - 433px)" id="myRaffles ">' : '<section id="myRaffles ">' ?>
 	<div class="containerError">
     	<?= isset($errors) ? "<div class=\"errorMessage\"><p>$errors</hp></div>" : ''; ?>
     </div>

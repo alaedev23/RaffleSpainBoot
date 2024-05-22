@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * Clase FavoritosView
+ *
+ * Esta clase se utiliza para mostrar la vista de productos favoritos.
+ */
 class FavoritosView extends View {
     
+    /**
+     * Muestra la vista de productos favoritos.
+     *
+     * @param array|null $carretoProducts Los productos favoritos a mostrar.
+     */
     public static function show($carretoProducts = null) {
         
         echo "<!DOCTYPE html><html class=\"light\" lang=\"es\">";

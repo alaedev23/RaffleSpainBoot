@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * Clase RaffleView
+ *
+ * Esta clase se utiliza para mostrar vistas relacionadas con rifas.
+ */
 class RaffleView extends View {
     
+    /**
+     * Constructor de la clase.
+     */
     public function __construct() {
         parent::__construct();
     }
     
+    /**
+     * Muestra la vista de la rifa.
+     *
+     * @param object $rifa Información de la rifa.
+     * @param bool $isInRaffle Indica si el usuario está participando en la rifa.
+     * @param bool $dateVerify Indica si la fecha de la rifa ha pasado.
+     */
     public static function show($rifa, $isInRaffle, $dateVerify) {
         
         $infoRaffle = self::generateInfoRaffle($rifa, $isInRaffle, $dateVerify);
@@ -20,14 +35,19 @@ class RaffleView extends View {
         
     }
     
+    /**
+     * Genera la información de la rifa.
+     *
+     * @param object $rifa Información de la rifa.
+     * @param bool $isInRaffle Indica si el usuario está participando en la rifa.
+     * @param bool $dateVerify Indica si la fecha de la rifa ha pasado.
+     * @return string HTML con la información de la rifa.
+     */
     public static function generateInfoRaffle($rifa, $isInRaffle, $dateVerify) {
         $html = '
         <h1>' . str_replace('-', ' ', $rifa->product->brand) . ' ' . str_replace('-', ' ', $rifa->product->name) . '</h1>
         <h1>' . $rifa->product->price . ' €</h1>
         <h3>Participa hasta el ' . $rifa->date_end . '</h3>';
-
-        // $rModel = new RaffleModel();
-        // $rifaHaveClients = $rModel->getAllClientInRaffle($rifa->id);
         
         if ($dateVerify) {
             $html .= '<p>Se ha acabado la rifa. Consulte su apartado de "Mis Premios" para ver si ha ganado la rifa. Mucha suerte!</p>';

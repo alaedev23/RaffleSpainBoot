@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * Clase que representa la vista de la cesta de la compra.
+ */
 class CistellaView extends View {
     
+    /**
+     * Muestra la cesta de la compra.
+     *
+     * @param array|null $carretoProducts Lista de productos en la cesta (opcional).
+     * @param string     $errors          Mensaje de error (opcional).
+     * @return string HTML que representa la cesta de la compra.
+     */
     public static function mostrarCesta($carretoProducts = null, $errors = '') {
         $html = (count($carretoProducts) === 0) ? '<div style="height: calc(100vh - 480px)" class="cistella">' : '<div class="cistella">';
         $html .= '<h1>Mi Cesta</h1>';
@@ -24,6 +34,12 @@ class CistellaView extends View {
         return $html;
     }
     
+    /**
+     * Renderiza la información de un producto en la cesta.
+     *
+     * @param object $carretoProduct Objeto que representa el producto en la cesta.
+     * @return string HTML que representa la información del producto en la cesta.
+     */
     private static function renderizarProductoEnCesta($carretoProduct) {
         
         $mProduct = new ProductModel();
@@ -45,6 +61,12 @@ class CistellaView extends View {
         return $html;
     }
     
+    /**
+     * Renderiza el precio total de la cesta.
+     *
+     * @param float $total Total de la compra.
+     * @return string HTML que representa el precio total de la cesta.
+     */
     private static function renderizarPrecioTotal($total) {
         $html = '<div class="precio-total">';
         $html .= '<p>Total: ' . number_format($total, 2) . ' €</p>';
@@ -56,6 +78,13 @@ class CistellaView extends View {
         return $html;
     }
     
+    /**
+     * Muestra la página de la cesta de la compra.
+     *
+     * @param array|null $carretoProducts Lista de productos en la cesta (opcional).
+     * @param string     $errors          Mensaje de error (opcional).
+     * @return string HTML que representa la página de la cesta de la compra.
+     */
     public static function show($carretoProducts = null, $errors = '') {
         
         $template = self::mostrarCesta($carretoProducts, $errors);

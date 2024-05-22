@@ -1,14 +1,30 @@
 <?php
 
+/**
+ * Clase ProductModel
+ *
+ * Esta clase se encarga de gestionar los productos en la base de datos.
+ */
 class ProductModel implements Crudable
 {
+    /**
+     * @var DataBase $database Objeto para interactuar con la base de datos.
+     */
     private $database;
-
+    
+    /**
+     * Constructor de la clase ProductModel.
+     */
     public function __construct()
     {
         $this->database = new DataBase('select');
     }
-
+    
+    /**
+     * Lee todos los productos de la base de datos.
+     *
+     * @return array Un array de objetos Product.
+     */
     public function read()
     {
         $sql = 'SELECT * FROM product';
@@ -19,6 +35,11 @@ class ProductModel implements Crudable
         return $products;
     }
     
+    /**
+     * Lee todos los productos de la base de datos.
+     *
+     * @return array Un array de objetos Product.
+     */
     public function readAll()
     {
         $sql = 'SELECT * FROM product';
@@ -33,7 +54,13 @@ class ProductModel implements Crudable
         
         return $productos;
     }
-
+    
+    /**
+     * Crea un nuevo producto en la base de datos.
+     *
+     * @param Product $obj Objeto Product a crear.
+     * @return mixed Resultado de la operación de inserción.
+     */
     public function create($obj)
     {
         $sql = 'INSERT INTO product (name, brand, modelCode, price, size, color, sex, img, description, quantity, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -41,7 +68,13 @@ class ProductModel implements Crudable
         
         return $this->database->executarSQL($sql, $params);
     }
-
+    
+    /**
+     * Actualiza un producto en la base de datos.
+     *
+     * @param Product $obj Objeto Product a actualizar.
+     * @return mixed Resultado de la operación de actualización.
+     */
     public function update($obj)
     {
         $sql = 'UPDATE product SET name=?, modelCode=?, sex=?, brand=?, price=?, size=?, color=?, img=?, description=?, quantity=?, discount=? WHERE id=?';
@@ -49,14 +82,26 @@ class ProductModel implements Crudable
         
         return $this->database->executarSQL($sql, $params);
     }
-
+    
+    /**
+     * Elimina un producto de la base de datos.
+     *
+     * @param Product $obj Objeto Product a eliminar.
+     * @return mixed Resultado de la operación de eliminación.
+     */
     public function delete($obj)
     {
         $sql = 'DELETE FROM product WHERE id=?';
         $params = [$obj->id];
         return $this->database->executarSQL($sql, $params);
     }
-
+    
+    /**
+     * Obtiene un producto por su ID.
+     *
+     * @param Product $obj Objeto Product con el ID a buscar.
+     * @return mixed|null Objeto Product encontrado o null si no se encuentra.
+     */
     public function getById($obj)
     {
         $sql = 'SELECT * FROM product WHERE id=? LIMIT 1';
@@ -70,6 +115,13 @@ class ProductModel implements Crudable
         return $this->createProductFromData($result[0]);
     }
     
+    /**
+     * Obtiene una cantidad aleatoria de productos de la base de datos.
+     *
+     * @param int $quantity Cantidad de productos aleatorios a obtener.
+     * @return array Un array de objetos Product.
+     * @throws Exception Si no hay suficientes productos disponibles para seleccionar.
+     */
     public function getRandomProducts($quantity) {
         $products = $this->read();
         $totalProducts = count($products);
@@ -91,7 +143,13 @@ class ProductModel implements Crudable
         
         return $randomProducts;
     }
-
+    
+    /**
+     * Busca productos que coincidan con una cadena de búsqueda en la base de datos.
+     *
+     * @param string $searchString Cadena de búsqueda para buscar productos.
+     * @return array Un array de objetos Product que coinciden con la búsqueda.
+     */
     public function searchProduct($searchString) {
         $allProducts = $this->readAll();
         $searchReady = strtolower(trim($searchString));
@@ -105,38 +163,9 @@ class ProductModel implements Crudable
                     str_contains(strtolower($product->__get("color")), strtolower($searchString)) ||
                     str_contains($nameBrand, strtolower($searchString))) {
                         array_push($productsFound, $product);
-                    }   
+                    }
             }
         }
-        
-//         if (empty($productsFound)) {
-//             foreach ($allProducts as $product) {
-//                 // Normaliza el nombre del producto y la marca, y los une en una sola cadena
-//                 $nameBrand = strtolower($product->__get("brand")) . " " . strtolower($product->__get("name"));
-                
-//                 // Divide la cadena de búsqueda en tokens individuales
-//                 $searchTokens = explode(" ", $searchReady);
-                
-//                 // Divide el nombre del producto en tokens individuales
-//                 $productTokens = explode(" ", strtolower($nameBrand));
-                
-//                 // Verifica si hay coincidencias entre los tokens
-//                 $match = false;
-//                 foreach ($searchTokens as $searchToken) {
-//                     foreach ($productTokens as $productToken) {
-//                         // Comprueba si el token de búsqueda está contenido en el token del producto
-//                         if (str_contains($productToken, $searchToken) || str_contains($searchToken, $productToken)) {
-//                             $match = true;
-//                             break 2; // Sale de ambos bucles foreach
-//                         }
-//                     }
-//                 }
-                
-//                 if ($match) {
-//                     array_push($productsFound, $product);
-//                 }   
-//             }
-//         }
         
         $deleteDuplicateProducts = [];
         
@@ -147,6 +176,12 @@ class ProductModel implements Crudable
         return (empty($deleteDuplicateProducts)) ? $productsFound : $deleteDuplicateProducts;
     }
     
+    /**
+     * Lee productos de la base de datos filtrando por sexo.
+     *
+     * @param string $sexo Sexo por el que filtrar los productos.
+     * @return array Un array de objetos Product filtrados por sexo.
+     */
     public function readForSex($sexo) {
         $sql = 'SELECT * FROM product WHERE sex = ?';
         $params = [$sexo];
@@ -157,6 +192,12 @@ class ProductModel implements Crudable
         return $products;
     }
     
+    /**
+     * Lee productos de la base de datos filtrando por nombre y marca.
+     *
+     * @param FavoritosProduct $obj Objeto FavoritosProduct con el nombre y la marca del producto a buscar.
+     * @return array Un array de objetos Product que coinciden con el nombre y la marca especificados.
+     */
     public function readForNameBrand($obj) {
         $sql = 'SELECT * FROM product WHERE name = ? and brand = ?';
         $params = [$obj->__get("name"), $obj->__get("brand")];
@@ -167,6 +208,12 @@ class ProductModel implements Crudable
         return $products;
     }
     
+    /**
+     * Verifica si existe un producto en la base de datos.
+     *
+     * @param mixed $search Objeto de búsqueda que contiene el ID del producto a buscar.
+     * @return bool true si el producto existe, false de lo contrario.
+     */
     public function existProduct($search) {
         $productsAll = $this->readAll();
         foreach ($productsAll as $product) {
@@ -177,6 +224,12 @@ class ProductModel implements Crudable
         return false;
     }
     
+    /**
+     * Obtiene las tallas disponibles para un producto.
+     *
+     * @param Product $product Objeto Product del que se desean obtener las tallas.
+     * @return array Un array de tallas disponibles para el producto.
+     */
     public function getTallas($product){
         
         $productName = $product->__get('name');
@@ -191,10 +244,17 @@ class ProductModel implements Crudable
         foreach ($results as $result) {
             $tallas[] = $result['size'];
         }
-
+        
         return $tallas;
     }
-
+    
+    /**
+     * Actualiza la cantidad de un producto en la base de datos.
+     *
+     * @param Product $product Objeto Product del que se desea actualizar la cantidad.
+     * @param int $quantity Nueva cantidad del producto.
+     * @return mixed Resultado de la operación de actualización.
+     */
     public function updateQuantity($product, $quantity)
     {
         $sql = 'UPDATE product SET quantity=? WHERE id=?';
@@ -202,7 +262,13 @@ class ProductModel implements Crudable
         
         return $this->database->executarSQL($sql, $params);
     }
-
+    
+    /**
+     * Obtiene la cantidad disponible de un producto.
+     *
+     * @param Product $product Objeto Product del que se desea obtener la cantidad.
+     * @return int La cantidad disponible del producto.
+     */
     public function getQuantity($product)
     {
         $sql = 'SELECT quantity FROM product WHERE id=?';
@@ -212,6 +278,12 @@ class ProductModel implements Crudable
         return $result[0]['quantity'];
     }
     
+    /**
+     * Elimina duplicados de un array de productos basados en el código de modelo.
+     *
+     * @param array $results Array de productos a procesar.
+     * @return array Un array de productos sin duplicados.
+     */
     public function deleteDuplicate($results) {
         $resultado = [];
         $modelCodes = [];
@@ -224,7 +296,7 @@ class ProductModel implements Crudable
                 $dataArray = $result;
             }
             
-            $product = $this->createProductFromData($dataArray);            
+            $product = $this->createProductFromData($dataArray);
             $currentModelCode = $product->__get("modelCode");
             
             if (!in_array($currentModelCode, $modelCodes)) {
@@ -235,7 +307,13 @@ class ProductModel implements Crudable
         return $resultado;
     }
     
-    public function convertRaffleToProduct($rifas) 
+    /**
+     * Convierte un array de rifas en un array de productos.
+     *
+     * @param array $rifas Un array de objetos Rifa.
+     * @return array Un array de objetos Product.
+     */
+    public function convertRaffleToProduct($rifas)
     {
         $allProducts = [];
         foreach ($rifas as $rifa) {
@@ -246,6 +324,12 @@ class ProductModel implements Crudable
         return $allProducts;
     }
     
+    /**
+     * Convierte un objeto Product en un array asociativo.
+     *
+     * @param Product $object El objeto Product a convertir.
+     * @return array El array asociativo con los datos del producto.
+     */
     public function productToArray($object) {
         $dataArray = [
             "id" => $object->id,
@@ -264,6 +348,12 @@ class ProductModel implements Crudable
         return $dataArray;
     }
     
+    /**
+     * Crea un objeto Product a partir de un array de datos.
+     *
+     * @param array $data El array de datos del producto.
+     * @return Product El objeto Product creado.
+     */
     public function createProductFromData($data)
     {
         return new Product(

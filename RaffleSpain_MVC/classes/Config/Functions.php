@@ -1,17 +1,32 @@
 <?php
 use RdKafka\Producer;
 
+/**
+ * Clase que contiene diversas funciones útiles.
+ */
 class Functions
 {
+    /**
+     * Calcula el precio descontado de un producto.
+     *
+     * @param float $price Precio del producto.
+     * @param float $discount Descuento aplicado al producto en porcentaje.
+     * @return float Precio descontado.
+     */
     public static function discountPrice($price, $discount)
     {
         $discountedPrice = $price - ($price * ($discount / 100));
         return $discountedPrice;
     }
     
+    /**
+     * Genera la tarjeta de producto para un conjunto de productos.
+     *
+     * @param array $products Arreglo de productos.
+     * @return string Tarjeta de productos en formato HTML.
+     */
     public static function generatecardProduct($products)
     {
-        // animated-section-left-right animation
         $result = '';
         foreach ($products as $product) {
             $result .= '
@@ -30,6 +45,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera tarjetas de rifas.
+     *
+     * @param array|null $rifas Array de objetos de rifas o null si no hay rifas.
+     * @return string HTML que representa las tarjetas de rifas.
+     */
     public static function generatecardRaffle($rifas)
     {        
         $result = '';
@@ -65,6 +86,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera tarjetas de rifas para miembros con participación abierta.
+     *
+     * @param object $rifa Objeto de la rifa.
+     * @return string HTML que representa la tarjeta de la rifa.
+     */
     public static function generatecardRaffleMemberOpen($rifa)
     {
         $result = '';
@@ -84,6 +111,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera tarjetas de rifas para miembros con participación cerrada.
+     *
+     * @param object $rifa Objeto de la rifa.
+     * @return string HTML que representa la tarjeta de la rifa.
+     */
     public static function generatecardRaffleMemberClose($rifa)
     {
         $result = '';
@@ -103,6 +136,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera tarjetas de comentarios.
+     *
+     * @param array $comments Array de objetos de comentarios.
+     * @return string HTML que representa las tarjetas de comentarios.
+     */
     public static function generateCardComment($comments)
     {
         $result = '';
@@ -121,6 +160,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera estrellas para la calificación.
+     *
+     * @param int $quantity Cantidad de estrellas a generar.
+     * @return string HTML que representa las estrellas de calificación.
+     */
     public static function generateStars($quantity)
     {
         $result = '';
@@ -142,6 +187,12 @@ class Functions
         return $result;
     }
 
+    /**
+     * Genera el texto correspondiente al sexo del producto.
+     *
+     * @param string $sex Sexo del producto ('H' para hombre, 'M' para mujer, 'N' para niño).
+     * @return string Texto representativo del sexo.
+     */
     public static function generateSex($sex)
     {
         if ($sex == 'H') {
@@ -153,6 +204,12 @@ class Functions
         }
     }
 
+    /**
+     * Genera opciones de tallas como radio buttons.
+     *
+     * @param array $tallas Array de tallas disponibles.
+     * @return string HTML que representa las opciones de tallas.
+     */
     public static function generateTallas($tallas)
     {
         $tallasHTML = '';
@@ -166,6 +223,13 @@ class Functions
         return $tallasHTML;
     }
 
+    /**
+     * Genera opciones de tallas como un select.
+     *
+     * @param array $tallas Array de tallas disponibles.
+     * @param string|null $actualTalla Talla actual seleccionada (opcional).
+     * @return string HTML que representa las opciones de tallas como un select.
+     */
     public static function generateFullTallas($tallas, $actualTalla = null)
     {
         $tallasHTML = '<section>';
@@ -183,6 +247,13 @@ class Functions
         return $tallasHTML;
     }
 
+    /**
+     * Obtiene un nuevo código de modelo para un producto.
+     *
+     * @param string $name Nombre del producto.
+     * @param string $brand Marca del producto.
+     * @return int Nuevo código de modelo para el producto.
+     */
     public static function getNewModelCode($name, $brand)
     {
         $modelo = new ProductModel();
@@ -202,62 +273,26 @@ class Functions
         }
     }
 
-    public static function redimensionarImagen($rutaImagen)
-    {
-        // Obtener las dimensiones de la imagen original
-        list ($ancho_orig, $alto_orig) = getimagesize($rutaImagen);
-
-        // Nuevas dimensiones para la imagen redimensionada
-        $nuevo_ancho = 600;
-        $nuevo_alto = 600;
-
-        // Crear una imagen en blanco con las nuevas dimensiones
-        $imagen_redimensionada = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
-
-        // Dependiendo del tipo de archivo, carga la imagen original
-        $extension = strtolower(pathinfo($rutaImagen, PATHINFO_EXTENSION));
-        switch ($extension) {
-            case 'png':
-                $imagen_original = imagecreatefrompng($rutaImagen);
-                break;
-            case 'jpg':
-            case 'jpeg':
-                $imagen_original = imagecreatefromjpeg($rutaImagen);
-                break;
-            // Agrega más casos si necesitas manejar otros tipos de archivos
-            default:
-                return false; // Devuelve falso si el tipo de archivo no es compatible
-        }
-
-        // Redimensionar la imagen original a la nueva imagen
-        imagecopyresampled($imagen_redimensionada, $imagen_original, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho_orig, $alto_orig);
-
-        // Guardar la imagen redimensionada en la misma ruta de destino
-        switch ($extension) {
-            case 'png':
-                imagepng($imagen_redimensionada, $rutaImagen);
-                break;
-            case 'jpg':
-            case 'jpeg':
-                imagejpeg($imagen_redimensionada, $rutaImagen);
-                break;
-            // Agrega más casos si necesitas manejar otros tipos de archivos
-        }
-
-        // Liberar la memoria ocupada por las imágenes
-        imagedestroy($imagen_original);
-        imagedestroy($imagen_redimensionada);
-
-        return true; // Devuelve verdadero si la redimensión fue exitosa
-    }
-
+    /**
+     * Reemplaza los espacios en una cadena por guiones.
+     *
+     * @param string $string Cadena en la que se reemplazarán los espacios.
+     * @return string Cadena con los espacios reemplazados por guiones.
+     */
     public static function replaceSpaceForHyphen($string)
     {
         return str_replace(' ', '-', $string);
     }
 
+    /**
+     * Reemplaza los guiones en una cadena por espacios.
+     *
+     * @param string $string Cadena en la que se reemplazarán los guiones.
+     * @return string Cadena con los guiones reemplazados por espacios.
+     */
     public static function replaceHyphenForSpace($string)
     {
         return str_replace('-', ' ', $string);
     }
+    
 }
