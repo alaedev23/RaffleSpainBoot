@@ -246,7 +246,7 @@ class ClientController extends Controller {
                     
                     $consulta = $mClient->update($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con éxito") {
+                    if ($consulta === "La consulta se ha realizado con existo") {
                         $_SESSION['usuari'] = $updateClient;
                         $this->vClientDates->show($lang);
                     } else {
