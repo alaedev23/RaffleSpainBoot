@@ -36,7 +36,7 @@ class Functions
                     <p class="nombre_zapatilla">' . self::replaceHyphenForSpace($product->brand) . ' ' . str_replace('-', ' ', $product->name) . '</p>
                     <p class="sexo_zapatilla">' . self::generateSex($product->sex) . '</p>';
                     if ($product->price != Functions::discountPrice($product->price, $product->discount)) {
-                        $result .= '<p class="precio"><span class="beforeDiscount">' . $product->price . '</span> ' . Functions::discountPrice($product->price, $product->discount) . ' €</p>';
+                        $result .= '<p class="precio"><span class="beforeDiscount">' . $product->normalPrice . '</span> ' . $product->price . ' €</p>';
                     } else {
                         $result .= '<p class="precio">' . $product->price . ' €</p>';
                     }

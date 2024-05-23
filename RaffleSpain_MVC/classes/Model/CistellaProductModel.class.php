@@ -113,7 +113,7 @@ class CistellaProductModel {
     /**
      * Elimina todos los productos en la cesta de un cliente.
      *
-     * @param CistellaProduct $obj Objeto que contiene el ID del cliente.
+     * @param $obj Objeto que contiene el ID del cliente.
      *
      * @return mixed El resultado de la operación de eliminación.
      */
@@ -145,4 +145,4 @@ class CistellaProductModel {
     }
     
 }
-?>
+

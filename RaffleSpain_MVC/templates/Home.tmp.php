@@ -55,13 +55,13 @@
     <div class="carousel">
       <ul>
         <li>
-          <img src="public/img/slider/fondo1.jpeg"" alt="" />
+          <img src="public/img/slider/fondo1.jpeg" alt="" />
         </li>
         <li>
           <img src="public/img/slider/fondo2.jpg" alt="">
         </li>
         <li>
-          <img src="public/img/slider/fondo3.avif"" />
+          <img src="public/img/slider/fondo3.avif" />
         </li>
         <li>
           <img src="public/img/slider/fondo4.jpg">

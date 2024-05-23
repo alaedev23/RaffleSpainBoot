@@ -210,7 +210,6 @@ class PayPalController extends Controller
                         $deliver->product = $product;
                         $deliver->quantity = $array['quantities'][$index];
                         $deliver->date = $array['date'];
-                        $deliver->token = $token;
 
                         $stockProduct = $productModel->getQuantity($deliver->product);
 

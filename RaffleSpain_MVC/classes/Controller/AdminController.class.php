@@ -467,6 +467,23 @@ class AdminController extends Controller {
         
     }
     
+    /**
+     * Asigna los datos de un producto para su creación o actualización.
+     *
+     * @param int|null $id El ID del producto si existe, o null para un nuevo producto.
+     * @param string $name El nombre del producto.
+     * @param string $brand La marca del producto.
+     * @param string $modelCode El código de modelo del producto.
+     * @param float $price El precio del producto.
+     * @param int $size El tamaño del producto.
+     * @param string $color El color del producto.
+     * @param string $description La descripción del producto.
+     * @param string $sex El género del producto.
+     * @param string $img El nombre del archivo de imagen del producto.
+     * @param int $quantity La cantidad disponible del producto.
+     * @param float $discount El descuento aplicado al producto.
+     * @return Product El objeto Product creado con los datos proporcionados.
+     */
     private function asignDataProduct($id, $name, $brand, $modelCode, $price, $size, $color, $description, $sex, $img, $quantity, $discount) {
         return new Product (
             $id,
@@ -484,6 +501,18 @@ class AdminController extends Controller {
         );
     }
     
+    /**
+     * Asigna los datos de un sorteo para su creación o actualización.
+     *
+     * @param int|null $id El ID del sorteo si existe, o null para un nuevo sorteo.
+     * @param int $product_id El ID del producto asociado al sorteo.
+     * @param string $date_start La fecha de inicio del sorteo.
+     * @param string $date_end La fecha de fin del sorteo.
+     * @param Product $product El objeto Producto asociado al sorteo.
+     * @param string|null $winner El ganador del sorteo, si existe.
+     * @param string $type El tipo de sorteo.
+     * @return Raffle El objeto Raffle creado con los datos proporcionados.
+     */
     private function asignDataRaffle($id, $product_id, $date_start, $date_end, $product, $winner, $type) {
         return new Raffle (
             $id,

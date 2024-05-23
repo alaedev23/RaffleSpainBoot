@@ -37,6 +37,14 @@ class DeliverModel {
         return $delivers;
     }
 
+
+    public function existsDeliverByPayerIdAndToken($payerID, $token) {
+        $query = "SELECT * FROM deliver WHERE payerID = ? AND token = ?";
+        $params = [$payerID, $token];
+        $result = $this->database->executarSQL($query, $params);
+        return !empty($result);
+    }
+
     public function createDeliver($deliver) {
         $query = "INSERT INTO deliver (client_id, date, date_deliver) VALUES (?, ?, ?)";
         $params = array(

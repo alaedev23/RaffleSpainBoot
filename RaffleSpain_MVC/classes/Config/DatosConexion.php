@@ -5,6 +5,6 @@
  */
 
 $sgbd = 'mysql';
-$base = 'rsdb2';
+$base = 'rsdb';
 $usuarioSelect = 'rsadmin';
 $passwordSelect = '12341234_Aa';

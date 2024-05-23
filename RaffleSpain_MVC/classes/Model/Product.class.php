@@ -65,6 +65,11 @@ class Product
      * @var float|null $discount Descuento aplicado al producto.
      */
     private $discount;
+
+    /**
+     * @var float|null $normalPrice precio sin el descuento aplicado.
+     */
+    private $normalPrice;
     
     /**
      * Constructor de la clase Product.
@@ -88,7 +93,6 @@ class Product
         $this->name = $name;
         $this->brand = $brand;
         $this->modelCode = $modelCode;
-        $this->price = $price;
         $this->size = $size;
         $this->color = $color;
         $this->description = $description;
@@ -96,6 +100,15 @@ class Product
         $this->img = $img;
         $this->quantity = $quantity;
         $this->discount = $discount;
+        $this->price = $this->calculateDiscountedPrice($price);
+        $this->normalPrice = $price;
+    }
+
+    private function calculateDiscountedPrice($price) {
+        if ($this->discount !== null || $this->discount !== 0) {
+            return round($price - ($price * ($this->discount / 100)), 2);
+        }
+        return $price;
     }
     
     /**
@@ -163,8 +176,9 @@ class Product
             'img' => $this->img,
             'description' => $this->description,
             'quantity' => $this->quantity,
-            'discount' => $this->discount
+            'discount' => $this->discount,
+            'normalPrice' => $this->normalPrice
         ];
     }
 }
-?>
+
