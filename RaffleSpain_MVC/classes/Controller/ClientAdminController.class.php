@@ -104,7 +104,7 @@ class ClientAdminController extends Controller {
                 $this->client = $this->assignClientData(null, $name, $password, $surnames, $born, $email, $phone, $sex, $poblation, $address, $type, $floor, $door, $postal_code);
                 $create = $this->clientModel->create($this->client);
 
-                if ($create === "La consulta se ha realizado con existo") {
+                if ($create === "La consulta se ha realizado con éxito") {
                     $this->clients = $this->clientModel->read();
                     header("Location: index.php?ClientAdmin/show");
                     ClientAdminView::showClients("es", $this->clients, null);
@@ -230,7 +230,7 @@ class ClientAdminController extends Controller {
 
             $delete = $this->clientModel->delete(new Client($id[0]));
 
-            if ($delete === "La consulta se ha realizado con existo") {
+            if ($delete === "La consulta se ha realizado con éxito") {
                 $this->clients = $this->clientModel->read();
                 header("Location: index.php?ClientAdmin/show");
                 ClientAdminView::showClients("es", $this->clients, null);
