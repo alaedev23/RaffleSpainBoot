@@ -6,12 +6,21 @@ class ProducteController extends Controller {
     private $mProduct;
     private $vSearchProduct;
     
+        /**
+     * Constructor de la clase ProducteController.
+     */
     public function __construct() {
         parent::__construct();
         $this->mProduct = new ProductModel();
         $this->vSearchProduct = new SearchView();
     }
     
+        /**
+     * Muestra productos aleatorios en la página de búsqueda.
+     *
+     * @throws Exception Si hay un error al obtener los productos aleatorios.
+     * @return void
+     */
     public function showSearchProducts() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -23,6 +32,14 @@ class ProducteController extends Controller {
         $this->vSearchProduct->showProducts($lang, $products);
     }
 
+        /**
+     * Muestra los detalles de un producto específico.
+     *
+     * @param array $id El ID del producto.
+     * @param string $errors Los errores a mostrar, si los hay.
+     * @throws Exception Si hay un error al obtener los detalles del producto.
+     * @return void
+     */
     public function mostrarProducte($id, $errors = '') {
         $mProducts = new ProductModel();
         $productId = new Product($id[0]);
@@ -49,6 +66,13 @@ class ProducteController extends Controller {
         }
 
     }
+
+        /**
+     * Realiza una búsqueda de productos.
+     *
+     * @throws Exception Si hay un error al procesar la búsqueda.
+     * @return void
+     */
 
     public function searchProducts() {
         if (isset($_COOKIE["lang"])) {

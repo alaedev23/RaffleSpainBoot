@@ -2,6 +2,11 @@
 
 class HomeController extends Controller {
     
+    /**
+     * Muestra la página de inicio con productos aleatorios y rifas.
+     *
+     * @return void
+     */
     public static function show() {
         
         $mProducts = new ProductModel();
@@ -15,4 +20,3 @@ class HomeController extends Controller {
     }
 
 }
-

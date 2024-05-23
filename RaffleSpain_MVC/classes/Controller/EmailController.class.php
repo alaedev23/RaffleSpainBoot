@@ -8,6 +8,14 @@ require 'vendor/autoload.php';
 class EmailController extends Controller
 {
 
+        /**
+     * Envía un correo electrónico.
+     *
+     * @param object $client  Cliente al que se enviará el correo electrónico.
+     * @param object|null $deliver  Entrega relacionada con el correo electrónico, si la hay.
+     *
+     * @throws Exception Cuando falla el envío del correo electrónico.
+     */
     public function sendMail($client, $deliver = null)
     {
 
@@ -80,6 +88,13 @@ class EmailController extends Controller
 
     }
 
+        /**
+     * Envía un correo electrónico desde el formulario de contacto.
+     *
+     * @param array $contact  Información del formulario de contacto.
+     *
+     * @throws Exception Cuando falla el envío del correo electrónico.
+     */
     public function sendMailContactUs($contact)
     {
 
@@ -174,6 +189,13 @@ class EmailController extends Controller
     //     }
     // }
 
+        /**
+     * Valida el hash de activación de la cuenta del cliente.
+     *
+     * @param string $hash  Hash de activación de la cuenta.
+     *
+     * @throws Exception Cuando el hash es inválido.
+     */
     public function validate($hash)
     {
         $implodedhash = implode("/", $hash);

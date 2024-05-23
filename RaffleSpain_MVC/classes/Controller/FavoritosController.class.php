@@ -2,6 +2,11 @@
 
 class FavoritosController extends Controller {
     
+        /**
+     * Muestra los productos favoritos del usuario.
+     *
+     * @throws Exception Cuando no hay ningún cliente logueado.
+     */
     public static function show()
     {
         if (isset($_SESSION['usuari'])) {
@@ -13,6 +18,12 @@ class FavoritosController extends Controller {
         }
 
     }
+
+        /**
+     * Carga los productos favoritos del usuario.
+     *
+     * @return array|null Lista de productos favoritos del usuario.
+     */
 
     public static function cargarProductos() {
 
@@ -27,6 +38,14 @@ class FavoritosController extends Controller {
 
         }
     }
+
+       /**
+     * Agrega un producto a la lista de favoritos del usuario.
+     *
+     * @param array $id  ID del producto a agregar.
+     *
+     * @throws Exception Cuando no hay ningún cliente logueado.
+     */
 
     public static function addProduct($id)
     {
@@ -63,6 +82,9 @@ class FavoritosController extends Controller {
 
     }
 
+        /**
+     * Vacía el carrito de favoritos del usuario.
+     */
     public static function emptyCart() {
 
         if (isset($_SESSION['usuari'])) {
@@ -76,6 +98,11 @@ class FavoritosController extends Controller {
     }
     
 
+        /**
+     * Elimina un producto de la lista de favoritos por su ID.
+     *
+     * @param array $productId  ID del producto a eliminar.
+     */
     public static function removeProductById($productId) {
 
         if (isset($_SESSION['usuari'])) {

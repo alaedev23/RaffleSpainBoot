@@ -41,8 +41,7 @@ class Deliver {
             'date' => $this->date,
             'date_deliver' => $this->date_deliver,
             'product' => $this->product,
-            'quantity' => $this->quantity,
-            'token' => $this->token
+            'quantity' => $this->quantity
         ];
     }
 

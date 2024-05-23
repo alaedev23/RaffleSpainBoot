@@ -99,7 +99,7 @@ class CistellaView extends View {
         include "templates/Footer.tmp.php";
         echo "</body></html>";
         
-        return $html;
+        return $template;
     }
     
 }

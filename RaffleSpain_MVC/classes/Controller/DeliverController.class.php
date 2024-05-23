@@ -8,6 +8,7 @@ class DeliverController extends Controller {
         $this->view = new DeliverView();
     }
 
+    // Método para mostrar las entregas
     public function showDelivers($errors = '') {
         if (!isset($_SESSION['usuari'])) {
             throw new Exception("No hi ha cap client loguejat");

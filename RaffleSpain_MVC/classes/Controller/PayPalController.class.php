@@ -3,6 +3,12 @@
 class PayPalController extends Controller
 {
 
+        /**
+     * Obtiene el token de acceso de PayPal.
+     *
+     * @throws Exception Si hay errores en la solicitud cURL.
+     * @return string|null El token de acceso de PayPal.
+     */
     public static function getToken()
     {
         $clientId = PayPalData::getClientId();
@@ -35,6 +41,12 @@ class PayPalController extends Controller
         }
     }
 
+        /**
+     * Crea una orden de pago en PayPal para los productos en la cesta.
+     *
+     * @throws Exception Si hay errores en la solicitud cURL.
+     * @return void
+     */
     public static function createOrder()
     {
 
@@ -148,6 +160,12 @@ class PayPalController extends Controller
             }
         }
     }
+        /**
+     * Confirma el pago y captura los fondos en PayPal.
+     *
+     * @param string $paymentToken El token de pago.
+     * @return void
+     */
     public static function confirmPaymentCapture($paymentToken)
     {
 

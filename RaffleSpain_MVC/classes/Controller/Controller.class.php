@@ -1,17 +1,20 @@
 <?php
 
-class Controller {
+class Controller
+{
 
     public function __construct()
-    {}
-    
+    {
+    }
+
     /**
      *
      * @param mixed $stringANetejar : Cadena a la que volem eliminar els caràcters perillosos
      * @return string|mixed
      */
-    function sanitize ($stringANetejar){
-        if (strlen($stringANetejar)==0) {
+    function sanitize($stringANetejar)
+    {
+        if (strlen($stringANetejar) == 0) {
             $stringANetejar = "";
         } else {
             $stringANetejar = trim($stringANetejar);
@@ -26,10 +29,17 @@ class Controller {
         }
         return $stringANetejar;
     }
-    
-    public function get_browser_name($userAgent) {
+
+    /**
+     * Devuelve el nombre del navegador basado en el agente de usuario proporcionado.
+     *
+     * @param string $userAgent El agente de usuario del navegador.
+     * @return string El nombre del navegador.
+     */
+    public function get_browser_name($userAgent)
+    {
         $browserName = "Unknown";
-        
+
         if (preg_match('/MSIE/i', $userAgent) && !preg_match('/Opera/i', $userAgent)) {
             $browserName = 'Internet Explorer';
         } elseif (preg_match('/Firefox/i', $userAgent)) {
@@ -47,9 +57,9 @@ class Controller {
         } else {
             $browserName = 'Unknown';
         }
-        
+
         return $browserName;
     }
-    
+
 }
 

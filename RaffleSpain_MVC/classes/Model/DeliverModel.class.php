@@ -137,8 +137,7 @@ class DeliverModel {
             $data['date'],
             $data['date_deliver'],
             $data['product'],
-            $data['quantity'],
-            $data['token']
+            $data['quantity']
         );
     }
 

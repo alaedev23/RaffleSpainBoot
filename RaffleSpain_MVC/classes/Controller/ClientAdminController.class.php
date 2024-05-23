@@ -12,6 +12,11 @@ class ClientAdminController extends Controller {
         $this->clientModel = new ClientModel();
     }
     
+    /**
+     * Muestra todos los clientes en la vista de administración de clientes.
+     *
+     * @throws Exception Si hay un problema al acceder a los datos de los clientes.
+     */
     public function show() {
         
         $this->clients = $this->clientModel->read();
@@ -20,6 +25,11 @@ class ClientAdminController extends Controller {
 
     }
     
+        /**
+     * Crea un nuevo cliente.
+     *
+     * @throws Exception Si hay errores de validación al crear el cliente.
+     */
     public function createClient() {
         
         if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["sendDataCreate"]))) {
@@ -111,6 +121,11 @@ class ClientAdminController extends Controller {
 
     }
     
+    /**
+     * Actualiza un cliente existente.
+     *
+     * @throws Exception Si hay errores de validación al actualizar el cliente o al acceder a los datos del cliente.
+     */
     public function updateClientSelected() {
         
 
@@ -205,6 +220,12 @@ class ClientAdminController extends Controller {
 
     }
     
+    /**
+     * Elimina un cliente existente.
+     *
+     * @param int[] $id El ID del cliente a eliminar.
+     * @throws Exception Si hay un problema al eliminar el cliente.
+     */
     public function deleteClient($id) {
 
             $delete = $this->clientModel->delete(new Client($id[0]));
@@ -221,6 +242,12 @@ class ClientAdminController extends Controller {
 
     }
 
+    /**
+     * Muestra la página de actualización de un cliente específico.
+     *
+     * @param int[] $id El ID del cliente a actualizar.
+     * @throws Exception Si hay un problema al acceder a los datos del cliente.
+     */
     public function updateClient($id) {
         $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
         
@@ -237,6 +264,25 @@ class ClientAdminController extends Controller {
         }
     }
     
+    /**
+     * Asigna datos de cliente a un objeto cliente.
+     *
+     * @param int|null $id El ID del cliente.
+     * @param string $name El nombre del cliente.
+     * @param string $password La contraseña del cliente.
+     * @param string $surnames Los apellidos del cliente.
+     * @param string $born La fecha de nacimiento del cliente.
+     * @param string $email El correo electrónico del cliente.
+     * @param string $phone El número de teléfono del cliente.
+     * @param string $sex El sexo del cliente.
+     * @param string $poblation La población del cliente.
+     * @param string $address La dirección del cliente.
+     * @param string $type El tipo del cliente.
+     * @param string $floor El piso del cliente.
+     * @param string $door La puerta del cliente.
+     * @param string $postal_code El código postal del cliente.
+     * @return Client El objeto cliente creado con los datos proporcionados.
+     */
     private function assignClientData($id, $name, $password, $surnames, $born, $email, $phone, $sex, $poblation, $address, $type, $floor, $door, $postal_code) {
         return new Client(
             $id,

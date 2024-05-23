@@ -15,6 +15,7 @@ class AdminController extends Controller {
         $this->rafflesAll = $rModel->read();
     }
     
+    /* Metodo que mostrara la pagina de admin.*/
     public function showAdminPage() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -31,6 +32,7 @@ class AdminController extends Controller {
         AdminView::show($lang, $this->productsAll, $this->rafflesAll);
     }
     
+    /* Metodo que creara el product */
     public function createProduct() {
         
         if (isset($_COOKIE["lang"])) {
@@ -139,6 +141,7 @@ class AdminController extends Controller {
             }
     }
     
+    /* Metodo que creara la raffle*/
     public function createRaffle() {
         
         if (isset($_COOKIE["lang"])) {
@@ -205,6 +208,7 @@ class AdminController extends Controller {
         }
     }
     
+    /* Metodo que  updateara la pagina al producto previamente seleccionado */
     public function updateProductSelected() {
         
         if (isset($_COOKIE["lang"])) {
@@ -311,6 +315,7 @@ class AdminController extends Controller {
         }
     }
     
+    /* Metodo que updateara la pagina a la rifa previamente seleccionado */
     public function updateRaffleSelected() {
         
         if (isset($_COOKIE["lang"])) {
@@ -383,89 +388,120 @@ class AdminController extends Controller {
         }
     }
     
-    public function updateProduct($id) {
-        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
-        
-        $pModelo = new ProductModel();
-        $rModelo = new RaffleModel();
-        $view = new AdminView();
-        
-        $this->product = new Product($id[0]);
-        $consulta = $pModelo->getById($this->product);
-        
-        if ($consulta instanceof Product) {
-            $this->product = $consulta;
-            $this->rafflesAll = $rModelo->read();
-            $this->productsAll = $pModelo->read();
-            $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, true);
-        } else {
-            $errores = $consulta;
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
-        }
+/* Metodo para actualizar un producto
+*
+* @param string $id id del producto
+*/
+public function updateProduct($id) {
+    // Obtención del idioma desde la cookie, predeterminado 'ca' si no se encuentra
+    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+    // Creación de instancias de modelos y vista
+    $pModelo = new ProductModel();
+    $rModelo = new RaffleModel();
+    $view = new AdminView();
+    // Creación del objeto Producto con el ID proporcionado
+    $this->product = new Product($id[0]);
+    // Consulta para obtener el producto por su ID
+    $consulta = $pModelo->getById($this->product);
+    // Verificación de si la consulta devuelve una instancia de Producto
+    if ($consulta instanceof Product) {
+        // Si el producto existe, se asigna y se muestran productos y sorteos en la vista de administrador
+        $this->product = $consulta;
+        $this->rafflesAll = $rModelo->read();
+        $this->productsAll = $pModelo->read();
+        $view->show($lang, $this->productsAll, $this->rafflesAll, $this->product, true);
+    } else {
+        // Si el producto no existe, se muestra un mensaje de error en la vista de administrador
+        $errores = $consulta;
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
     }
-    
-    public function updateRaffle($id) {
-        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
-        
-        $pModelo = new ProductModel();
-        $rModelo = new RaffleModel();
-        $view = new AdminView();
-        
-        $this->raffle = new Raffle($id[0]);
-        $consulta = $rModelo->getById($this->raffle);
+}
 
-        if ($consulta instanceof Raffle) {
-            $this->raffle = $consulta;
-            $this->rafflesAll = $rModelo->read();
-            $this->productsAll = $pModelo->read();
-            $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, true);
-        } else {
-            $errores = $consulta;
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
-        }
+/* Metodo para actualizar una rifa
+*
+* @param string $id id de la rifa
+*/
+public function updateRaffle($id) {
+    // Obtención del idioma desde la cookie, predeterminado 'ca' si no se encuentra
+    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+    // Creación de instancias de modelos y vista
+    $pModelo = new ProductModel();
+    $rModelo = new RaffleModel();
+    $view = new AdminView();
+    // Creación del objeto Sorteo con el ID proporcionado
+    $this->raffle = new Raffle($id[0]);
+    // Consulta para obtener el sorteo por su ID
+    $consulta = $rModelo->getById($this->raffle);
+    // Verificación de si la consulta devuelve una instancia de Sorteo
+    if ($consulta instanceof Raffle) {
+        // Si el sorteo existe, se asigna y se muestran productos y sorteos en la vista de administrador
+        $this->raffle = $consulta;
+        $this->rafflesAll = $rModelo->read();
+        $this->productsAll = $pModelo->read();
+        $view->show($lang, $this->productsAll, $this->rafflesAll, $this->raffle, true);
+    } else {
+        // Si el sorteo no existe, se muestra un mensaje de error en la vista de administrador
+        $errores = $consulta;
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
     }
-    
-    public function deleteProduct($id) {
-        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
-        
-        $pModelo = new ProductModel();
-        $rModelo = new RaffleModel();
-        $view = new AdminView();
-        
-        $this->product = new Product($id[0]);
-        $consulta = $pModelo->delete($this->product);
-        
-        if ($consulta === "La consulta se ha realizado con existo") {
-            $this->rafflesAll = $rModelo->read();
-            $this->productsAll = $pModelo->read();
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
-        } else {
-            $errores = $consulta;
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
-        }
-        
+}
+
+/* Metodo para eliminar un producto
+*
+* @param string $id id del producto
+*/
+public function deleteProduct($id) {
+    // Obtención del idioma desde la cookie, predeterminado 'ca' si no se encuentra
+    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+    // Creación de instancias de modelos y vista
+    $pModelo = new ProductModel();
+    $rModelo = new RaffleModel();
+    $view = new AdminView();
+    // Creación del objeto Producto con el ID proporcionado
+    $this->product = new Product($id[0]);
+    // Eliminación del producto y obtención del resultado
+    $consulta = $pModelo->delete($this->product);
+    // Verificación del resultado de la eliminación del producto
+    if ($consulta === "La consulta se ha realizado con existo") {
+        // Si la eliminación tiene éxito, se actualizan los productos y sorteos en la vista de administrador
+        $this->rafflesAll = $rModelo->read();
+        $this->productsAll = $pModelo->read();
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+    } else {
+        // Si hay un error en la eliminación, se muestra un mensaje de error en la vista de administrador
+        $errores = $consulta;
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
     }
-    
-    public function deleteRaffle($id) {
-        $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
-        
-        $pModelo = new ProductModel();
-        $rModelo = new RaffleModel();
-        $view = new AdminView();
-        
-        $this->raffle = new Raffle($id[0], null, null, null);
-        $consulta = $rModelo->delete($this->raffle);
-        
-        if ($consulta === "La consulta se ha realizado con existo") {
-            $this->rafflesAll = $rModelo->read();
-            $this->productsAll = $pModelo->read();
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
-        } else {
-            $errores = $consulta;
-            $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
-        }
-        
+}
+
+/* Metodo para borrar una rifa
+*
+* @param string $id id de la rifa
+*/
+public function deleteRaffle($id) {
+    // Obtención del idioma desde la cookie, predeterminado 'ca' si no se encuentra
+    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : "ca";
+    // Creación de instancias de modelos y vista
+    $pModelo = new ProductModel();
+    $rModelo = new RaffleModel();
+    $view = new AdminView();
+    // Creación del objeto Sorteo con el ID proporcionado
+    $this->raffle = new Raffle($id[0], null, null, null);
+    // Eliminación del sorteo y obtención del resultado
+    $consulta = $rModelo->delete($this->raffle);
+    // Verificación del resultado de la eliminación del sorteo
+    if ($consulta === "La consulta se ha realizado con existo") {
+        // Si la eliminación tiene éxito, se actualizan los productos y sorteos en la vista de administrador
+        $this->rafflesAll = $rModelo->read();
+        $this->productsAll = $pModelo->read();
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
+    } else {
+        // Si hay un error en la eliminación, se muestra un mensaje de error en la vista de administrador
+        $errores = $consulta;
+        $view->show($lang, $this->productsAll, $this->rafflesAll, null, false, $errores);
     }
+}
+
     
     /**
      * Asigna los datos de un producto para su creación o actualización.

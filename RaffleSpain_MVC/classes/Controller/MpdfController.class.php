@@ -5,6 +5,13 @@ use Mpdf\Mpdf;
 
 class MpdfController extends Controller {
     
+        /**
+     * Muestra el PDF generado para una entrega específica.
+     *
+     * @param array $id El ID de la entrega.
+     * @throws Exception Si hay errores al generar el PDF.
+     * @return void
+     */
     public function show($id) {
         
         $idValid = $this->sanitize($id[0]);
@@ -79,6 +86,12 @@ class MpdfController extends Controller {
         }
     }
     
+    /**
+     * Genera el contenido HTML para una entrega específica.
+     *
+     * @param object $deliver El objeto de la entrega.
+     * @return string El contenido HTML generado.
+     */
     public function generateTemplateDeliver($deliver) {
         $mClient = new ClientModel();
 
@@ -164,6 +177,12 @@ class MpdfController extends Controller {
             </div>";
     }
 
+    /**
+     * Genera y guarda el PDF para una entrega específica.
+     *
+     * @param object $del El objeto de la entrega.
+     * @return array El array que contiene la ruta y el ID único del PDF guardado.
+     */
     public function generateAndSavePDF($del) {
 
         $mDeliver = new DeliverModel();
@@ -207,6 +226,12 @@ class MpdfController extends Controller {
         return array($pdfFilePath, $uniqueId);
     }
     
+    /**
+     * Elimina un PDF guardado.
+     *
+     * @param string $pdfFilePath La ruta del archivo PDF.
+     * @return bool true si se elimina correctamente, false si no.
+     */
     public function deletePDF($pdfFilePath) {
         if (file_exists($pdfFilePath)) {
             unlink($pdfFilePath);

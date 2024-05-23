@@ -2,6 +2,9 @@
 
 class ContactController extends Controller {
     
+    /**
+     * Muestra el formulario de contacto.
+     */
     public function showContactUs() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -12,6 +15,9 @@ class ContactController extends Controller {
         ContactView::show($lang, false);
     }
     
+    /**
+     * Verifica el formulario de contacto y envía el correo electrónico.
+     */
     public function verifyForm() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];

@@ -23,6 +23,9 @@ class ClientController extends Controller {
         $this->vClient = new ClientView();
     }
     
+        /**
+     * Muestra el formulario de inicio de sesión.
+     */
     public function formLogin() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -36,6 +39,9 @@ class ClientController extends Controller {
         ClientView::showLogin($this->login, $lang);
     }
     
+        /**
+     * Muestra el formulario de registro.
+     */
     public function formRegister() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -49,6 +55,9 @@ class ClientController extends Controller {
         ClientView::showRegister($this->register, $lang);
     }
     
+        /**
+     * Muestra las fechas del cliente.
+     */
     public function showDatesClient() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -60,6 +69,9 @@ class ClientController extends Controller {
         $vClientDates->show($lang);
     }
     
+        /**
+     * Muestra los premios del cliente.
+     */
     public function showMyPrizes() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -77,6 +89,11 @@ class ClientController extends Controller {
         $vClientDates->showMyPrizes($lang, $products);
     }
     
+       /**
+     * Cambia la contraseña del cliente.
+     *
+     * @param int[] $idSent El ID del cliente.
+     */
     public function changePassword($idSent) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -128,6 +145,9 @@ class ClientController extends Controller {
         }
     }
     
+    /**
+     * Valida el inicio de sesión del cliente.
+     */
     public function validateLogin() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -186,6 +206,11 @@ class ClientController extends Controller {
         }
     }
     
+    /**
+     * Actualiza los datos del cliente.
+     *
+     * @param int[] $idPass El ID del cliente.
+     */
     public function updateDatesClient($idPass) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -263,6 +288,11 @@ class ClientController extends Controller {
         }
     }
     
+    /**
+     * Actualiza la dirección del cliente.
+     *
+     * @param int[] $idPass El ID del cliente.
+     */
     public function updateDirection($idPass) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -351,7 +381,9 @@ class ClientController extends Controller {
         }
     }
     
-    
+    /**
+     * Valida el registro del cliente.
+     */
     public function validateRegister() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
@@ -475,6 +507,9 @@ class ClientController extends Controller {
         }
     }
     
+    /**
+     * Cierra la sesión del cliente.
+     */
     public function logOut() {
         session_destroy();
         header("Location: index.php");   

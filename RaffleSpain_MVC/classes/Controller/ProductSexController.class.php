@@ -3,9 +3,9 @@
 class ProductSexController extends Controller {
     
     private $productList;
-    private const SEXO = ["H", "M", "N"];
+    private const TIPO = ["H", "M", "N"];
     
-    public function show($sexo) {
+    public function show($tipo) {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];
         } else {
@@ -15,23 +15,23 @@ class ProductSexController extends Controller {
         $vista = new ProductSexView();
         $model = new ProductModel();
         
-        $sexo = $this->sanitize($sexo[0]);
-        $sexo = strtoupper($sexo[0]);
+        $tipo = $this->sanitize($tipo[0]);
+        $tipo = strtoupper($tipo[0]);
         
-        if (!in_array($sexo, self::SEXO)) {
-            $errores = "No coincide el sexo enviado";
+        if (!in_array($tipo, self::TIPO)) {
+            $errores = "No coincide el tipo enviado";
         }
         
         if (!isset($errores)) {
-            $productos = $model->readForSex($sexo);
+            $productos = $model->readForSex($tipo);
             if (count($productos) > 0) {
-                $vista->showView($lang, $sexo, $productos);
+                $vista->showView($lang, $tipo, $productos);
             } else {
-                $errores = "No hay productos para este sexo.";
-                $vista->showView($lang, $sexo, null, $errores);
+                $errores = "No hay productos para este tipo.";
+                $vista->showView($lang, $tipo, null, $errores);
             }
         } else {
-            $vista->showView($lang, $sexo, null, $errores);
+            $vista->showView($lang, $tipo, null, $errores);
         }
     }
     

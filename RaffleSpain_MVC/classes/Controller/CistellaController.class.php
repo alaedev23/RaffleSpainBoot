@@ -3,6 +3,11 @@
 class CistellaController extends Controller
 {
 
+        /**
+     * Muestra la cesta de la compra del usuario.
+     *
+     * @throws Exception Si el usuario no está autenticado.
+     */
     public static function show()
     {
         if (isset($_SESSION['usuari'])) {
@@ -14,6 +19,11 @@ class CistellaController extends Controller
         }
     }
 
+        /**
+     * Carga los productos en la cesta del usuario.
+     *
+     * @return mixed|array|null Los productos en la cesta o null si el usuario no está autenticado.
+     */
     public static function cargarProductos()
     {
         if (isset($_SESSION['usuari'])) {
@@ -27,6 +37,12 @@ class CistellaController extends Controller
         }
     }
 
+        /**
+     * Añade un producto a la cesta de la compra del usuario.
+     *
+     * @param int $id El ID del producto a añadir.
+     * @throws Exception Si el usuario no está autenticado o no se proporciona la talla del producto.
+     */
     public function addProduct($id)
     {
         if (isset($_SESSION['usuari'])) {
@@ -84,6 +100,11 @@ class CistellaController extends Controller
         exit();
     }
 
+    /**
+     * Vacía la cesta de la compra del usuario.
+     *
+     * @throws Exception Si el usuario no está autenticado.
+     */
     public static function emptyCart()
     {
         if (isset($_SESSION['usuari'])) {
@@ -96,6 +117,7 @@ class CistellaController extends Controller
         exit();
     }
 
+    
     public static function removeProductById($productId)
     {
         
@@ -110,6 +132,13 @@ class CistellaController extends Controller
         header('Location: ?Cistella/show');
         exit();
     }
+
+        /**
+     * Actualiza la cantidad de un producto en la cesta de la compra del usuario.
+     *
+     * @param array $params Un array que contiene el ID del producto y la nueva cantidad.
+     * @throws Exception Si el usuario no está autenticado.
+     */
 
     public static function updateCantidad($params)
     {
@@ -132,6 +161,12 @@ class CistellaController extends Controller
         exit();
     }
 
+        /**
+     * Actualiza la cantidad y la talla de un producto en la cesta de la compra del usuario.
+     *
+     * @param array $params Un array que contiene el ID del producto, la nueva cantidad y la nueva talla.
+     * @throws Exception Si el usuario no está autenticado.
+     */
     public static function updateCantidadTalla($params)
     {
         $productId = $params[0];

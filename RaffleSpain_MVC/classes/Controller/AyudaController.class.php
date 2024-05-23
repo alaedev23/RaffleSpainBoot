@@ -6,6 +6,7 @@ class AyudaController extends Controller {
         parent::__construct();
     }
     
+    /* Metodo para mostrar la View de Ayuda */
     public function showView() {
         if (isset($_COOKIE["lang"])) {
             $lang = $_COOKIE["lang"];

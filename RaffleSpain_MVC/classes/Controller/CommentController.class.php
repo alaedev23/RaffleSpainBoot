@@ -8,6 +8,11 @@ class CommentController extends Controller {
         $this->vComment = new ProducteView();
     }
     
+        /**
+     * Agrega un comentario.
+     *
+     * @param int[] $id El ID del producto.
+     */
     public function addComment($id) {
         
         if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["addNewComent"]))) {
@@ -56,10 +61,6 @@ class CommentController extends Controller {
             }
             
         }
-    }
-    
-    public function isInFavorites() {
-        
     }
     
 }
