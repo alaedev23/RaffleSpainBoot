@@ -132,7 +132,7 @@ class ClientController extends Controller {
                 $result->__set("password", $confirmPassword);
                 $consulta = $mClient->updatePassword($result);
                 
-                if ($consulta === "La consulta se ha realizado con existo") {
+                if ($consulta === "La consulta se ha realizado con éxito") {
                     session_destroy();
                     header("Location: index.php?client/formLogin");
                 } else {
@@ -271,7 +271,7 @@ class ClientController extends Controller {
                     
                     $consulta = $mClient->update($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con existo") {
+                    if ($consulta === "La consulta se ha realizado con éxito") {
                         $_SESSION['usuari'] = $updateClient;
                         $this->vClientDates->show($lang);
                     } else {
@@ -360,7 +360,7 @@ class ClientController extends Controller {
                     
                     $consulta = $mClient->updateDirection($updateClient);
                     
-                    if ($consulta === "La consulta se ha realizado con existo") {
+                    if ($consulta === "La consulta se ha realizado con éxito") {
                         $_SESSION['usuari']->address = $address;
                         $_SESSION['usuari']->poblation = $poblation;
                         $_SESSION['usuari']->floor = $floor;
@@ -493,7 +493,7 @@ class ClientController extends Controller {
                 $mClient = new ClientModel();
                 $consulta = $mClient->create($this->register);
                 
-                if ($consulta === "La consulta se ha realizado con existo") {
+                if ($consulta === "La consulta se ha realizado con éxito") {
                     $eController = new EmailController();
                     $eController->sendMail($this->register);
                     ValidateView::show($this->register->email);

@@ -123,7 +123,7 @@ class AdminController extends Controller {
                         $this->product->__set("img", "$brand-$name.$extensionImagen");
                         $create = $modelo->create($this->product);
                         var_dump($create);
-                        if ($create === "La consulta se ha realizado con existo") {
+                        if ($create === "La consulta se ha realizado con éxito") {
                             $this->productsAll = $modelo->read();;
                             header("Location: index.php?admin/showAdminPage");
                         } else {
@@ -194,7 +194,7 @@ class AdminController extends Controller {
                 $this->productsAll = $pModelo->read();
                 $this->rafflesAll = $rModelo->read();
                 
-                if ($create === "La consulta se ha realizado con existo") {
+                if ($create === "La consulta se ha realizado con éxito") {
                     $this->productsAll = $rModelo->read();
                     header("Location: index.php?admin/showAdminPage");
                     $view->show($lang, $this->productsAll, $this->rafflesAll, null);
@@ -300,7 +300,7 @@ class AdminController extends Controller {
                     $this->product->__set("img", "$brand-$name.png");
                     $update = $modelo->update($this->product);
                     
-                    if ($update === "La consulta se ha realizado con existo") {
+                    if ($update === "La consulta se ha realizado con éxito") {
                         $this->productsAll = $modelo->read();
                         header("Location: index.php?admin/showAdminPage");
                         $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
@@ -375,7 +375,7 @@ class AdminController extends Controller {
                 $this->productsAll = $pModelo->read();
                 $this->rafflesAll = $rModelo->read();
                 
-                if ($update === "La consulta se ha realizado con existo") {
+                if ($update === "La consulta se ha realizado con éxito") {
                     header("Location: index.php?admin/showAdminPage");
                     $view->show($lang, $this->productsAll, $this->rafflesAll, null, false);
                 } else {
@@ -462,7 +462,7 @@ public function deleteProduct($id) {
     // Eliminación del producto y obtención del resultado
     $consulta = $pModelo->delete($this->product);
     // Verificación del resultado de la eliminación del producto
-    if ($consulta === "La consulta se ha realizado con existo") {
+    if ($consulta === "La consulta se ha realizado con éxito") {
         // Si la eliminación tiene éxito, se actualizan los productos y sorteos en la vista de administrador
         $this->rafflesAll = $rModelo->read();
         $this->productsAll = $pModelo->read();
@@ -490,7 +490,7 @@ public function deleteRaffle($id) {
     // Eliminación del sorteo y obtención del resultado
     $consulta = $rModelo->delete($this->raffle);
     // Verificación del resultado de la eliminación del sorteo
-    if ($consulta === "La consulta se ha realizado con existo") {
+    if ($consulta === "La consulta se ha realizado con éxito") {
         // Si la eliminación tiene éxito, se actualizan los productos y sorteos en la vista de administrador
         $this->rafflesAll = $rModelo->read();
         $this->productsAll = $pModelo->read();

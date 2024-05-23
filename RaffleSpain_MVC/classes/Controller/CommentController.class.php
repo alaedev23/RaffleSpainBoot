@@ -51,7 +51,7 @@ class CommentController extends Controller {
                 $mComment = new CommentModel();
                 $create = $mComment->create($objComment);
                 
-                if ($create === "La consulta se ha realizado con existo") {
+                if ($create === "La consulta se ha realizado con éxito") {
                     header('Location: ?Producte/mostrarProducte/' . $id[0]);
                 } else {
                     $this->vComment->show($product, $tallas, $enFavoritos, '', $create);

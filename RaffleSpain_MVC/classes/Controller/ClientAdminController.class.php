@@ -203,17 +203,17 @@ class ClientAdminController extends Controller {
 
                 $update = $this->clientModel->update($this->client);
 
-                if ($update === "La consulta se ha realizado con existo") {
+                if ($update === "La consulta se ha realizado con éxito") {
                     $this->clients = $this->clientModel->read();
                     header("Location: index.php?ClientAdmin/show");
                     ClientAdminView::showClients("es", $this->clients, null);
                 } else {
-                    $errores = $update;
-                    ClientAdminView::showClients("es", $this->clients, $this->client, false, $errores);
+                    $errors = $update;
+                    ClientAdminView::showClients("es", $this->clients, $this->client, false, $errors);
                 }
 
             } else {
-                ClientAdminView::showClients("es", $this->clients, $errors);
+                ClientAdminView::showClients("es", $this->clients, null, false, $errors);
             }
 
         }
