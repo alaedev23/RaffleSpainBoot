@@ -21,7 +21,7 @@ RaffleSpain es una tienda en línea desarrollada en PHP utilizando el modelo de 
 - Base de datos MySQL.
 
 ## Contacto
-ara cualquier duda o sugerencia, por favor contacta a:
+Para cualquier duda o sugerencia, por favor contacta a:
 - polanmarc19@gmail.com
 - thos.harrak.alae@gmail.com
 
